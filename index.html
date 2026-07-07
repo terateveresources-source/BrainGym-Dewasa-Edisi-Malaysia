@@ -3,20 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainGym Dewasa Edisi Malaysia</title>
+    <title>BrainGym Dewasa Edisi 10,000 Soalan</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
-        }
-        .custom-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        .custom-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%); }
     </style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
@@ -25,7 +20,7 @@
         <div class="max-w-4xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
                 <i data-lucide="brain" class="w-8 h-8 text-orange-400 animate-pulse"></i>
-                <span class="font-bold text-lg md:text-xl tracking-tight" id="txt-app-title">BrainGym Dewasa</span>
+                <span class="font-bold text-lg md:text-xl tracking-tight" id="txt-app-title">BrainGym Ultra</span>
             </div>
             <div class="flex items-center space-x-4">
                 <div class="bg-white/20 rounded-lg p-1 flex text-xs font-medium">
@@ -45,8 +40,8 @@
         
         <div id="screen-lobby" class="space-y-6">
             <div class="text-center space-y-2 py-4">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-blue-900 tracking-tight" id="lobby-title">BrainGym Dewasa Edisi Malaysia</h1>
-                <p class="text-slate-600 text-sm md:text-base max-w-xl mx-auto" id="lobby-desc">Uji memori, logik, pantas kira, dan pengetahuan am anda dengan cabaran mesra minda Malaysia.</p>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-blue-900 tracking-tight" id="lobby-title">BrainGym Dewasa Edisi 10,000+ Soalan</h1>
+                <p class="text-slate-600 text-sm md:text-base max-w-xl mx-auto" id="lobby-desc">Sistem berkuasa AI generator yang menjana beribu kombinasi soalan matematik, logik, dan minda secara rawak.</p>
             </div>
 
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
@@ -58,10 +53,270 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="category-grid">
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="category-grid"></div>
         </div>
 
         <div id="screen-game" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md border border-slate-100 max-w-2xl mx-auto w-full space-y-6">
             <div class="flex justify-between items-center border-b border-slate-100 pb-4">
-                <button
+                <button onclick="goHome()" class="flex items-center space-x-1 text-sm text-slate-500 hover:text-slate-800 transition">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                    <span id="btn-back">Kembali</span>
+                </button>
+                <div class="text-sm font-semibold text-blue-900" id="question-progress">Soalan 1 daripada 5</div>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-slate-900" id="question-text">Teks soalan...</h2>
+                <div class="grid grid-cols-1 gap-3 pt-2" id="options-container"></div>
+            </div>
+
+            <div id="feedback-container" class="hidden p-4 rounded-xl text-sm font-medium text-center"></div>
+
+            <button id="btn-next" onclick="nextQuestion()" class="hidden w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-md transition text-center">
+                Seterusnya
+            </button>
+        </div>
+
+        <div id="screen-result" class="hidden bg-white p-8 rounded-3xl shadow-md border border-slate-100 max-w-md mx-auto w-full text-center space-y-6">
+            <div class="inline-flex p-4 bg-amber-100 text-amber-600 rounded-full"><i data-lucide="trophy" class="w-12 h-12"></i></div>
+            <div class="space-y-2">
+                <h2 class="text-2xl font-bold text-slate-900" id="result-title">Tahniah!</h2>
+                <p class="text-slate-600" id="result-desc">Sesi ini selesai!</p>
+            </div>
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                <span class="text-xs uppercase font-semibold text-slate-400 tracking-wider block mb-1" id="lbl-score-obtained">Skor Sesi Ini</span>
+                <span class="text-4xl font-extrabold text-blue-900" id="session-score">0</span>
+            </div>
+            <button onclick="goHome()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-md transition" id="btn-retry">Main Lagi</button>
+        </div>
+
+    </main>
+
+    <footer class="text-center p-4 text-xs text-slate-400 border-t border-t-slate-200 bg-white">
+        &copy; 2026 BrainGym Ultra Engine - Infiniti Kuiz Generated Dinamik.
+    </footer>
+
+    <script>
+        const langData = {
+            ms: {
+                title: "BrainGym Ultra", lobbyTitle: "BrainGym Dewasa Infiniti",
+                lobbyDesc: "Sistem pintar yang menjana beribu kombinasi soalan matematik dan logik secara rawak (Infinity Mode).",
+                difficulty: "Pilih Tahap Kesukaran:", scoreLabel: "Skor:", back: "Kembali", next: "Seterusnya",
+                progress: "Soalan {current} daripada {total}", resultTitle: "Selesai Sesi!", resultDesc: "Bagus! Minda anda semakin aktif.", scoreObtained: "Skor Sesi Ini", retry: "Main Lagi Sesi Baru",
+                categories: {
+                    logik: { title: "Pantas Kira & Logik", desc: "Menjana beribu kombinasi soalan matematik rawak." },
+                    memori: { title: "Daya Memori Digit", desc: "Mengingat siri rantaian nombor rawak bertaraf tinggi." }
+                }
+            },
+            en: {
+                title: "BrainGym Ultra", lobbyTitle: "Adult BrainGym Infinity",
+                lobbyDesc: "A smart system that generates thousands of random math and logic combinations (Infinity Mode).",
+                difficulty: "Select Difficulty:", scoreLabel: "Score:", back: "Back", next: "Next",
+                progress: "Question {current} of {total}", resultTitle: "Session Completed!", resultDesc: "Great! Your mind is getting sharper.", scoreObtained: "Session Score", retry: "Play New Session",
+                categories: {
+                    logik: { title: "Quick Math & Logic", desc: "Generates thousands of unique random math questions." },
+                    memori: { title: "Digit Memory Power", desc: "Test your memory with high-level randomized digit chains." }
+                }
+            }
+        };
+
+        let currentLanguage = 'ms';
+        let currentDifficulty = 'easy';
+        let totalGlobalScore = 0;
+        let currentGameQuestions = [];
+        let currentQuestionIndex = 0;
+        let sessionScore = 0;
+        let hasAnswered = false;
+        const QUESTIONS_PER_SESSION = 5; // Setiap sesi permainan akan beri 5 soalan unik
+
+        window.onload = function() {
+            lucide.createIcons();
+            renderCategories();
+            updateUIStrings();
+        };
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.getElementById('btn-lang-ms').className = lang === 'ms' ? "px-3 py-1.5 rounded-md bg-white text-blue-900 shadow-sm transition" : "px-3 py-1.5 rounded-md text-white hover:bg-white/10 transition";
+            document.getElementById('btn-lang-en').className = lang === 'en' ? "px-3 py-1.5 rounded-md bg-white text-blue-900 shadow-sm transition" : "px-3 py-1.5 rounded-md text-white hover:bg-white/10 transition";
+            updateUIStrings();
+            renderCategories();
+            if(!document.getElementById('screen-game').classList.contains('hidden')) displayQuestion();
+        }
+
+        function setDifficulty(level) {
+            currentDifficulty = level;
+            document.getElementById('diff-easy').className = "py-2.5 rounded-xl font-medium border-2 transition-all text-center text-sm " + (level==='easy'?'border-emerald-500 bg-emerald-50 text-emerald-700':'border-slate-200 text-slate-700');
+            document.getElementById('diff-medium').className = "py-2.5 rounded-xl font-medium border-2 transition-all text-center text-sm " + (level==='medium'?'border-amber-500 bg-amber-50 text-amber-700':'border-slate-200 text-slate-700');
+            document.getElementById('diff-hard').className = "py-2.5 rounded-xl font-medium border-2 transition-all text-center text-sm " + (level==='hard'?'border-rose-500 bg-rose-50 text-rose-700':'border-slate-200 text-slate-700');
+        }
+
+        function updateUIStrings() {
+            const data = langData[currentLanguage];
+            document.getElementById('txt-app-title').innerText = data.title;
+            document.getElementById('lobby-title').innerText = data.lobbyTitle;
+            document.getElementById('lobby-desc').innerText = data.lobbyDesc;
+            document.getElementById('lbl-difficulty').innerText = data.difficulty;
+            document.getElementById('txt-total-score-label').innerText = data.scoreLabel;
+            document.getElementById('btn-back').innerText = data.back;
+            document.getElementById('btn-next').innerText = data.next;
+            document.getElementById('result-title').innerText = data.resultTitle;
+            document.getElementById('result-desc').innerText = data.resultDesc;
+            document.getElementById('lbl-score-obtained').innerText = data.scoreObtained;
+            document.getElementById('btn-retry').innerText = data.retry;
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('category-grid');
+            const data = langData[currentLanguage].categories;
+            grid.innerHTML = `
+                <div onclick="generateInfinityQuestions('logik')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer flex items-start space-x-4">
+                    <div class="bg-emerald-500 text-white p-3 rounded-xl"><i data-lucide="calculator" class="w-6 h-6"></i></div>
+                    <div><h3 class="font-bold text-slate-800">${data.logik.title}</h3><p class="text-xs text-slate-500 mt-1">${data.logik.desc}</p></div>
+                </div>
+                <div onclick="generateInfinityQuestions('memori')" class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition cursor-pointer flex items-start space-x-4">
+                    <div class="bg-amber-500 text-white p-3 rounded-xl"><i data-lucide="brain-circuit" class="w-6 h-6"></i></div>
+                    <div><h3 class="font-bold text-slate-800">${data.memori.title}</h3><p class="text-xs text-slate-500 mt-1">${data.memori.desc}</p></div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // ENGINE PINTAR: Menjana beribu soalan secara rawak (Procedural Generation)
+        function generateInfinityQuestions(type) {
+            currentGameQuestions = [];
+            
+            for (let i = 0; i < QUESTIONS_PER_SESSION; i++) {
+                if (type === 'logik') {
+                    // Penjana Soalan Matematik Rawak
+                    let num1 = Math.floor(Math.random() * (currentDifficulty === 'easy' ? 20 : currentDifficulty === 'medium' ? 100 : 500)) + 5;
+                    let num2 = Math.floor(Math.random() * (currentDifficulty === 'easy' ? 10 : currentDifficulty === 'medium' ? 30 : 100)) + 2;
+                    const operators = ['+', '-', '*'];
+                    let op = operators[Math.floor(Math.random() * (currentDifficulty === 'easy' ? 2 : 3))]; // Susah ada darab
+                    
+                    let jawapanBetul = eval(`${num1} ${op} ${num2}`);
+                    let simbol = op === '*' ? 'x' : op;
+
+                    // Buat pilihan jawapan mengelirukan (rawak sekitar jawapan betul)
+                    let optionsSet = new Set([jawapanBetul]);
+                    while(optionsSet.size < 4) {
+                        let salah = jawapanBetul + (Math.floor(Math.random() * 20) - 10);
+                        if(salah !== jawapanBetul) optionsSet.add(salah);
+                    }
+                    let optionsArr = Array.from(optionsSet).sort(() => Math.random() - 0.5);
+                    let correctIdx = optionsArr.indexOf(jawapanBetul);
+
+                    currentGameQuestions.push({
+                        q: {
+                            ms: `Berapakah hasil bagi: ${num1} ${simbol} ${num2} = ?`,
+                            en: `What is the result of: ${num1} ${simbol} ${num2} = ?`
+                        },
+                        o: optionsArr.map(String),
+                        a: correctIdx
+                    });
+
+                } else if (type === 'memori') {
+                    // Penjana Ujian Memori Rantaian Digit Rawak
+                    let panjangDigit = currentDifficulty === 'easy' ? 4 : currentDifficulty === 'medium' ? 6 : 8;
+                    let rantaiDigit = "";
+                    for(let d=0; d<panjangDigit; d++) {
+                        rantaiDigit += Math.floor(Math.random() * 10);
+                    }
+
+                    let optionsSet = new Set([rantaiDigit]);
+                    while(optionsSet.size < 4) {
+                        let salah = "";
+                        for(let d=0; d<panjangDigit; d++) { salah += Math.floor(Math.random() * 10); }
+                        optionsSet.add(salah);
+                    }
+                    let optionsArr = Array.from(optionsSet).sort(() => Math.random() - 0.5);
+                    let correctIdx = optionsArr.indexOf(rantaiDigit);
+
+                    currentGameQuestions.push({
+                        q: {
+                            ms: `Ingat rantaian kod ini: [ ${rantaiDigit} ]. Antara berikut, yang manakah kod yang betul?`,
+                            en: `Remember this chain code: [ ${rantaiDigit} ]. Which of the following is the correct code?`
+                        },
+                        o: optionsArr.map(String),
+                        a: correctIdx
+                    });
+                }
+            }
+
+            currentQuestionIndex = 0;
+            sessionScore = 0;
+            document.getElementById('screen-lobby').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            hasAnswered = false;
+            document.getElementById('feedback-container').classList.add('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+
+            const currentQ = currentGameQuestions[currentQuestionIndex];
+            let progText = langData[currentLanguage].progress.replace('{current}', currentQuestionIndex + 1).replace('{total}', QUESTIONS_PER_SESSION);
+            document.getElementById('question-progress').innerText = progText;
+            document.getElementById('question-text').innerText = currentQ.q[currentLanguage];
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            currentQ.o.forEach((option, index) => {
+                optionsContainer.innerHTML += `
+                    <button onclick="checkAnswer(${index})" id="opt-${index}" class="w-full text-left p-4 rounded-xl border border-slate-200 hover:bg-slate-50 font-medium transition text-sm">
+                        ${option}
+                    </button>
+                `;
+            });
+        }
+
+        function checkAnswer(selectedIndex) {
+            if(hasAnswered) return;
+            hasAnswered = true;
+            const currentQ = currentGameQuestions[currentQuestionIndex];
+            const correctIndex = currentQ.a;
+            const feedback = document.getElementById('feedback-container');
+            feedback.classList.remove('hidden');
+
+            if(selectedIndex === correctIndex) {
+                document.getElementById(`opt-${selectedIndex}`).className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-semibold text-sm";
+                feedback.className = "p-4 rounded-xl text-sm font-semibold text-center bg-emerald-100 text-emerald-800";
+                feedback.innerText = currentLanguage === 'ms' ? "🎉 Betul!" : "🎉 Correct!";
+                sessionScore += currentDifficulty === 'easy' ? 10 : currentDifficulty === 'medium' ? 20 : 30;
+            } else {
+                document.getElementById(`opt-${selectedIndex}`).className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-50 text-rose-800 font-semibold text-sm";
+                document.getElementById(`opt-${correctIndex}`).className = "w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-800 font-semibold text-sm";
+                feedback.className = "p-4 rounded-xl text-sm font-semibold text-center bg-rose-100 text-rose-800";
+                feedback.innerText = currentLanguage === 'ms' ? "❌ Salah!" : "❌ Incorrect!";
+            }
+            document.getElementById('btn-next').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if(currentQuestionIndex < QUESTIONS_PER_SESSION) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+            document.getElementById('session-score').innerText = sessionScore;
+            totalGlobalScore += sessionScore;
+            document.getElementById('global-score').innerText = totalGlobalScore;
+        }
+
+        function goHome() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-lobby').classList.remove('hidden');
+            renderCategories();
+        }
+    </script>
+</body>
+</html>
