@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <!-- Lucide Icons & Supabase JS Library -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.8/dist/umd/supabase.js"></script>
     
     <style>
         body { font-family: 'Fredoka', 'Inter', sans-serif; background-color: #fef08a; background-image: radial-gradient(#fde047 1px, transparent 1px); background-size: 20px 20px; }
@@ -36,7 +36,7 @@
                 <p class="text-xs font-bold text-white tracking-wide">Edisi Kuiz Pintar Citra Malaysia 🇲🇾</p>
             </div>
         </div>
-        <!-- STATUS PEMAIN / DASHBOARD MINI -->
+        <!-- STATUS PEMAIN -->
         <div id="mini-profile" class="hidden bg-black/30 px-4 py-2 rounded-xl border border-white/20 flex items-center space-x-3 text-sm">
             <span class="font-bold text-yellow-300" id="header-player-name">Pemain</span>
             <span class="bg-yellow-400 text-black px-2 py-0.5 rounded-full font-black text-xs" id="header-player-score">0 Pts</span>
@@ -46,16 +46,13 @@
     <!-- KANDUNGAN UTAMA -->
     <main class="flex-grow max-w-4xl w-full mx-auto flex flex-col justify-center my-6">
 
-        <!-- SETUP SUPABASE WARNING (Paparan sementara jika kredensial belum diisi) -->
-        <div id="setup-warning" class="bg-rose-400 border-4 border-black p-6 rounded-3xl pop-card text-center space-y-3">
-            <i data-lucide="alert-triangle" class="w-12 h-12 mx-auto text-black"></i>
-            <h2 class="text-xl font-bold">Langkah Penting Hubungan Dashboard Peranti!</h2>
-            <p class="text-sm text-black/80 max-w-md mx-auto">Untuk membolehkan ciri bersaing merentas peranti (*multiplayer*) berfungsi, anda perlu memasukkan URL & API Key Supabase anda di dalam kod fail HTML ini terlebih dahulu.</p>
-            <button onclick="document.getElementById('setup-warning').classList.add('hidden')" class="pop-btn bg-white px-4 py-2 rounded-xl text-xs font-bold border-2 border-black">Faham, Teruskan Demo Tempatan</button>
+        <!-- STATUS PENYAMBUNGAN MOD -->
+        <div id="connection-status-badge" class="mb-4 text-center p-2 rounded-xl bg-amber-400 border-2 border-black font-bold text-xs uppercase shadow-[2px_2px_0px_#000]">
+            ℹ️ Berjalan dalam Mod Demo Tempatan (Offline Famili). Anda boleh terus main tanpa setup database!
         </div>
         
         <!-- SKRIN UTAMA (LOBBY MASUK BILIK) -->
-        <div id="screen-lobby" class="space-y-6 mt-4">
+        <div id="screen-lobby" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 
                 <!-- KAD 1: CIPTA BILIK BARU / JOIN BILIK -->
@@ -94,7 +91,7 @@
             </div>
 
             <!-- GRID PILIHAN KATEGORI SOALAN -->
-            <p class="text-center font-black text-sm uppercase tracking-widest text-slate-700 mt-4">👇 Sila Pilih Kategori Kuiz Untuk Mula Bertarung 👇</p>
+            <p class="text-center font-black text-sm uppercase tracking-widest text-slate-700 mt-4">👇 Sila Masukkan Nama Di Atas & Pilih Kategori Kuiz 👇</p>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="category-grid"></div>
         </div>
 
@@ -121,7 +118,7 @@
                 </button>
             </div>
 
-            <!-- BAHAGIAN DASHBOARD PERSAINGAN LIVE (1/3 Skrin - Menggunakan Supabase Realtime) -->
+            <!-- BAHAGIAN DASHBOARD PERSAINGAN LIVE -->
             <div class="bg-orange-300 p-5 rounded-3xl border-4 border-black shadow-[4px_4px_0px_#000] space-y-4">
                 <div class="flex items-center space-x-2 border-b-2 border-black/20 pb-2">
                     <i data-lucide="aperture" class="w-5 h-5 animate-spin"></i>
@@ -130,17 +127,17 @@
                 <div class="text-xs bg-white/50 p-2 rounded-lg border border-black/10 font-bold text-orange-900">
                     Bilik: <span id="dash-room-id" class="font-black text-black">LOKAL_DEMO</span>
                 </div>
-                <!-- SENARAI MARKAH PEMAIN BERKUMPULAN YANG BERSEDIA SELEPAS MASUK BILIK -->
+                <!-- SENARAI MARKAH PEMAIN BERKUMPULAN -->
                 <div class="space-y-2" id="live-leaderboard">
                     <div class="bg-white p-3 rounded-xl border-2 border-black flex justify-between items-center">
-                        <span class="font-bold text-xs">Aktiviti simulasi...</span>
+                        <span class="font-bold text-xs">Menunggu pemain...</span>
                         <span class="font-black text-sm text-purple-600">0 Pts</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SKRIN KEPUTUSAN AKHIR (PENTAS PEMENANG) -->
+        <!-- SKRIN KEPUTUSAN AKHIR -->
         <div id="screen-result" class="hidden bg-emerald-300 p-8 rounded-3xl border-4 border-black shadow-[6px_6px_0px_#000] max-w-md mx-auto w-full text-center space-y-6">
             <div class="inline-flex p-4 bg-yellow-300 rounded-full border-4 border-black animate-bounce"><i data-lucide="party-popper" class="w-12 h-12 text-black"></i></div>
             <div class="space-y-2">
@@ -158,24 +155,30 @@
 
     <!-- FOOTER -->
     <footer class="text-center p-2 text-xs font-bold text-black/60">
-        📢 Roda Impian Famili Cera 2026 - Enjin Dinamik Infiniti 10,000+ Kombinasi Data.
+        📢 Roda Impian Famili Ceria 2026 - Enjin Dinamik Infiniti 10,000+ Kombinasi Data.
     </footer>
 
-    <!-- LOGIK KUIZ & CONFIG SUPABASE REALTIME MULTIPLAYER -->
+    <!-- LOGIK KUIZ -->
     <script>
         // ==========================================
-        // TETAPAN SUPABASE (Isikan Butiran Anda Di Sini)
+        // CONFIG SUPABASE (Opsional)
         // ==========================================
-        // Sila buat akaun di supabase.com (Percuma), bina satu table bernama "gameroom" dengan column: id, room_id, player_name, score, updated_at
-        const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co"; 
-        const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+        const SUPABASE_URL = https://zlqxctzryejevctyhtbb.supabase.co/rest/v1/
+        const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpscXhjdHpyeWVqZXZjdHlodGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MTg4MjcsImV4cCI6MjA5ODk5NDgyN30.EWo4qfDyyeyC4b4Xd6e2HPBop_65-lI0lF-mf4HcaAI
         
-        let supabase = null;
-        if(SUPABASE_URL !== "https://YOUR_PROJECT_ID.supabase.co") {
-            supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let supabaseClient = null;
+        let isSupabaseActive = false;
+
+        // Validasi dan init Supabase dengan selamat tanpa menyebabkan Javascript ralat
+        try {
+            if (typeof supabase !== 'undefined' && SUPABASE_URL !== "https://YOUR_PROJECT_ID.supabase.co" && SUPABASE_ANON_KEY !== "YOUR_ANON_KEY") {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                isSupabaseActive = true;
+            }
+        } catch (e) {
+            console.log("Supabase dibiarkan offline. Menggunakan mod simulasi tempatan.");
         }
 
-        // Bank Maklumat Utama untuk Penjana 10,000+ Kombinasi Soalan
         const malaysiaData = {
             negeri: [
                 { nama: "Johor", ibu: "Johor Bahru", gelaran: "Harimau Selatan", produk: "Otak-otak" },
@@ -212,10 +215,10 @@
         };
 
         let currentDifficulty = 'easy';
-        let myPlayerName = "Pemain Rawak";
+        let myPlayerName = "Pemain 1";
         let myRoomID = "UTAMA";
         let myScore = 0;
-        let localPlayersData = {}; // Digunakan jika tiada sambungan Supabase (Offline demo)
+        let localPlayersData = {}; 
 
         let currentGameQuestions = [];
         let currentQuestionIndex = 0;
@@ -226,6 +229,13 @@
             lucide.createIcons();
             renderCategories();
             setDifficulty('easy');
+            
+            // Tukar text badge status penyambungan
+            if(isSupabaseActive) {
+                document.getElementById('connection-status-badge').className = "mb-4 text-center p-2 rounded-xl bg-emerald-400 border-2 border-black font-bold text-xs uppercase shadow-[2px_2px_0px_#000]";
+                document.getElementById('connection-status-badge').innerText = "⚡ Mod Live Cloud Berfungsi! Peranti anda sedang terhubung secara Realtime.";
+            }
+            
             setupRealtimeSimulation();
         };
 
@@ -254,7 +264,6 @@
             lucide.createIcons();
         }
 
-        // FUNGSI UTAMA: DAFTAR / JOIN BILIK MULTIPLAYER
         async function joinRoom(isCreate) {
             let nameInput = document.getElementById('player-name').value.trim();
             let roomInput = document.getElementById('room-id').value.trim().toUpperCase();
@@ -268,41 +277,41 @@
             myRoomID = roomInput;
             myScore = 0;
 
-            // Kemaskini Paparan Header & Dashboard Mini
             document.getElementById('mini-profile').classList.remove('hidden');
             document.getElementById('header-player-name').innerText = myPlayerName;
             document.getElementById('header-player-score').innerText = myScore + " Pts";
             document.getElementById('dash-room-id').innerText = myRoomID;
 
-            // Simpan data lokal untuk simulasi
+            localPlayersData = {}; 
             localPlayersData[myPlayerName] = myScore;
 
-            if(supabase) {
-                // Hantar data ke Supabase Database sekiranya ada
-                await supabase.from('gameroom').insert([{ room_id: myRoomID, player_name: myPlayerName, score: myScore }]);
-                subscribeToRoomRealtime();
+            if(isSupabaseActive && supabaseClient) {
+                try {
+                    await supabaseClient.from('gameroom').insert([{ room_id: myRoomID, player_name: myPlayerName, score: myScore }]);
+                    subscribeToRoomRealtime();
+                } catch(e) { console.log(e); }
             } else {
-                // Sekiranya tiada Supabase, buat simulasi kemasukan ahli keluarga secara rawak (bot) untuk suasana meriah!
-                let botNames = ["Mak Ngah", "Sepupu Bob", "Pak Su", "Ulong"];
-                let randomBot = botNames[Math.floor(Math.random() * botNames.length)];
-                localPlayersData[randomBot] = Math.floor(Math.random() * 50);
-                updateLeaderboardUI();
+                // Tambah bot ahli keluarga sekiranya offline untuk memeriahkan suasana roda impian
+                localPlayersData["Mak Ngah"] = 10;
+                localPlayersData["Bob Sepupu"] = 0;
+                localPlayersData["Pak Su"] = 20;
             }
-            alert(`Berjaya menyertai bilik: ${myRoomID}! Sila pilih kategori untuk bersaing.`);
+            
+            updateLeaderboardUI();
+            alert(`Pendaftaran Berjaya! Sila pilih mana-mana kotak kategori di bawah untuk memulakan cabaran.`);
         }
 
-        // UPDATE PAPARAN LEADERBOARD LIVE DI PERANTI
         function updateLeaderboardUI() {
             const container = document.getElementById('live-leaderboard');
+            if(!container) return;
             container.innerHTML = '';
 
-            // Susun kedudukan pemain mengikut markah tertinggi (Konsep Roda Impian)
             let sortedPlayers = Object.entries(localPlayersData).sort((a,b) => b[1] - a[1]);
             
             sortedPlayers.forEach(([name, score], idx) => {
                 let badgeColor = idx === 0 ? 'bg-yellow-400' : idx === 1 ? 'bg-slate-300' : 'bg-orange-100';
                 container.innerHTML += `
-                    <div class="bg-white p-2.5 rounded-xl border-2 border-black flex justify-between items-center shadow-[2px_2px_0px_#000] animate-fade-in">
+                    <div class="bg-white p-2.5 rounded-xl border-2 border-black flex justify-between items-center shadow-[2px_2px_0px_#000]">
                         <div class="flex items-center space-x-2">
                             <span class="${badgeColor} text-black font-black w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-black">${idx+1}</span>
                             <span class="font-bold text-xs truncate max-w-[120px]">${name} ${name === myPlayerName ? '(Anda)' : ''}</span>
@@ -313,22 +322,29 @@
             });
         }
 
-        // REALTIME SUBSCRIPTION (SUPABASE)
         function subscribeToRoomRealtime() {
-            supabase.channel('room-changes')
+            if(!supabaseClient) return;
+            supabaseClient.channel('room-changes')
             .on('postgres_changes', { event: '*', filter: `room_id=eq.${myRoomID}`, schema: 'public', table: 'gameroom' }, payload => {
                 let data = payload.new;
-                localPlayersData[data.player_name] = data.score;
-                updateLeaderboardUI();
+                if(data) {
+                    localPlayersData[data.player_name] = data.score;
+                    updateLeaderboardUI();
+                }
             })
             .subscribe();
         }
 
-        // ENGINE PENJANA INFINITI 10,000+ KOMBINASI SOALAN
         function startQuizSession(category) {
+            // Memastikan nama telah diisi terlebih dahulu sebelum bermula
+            let nameInput = document.getElementById('player-name').value.trim();
+            if(!nameInput) {
+                alert("Sila masukkan Nama anda di dalam kotak 'Bilik Kuiz Bersama' terlebih dahulu sebelum mula!");
+                return;
+            }
+
             currentGameQuestions = [];
             let negeriPool = [...malaysiaData.negeri];
-
             document.getElementById('game-difficulty-badge').innerText = currentDifficulty.toUpperCase();
 
             for(let i=0; i<Total_Questions; i++) {
@@ -367,7 +383,6 @@
                         questionObj = { q: `Peristiwa meriah "${rawTarikh.peristiwa}" melakar sejarah pada tahun...?`, o: options, a: options.indexOf(rawTarikh.tahun) };
                     }
                 } else if(category === 'logik') {
-                    // Matematik Kilat Roda Impian
                     let limit = currentDifficulty === 'easy' ? 40 : currentDifficulty === 'medium' ? 200 : 500;
                     let n1 = Math.floor(Math.random() * limit) + 5;
                     let n2 = Math.floor(Math.random() * 20) + 3;
@@ -421,21 +436,21 @@
                 feedback.className = "p-4 rounded-xl text-sm font-black text-center bg-emerald-100 border-2 border-emerald-500 text-emerald-800";
                 feedback.innerText = `🎉 JAWAPAN TEPAT! Anda mendapat +${pointsPerCorrect} Mata!`;
                 
-                // Kemaskini Skor
                 myScore += pointsPerCorrect;
                 document.getElementById('header-player-score').innerText = myScore + " Pts";
                 localPlayersData[myPlayerName] = myScore;
                 updateLeaderboardUI();
 
-                // Kemaskini Dashboard Supabase (Realtime) Sekiranya Ada
-                if(supabase) {
-                    await supabase.from('gameroom').update({ score: myScore }).match({ room_id: myRoomID, player_name: myPlayerName });
+                if(isSupabaseActive && supabaseClient) {
+                    try {
+                        await supabaseClient.from('gameroom').update({ score: myScore }).match({ room_id: myRoomID, player_name: myPlayerName });
+                    } catch(e) { console.log(e); }
                 }
             } else {
                 document.getElementById(`opt-${selected}`).className = "w-full text-left p-4 rounded-xl border-2 border-black bg-rose-300 text-slate-900 font-black text-sm";
                 document.getElementById(`opt-${correct}`).className = "w-full text-left p-4 rounded-xl border-2 border-black bg-emerald-200 text-slate-900 font-black text-sm";
                 feedback.className = "p-4 rounded-xl text-sm font-black text-center bg-rose-100 border-2 border-rose-500 text-rose-800";
-                feedback.innerText = "❌ KURANG TEPAT! Sesiapa sahaja boleh memintas kedudukan anda!";
+                feedback.innerText = "❌ KURANG TEPAT! Teruskan fokus untuk soalan selepas ini!";
             }
 
             document.getElementById('btn-next').classList.remove('hidden');
@@ -446,7 +461,6 @@
             if(currentQuestionIndex < Total_Questions) {
                 displayQuestion();
             } else {
-                // Tunjuk Papan Skor AkhirSesi
                 document.getElementById('screen-game').classList.add('hidden');
                 document.getElementById('screen-result').classList.remove('hidden');
                 document.getElementById('session-score').innerText = myScore + " Pts";
@@ -457,22 +471,19 @@
             document.getElementById('screen-game').classList.add('hidden');
             document.getElementById('screen-result').classList.add('hidden');
             document.getElementById('screen-lobby').classList.remove('hidden');
-            renderCategories();
         }
 
-        // SIMULASI MONTAJ PERSAINGAN LIVE UNTUK PAPARAN TEMPATAN
         function setupRealtimeSimulation() {
             setInterval(() => {
-                if(!document.getElementById('screen-game').classList.contains('hidden')) {
-                    // Beri mata rawak kepada pemain lain (bot) untuk menunjukkan papan dashboard sentiasa bergerak secara 'live'
+                if(!document.getElementById('screen-game').classList.contains('hidden') && !isSupabaseActive) {
                     for (let key in localPlayersData) {
                         if(key !== myPlayerName) {
-                            localPlayersData[key] += Math.random() > 0.6 ? 10 : 0;
+                            localPlayersData[key] += Math.random() > 0.7 ? 10 : 0;
                         }
                     }
                     updateLeaderboardUI();
                 }
-            }, 4000);
+            }, 3000);
         }
     </script>
 </body>
