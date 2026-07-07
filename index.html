@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainGym Dewasa Edisi Malaysia</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .custom-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <header class="custom-gradient text-white shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
+                <i data-lucide="brain" class="w-8 h-8 text-orange-400 animate-pulse"></i>
+                <span class="font-bold text-lg md:text-xl tracking-tight" id="txt-app-title">BrainGym Dewasa</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="bg-white/20 rounded-lg p-1 flex text-xs font-medium">
+                    <button id="btn-lang-ms" onclick="setLanguage('ms')" class="px-3 py-1.5 rounded-md bg-white text-blue-900 shadow-sm transition">BM</button>
+                    <button id="btn-lang-en" onclick="setLanguage('en')" class="px-3 py-1.5 rounded-md text-white hover:bg-white/10 transition">EN</button>
+                </div>
+                <div class="flex items-center space-x-1 bg-amber-500/20 px-3 py-1.5 rounded-lg border border-amber-400/30">
+                    <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+                    <span class="text-xs font-semibold uppercase text-amber-300" id="txt-total-score-label">Skor:</span>
+                    <span class="font-bold text-amber-400" id="global-score">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow p-4 md:p-6 max-w-4xl w-full mx-auto flex flex-col justify-center">
+        
+        <div id="screen-lobby" class="space-y-6">
+            <div class="text-center space-y-2 py-4">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-blue-900 tracking-tight" id="lobby-title">BrainGym Dewasa Edisi Malaysia</h1>
+                <p class="text-slate-600 text-sm md:text-base max-w-xl mx-auto" id="lobby-desc">Uji memori, logik, pantas kira, dan pengetahuan am anda dengan cabaran mesra minda Malaysia.</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3 text-center" id="lbl-difficulty">Pilih Tahap Kesukaran:</p>
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="setDifficulty('easy')" id="diff-easy" class="py-2.5 rounded-xl font-medium border-2 transition-all text-center text-sm border-emerald-500 bg-emerald-50 text-emerald-700">Mudah / Easy</button>
+                    <button onclick="setDifficulty('medium')" id="diff-medium" class="py-2.5 rounded-xl font-medium border-2 transition-all text-center text-sm border-slate-200 hover:border-amber-500 text-slate-700">Sederhana</button>
+                    <button onclick="setDifficulty('hard')" id="diff-hard" class="py-2.5 rounded-xl font-medium border-2 transition-all text-center text-sm border-slate-200 hover:border-rose-500 text-slate-700">Susah / Hard</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="category-grid">
+                </div>
+        </div>
+
+        <div id="screen-game" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md border border-slate-100 max-w-2xl mx-auto w-full space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <button
