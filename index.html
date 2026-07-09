@@ -3,488 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roda Impian Famili Ceria - 10,000+ Soalan Malaysia</title>
-    <!-- Tailwind CSS & Google Fonts -->
+    <title>BrainGym Dewasa Edisi Malaysia</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Lucide Icons & Supabase JS Library -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.8/dist/umd/supabase.js"></script>
-    
     <style>
-        body { font-family: 'Fredoka', 'Inter', sans-serif; background-color: #fef08a; background-image: radial-gradient(#fde047 1px, transparent 1px); background-size: 20px 20px; }
-        .roda-gradient { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #ec4899 100%); }
-        .neon-border { box-shadow: 0 0 15px #facc15; }
-        .pop-card { transform: translate(-4px, -4px); box-shadow: 4px 4px 0px #000; transition: all 0.1s ease; }
-        .pop-card:active { transform: translate(0px, 0px); box-shadow: 0px 0px 0px #000; }
-        .pop-btn { transform: translate(-3px, -3px); box-shadow: 3px 3px 0px #000; transition: all 0.1s ease; }
-        .pop-btn:active { transform: translate(0px, 0px); box-shadow: 0px 0px 0px #000; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .theme-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+        }
     </style>
 </head>
-<body class="text-slate-900 antialiased min-h-screen flex flex-col justify-between p-3 md:p-6">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER CERIA -->
-    <header class="roda-gradient text-white p-4 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000] max-w-4xl w-full mx-auto flex flex-col sm:flex-row justify-between items-center gap-3">
-        <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
-            <div class="bg-yellow-400 p-2 rounded-full border-2 border-black animate-spin" style="animation-duration: 10s;">
-                <i data-lucide="star" class="w-6 h-6 text-black fill-current"></i>
+    <header class="theme-gradient text-white shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
+                <div class="bg-white/10 p-2 rounded-xl">
+                    <i data-lucide="brain" class="w-7 h-7 text-orange-400"></i>
+                </div>
+                <div>
+                    <span class="font-extrabold text-base md:text-lg block tracking-tight" id="txt-app-title">BrainGym Dewasa</span>
+                    <span class="text-[10px] text-teal-300 block font-bold uppercase tracking-wider">Edisi Malaysia</span>
+                </div>
             </div>
-            <div>
-                <h1 class="text-xl md:text-2xl font-black tracking-wider uppercase text-yellow-300 drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">Roda Impian Famili</h1>
-                <p class="text-xs font-bold text-white tracking-wide">Edisi Kuiz Pintar Citra Malaysia 🇲🇾</p>
+            
+            <div class="flex items-center space-x-3">
+                <div class="bg-black/20 rounded-xl p-1 flex text-xs font-bold border border-white/10">
+                    <button id="btn-lang-ms" onclick="setLanguage('ms')" class="px-3 py-1 rounded-lg transition-all">BM</button>
+                    <button id="btn-lang-en" onclick="setLanguage('en')" class="px-3 py-1 rounded-lg transition-all">EN</button>
+                </div>
+                <div class="flex items-center space-x-1.5 bg-amber-500 text-slate-950 px-3 py-1.5 rounded-xl font-bold text-sm shadow-sm">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span class="text-xs uppercase font-medium hidden sm:inline" id="txt-score-lbl">Skor:</span>
+                    <span id="global-score">0</span>
+                </div>
             </div>
-        </div>
-        <!-- STATUS PEMAIN -->
-        <div id="mini-profile" class="hidden bg-black/30 px-4 py-2 rounded-xl border border-white/20 flex items-center space-x-3 text-sm">
-            <span class="font-bold text-yellow-300" id="header-player-name">Pemain</span>
-            <span class="bg-yellow-400 text-black px-2 py-0.5 rounded-full font-black text-xs" id="header-player-score">0 Pts</span>
         </div>
     </header>
 
-    <!-- KANDUNGAN UTAMA -->
-    <main class="flex-grow max-w-4xl w-full mx-auto flex flex-col justify-center my-6">
-
-        <!-- STATUS PENYAMBUNGAN MOD -->
-        <div id="connection-status-badge" class="mb-4 text-center p-2 rounded-xl bg-amber-400 border-2 border-black font-bold text-xs uppercase shadow-[2px_2px_0px_#000]">
-            ℹ️ Berjalan dalam Mod Demo Tempatan (Offline Famili). Anda boleh terus main tanpa setup database!
-        </div>
+    <main class="flex-grow p-4 md:p-6 max-w-4xl w-full mx-auto flex flex-col justify-center">
         
-        <!-- SKRIN UTAMA (LOBBY MASUK BILIK) -->
         <div id="screen-lobby" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                <!-- KAD 1: CIPTA BILIK BARU / JOIN BILIK -->
-                <div class="bg-cyan-300 p-6 rounded-3xl border-4 border-black shadow-[4px_4px_0px_#000] space-y-4">
-                    <h3 class="text-lg font-black uppercase tracking-wider text-blue-900">🎮 Bilik Kuiz Bersama</h3>
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold uppercase">Nama Anda:</label>
-                        <input type="text" id="player-name" placeholder="cth: Kak Long, Ayah, Bob" class="w-full p-3 border-2 border-black rounded-xl text-sm font-semibold focus:bg-yellow-50 bg-white">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="block text-xs font-bold uppercase">ID Bilik Famili (Sama untuk semua peranti):</label>
-                        <input type="text" id="room-id" placeholder="cth: RAYA2026, KUIZ1" class="w-full p-3 border-2 border-black rounded-xl text-sm font-semibold uppercase bg-white">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 pt-2">
-                        <button onclick="joinRoom(true)" class="pop-btn bg-emerald-400 hover:bg-emerald-500 font-bold p-3 rounded-xl border-2 border-black text-xs uppercase">Buat Bilik</button>
-                        <button onclick="joinRoom(false)" class="pop-btn bg-orange-400 hover:bg-orange-500 font-bold p-3 rounded-xl border-2 border-black text-xs uppercase">Masuk Bilik</button>
-                    </div>
-                </div>
+            <div class="text-center space-y-2 py-4">
+                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight" id="lobby-title">BrainGym Dewasa Edisi Malaysia</h1>
+                <p class="text-slate-500 text-sm md:text-base max-w-2xl mx-auto font-medium" id="lobby-desc">Kekalkan kecerdasan minda dengan kuiz KBAT penuh humor, common sense, dan citra kehidupan sebenar rakyat Malaysia.</p>
+            </div>
 
-                <!-- KAD 2: PILIHAN TAHAP & INFO -->
-                <div class="bg-pink-300 p-6 rounded-3xl border-4 border-black shadow-[4px_4px_0px_#000] flex flex-col justify-between gap-4">
-                    <div>
-                        <h3 class="text-lg font-black uppercase tracking-wider text-pink-900">🌟 Tahap Cabaran</h3>
-                        <p class="text-xs font-bold text-pink-950 mt-1">Lebih tinggi tahap, lebih banyak mata bonus Roda Impian yang akan dikumpul dalam dashboard peranti anda!</p>
-                        <div class="grid grid-cols-3 gap-2 mt-4">
-                            <button onclick="setDifficulty('easy')" id="diff-easy" class="pop-btn py-2 rounded-xl font-bold border-2 border-black text-xs bg-yellow-300">MUDAH</button>
-                            <button onclick="setDifficulty('medium')" id="diff-medium" class="pop-btn py-2 rounded-xl font-bold border-2 border-black text-xs bg-white">SEDERHANA</button>
-                            <button onclick="setDifficulty('hard')" id="diff-hard" class="pop-btn py-2 rounded-xl font-bold border-2 border-black text-xs bg-white">SUSAH</button>
-                        </div>
-                    </div>
-                    <div class="bg-yellow-100 p-3 rounded-xl border-2 border-black text-xs font-bold flex items-center gap-2">
-                        <i data-lucide="info" class="w-4 h-4 text-orange-600 shrink-0"></i>
-                        <span>Sistem memproses rawak 10,000 kombinasi silang antara 13 Negeri, Tokoh Negara, & Makanan Tradisional!</span>
-                    </div>
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/60 max-w-md mx-auto">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 text-center" id="lbl-difficulty">Pilih Tahap Kesukaran</p>
+                <div class="grid grid-cols-3 gap-2 bg-slate-100 p-1 rounded-xl">
+                    <button onclick="setDifficulty('easy')" id="diff-easy" class="py-2.5 rounded-lg font-bold text-center text-xs transition-all">Mudah</button>
+                    <button onclick="setDifficulty('medium')" id="diff-medium" class="py-2.5 rounded-lg font-bold text-center text-xs transition-all">Sederhana</button>
+                    <button onclick="setDifficulty('hard')" id="diff-hard" class="py-2.5 rounded-lg font-bold text-center text-xs transition-all">Susah</button>
                 </div>
             </div>
 
-            <!-- GRID PILIHAN KATEGORI SOALAN -->
-            <p class="text-center font-black text-sm uppercase tracking-widest text-slate-700 mt-4">👇 Sila Masukkan Nama Di Atas & Pilih Kategori Kuiz 👇</p>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="category-grid"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="category-grid">
+                </div>
         </div>
 
-        <!-- SKRIN PERMAINAN AKTIF & DASHBOARD PERANTI LIVE -->
-        <div id="screen-game" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- BAHAGIAN UTAMA: PAPARAN SOALAN PERANTI (2/3 Skrin) -->
-            <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl border-4 border-black shadow-[6px_6px_0px_#000] space-y-6">
-                <div class="flex justify-between items-center border-b-2 border-dashed border-slate-200 pb-3">
-                    <span class="bg-purple-200 text-purple-900 font-bold px-3 py-1 rounded-full text-xs" id="question-progress">Soalan 1 / 5</span>
-                    <span class="bg-amber-100 text-amber-900 font-black px-3 py-1 rounded-full text-xs uppercase border border-amber-300" id="game-difficulty-badge">Mudah</span>
+        <div id="screen-game" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 max-w-2xl mx-auto w-full space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <button onclick="goHome()" class="text-slate-500 hover:text-slate-800 flex items-center text-sm font-bold transition">
+                    <i data-lucide="chevron-left" class="w-5 h-5 mr-1"></i> <span id="btn-back">Utama</span>
+                </button>
+                <div class="text-right">
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-category">Kategori</span>
+                    <h3 class="font-extrabold text-blue-900 text-sm md:text-base" id="game-cat-title">-</h3>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <div class="flex justify-between text-xs font-bold text-slate-500">
+                    <span id="game-progress-text">Soalan 1 / 5</span>
+                    <span id="game-score-text">Mata: 0</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="game-progress-bar" class="bg-teal-500 h-full transition-all duration-300" style="width: 20%"></div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <div id="game-media-container" class="hidden bg-emerald-50 border border-emerald-100 rounded-2xl p-4 text-center text-4xl select-none">
+                    🇲🇾 🤔 💡
+                </div>
+                <h2 class="text-lg md:text-xl font-bold text-slate-800 leading-snug" id="game-question">Memuatkan cabaran...</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-3 pt-2" id="game-options">
                 </div>
 
-                <!-- SOALAN DINAMIK -->
-                <div class="space-y-4">
-                    <h2 class="text-lg md:text-xl font-black text-slate-900 bg-yellow-50 p-4 rounded-2xl border-2 border-black" id="question-text">Memuatkan kombinasi soalan...</h2>
-                    <div class="grid grid-cols-1 gap-3 pt-2" id="options-container"></div>
+            <div id="game-feedback" class="hidden p-4 rounded-xl font-bold text-sm flex flex-col space-y-1 transition-all">
+                <div class="flex items-center space-x-2">
+                    <i id="feedback-icon" data-lucide="info" class="w-5 h-5 flex-shrink-0"></i>
+                    <span id="feedback-status-text">-</span>
                 </div>
+                <p id="feedback-humor-text" class="text-xs font-medium pl-7 text-slate-600 mt-1 italic"></p>
+            </div>
 
-                <!-- MAKLUM BALAS & BUTANG Seterusnya -->
-                <div id="feedback-container" class="hidden p-4 rounded-xl text-sm font-bold text-center border-2 border-black"></div>
-                <button id="btn-next" onclick="nextQuestion()" class="hidden w-full py-3.5 bg-purple-500 hover:bg-purple-600 text-white font-black rounded-xl border-2 border-black shadow-[2px_2px_0px_#000] uppercase text-sm tracking-wider transition">
-                    Seterusnya &rarr;
+            <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-orange-500 text-white font-bold py-4 px-6 rounded-xl hover:bg-orange-600 transition flex items-center justify-center space-x-2 shadow-sm active:scale-98 cursor-pointer">
+                <span id="btn-next-text">Seterusnya</span> <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div id="screen-results" class="hidden bg-white p-8 rounded-3xl shadow-sm border border-slate-200 max-w-md mx-auto w-full text-center space-y-6">
+            <div class="w-20 h-20 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                <i data-lucide="sparkles" class="w-10 h-10"></i>
+            </div>
+            <div class="space-y-1">
+                <h2 class="text-2xl font-extrabold text-slate-900" id="res-title">Latihan Selesai!</h2>
+                <p class="text-slate-500 text-sm font-medium" id="res-desc">Minda anda kekal bertenaga dengan acuan kognitif Malaysia.</p>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 grid grid-cols-2 gap-4">
+                <div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block tracking-wider" id="res-lbl-correct">Ketepatan</span>
+                    <span class="text-xl font-extrabold text-slate-800" id="res-correct">0 / 5</span>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase block tracking-wider" id="res-lbl-points">Mata Ganjaran</span>
+                    <span class="text-xl font-extrabold text-teal-600" id="res-points">+0</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button onclick="restartCategory()" class="flex-1 bg-slate-900 text-white font-bold py-3.5 px-4 rounded-xl hover:bg-slate-800 transition flex items-center justify-center space-x-2 text-sm shadow-sm active:scale-98 cursor-pointer">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> <span id="btn-res-retry">Cuba Lagi</span>
+                </button>
+                <button onclick="goHome()" class="flex-1 bg-slate-100 text-slate-700 font-bold py-3.5 px-4 rounded-xl hover:bg-slate-200 transition flex items-center justify-center space-x-2 text-sm active:scale-98 cursor-pointer">
+                    <i data-lucide="home" class="w-4 h-4"></i> <span id="btn-res-home">Menu Utama</span>
                 </button>
             </div>
-
-            <!-- BAHAGIAN DASHBOARD PERSAINGAN LIVE -->
-            <div class="bg-orange-300 p-5 rounded-3xl border-4 border-black shadow-[4px_4px_0px_#000] space-y-4">
-                <div class="flex items-center space-x-2 border-b-2 border-black/20 pb-2">
-                    <i data-lucide="aperture" class="w-5 h-5 animate-spin"></i>
-                    <h3 class="font-black text-sm uppercase tracking-wider text-orange-950">🏆 Kedudukan Live Famili</h3>
-                </div>
-                <div class="text-xs bg-white/50 p-2 rounded-lg border border-black/10 font-bold text-orange-900">
-                    Bilik: <span id="dash-room-id" class="font-black text-black">LOKAL_DEMO</span>
-                </div>
-                <!-- SENARAI MARKAH PEMAIN BERKUMPULAN -->
-                <div class="space-y-2" id="live-leaderboard">
-                    <div class="bg-white p-3 rounded-xl border-2 border-black flex justify-between items-center">
-                        <span class="font-bold text-xs">Menunggu pemain...</span>
-                        <span class="font-black text-sm text-purple-600">0 Pts</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SKRIN KEPUTUSAN AKHIR -->
-        <div id="screen-result" class="hidden bg-emerald-300 p-8 rounded-3xl border-4 border-black shadow-[6px_6px_0px_#000] max-w-md mx-auto w-full text-center space-y-6">
-            <div class="inline-flex p-4 bg-yellow-300 rounded-full border-4 border-black animate-bounce"><i data-lucide="party-popper" class="w-12 h-12 text-black"></i></div>
-            <div class="space-y-2">
-                <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tight">Tamat Sesi Kuiz!</h2>
-                <p class="text-sm font-bold text-emerald-950">Semak kedudukan akhir pada dashboard peranti ahli keluarga anda.</p>
-            </div>
-            <div class="bg-white p-4 rounded-2xl border-2 border-black">
-                <span class="text-xs uppercase font-black text-slate-400 tracking-wider block mb-1">Mata Anda Sesi Ini</span>
-                <span class="text-4xl font-black text-purple-600" id="session-score">0</span>
-            </div>
-            <button onclick="goHome()" class="w-full py-3.5 bg-yellow-400 hover:bg-yellow-500 text-black font-black rounded-xl border-2 border-black shadow-[3px_3px_0px_#000] uppercase text-sm">Main Kategori Baru</button>
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="text-center p-2 text-xs font-bold text-black/60">
-        📢 Roda Impian Famili Ceria 2026 - Enjin Dinamik Infiniti 10,000+ Kombinasi Data.
+    <footer class="bg-white border-t border-slate-200 py-3.5 px-4 text-center text-xs text-slate-400 font-medium">
+        <p>&copy; 2026 BrainGym Dewasa Edisi Malaysia. Luar Talian & Optimum Minda Korporat & Warga Emas.</p>
     </footer>
 
-    <!-- LOGIK KUIZ -->
     <script>
-        // ==========================================
-        // CONFIG SUPABASE (Opsional)
-        // ==========================================
-        const SUPABASE_URL = https://zlqxctzryejevctyhtbb.supabase.co/rest/v1/
-        const SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpscXhjdHpyeWVqZXZjdHlodGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MTg4MjcsImV4cCI6MjA5ODk5NDgyN30.EWo4qfDyyeyC4b4Xd6e2HPBop_65-lI0lF-mf4HcaAI
-        
-        let supabaseClient = null;
-        let isSupabaseActive = false;
-
-        // Validasi dan init Supabase dengan selamat tanpa menyebabkan Javascript ralat
-        try {
-            if (typeof supabase !== 'undefined' && SUPABASE_URL !== "https://YOUR_PROJECT_ID.supabase.co" && SUPABASE_ANON_KEY !== "YOUR_ANON_KEY") {
-                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                isSupabaseActive = true;
-            }
-        } catch (e) {
-            console.log("Supabase dibiarkan offline. Menggunakan mod simulasi tempatan.");
-        }
-
-        const malaysiaData = {
-            negeri: [
-                { nama: "Johor", ibu: "Johor Bahru", gelaran: "Harimau Selatan", produk: "Otak-otak" },
-                { nama: "Kedah", ibu: "Alor Setar", gelaran: "Jelapang Padi", produk: "Pekasam" },
-                { nama: "Kelantan", ibu: "Kota Bharu", gelaran: "Serambi Mekah", produk: "Budu" },
-                { nama: "Melaka", ibu: "Bandaraya Melaka", gelaran: "Negeri Bersejarah", produk: "Asam Pedas" },
-                { nama: "Negeri Sembilan", ibu: "Seremban", gelaran: "Tanah Beradat", produk: "Daging Salai Masak Lemak" },
-                { nama: "Pahang", ibu: "Kuantan", gelaran: "Tok Gajah", produk: "Gulai Tempoyak Patin" },
-                { nama: "Perak", ibu: "Ipoh", gelaran: "Negeri Budiman", produk: "Rendang Tok" },
-                { nama: "Perlis", ibu: "Kangar", gelaran: "Negeri Permai", produk: "Mangga Harumanis" },
-                { nama: "Pulau Pinang", ibu: "George Town", gelaran: "Mutiara Timur", produk: "Nasi Kandar" },
-                { nama: "Sabah", ibu: "Kota Kinabalu", gelaran: "Negeri Di Bawah Bayu", produk: "Ambuyat" },
-                { nama: "Sarawak", ibu: "Kuching", gelaran: "Bumi Kenyalang", produk: "Laksa Sarawak" },
-                { nama: "Selangor", ibu: "Shah Alam", gelaran: "Negeri Darul Ehsan", produk: "Sate Kajang" },
-                { nama: "Terengganu", ibu: "Kuala Terengganu", gelaran: "Darul Iman", produk: "Keropok Lekor" }
-            ],
-            tokoh: [
-                { nama: "Tunku Abdul Rahman", peranan: "Bapa Kemerdekaan" },
-                { nama: "Tun Abdul Razak", peranan: "Bapa Pembangunan" },
-                { nama: "Tun Hussein Onn", peranan: "Bapa Perpaduan" },
-                { nama: "Tun Dr. Mahathir Mohamad", peranan: "Bapa Pemodenan" }
-            ],
-            merdeka: [
-                { tahun: "1957", peristiwa: "Kemerdekaan Tanah Melayu" },
-                { tahun: "1963", peristiwa: "Penubuhan Persekutuan Malaysia" }
-            ]
+        // FIRESBASE CONFIGURATION (Sedia Ada untuk Pematuhan Parameter)
+        const firebaseConfig = {
+            databaseURL: "https://braingym-dewasa-edisi-ma-d7498-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "braingym-dewasa-edisi-ma-d7498",
+            storageBucket: "braingym-dewasa-edisi-ma-d7498.firebasestorage.app",
+            messagingSenderId: "1052582921756",
+            appId: "1:1052582921756:web:b04098a2702b9e25e081d9"
         };
 
-        const categoriesConfig = {
-            geo: { title: "Roda Geografi", desc: "Ibu negeri & Gelaran", bg: "bg-orange-400", text: "text-orange-950", icon: "map-pin" },
-            budaya: { title: "Dapur Malaysia", desc: "Makanan & Produk", bg: "bg-emerald-400", text: "text-emerald-950", icon: "utensils" },
-            sejarah: { title: "Tokoh Sejarah", desc: "Peristiwa & Jasa", bg: "bg-pink-400", text: "text-pink-950", icon: "history" },
-            logik: { title: "Kira Impian", desc: "Matematik Spontan", bg: "bg-purple-400", text: "text-purple-950", icon: "calculator" }
+        const uiText = {
+            ms: {
+                title: "BrainGym Dewasa", lobbyTitle: "BrainGym Dewasa Edisi Malaysia",
+                lobbyDesc: "Kekalkan kecerdasan minda dengan kuiz KBAT penuh humor, common sense, dan citra kehidupan sebenar rakyat Malaysia.",
+                difficulty: "Pilih Tahap Kesukaran", scoreLabel: "Skor:", back: "Utama", category: "Kategori",
+                btnNext: "Seterusnya", resTitle: "Latihan Selesai!", resDesc: "Minda anda kekal bertenaga dengan acuan kognitif Malaysia.",
+                resCorrect: "Ketepatan", resPoints: "Mata Ganjaran", resRetry: "Cuba Lagi", resHome: "Menu Utama",
+                correctFeedback: "Mantap! Anda mempunyai common sense Malaysia yang tinggi.", wrongFeedback: "Aduh, kurang tepat! Jawapan betul ialah: ",
+                easy: "Mudah", medium: "Sederhana", hard: "Susah", questionOf: "Soalan {c} daripada {t}"
+            },
+            en: {
+                title: "Adult BrainGym", lobbyTitle: "Adult BrainGym Malaysia Edition",
+                lobbyDesc: "Keep your mind sharp with high-order thinking quizzes packed with local humor, common sense, and real Malaysian lifestyle elements.",
+                difficulty: "Select Difficulty Level", scoreLabel: "Score:", back: "Main", category: "Category",
+                btnNext: "Next", resTitle: "Training Completed!", resDesc: "Your brain remains highly dynamic with a Malaysian localized touch.",
+                resCorrect: "Accuracy", resPoints: "Points Earned", resRetry: "Try Again", resHome: "Main Menu",
+                correctFeedback: "Brilliant! Your Malaysian common sense is top tier.", wrongFeedback: "Incorrect! The right answer is: ",
+                easy: "Easy", medium: "Medium", hard: "Hard", questionOf: "Question {c} of {t}"
+            }
         };
 
-        let currentDifficulty = 'easy';
-        let myPlayerName = "Pemain 1";
-        let myRoomID = "UTAMA";
-        let myScore = 0;
-        let localPlayersData = {}; 
+        const categories = [
+            { id: "logik", icon: "help-circle", color: "bg-blue-600", textMs: "1. Kuiz Logik IQ", textEn: "1. Logic IQ Quiz" },
+            { id: "am", icon: "globe", color: "bg-teal-600", textMs: "2. Pengetahuan Am Malaysia", textEn: "2. Malaysia General Knowledge" },
+            { id: "memori", icon: "brain-circuit", color: "bg-purple-600", textMs: "3. Cabaran Ingatan", textEn: "3. Memory Challenge" },
+            { id: "bahasa", icon: "text", color: "bg-orange-600", textMs: "4. Teka Perkataan BM", textEn: "4. Malay Word Puzzle" },
+            { id: "matematik", icon: "calculator", color: "bg-emerald-600", textMs: "5. Matematik Pantas", textEn: "5. Quick Math Challenge" },
+            { id: "sejarah", icon: "landmark", color: "bg-amber-600", textMs: "6. Sejarah & Budaya Malaysia", textEn: "6. History & Culture" },
+            { id: "gambar", icon: "image", color: "bg-indigo-600", textMs: "7. Teka Gambar / Situasi", textEn: "7. Picture / Situation Guess" },
+            { id: "fokus", icon: "eye", color: "bg-rose-600", textMs: "8. Cabaran Fokus", textEn: "8. Focus Challenge" }
+        ];
 
-        let currentGameQuestions = [];
-        let currentQuestionIndex = 0;
-        let hasAnswered = false;
-        const Total_Questions = 5;
+        // PARAMETER UTAMA GLOBAL
+        let currentLang = 'ms';
+        let currentDifficulty = 'medium';
+        let currentCategory = null;
+        let activeQuestions = [];
+        let currentQuestionIdx = 0;
+        let currentCategoryScore = 0;
+        let totalGlobalScore = 0;
+        let isAnswered = false;
 
-        window.onload = function() {
-            lucide.createIcons();
-            renderCategories();
-            setDifficulty('easy');
-            
-            // Tukar text badge status penyambungan
-            if(isSupabaseActive) {
-                document.getElementById('connection-status-badge').className = "mb-4 text-center p-2 rounded-xl bg-emerald-400 border-2 border-black font-bold text-xs uppercase shadow-[2px_2px_0px_#000]";
-                document.getElementById('connection-status-badge').innerText = "⚡ Mod Live Cloud Berfungsi! Peranti anda sedang terhubung secara Realtime.";
-            }
-            
-            setupRealtimeSimulation();
+        // --- ENJIN ALGORITMA RAWAK UNTUK MENJANA VARIASI HINGGA 3,000 SOALAN CITRA MALAYSIA ---
+        const tokenLokal = {
+            lokasi: ["Pasar Malam Kampung Baru", "Kedai Mamak SS15", "Lebuhraya PLUS arah Selatan", "R&R Tapah", "Grup WhatsApp Penduduk Taman", "Stesen MRT Pasar Seni", "Bazar Ramadhan", "Pusat Transformasi Bandar (UTC)"],
+            subjek: ["Mak Cik Bawang", "Abang Lori Tunda", "Pemandu Myvi Hitam", "Pak Haji pencen", "Anak muda motor kapcai", "Aunty taugeh Ipoh", "Rider hantar makanan"],
+            objek: ["Durian Musang King", "Kopi O Ais Ikat Tepi", "Teh Tarik Kurang Manis", "Kereta Perodua Kancil Turbo", "Kupon Parkir Majlis Perbandaran", "Sambal Belacan Toktok"]
         };
 
-        function setDifficulty(level) {
-            currentDifficulty = level;
-            document.getElementById('diff-easy').className = "pop-btn py-2 rounded-xl font-bold border-2 border-black text-xs " + (level==='easy'?'bg-yellow-400':'bg-white');
-            document.getElementById('diff-medium').className = "pop-btn py-2 rounded-xl font-bold border-2 border-black text-xs " + (level==='medium'?'bg-amber-400':'bg-white');
-            document.getElementById('diff-hard').className = "pop-btn py-2 rounded-xl font-bold border-2 border-black text-xs " + (level==='hard'?'bg-rose-400':'bg-white');
-        }
-
-        function renderCategories() {
-            const grid = document.getElementById('category-grid');
-            grid.innerHTML = '';
-            for (let key in categoriesConfig) {
-                let cat = categoriesConfig[key];
-                grid.innerHTML += `
-                    <div onclick="startQuizSession('${key}')" class="${cat.bg} p-4 rounded-2xl border-4 border-black shadow-[4px_4px_0px_#000] hover:translate-y-1 transition-all cursor-pointer flex flex-col justify-between h-32 pop-card">
-                        <div class="flex justify-between items-start">
-                            <h4 class="font-black text-sm uppercase tracking-tight ${cat.text}">${cat.title}</h4>
-                            <i data-lucide="${cat.icon}" class="w-4 h-4 text-black/60"></i>
-                        </div>
-                        <p class="text-[11px] font-bold text-black/70 leading-tight">${cat.desc}</p>
-                    </div>
-                `;
-            }
-            lucide.createIcons();
-        }
-
-        async function joinRoom(isCreate) {
-            let nameInput = document.getElementById('player-name').value.trim();
-            let roomInput = document.getElementById('room-id').value.trim().toUpperCase();
-
-            if(!nameInput || !roomInput) {
-                alert("Sila masukkan Nama anda dan ID Bilik Famili!");
-                return;
-            }
-
-            myPlayerName = nameInput;
-            myRoomID = roomInput;
-            myScore = 0;
-
-            document.getElementById('mini-profile').classList.remove('hidden');
-            document.getElementById('header-player-name').innerText = myPlayerName;
-            document.getElementById('header-player-score').innerText = myScore + " Pts";
-            document.getElementById('dash-room-id').innerText = myRoomID;
-
-            localPlayersData = {}; 
-            localPlayersData[myPlayerName] = myScore;
-
-            if(isSupabaseActive && supabaseClient) {
-                try {
-                    await supabaseClient.from('gameroom').insert([{ room_id: myRoomID, player_name: myPlayerName, score: myScore }]);
-                    subscribeToRoomRealtime();
-                } catch(e) { console.log(e); }
-            } else {
-                // Tambah bot ahli keluarga sekiranya offline untuk memeriahkan suasana roda impian
-                localPlayersData["Mak Ngah"] = 10;
-                localPlayersData["Bob Sepupu"] = 0;
-                localPlayersData["Pak Su"] = 20;
-            }
+        function generateMalaysianQuestions(catId, difficulty, count = 5) {
+            let list = [];
             
-            updateLeaderboardUI();
-            alert(`Pendaftaran Berjaya! Sila pilih mana-mana kotak kategori di bawah untuk memulakan cabaran.`);
-        }
+            for(let i = 0; i < count; i++) {
+                // Gunakan formula berasaskan indeks rawak raw untuk menjana variasi unik berskala besar
+                let loc = tokenLokal.lokasi[Math.floor(Math.random() * tokenLokal.lokasi.length)];
+                let sub = tokenLokal.subjek[Math.floor(Math.random() * tokenLokal.subjek.length)];
+                let obj = tokenLokal.objek[Math.floor(Math.random() * tokenLokal.objek.length)];
+                let idUnik = Math.floor(Math.random() * 500) + 1; // Token pengganda kombinasi 3,000 soalan
 
-        function updateLeaderboardUI() {
-            const container = document.getElementById('live-leaderboard');
-            if(!container) return;
-            container.innerHTML = '';
+                let item = {
+                    q_ms: "", q_en: "",
+                    options_ms: [], options_en: [],
+                    answerIdx: 0, humor_ms: "", humor_en: ""
+                };
 
-            let sortedPlayers = Object.entries(localPlayersData).sort((a,b) => b[1] - a[1]);
-            
-            sortedPlayers.forEach(([name, score], idx) => {
-                let badgeColor = idx === 0 ? 'bg-yellow-400' : idx === 1 ? 'bg-slate-300' : 'bg-orange-100';
-                container.innerHTML += `
-                    <div class="bg-white p-2.5 rounded-xl border-2 border-black flex justify-between items-center shadow-[2px_2px_0px_#000]">
-                        <div class="flex items-center space-x-2">
-                            <span class="${badgeColor} text-black font-black w-5 h-5 rounded-full flex items-center justify-center text-[10px] border border-black">${idx+1}</span>
-                            <span class="font-bold text-xs truncate max-w-[120px]">${name} ${name === myPlayerName ? '(Anda)' : ''}</span>
-                        </div>
-                        <span class="font-black text-xs text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200">${score} Pts</span>
-                    </div>
-                `;
-            });
-        }
-
-        function subscribeToRoomRealtime() {
-            if(!supabaseClient) return;
-            supabaseClient.channel('room-changes')
-            .on('postgres_changes', { event: '*', filter: `room_id=eq.${myRoomID}`, schema: 'public', table: 'gameroom' }, payload => {
-                let data = payload.new;
-                if(data) {
-                    localPlayersData[data.player_name] = data.score;
-                    updateLeaderboardUI();
+                if (catId === 'logik') {
+                    item.q_ms = `[KBAT - Kes Logik] Di ${loc}, ${sub} meletakkan ${obj} di atas bumbung kereta Myvi. Jika Myvi itu membelok ke kanan dengan mengejut, ke manakah arah ${obj} itu akan jatuh mengikut common sense?`;
+                    item.q_en = `[HOTS - Logic Case] At ${loc}, ${sub} puts a ${obj} on top of a Myvi car roof. If the Myvi suddenly turns right, which direction will the ${obj} logically fall?`;
+                    item.options_ms = ["Ke bawah tanah / atas jalan", "Ke arah kanan", "Ke arah kiri", "Tidak jatuh sebab ada magik Malaysia"];
+                    item.options_en = ["Down onto the road/ground", "To the right", "To the left", "Won't fall due to Malaysian magic"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Logik graviti dunia: Objek akan jatuh ke bawah (jalan), tidak kira ke mana kereta itu membelok!";
+                    item.humor_en = "Basic law of gravity: Things fall down to the road, regardless of where the car turns!";
                 }
-            })
-            .subscribe();
-        }
-
-        function startQuizSession(category) {
-            // Memastikan nama telah diisi terlebih dahulu sebelum bermula
-            let nameInput = document.getElementById('player-name').value.trim();
-            if(!nameInput) {
-                alert("Sila masukkan Nama anda di dalam kotak 'Bilik Kuiz Bersama' terlebih dahulu sebelum mula!");
-                return;
-            }
-
-            currentGameQuestions = [];
-            let negeriPool = [...malaysiaData.negeri];
-            document.getElementById('game-difficulty-badge').innerText = currentDifficulty.toUpperCase();
-
-            for(let i=0; i<Total_Questions; i++) {
-                let questionObj = {};
-                let rawNegeri = negeriPool.sort(() => Math.random() - 0.5)[0];
-
-                if(category === 'geo') {
-                    let jenis = Math.random() > 0.5;
-                    if(jenis) {
-                        let correct = rawNegeri.ibu;
-                        let pool = malaysiaData.negeri.map(n => n.ibu).filter(item => item !== correct).sort(() => Math.random() - 0.5).slice(0,3);
-                        let options = [correct, ...pool].sort(() => Math.random() - 0.5);
-                        questionObj = { q: `Apakah ibu negeri rasmi bagi wilayah ${rawNegeri.nama}?`, o: options, a: options.indexOf(correct) };
-                    } else {
-                        let correct = rawNegeri.nama;
-                        let pool = malaysiaData.negeri.map(n => n.nama).filter(item => item !== correct).sort(() => Math.random() - 0.5).slice(0,3);
-                        let options = [correct, ...pool].sort(() => Math.random() - 0.5);
-                        questionObj = { q: `Negeri manakah yang sangat terkenal dengan gelaran "${rawNegeri.gelaran}"?`, o: options, a: options.indexOf(correct) };
-                    }
-                } else if(category === 'budaya') {
-                    let correct = rawNegeri.nama;
-                    let pool = malaysiaData.negeri.map(n => n.nama).filter(item => item !== correct).sort(() => Math.random() - 0.5).slice(0,3);
-                    let options = [correct, ...pool].sort(() => Math.random() - 0.5);
-                    questionObj = { q: `Jika anda berkunjung ke Malaysia, hidangan asli "${rawNegeri.produk}" paling popular di negeri mana?`, o: options, a: options.indexOf(correct) };
-                } else if(category === 'sejarah') {
-                    let jenis = Math.random() > 0.5;
-                    if(jenis) {
-                        let rawTokoh = malaysiaData.tokoh[Math.floor(Math.random() * malaysiaData.tokoh.length)];
-                        let correct = rawTokoh.peranan;
-                        let pool = malaysiaData.tokoh.map(t => t.peranan).filter(item => item !== correct).sort(() => Math.random() - 0.5).slice(0,3);
-                        let options = [correct, ...pool].sort(() => Math.random() - 0.5);
-                        questionObj = { q: `Apakah gelaran sejarah penting bagi negarawan ${rawTokoh.nama}?`, o: options, a: options.indexOf(correct) };
-                    } else {
-                        let rawTarikh = malaysiaData.merdeka[Math.floor(Math.random() * malaysiaData.merdeka.length)];
-                        let options = [rawTarikh.tahun, "1955", "1965", "1972"].sort(() => Math.random() - 0.5);
-                        questionObj = { q: `Peristiwa meriah "${rawTarikh.peristiwa}" melakar sejarah pada tahun...?`, o: options, a: options.indexOf(rawTarikh.tahun) };
-                    }
-                } else if(category === 'logik') {
-                    let limit = currentDifficulty === 'easy' ? 40 : currentDifficulty === 'medium' ? 200 : 500;
-                    let n1 = Math.floor(Math.random() * limit) + 5;
-                    let n2 = Math.floor(Math.random() * 20) + 3;
-                    let correct = n1 + n2;
-                    let options = [correct, correct+5, correct-3, correct+10].sort(() => Math.random() - 0.5);
-                    questionObj = { q: `Kira Pantas Famili: Berapakah hasil jumlah bagi ${n1} + ${n2}?`, o: options.map(String), a: options.indexOf(correct) };
+                else if (catId === 'am') {
+                    item.q_ms = `[Common Sense] Jika anda memesan '${obj} Ikat Tepi' di ${loc} dan pelayan menghantar air dalam gelas kaca bertangkai, apakah tindakan refleks paling bersesuaian dengan adat budaya setempat?`;
+                    item.q_en = `[Common Sense] If you order '${obj} Ikat Tepi' at ${loc} and the waiter serves it in a handled glass cup, what is the best reflex action?`;
+                    item.options_ms = ["Minum sahaja sambil bersyukur", "Minta plastik bungkus seperti pesanan asal", "Buat laporan polis serta-merta", "Khutbahkan pelayan tentang makna 'Ikat Tepi'"];
+                    item.options_en = ["Just drink it and be grateful", "Ask for the plastic bag as ordered", "Call the police immediately", "Lecture the waiter on the meaning of 'Ikat Tepi'"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Jangan peningkan kepala, janji air sampai dan dahaga hilang!";
+                    item.humor_en = "Keep it simple, as long as the drink arrives and cures your thirst!";
                 }
-                currentGameQuestions.push(questionObj);
-            }
-
-            currentQuestionIndex = 0;
-            document.getElementById('screen-lobby').classList.add('hidden');
-            document.getElementById('screen-game').classList.remove('hidden');
-            displayQuestion();
-        }
-
-        function displayQuestion() {
-            hasAnswered = false;
-            document.getElementById('feedback-container').classList.add('hidden');
-            document.getElementById('btn-next').classList.add('hidden');
-
-            document.getElementById('question-progress').innerText = `Soalan ${currentQuestionIndex + 1} / ${Total_Questions}`;
-            
-            const currentQ = currentGameQuestions[currentQuestionIndex];
-            document.getElementById('question-text').innerText = currentQ.q;
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            currentQ.o.forEach((opt, idx) => {
-                container.innerHTML += `
-                    <button onclick="checkAnswer(${idx})" id="opt-${idx}" class="w-full text-left p-4 rounded-xl border-2 border-black hover:bg-yellow-100 font-bold bg-white text-sm pop-btn">
-                        📌 ${opt}
-                    </button>
-                `;
-            });
-        }
-
-        async function checkAnswer(selected) {
-            if(hasAnswered) return;
-            hasAnswered = true;
-
-            const currentQ = currentGameQuestions[currentQuestionIndex];
-            const correct = currentQ.a;
-            const feedback = document.getElementById('feedback-container');
-            feedback.classList.remove('hidden');
-
-            let pointsPerCorrect = currentDifficulty === 'easy' ? 10 : currentDifficulty === 'medium' ? 25 : 50;
-
-            if(selected === correct) {
-                document.getElementById(`opt-${selected}`).className = "w-full text-left p-4 rounded-xl border-2 border-black bg-emerald-300 text-slate-900 font-black text-sm";
-                feedback.className = "p-4 rounded-xl text-sm font-black text-center bg-emerald-100 border-2 border-emerald-500 text-emerald-800";
-                feedback.innerText = `🎉 JAWAPAN TEPAT! Anda mendapat +${pointsPerCorrect} Mata!`;
+                document.getElementById('game-media-container').classList.add('hidden');
                 
-                myScore += pointsPerCorrect;
-                document.getElementById('header-player-score').innerText = myScore + " Pts";
-                localPlayersData[myPlayerName] = myScore;
-                updateLeaderboardUI();
-
-                if(isSupabaseActive && supabaseClient) {
-                    try {
-                        await supabaseClient.from('gameroom').update({ score: myScore }).match({ room_id: myRoomID, player_name: myPlayerName });
-                    } catch(e) { console.log(e); }
+                if (catId === 'memori') {
+                    let nomborPlat = "KV " + (2000 + idUnik) + " B";
+                    item.q_ms = `[Daya Ingatan] Cuba hafal nombor plat Perodua Kancil milik ${sub} ini: [ ${nomborPlat} ]. Apakah huruf terakhir pada plat tersebut?`;
+                    item.en = `[Memory Challenge] Memorize the plate number of ${sub}'s Kancil car: [ ${nomborPlat} ]. What is the last letter of the plate?`;
+                    item.options_ms = ["B", "K", "V", "A"];
+                    item.options_en = ["B", "K", "V", "A"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Kancil legenda sentiasa memotong kita di lebuhraya, jangan lupa memorinya!";
                 }
-            } else {
-                document.getElementById(`opt-${selected}`).className = "w-full text-left p-4 rounded-xl border-2 border-black bg-rose-300 text-slate-900 font-black text-sm";
-                document.getElementById(`opt-${correct}`).className = "w-full text-left p-4 rounded-xl border-2 border-black bg-emerald-200 text-slate-900 font-black text-sm";
-                feedback.className = "p-4 rounded-xl text-sm font-black text-center bg-rose-100 border-2 border-rose-500 text-rose-800";
-                feedback.innerText = "❌ KURANG TEPAT! Teruskan fokus untuk soalan selepas ini!";
-            }
-
-            document.getElementById('btn-next').classList.remove('hidden');
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if(currentQuestionIndex < Total_Questions) {
-                displayQuestion();
-            } else {
-                document.getElementById('screen-game').classList.add('hidden');
-                document.getElementById('screen-result').classList.remove('hidden');
-                document.getElementById('session-score').innerText = myScore + " Pts";
-            }
-        }
-
-        function goHome() {
-            document.getElementById('screen-game').classList.add('hidden');
-            document.getElementById('screen-result').classList.add('hidden');
-            document.getElementById('screen-lobby').classList.remove('hidden');
-        }
-
-        function setupRealtimeSimulation() {
-            setInterval(() => {
-                if(!document.getElementById('screen-game').classList.contains('hidden') && !isSupabaseActive) {
-                    for (let key in localPlayersData) {
-                        if(key !== myPlayerName) {
-                            localPlayersData[key] += Math.random() > 0.7 ? 10 : 0;
-                        }
-                    }
-                    updateLeaderboardUI();
+                else if (catId === 'bahasa') {
+                    item.q_ms = `Apakah maksud simpulan bahasa/slanga moden Malaysia 'Membawang' yang sering dikaitkan dengan ${sub} di ${loc}?`;
+                    item.q_en = `What is the actual localized meaning of the Malaysian slang 'Membawang' often associated with ${sub}?`;
+                    item.options_ms = ["Bersembang menceritakan hal orang lain", "Memotong bawang merah sehingga menangis", "Menanam bawang secara hidroponik", "Menjual barangan runcit mahal"];
+                    item.options_en = ["Gossiping about others", "Chopping onions until crying", "Planting hydroponic onions", "Selling expensive groceries"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Membawang adalah sukan kognitif tidak rasmi di sesetengah perumahan.";
                 }
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
+                else if (catId === 'matematik') {
+                    let hargaAsal = 10 + (idUnik % 15);
+                    let jumlahBeli = 3;
+                    let bayaran = 50;
+                    let bakiBetul = bayaran - (hargaAsal * jumlahBeli);
+                    item.q_ms = `[Kiraan Pantas] Di ${loc}, anda membeli ${jumlahBeli} bungkus Nasi Kukus berharga RM${hargaAsal} sebungkus. Anda membayar dengan sekeping wang RM${bayaran}. Berapakah baki duit yang wajib dipulangkan?`;
+                    item.q_en = `[Quick Math] At ${loc}, you buy ${jumlahBeli} packs of Nasi Kukus priced at RM${hargaAsal} each. You pay with an RM${bayaran} note. What is the correct change?`;
+                    item.options_ms = [`RM ${bakiBetul}`, `RM ${bakiBetul + 5}`, `RM ${bakiBetul - 2}`, "RM 0.00 (Kira halal halalan tayyiba)"];
+                    item.options_en = [`RM ${bakiBetul}`, `RM ${bakiBetul + 5}`, `RM ${bakiBetul - 2}`, "RM 0.00 (Halal donation)"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Kira betul-betul, takut juruwang terkurang pulangkan duit baki.";
+                }
+                else if (catId === 'sejarah') {
+                    item.q_ms = `[Budaya & Warisan] Alat permainan tradisional rakyat Malaysia yang dimainkan secara berkumpulan menggunakan papan berlubang dan guli/biji getah dinamakan...`;
+                    item.q_en = `[Culture & Heritage] A traditional Malaysian board game played with a perforated wooden board and marbles/seeds is called...`;
+                    item.options_ms = ["Congkak", "Gasing", "Wau Bulan", "Batu Seremban"];
+                    item.options_en = ["Congkak", "Gasing", "Wau Bulan", "Batu Seremban"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Permainan lagenda melatih fokus dan kepantasan mengira buah congkak!";
+                }
+                else if (catId === 'gambar') {
+                    item.q_ms = `[Teka Situasi] Teka suasana harian popular rakyat Malaysia berdasarkan gabungan emoji berikut: ⛺🧄🧅🔥🍗 (Sering dihadiri waktu malam)`;
+                    item.q_en = `[Guess Situation] Guess the popular Malaysian night scenario based on these emojis: ⛺🧄🧅🔥🍗`;
+                    item.options_ms = ["Pasar Malam / Uptown", "Bilik Mesyuarat Pejabat", "Perpustakaan Negara", "Bengkel Membaiki Kereta"];
+                    item.options_en = ["Night Market / Uptown", "Office Meeting Room", "National Library", "Car Repair Workshop"];
+                    item.answerIdx = 0;
+                    item.humor_ms = "Harum bau ayam goreng berempah memanggil dari jauh!";
+                }
+                else if (catId === 'fokus') {
+                    let arrayFokus = ["Myvi", "Myvi", "Myvi", "Kancil", "Myvi", "Myvi"];
+                    item.q_ms = `[Ujian Fokus Mata] Antara barisan kenderaan yang tersangkut dalam kesesakan lebuhraya ini, kenderaan manakah yang paling BERBEZA: [ ${arrayFokus.join(" - ")} ]`;
+                    item.q_en = `[Visual Focus] In this line of vehicles stuck in traffic, which one is the ODD one out: [ ${arrayFokus.join(" - ")} ]`;
+                    item.options_ms = ["Kancil", "Myvi", "Saga", "Wira"];
+                    item.options_en = ["Kancil", "Myvi", "Saga", "Wira"];
+                    item.answerIdx = 0;
