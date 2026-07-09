@@ -4,161 +4,608 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainGym Dewasa Edisi Malaysia</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        /* CSS Murni Dalaman - 100% Luar Talian & Sangat Ringan */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
             background-color: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-col: column;
+            flex-direction: column;
+            justify-content: space-between;
             -webkit-tap-highlight-color: transparent;
         }
+
         .theme-gradient {
             background: linear-gradient(135deg, #1e3a8a 0%, #0d9488 100%);
+            color: white;
+        }
+
+        header {
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem;
+            border-radius: 12px;
+            font-size: 1.5rem;
+        }
+
+        .logo-text h1 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .logo-text span {
+            font-size: 10px;
+            color: #5eead4;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .lang-toggle {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 2px;
+            display: flex;
+            gap: 2px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: #1e3a8a;
+        }
+
+        .score-badge {
+            background: #f59e0b;
+            color: #0f172a;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        main {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* SKRIN UTAMA (LOBBY) */
+        .intro-block {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .intro-block h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .intro-block p {
+            color: #64748b;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .difficulty-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            max-width: 400px;
+            margin: 0 auto 2rem auto;
+            text-align: center;
+        }
+
+        .diff-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .diff-selector {
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+        }
+
+        .diff-btn {
+            border: none;
+            background: transparent;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+
+        .diff-btn.easy.active { background: #10b981; color: white; }
+        .diff-btn.medium.active { background: #f59e0b; color: #0f172a; }
+        .diff-btn.hard.active { background: #f43f5e; color: white; }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media(min-width: 600px) {
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .cat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .cat-card:active {
+            transform: scale(0.98);
+        }
+
+        .cat-icon-box {
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .cat-info {
+            flex-grow: 1;
+        }
+
+        .cat-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .cat-sub {
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* SKRIN PERMAINAN */
+        .game-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 1.5rem;
+            max-width: 650px;
+            margin: 0 auto;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .game-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-b: 1px solid #f1f5f9;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: none;
+            color: #64748b;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+
+        .progress-bar-bg {
+            background: #e2e8f0;
+            height: 8px;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            background: #0d9488;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .emoji-media {
+            background: #ecfdf5;
+            border: 1px solid #d1fae5;
+            padding: 1rem;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.15s;
+            width: 100%;
+        }
+
+        .option-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .radio-dot {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Status Maklumbalas Jawapan */
+        .option-btn.correct {
+            background: #ecfdf5;
+            border-color: #10b981;
+            color: #065f46;
+        }
+        .option-btn.correct .radio-dot {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        .option-btn.wrong {
+            background: #fff1f2;
+            border-color: #f43f5e;
+            color: #9f1239;
+        }
+        .option-btn.wrong .radio-dot {
+            background: #f43f5e;
+            border-color: #f43f5e;
+        }
+
+        .feedback-card {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            font-size: 13px;
+        }
+        .feedback-card.correct { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+        .feedback-card.wrong { background: #fff1f2; color: #9f1239; border: 1px solid #fecdd3; }
+        
+        .feedback-humor {
+            font-style: italic;
+            margin-top: 4px;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .action-btn {
+            width: 100%;
+            background: #f97316;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .action-btn:hover { background: #ea580c; }
+
+        /* SKRIN HASIL */
+        .result-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 450px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+            border: 1px solid #f1f5f9;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .stat-val {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-top: 2px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        @media(min-width: 400px) {
+            .btn-group { flex-direction: row; }
+        }
+
+        .btn-primary { background: #0f172a; color: white; flex: 1; border: none; padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer;}
+        .btn-secondary { background: #e2e8f0; color: #334155; flex: 1; border: none; padding: 12px; border-radius: 12px; font-weight: 700; cursor: pointer;}
+
+        footer {
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            padding: 1rem;
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            font-weight: 500;
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+<body>
 
-    <header class="theme-gradient text-white shadow-md p-4 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="goHome()">
-                <div class="bg-white/10 p-2 rounded-xl">
-                    <i data-lucide="brain" class="w-7 h-7 text-orange-400"></i>
-                </div>
-                <div>
-                    <span class="font-extrabold text-base md:text-lg block tracking-tight" id="txt-app-title">BrainGym Dewasa</span>
-                    <span class="text-[10px] text-teal-300 block font-bold uppercase tracking-wider">Edisi Malaysia</span>
+    <!-- HEADER & SKOR -->
+    <header class="theme-gradient">
+        <div class="header-container">
+            <div class="logo-section" onclick="goHome()">
+                <div class="logo-icon">🧠</div>
+                <div class="logo-text">
+                    <h1 id="txt-app-title">BrainGym Dewasa</h1>
+                    <span>Edisi Malaysia</span>
                 </div>
             </div>
             
-            <div class="flex items-center space-x-3">
-                <div class="bg-black/20 rounded-xl p-1 flex text-xs font-bold border border-white/10">
-                    <button id="btn-lang-ms" onclick="setLanguage('ms')" class="px-3 py-1 rounded-lg transition-all">BM</button>
-                    <button id="btn-lang-en" onclick="setLanguage('en')" class="px-3 py-1 rounded-lg transition-all">EN</button>
+            <div class="right-header">
+                <div class="lang-toggle">
+                    <button id="btn-lang-ms" onclick="setLanguage('ms')" class="lang-btn active">BM</button>
+                    <button id="btn-lang-en" onclick="setLanguage('en')" class="lang-btn">EN</button>
                 </div>
-                <div class="flex items-center space-x-1.5 bg-amber-500 text-slate-950 px-3 py-1.5 rounded-xl font-bold text-sm shadow-sm">
-                    <i data-lucide="award" class="w-4 h-4"></i>
-                    <span class="text-xs uppercase font-medium hidden sm:inline" id="txt-score-lbl">Skor:</span>
-                    <span id="global-score">0</span>
+                <div class="score-badge">
+                    🏆 <span id="txt-score-lbl">Skor:</span> <span id="global-score">0</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="flex-grow p-4 md:p-6 max-w-4xl w-full mx-auto flex flex-col justify-center">
+    <!-- KAWASAN KANDUNGAN UTAMA -->
+    <main>
         
-        <div id="screen-lobby" class="space-y-6">
-            <div class="text-center space-y-2 py-4">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight" id="lobby-title">BrainGym Dewasa Edisi Malaysia</h1>
-                <p class="text-slate-500 text-sm md:text-base max-w-2xl mx-auto font-medium" id="lobby-desc">Kekalkan kecerdasan minda dengan kuiz KBAT penuh humor, common sense, dan citra kehidupan sebenar rakyat Malaysia.</p>
+        <!-- SKRIN 1: LOBBY UTAMA -->
+        <div id="screen-lobby">
+            <div class="intro-block">
+                <h2 id="lobby-title">BrainGym Dewasa Edisi Malaysia</h2>
+                <p id="lobby-desc">Kekalkan kecerdasan minda dengan kuiz KBAT penuh humor, common sense, dan citra kehidupan sebenar rakyat Malaysia.</p>
             </div>
 
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/60 max-w-md mx-auto">
-                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 text-center" id="lbl-difficulty">Pilih Tahap Kesukaran</p>
-                <div class="grid grid-cols-3 gap-2 bg-slate-100 p-1 rounded-xl">
-                    <button onclick="setDifficulty('easy')" id="diff-easy" class="py-2.5 rounded-lg font-bold text-center text-xs transition-all">Mudah</button>
-                    <button onclick="setDifficulty('medium')" id="diff-medium" class="py-2.5 rounded-lg font-bold text-center text-xs transition-all">Sederhana</button>
-                    <button onclick="setDifficulty('hard')" id="diff-hard" class="py-2.5 rounded-lg font-bold text-center text-xs transition-all">Susah</button>
+            <div class="difficulty-card">
+                <p class="diff-label" id="lbl-difficulty">Pilih Tahap Kesukaran</p>
+                <div class="diff-selector">
+                    <button onclick="setDifficulty('easy')" id="diff-easy" class="diff-btn easy">Mudah</button>
+                    <button onclick="setDifficulty('medium')" id="diff-medium" class="diff-btn medium active">Sederhana</button>
+                    <button onclick="setDifficulty('hard')" id="diff-hard" class="diff-btn hard">Susah</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="category-grid">
-                </div>
+            <div class="category-grid" id="category-grid">
+                <!-- Dijana Dinamik oleh JS -->
+            </div>
         </div>
 
-        <div id="screen-game" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200 max-w-2xl mx-auto w-full space-y-6">
-            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
-                <button onclick="goHome()" class="text-slate-500 hover:text-slate-800 flex items-center text-sm font-bold transition">
-                    <i data-lucide="chevron-left" class="w-5 h-5 mr-1"></i> <span id="btn-back">Utama</span>
-                </button>
-                <div class="text-right">
-                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider" id="lbl-category">Kategori</span>
-                    <h3 class="font-extrabold text-blue-900 text-sm md:text-base" id="game-cat-title">-</h3>
+        <!-- SKRIN 2: PERMAINAN (GAMEPLAY) -->
+        <div id="screen-game" class="hidden">
+            <div class="game-box">
+                <div class="game-top">
+                    <button onclick="goHome()" class="back-btn">
+                        ⬅️ <span id="btn-back">Utama</span>
+                    </button>
+                    <div style="text-align: right;">
+                        <span style="font-size: 10px; color: #94a3b8; font-weight:700; text-transform:uppercase;" id="lbl-category">Kategori</span>
+                        <h3 style="font-size: 14px; color: #1e3a8a; font-weight:800;" id="game-cat-title">-</h3>
+                    </div>
                 </div>
-            </div>
 
-            <div class="space-y-2">
-                <div class="flex justify-between text-xs font-bold text-slate-500">
-                    <span id="game-progress-text">Soalan 1 / 5</span>
-                    <span id="game-score-text">Mata: 0</span>
+                <div class="progress-container">
+                    <div class="progress-labels">
+                        <span id="game-progress-text">Soalan 1 / 5</span>
+                        <span id="game-score-text">Mata: 0</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="game-progress-bar" class="progress-bar-fill"></div>
+                    </div>
                 </div>
-                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                    <div id="game-progress-bar" class="bg-teal-500 h-full transition-all duration-300" style="width: 20%"></div>
-                </div>
-            </div>
 
-            <div class="space-y-4">
-                <div id="game-media-container" class="hidden bg-emerald-50 border border-emerald-100 rounded-2xl p-4 text-center text-4xl select-none">
+                <div id="game-media-container" class="emoji-media hidden">
                     🇲🇾 🤔 💡
                 </div>
-                <h2 class="text-lg md:text-xl font-bold text-slate-800 leading-snug" id="game-question">Memuatkan cabaran...</h2>
-            </div>
+                
+                <div class="question-text" id="game-question">Memuatkan cabaran...</div>
 
-            <div class="grid grid-cols-1 gap-3 pt-2" id="game-options">
+                <div class="options-list" id="game-options">
+                    <!-- Butang jawapan objektif -->
                 </div>
 
-            <div id="game-feedback" class="hidden p-4 rounded-xl font-bold text-sm flex flex-col space-y-1 transition-all">
-                <div class="flex items-center space-x-2">
-                    <i id="feedback-icon" data-lucide="info" class="w-5 h-5 flex-shrink-0"></i>
-                    <span id="feedback-status-text">-</span>
+                <div id="game-feedback" class="feedback-card hidden">
+                    <div style="font-weight: 700;" id="feedback-status-text">-</div>
+                    <div class="feedback-humor" id="feedback-humor-text"></div>
                 </div>
-                <p id="feedback-humor-text" class="text-xs font-medium pl-7 text-slate-600 mt-1 italic"></p>
-            </div>
 
-            <button id="btn-next" onclick="nextQuestion()" class="hidden w-full bg-orange-500 text-white font-bold py-4 px-6 rounded-xl hover:bg-orange-600 transition flex items-center justify-center space-x-2 shadow-sm active:scale-98 cursor-pointer">
-                <span id="btn-next-text">Seterusnya</span> <i data-lucide="arrow-right" class="w-5 h-5"></i>
-            </button>
+                <button id="btn-next" onclick="nextQuestion()" class="action-btn hidden">
+                    <span id="btn-next-text">Seterusnya</span> ➡️
+                </button>
+            </div>
         </div>
 
-        <div id="screen-results" class="hidden bg-white p-8 rounded-3xl shadow-sm border border-slate-200 max-w-md mx-auto w-full text-center space-y-6">
-            <div class="w-20 h-20 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                <i data-lucide="sparkles" class="w-10 h-10"></i>
-            </div>
-            <div class="space-y-1">
-                <h2 class="text-2xl font-extrabold text-slate-900" id="res-title">Latihan Selesai!</h2>
-                <p class="text-slate-500 text-sm font-medium" id="res-desc">Minda anda kekal bertenaga dengan acuan kognitif Malaysia.</p>
-            </div>
+        <!-- SKRIN 3: HASIL KEPUTUSAN -->
+        <div id="screen-results" class="hidden">
+            <div class="result-box">
+                <div class="result-icon">✨</div>
+                <h2 style="font-weight:800; font-size:1.5rem;" id="res-title">Latihan Selesai!</h2>
+                <p style="font-size:13px; color:#64748b; margin-top:4px;" id="res-desc">Minda anda kekal bertenaga dengan acuan kognitif Malaysia.</p>
 
-            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 grid grid-cols-2 gap-4">
-                <div>
-                    <span class="text-[10px] text-slate-400 font-bold uppercase block tracking-wider" id="res-lbl-correct">Ketepatan</span>
-                    <span class="text-xl font-extrabold text-slate-800" id="res-correct">0 / 5</span>
+                <div class="result-stats">
+                    <div>
+                        <div class="stat-label" id="res-lbl-correct">Ketepatan</div>
+                        <div class="stat-val" id="res-correct">0 / 5</div>
+                    </div>
+                    <div>
+                        <div class="stat-label" id="res-lbl-points">Mata Ganjaran</div>
+                        <div class="stat-val" style="color:#0d9488;" id="res-points">+0</div>
+                    </div>
                 </div>
-                <div>
-                    <span class="text-[10px] text-slate-400 font-bold uppercase block tracking-wider" id="res-lbl-points">Mata Ganjaran</span>
-                    <span class="text-xl font-extrabold text-teal-600" id="res-points">+0</span>
-                </div>
-            </div>
 
-            <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                <button onclick="restartCategory()" class="flex-1 bg-slate-900 text-white font-bold py-3.5 px-4 rounded-xl hover:bg-slate-800 transition flex items-center justify-center space-x-2 text-sm shadow-sm active:scale-98 cursor-pointer">
-                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> <span id="btn-res-retry">Cuba Lagi</span>
-                </button>
-                <button onclick="goHome()" class="flex-1 bg-slate-100 text-slate-700 font-bold py-3.5 px-4 rounded-xl hover:bg-slate-200 transition flex items-center justify-center space-x-2 text-sm active:scale-98 cursor-pointer">
-                    <i data-lucide="home" class="w-4 h-4"></i> <span id="btn-res-home">Menu Utama</span>
-                </button>
+                <div class="btn-group">
+                    <button onclick="restartCategory()" class="btn-primary" id="btn-res-retry"><span>Cuba Lagi</span></button>
+                    <button onclick="goHome()" class="btn-secondary" id="btn-res-home"><span>Menu Utama</span></button>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <footer class="bg-white border-t border-slate-200 py-3.5 px-4 text-center text-xs text-slate-400 font-medium">
-        <p>&copy; 2026 BrainGym Dewasa Edisi Malaysia. Luar Talian & Optimum Minda Korporat & Warga Emas.</p>
+    <footer>
+        <p>&copy; 2026 BrainGym Dewasa Edisi Malaysia. 100% Luar Talian & Selamat.</p>
     </footer>
 
     <script>
-        // FIRESBASE CONFIGURATION (Sedia Ada untuk Pematuhan Parameter)
-        const firebaseConfig = {
-            databaseURL: "https://braingym-dewasa-edisi-ma-d7498-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "braingym-dewasa-edisi-ma-d7498",
-            storageBucket: "braingym-dewasa-edisi-ma-d7498.firebasestorage.app",
-            messagingSenderId: "1052582921756",
-            appId: "1:1052582921756:web:b04098a2702b9e25e081d9"
-        };
-
         const uiText = {
             ms: {
                 title: "BrainGym Dewasa", lobbyTitle: "BrainGym Dewasa Edisi Malaysia",
@@ -181,17 +628,22 @@
         };
 
         const categories = [
-            { id: "logik", icon: "help-circle", color: "bg-blue-600", textMs: "1. Kuiz Logik IQ", textEn: "1. Logic IQ Quiz" },
-            { id: "am", icon: "globe", color: "bg-teal-600", textMs: "2. Pengetahuan Am Malaysia", textEn: "2. Malaysia General Knowledge" },
-            { id: "memori", icon: "brain-circuit", color: "bg-purple-600", textMs: "3. Cabaran Ingatan", textEn: "3. Memory Challenge" },
-            { id: "bahasa", icon: "text", color: "bg-orange-600", textMs: "4. Teka Perkataan BM", textEn: "4. Malay Word Puzzle" },
-            { id: "matematik", icon: "calculator", color: "bg-emerald-600", textMs: "5. Matematik Pantas", textEn: "5. Quick Math Challenge" },
-            { id: "sejarah", icon: "landmark", color: "bg-amber-600", textMs: "6. Sejarah & Budaya Malaysia", textEn: "6. History & Culture" },
-            { id: "gambar", icon: "image", color: "bg-indigo-600", textMs: "7. Teka Gambar / Situasi", textEn: "7. Picture / Situation Guess" },
-            { id: "fokus", icon: "eye", color: "bg-rose-600", textMs: "8. Cabaran Fokus", textEn: "8. Focus Challenge" }
+            { id: "logik", emoji: "💡", color: "#2563eb", textMs: "1. Kuiz Logik IQ", textEn: "1. Logic IQ Quiz" },
+            { id: "am", emoji: "🇲🇾", color: "#0d9488", textMs: "2. Pengetahuan Am Malaysia", textEn: "2. Malaysia General Knowledge" },
+            { id: "memori", emoji: "🧠", color: "#9333ea", textMs: "3. Cabaran Ingatan", textEn: "3. Memory Challenge" },
+            { id: "bahasa", emoji: "✍️", color: "#ea580c", textMs: "4. Teka Perkataan BM", textEn: "4. Malay Word Puzzle" },
+            { id: "matematik", emoji: "🧮", color: "#16a34a", textMs: "5. Matematik Pantas", textEn: "5. Quick Math Challenge" },
+            { id: "sejarah", emoji: "🏛️", color: "#d97706", textMs: "6. Sejarah & Budaya Malaysia", textEn: "6. History & Culture" },
+            { id: "gambar", emoji: "🖼️", color: "#4f46e5", textMs: "7. Teka Gambar / Situasi", textEn: "7. Picture / Situation Guess" },
+            { id: "fokus", emoji: "👁️", color: "#e11d48", textMs: "8. Cabaran Fokus", textEn: "8. Focus Challenge" }
         ];
 
-        // PARAMETER UTAMA GLOBAL
+        const tokenLokal = {
+            lokasi: ["Pasar Malam Kampung Baru", "Kedai Mamak SS15", "Lebuhraya PLUS", "R&R Tapah", "Grup WhatsApp Perumahan", "Stesen MRT Pasar Seni", "Bazar Ramadhan", "UTC"],
+            subjek: ["Mak Cik Bawang", "Abang Lori Tunda", "Pemandu Myvi", "Pak Haji", "Rider Penghantar Makanan", "Aunty Ipoh"],
+            objek: ["Durian Musang King", "Kopi O Ais Ikat Tepi", "Teh Tarik", "Kereta Kancil Turbo", "Kupon Parkir"]
+        };
+
         let currentLang = 'ms';
         let currentDifficulty = 'medium';
         let currentCategory = null;
@@ -201,98 +653,263 @@
         let totalGlobalScore = 0;
         let isAnswered = false;
 
-        // --- ENJIN ALGORITMA RAWAK UNTUK MENJANA VARIASI HINGGA 3,000 SOALAN CITRA MALAYSIA ---
-        const tokenLokal = {
-            lokasi: ["Pasar Malam Kampung Baru", "Kedai Mamak SS15", "Lebuhraya PLUS arah Selatan", "R&R Tapah", "Grup WhatsApp Penduduk Taman", "Stesen MRT Pasar Seni", "Bazar Ramadhan", "Pusat Transformasi Bandar (UTC)"],
-            subjek: ["Mak Cik Bawang", "Abang Lori Tunda", "Pemandu Myvi Hitam", "Pak Haji pencen", "Anak muda motor kapcai", "Aunty taugeh Ipoh", "Rider hantar makanan"],
-            objek: ["Durian Musang King", "Kopi O Ais Ikat Tepi", "Teh Tarik Kurang Manis", "Kereta Perodua Kancil Turbo", "Kupon Parkir Majlis Perbandaran", "Sambal Belacan Toktok"]
-        };
-
         function generateMalaysianQuestions(catId, difficulty, count = 5) {
             let list = [];
-            
             for(let i = 0; i < count; i++) {
-                // Gunakan formula berasaskan indeks rawak raw untuk menjana variasi unik berskala besar
                 let loc = tokenLokal.lokasi[Math.floor(Math.random() * tokenLokal.lokasi.length)];
                 let sub = tokenLokal.subjek[Math.floor(Math.random() * tokenLokal.subjek.length)];
                 let obj = tokenLokal.objek[Math.floor(Math.random() * tokenLokal.objek.length)];
-                let idUnik = Math.floor(Math.random() * 500) + 1; // Token pengganda kombinasi 3,000 soalan
+                let idUnik = Math.floor(Math.random() * 500) + 1;
 
-                let item = {
-                    q_ms: "", q_en: "",
-                    options_ms: [], options_en: [],
-                    answerIdx: 0, humor_ms: "", humor_en: ""
-                };
+                let item = { q_ms: "", q_en: "", options_ms: [], options_en: [], answerIdx: 0, humor_ms: "", humor_en: "" };
 
                 if (catId === 'logik') {
-                    item.q_ms = `[KBAT - Kes Logik] Di ${loc}, ${sub} meletakkan ${obj} di atas bumbung kereta Myvi. Jika Myvi itu membelok ke kanan dengan mengejut, ke manakah arah ${obj} itu akan jatuh mengikut common sense?`;
-                    item.q_en = `[HOTS - Logic Case] At ${loc}, ${sub} puts a ${obj} on top of a Myvi car roof. If the Myvi suddenly turns right, which direction will the ${obj} logically fall?`;
-                    item.options_ms = ["Ke bawah tanah / atas jalan", "Ke arah kanan", "Ke arah kiri", "Tidak jatuh sebab ada magik Malaysia"];
-                    item.options_en = ["Down onto the road/ground", "To the right", "To the left", "Won't fall due to Malaysian magic"];
+                    item.q_ms = `[Logik] Di ${loc}, ${sub} meletakkan ${obj} di atas bumbung kereta. Jika kereta itu membelok ke kanan dengan mengejut, ke manakah ${obj} itu akan jatuh?`;
+                    item.q_en = `[Logic] At ${loc}, ${sub} puts a ${obj} on a car roof. If the car turns right suddenly, where will the ${obj} fall?`;
+                    item.options_ms = ["Ke atas jalan raya / bawah", "Ke kanan", "Ke kiri", "Tidak jatuh langsung"];
+                    item.options_en = ["Down to the road", "To the right", "To the left", "Won't fall"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Logik graviti dunia: Objek akan jatuh ke bawah (jalan), tidak kira ke mana kereta itu membelok!";
-                    item.humor_en = "Basic law of gravity: Things fall down to the road, regardless of where the car turns!";
+                    item.humor_ms = "Logik graviti: Objek berat akan ditarik ke bawah (jalan), bukan mengikut pemandu!";
                 }
                 else if (catId === 'am') {
-                    item.q_ms = `[Common Sense] Jika anda memesan '${obj} Ikat Tepi' di ${loc} dan pelayan menghantar air dalam gelas kaca bertangkai, apakah tindakan refleks paling bersesuaian dengan adat budaya setempat?`;
-                    item.q_en = `[Common Sense] If you order '${obj} Ikat Tepi' at ${loc} and the waiter serves it in a handled glass cup, what is the best reflex action?`;
-                    item.options_ms = ["Minum sahaja sambil bersyukur", "Minta plastik bungkus seperti pesanan asal", "Buat laporan polis serta-merta", "Khutbahkan pelayan tentang makna 'Ikat Tepi'"];
-                    item.options_en = ["Just drink it and be grateful", "Ask for the plastic bag as ordered", "Call the police immediately", "Lecture the waiter on the meaning of 'Ikat Tepi'"];
+                    item.q_ms = `[Pengetahuan Am] Apakah tindakan paling 'common sense' jika anda terserempak dengan seekor harimau Malaya sedang tidur di kawasan hutan rekreasi?`;
+                    item.q_en = `[General Knowledge] What is the best common sense action if you encounter a sleeping Malayan tiger in the forest?`;
+                    item.options_ms = ["Berundur senyap-senyap dan lari", "Ambil gambar 'selfie' dekat-dekat", "Kejutkan untuk beri makan biskut", "Baling batu untuk uji kepekaan"];
+                    item.options_en = ["Back away quietly and leave", "Take a close-up selfie", "Wake it up to feed biscuits", "Throw a stone to test it"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Jangan peningkan kepala, janji air sampai dan dahaga hilang!";
-                    item.humor_en = "Keep it simple, as long as the drink arrives and cures your thirst!";
+                    item.humor_ms = "Keselamatan nyawa lebih utama, jangan cari pasal dengan 'Pak Belalang'!";
                 }
-                document.getElementById('game-media-container').classList.add('hidden');
-                
-                if (catId === 'memori') {
-                    let nomborPlat = "KV " + (2000 + idUnik) + " B";
-                    item.q_ms = `[Daya Ingatan] Cuba hafal nombor plat Perodua Kancil milik ${sub} ini: [ ${nomborPlat} ]. Apakah huruf terakhir pada plat tersebut?`;
-                    item.en = `[Memory Challenge] Memorize the plate number of ${sub}'s Kancil car: [ ${nomborPlat} ]. What is the last letter of the plate?`;
-                    item.options_ms = ["B", "K", "V", "A"];
-                    item.options_en = ["B", "K", "V", "A"];
+                else if (catId === 'memori') {
+                    let plat = "W" + (100 + idUnik) + "A";
+                    item.q_ms = `[Ingatan] Sila ingat nombor plat lori ${sub} ini: [ ${plat} ]. Apakah huruf terakhir bagi plat tersebut?`;
+                    item.q_en = `[Memory] Remember this truck plate: [ ${plat} ]. What is the last letter?`;
+                    item.options_ms = ["A", "W", "X", "B"];
+                    item.options_en = ["A", "W", "X", "B"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Kancil legenda sentiasa memotong kita di lebuhraya, jangan lupa memorinya!";
+                    item.humor_ms = "Fokus adalah kunci utama untuk mengingat data pantas.";
                 }
                 else if (catId === 'bahasa') {
-                    item.q_ms = `Apakah maksud simpulan bahasa/slanga moden Malaysia 'Membawang' yang sering dikaitkan dengan ${sub} di ${loc}?`;
-                    item.q_en = `What is the actual localized meaning of the Malaysian slang 'Membawang' often associated with ${sub}?`;
-                    item.options_ms = ["Bersembang menceritakan hal orang lain", "Memotong bawang merah sehingga menangis", "Menanam bawang secara hidroponik", "Menjual barangan runcit mahal"];
-                    item.options_en = ["Gossiping about others", "Chopping onions until crying", "Planting hydroponic onions", "Selling expensive groceries"];
+                    item.q_ms = `Apakah makna ungkapan slanga harian Malaysia 'Koyak' apabila seseorang gagal menjawab soalan dengan baik?`;
+                    item.q_en = `What is the slang meaning of 'Koyak' when someone breaks down under pressure?`;
+                    item.options_ms = ["Berasa tertekan / mengalah", "Baju terkeluar benang", "Kertas latihan terpotong", "Menangis gembira"];
+                    item.options_en = ["Feeling stressed / giving up", "Torn clothes", "Ripped papers", "Crying with joy"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Membawang adalah sukan kognitif tidak rasmi di sesetengah perumahan.";
+                    item.humor_ms = "Minda dewasa kena kental, jangan cepat 'koyak'!";
                 }
                 else if (catId === 'matematik') {
-                    let hargaAsal = 10 + (idUnik % 15);
-                    let jumlahBeli = 3;
-                    let bayaran = 50;
-                    let bakiBetul = bayaran - (hargaAsal * jumlahBeli);
-                    item.q_ms = `[Kiraan Pantas] Di ${loc}, anda membeli ${jumlahBeli} bungkus Nasi Kukus berharga RM${hargaAsal} sebungkus. Anda membayar dengan sekeping wang RM${bayaran}. Berapakah baki duit yang wajib dipulangkan?`;
-                    item.q_en = `[Quick Math] At ${loc}, you buy ${jumlahBeli} packs of Nasi Kukus priced at RM${hargaAsal} each. You pay with an RM${bayaran} note. What is the correct change?`;
-                    item.options_ms = [`RM ${bakiBetul}`, `RM ${bakiBetul + 5}`, `RM ${bakiBetul - 2}`, "RM 0.00 (Kira halal halalan tayyiba)"];
-                    item.options_en = [`RM ${bakiBetul}`, `RM ${bakiBetul + 5}`, `RM ${bakiBetul - 2}`, "RM 0.00 (Halal donation)"];
+                    let harga = 5 + (idUnik % 5);
+                    let baki = 50 - (harga * 3);
+                    item.q_ms = `[Kiraan] Anda membeli 3 bungkus makanan berharga RM${harga} sebungkus di ${loc}. Anda bayar RM50. Berapakah baki wang anda?`;
+                    item.q_en = `[Math] You buy 3 packs of food at RM${harga} each at ${loc}. You pay RM50. What is your change?`;
+                    item.options_ms = [`RM ${baki}`, `RM ${baki + 2}`, `RM ${baki - 3}`, "RM 0"];
+                    item.options_en = [`RM ${baki}`, `RM ${baki + 2}`, `RM ${baki - 3}`, "RM 0"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Kira betul-betul, takut juruwang terkurang pulangkan duit baki.";
+                    item.humor_ms = "Kiraan pantas mengelakkan kita daripada tersilap ambil baki di kaunter.";
                 }
                 else if (catId === 'sejarah') {
-                    item.q_ms = `[Budaya & Warisan] Alat permainan tradisional rakyat Malaysia yang dimainkan secara berkumpulan menggunakan papan berlubang dan guli/biji getah dinamakan...`;
-                    item.q_en = `[Culture & Heritage] A traditional Malaysian board game played with a perforated wooden board and marbles/seeds is called...`;
-                    item.options_ms = ["Congkak", "Gasing", "Wau Bulan", "Batu Seremban"];
-                    item.options_en = ["Congkak", "Gasing", "Wau Bulan", "Batu Seremban"];
+                    item.q_ms = `Apakah nama bangunan bersejarah yang terletak bertentangan dengan Dataran Merdeka di Kuala Lumpur?`;
+                    item.q_en = `What is the name of the historic building located opposite Dataran Merdeka?`;
+                    item.options_ms = ["Bangunan Sultan Abdul Samad", "Menara Berkembar Petronas", "Istana Negara", "Kota A Famosa"];
+                    item.options_en = ["Sultan Abdul Samad Building", "Petronas Twin Towers", "National Palace", "A Famosa"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Permainan lagenda melatih fokus dan kepantasan mengira buah congkak!";
+                    item.humor_ms = "Bangunan ikonik warisan sejarah yang sangat terkenal.";
                 }
                 else if (catId === 'gambar') {
-                    item.q_ms = `[Teka Situasi] Teka suasana harian popular rakyat Malaysia berdasarkan gabungan emoji berikut: ⛺🧄🧅🔥🍗 (Sering dihadiri waktu malam)`;
-                    item.q_en = `[Guess Situation] Guess the popular Malaysian night scenario based on these emojis: ⛺🧄🧅🔥🍗`;
-                    item.options_ms = ["Pasar Malam / Uptown", "Bilik Mesyuarat Pejabat", "Perpustakaan Negara", "Bengkel Membaiki Kereta"];
-                    item.options_en = ["Night Market / Uptown", "Office Meeting Room", "National Library", "Car Repair Workshop"];
+                    item.q_ms = `[Situasi] Teka situasi harian popular Malaysia berdasarkan gabungan emoji ini: ☕🤝🥢🍳 (Biasanya sarapan pagi)`;
+                    item.q_en = `[Situation] Guess the breakfast scenario based on these emojis: ☕🤝🥢🍳`;
+                    item.options_ms = ["Makan di Kedai Kopi / Kopitiam", "Menonton wayang", "Berjoging di taman", "Tidur di pejabat"];
+                    item.options_en = ["Eating at a Kopitiam", "Watching movies", "Jogging at park", "Sleeping at office"];
                     item.answerIdx = 0;
-                    item.humor_ms = "Harum bau ayam goreng berempah memanggil dari jauh!";
+                    item.humor_ms = "Sarapan pagi yang harmoni mengeratkan silaturahim.";
                 }
                 else if (catId === 'fokus') {
-                    let arrayFokus = ["Myvi", "Myvi", "Myvi", "Kancil", "Myvi", "Myvi"];
-                    item.q_ms = `[Ujian Fokus Mata] Antara barisan kenderaan yang tersangkut dalam kesesakan lebuhraya ini, kenderaan manakah yang paling BERBEZA: [ ${arrayFokus.join(" - ")} ]`;
-                    item.q_en = `[Visual Focus] In this line of vehicles stuck in traffic, which one is the ODD one out: [ ${arrayFokus.join(" - ")} ]`;
-                    item.options_ms = ["Kancil", "Myvi", "Saga", "Wira"];
-                    item.options_en = ["Kancil", "Myvi", "Saga", "Wira"];
-                    item.answerIdx = 0;
+                    item.q_ms = `[Fokus] Antara senarai perkataan ini, manakah yang ditulis dengan ejaan yang PALING TEPAT mengikut Kamus Dewan?`;
+                    item.q_en = `[Focus] Which Malay word is spelled correctly?`;
+                    item.options_ms = ["Murtabak", "Martabak", "Murtarbak", "Matabak"];
+                    item.options_en = ["Murtabak", "Martabak", "Murtarbak", "Matabak"];
+                    item.answerIdx = 1; // Martabak adalah ejaan betul rasmi Dewan Bahasa
+                    item.humor_ms = "Ramai rakyat Malaysia salah eja, yang betul ialah Martabak!";
+                }
+
+                shuffleOptions(item);
+                list.push(item);
+            }
+            return list;
+        }
+
+        function shuffleOptions(item) {
+            let idxs = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+            let origMs = [...item.options_ms];
+            let origEn = [...item.options_en];
+            idxs.forEach((newIdx, curIdx) => {
+                item.options_ms[newIdx] = origMs[curIdx];
+                item.options_en[newIdx] = origEn[curIdx];
+            });
+            item.answerIdx = idxs[item.answerIdx];
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('btn-lang-ms').className = lang === 'ms' ? 'lang-btn active' : 'lang-btn';
+            document.getElementById('btn-lang-en').className = lang === 'en' ? 'lang-btn active' : 'lang-btn';
+            
+            document.getElementById('txt-app-title').innerText = uiText[lang].title;
+            document.getElementById('lobby-title').innerText = uiText[lang].lobbyTitle;
+            document.getElementById('lobby-desc').innerText = uiText[lang].lobbyDesc;
+            document.getElementById('lbl-difficulty').innerText = uiText[lang].difficulty;
+            document.getElementById('txt-score-lbl').innerText = uiText[lang].scoreLabel;
+            document.getElementById('btn-back').innerText = uiText[lang].back;
+            document.getElementById('lbl-category').innerText = uiText[lang].category;
+            document.getElementById('btn-next-text').innerText = uiText[lang].btnNext;
+            document.getElementById('res-title').innerText = uiText[lang].resTitle;
+            document.getElementById('res-desc').innerText = uiText[lang].resDesc;
+            document.getElementById('res-lbl-correct').innerText = uiText[lang].resCorrect;
+            document.getElementById('res-lbl-points').innerText = uiText[lang].resPoints;
+            document.getElementById('btn-res-retry').querySelector('span').innerText = uiText[lang].resRetry;
+            document.getElementById('btn-res-home').querySelector('span').innerText = uiText[lang].resHome;
+
+            renderCategories();
+            if (!document.getElementById('screen-game').classList.contains('hidden')) displayQuestion();
+        }
+
+        function setDifficulty(diff) {
+            currentDifficulty = diff;
+            ['easy', 'medium', 'hard'].forEach(d => {
+                document.getElementById(`diff-${d}`).className = `diff-btn ${d}`;
+            });
+            document.getElementById(`diff-${diff}`).className = `diff-btn ${diff} active`;
+            renderCategories();
+        }
+
+        function renderCategories() {
+            const grid = document.getElementById('category-grid');
+            grid.innerHTML = '';
+            categories.forEach(cat => {
+                const title = currentLang === 'ms' ? cat.textMs : cat.textEn;
+                const card = document.createElement('button');
+                card.onclick = () => startCategory(cat.id);
+                card.className = "cat-card";
+                card.innerHTML = `
+                    <div class="cat-icon-box" style="background-color: ${cat.color}">${cat.emoji}</div>
+                    <div class="cat-info">
+                        <div class="cat-title">${title}</div>
+                        <div class="cat-sub">${uiText[currentLang][currentDifficulty]}</div>
+                    </div>
+                    <div style="color:#cbd5e1; font-weight:bold;">▶</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function startCategory(catId) {
+            currentCategory = categories.find(c => c.id === catId);
+            activeQuestions = generateMalaysianQuestions(catId, currentDifficulty, 5);
+            currentQuestionIdx = 0;
+            currentCategoryScore = 0;
+            switchScreen('screen-game');
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            isAnswered = false;
+            document.getElementById('btn-next').classList.add('hidden');
+            document.getElementById('game-feedback').classList.add('hidden');
+
+            document.getElementById('game-cat-title').innerText = currentLang === 'ms' ? currentCategory.textMs : currentCategory.textEn;
+            
+            const currentQNum = currentQuestionIdx + 1;
+            document.getElementById('game-progress-text').innerText = uiText[currentLang].questionOf.replace('{c}', currentQNum).replace('{t}', activeQuestions.length);
+            document.getElementById('game-score-text').innerText = `${uiText[currentLang].scoreLabel} ${currentCategoryScore}`;
+            document.getElementById('game-progress-bar').style.width = `${(currentQNum / activeQuestions.length) * 100}%`;
+
+            const qData = activeQuestions[currentQuestionIdx];
+            document.getElementById('game-question').innerText = currentLang === 'ms' ? qData.q_ms : qData.q_en;
+
+            if (currentCategory.id === 'gambar') {
+                document.getElementById('game-media-container').classList.remove('hidden');
+            } else {
+                document.getElementById('game-media-container').classList.add('hidden');
+            }
+
+            const optionsArea = document.getElementById('game-options');
+            optionsArea.innerHTML = '';
+            const opts = currentLang === 'ms' ? qData.options_ms : qData.options_en;
+
+            opts.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.onclick = () => selectOption(idx);
+                btn.id = `opt-${idx}`;
+                btn.className = "option-btn";
+                btn.innerHTML = `<span>${opt}</span> <div class="radio-dot"></div>`;
+                optionsArea.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIdx) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            const qData = activeQuestions[currentQuestionIdx];
+            const correctIdx = qData.answerIdx;
+            const opts = currentLang === 'ms' ? qData.options_ms : qData.options_en;
+            
+            const feedbackBox = document.getElementById('game-feedback');
+            const statusText = document.getElementById('feedback-status-text');
+            const humorText = document.getElementById('feedback-humor-text');
+
+            if (selectedIdx === correctIdx) {
+                currentCategoryScore += 20;
+                totalGlobalScore += 20;
+                document.getElementById('global-score').innerText = totalGlobalScore;
+                document.getElementById(`opt-${selectedIdx}`).classList.add('correct');
+                feedbackBox.className = "feedback-card correct";
+                statusText.innerText = uiText[currentLang].correctFeedback;
+            } else {
+                document.getElementById(`opt-${selectedIdx}`).classList.add('wrong');
+                document.getElementById(`opt-${correctIdx}`).classList.add('correct');
+                feedbackBox.className = "feedback-card wrong";
+                statusText.innerText = uiText[currentLang].wrongFeedback + ` "${opts[correctIdx]}"`;
+            }
+
+            humorText.innerText = currentLang === 'ms' ? qData.humor_ms : qData.humor_en;
+            feedbackBox.classList.remove('hidden');
+            document.getElementById('btn-next').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIdx++;
+            if (currentQuestionIdx < activeQuestions.length) {
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            switchScreen('screen-results');
+            document.getElementById('res-correct').innerText = `${currentCategoryScore / 20} / ${activeQuestions.length}`;
+            document.getElementById('res-points').innerText = `+${currentCategoryScore}`;
+        }
+
+        function restartCategory() {
+            if (currentCategory) startCategory(currentCategory.id);
+        }
+
+        function goHome() {
+            switchScreen('screen-lobby');
+            renderCategories();
+        }
+
+        function switchScreen(screenId) {
+            ['screen-lobby', 'screen-game', 'screen-results'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        window.onload = function() {
+            renderCategories();
+        };
+    </script>
+</body>
+</html>
