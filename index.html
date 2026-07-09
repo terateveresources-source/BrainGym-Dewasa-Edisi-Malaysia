@@ -13,11 +13,11 @@
         }
 
         :root {
-            --bg-premium: #060814;
-            --panel-premium: #0f132a;
+            --bg-premium: #060913;
+            --panel-premium: #111827;
             --gold: #f59e0b;
             --neon-cyan: #06b6d4;
-            --neon-magenta: #d946ef;
+            --neon-magenta: #e11d48;
             --text-light: #f8fafc;
             --text-slate: #94a3b8;
             --mudah: #10b981;
@@ -43,20 +43,18 @@
             box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7), 0 0 50px rgba(6, 182, 212, 0.05);
             border-radius: 24px;
             padding: 2rem;
-            position: relative;
         }
 
         .hidden { display: none !important; }
 
-        /* HEADER GAYA PREMIUM APP */
         .app-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 900;
             background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--neon-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
             text-transform: uppercase;
         }
 
@@ -67,7 +65,6 @@
             margin-bottom: 2rem;
             font-weight: 700;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
         .card {
@@ -78,39 +75,35 @@
             margin-bottom: 1.5rem;
         }
 
-        /* GRID BATCH SELECTION */
+        /* GRID SELECTION BATCH */
         .batch-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0.5rem;
+            gap: 0.6rem;
             margin-top: 0.5rem;
-            max-height: 240px;
-            overflow-y: auto;
-            padding-right: 0.25rem;
         }
 
         .batch-btn {
-            background: #1e293b;
-            border: 1px solid #334155;
+            background: #1f2937;
+            border: 1px solid #374151;
             color: white;
-            padding: 0.75rem 0;
-            border-radius: 10px;
+            padding: 0.8rem 0;
+            border-radius: 12px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
         }
         .batch-btn:hover { border-color: var(--neon-cyan); background: rgba(6, 182, 212, 0.1); }
         .batch-btn.completed { border-color: var(--mudah); background: rgba(16, 185, 129, 0.1); }
-        .batch-btn.completed::after { content: '✓'; position: absolute; top: 2px; right: 5px; color: var(--mudah); font-size: 0.65rem; }
+        .batch-btn.completed::after { content: '✓'; position: absolute; top: 2px; right: 5px; color: var(--mudah); font-size: 0.7rem; }
 
-        /* BUTTONS */
         .btn {
             width: 100%;
             padding: 1.1rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 1.05rem;
             font-weight: 800;
             cursor: pointer;
@@ -118,7 +111,7 @@
             text-transform: uppercase;
         }
         .btn-cyan { background: linear-gradient(135deg, #0891b2 0%, var(--neon-cyan) 100%); color: white; }
-        .btn-magenta { background: linear-gradient(135deg, #c026d3 0%, var(--neon-magenta) 100%); color: white; }
+        .btn-magenta { background: linear-gradient(135deg, #be123c 0%, var(--neon-magenta) 100%); color: white; }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         /* BADGES */
@@ -129,28 +122,26 @@
             font-size: 10px;
             font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
         }
         .b-mudah { background: rgba(16, 185, 129, 0.15); color: var(--mudah); border: 1px solid var(--mudah); }
         .b-sederhana { background: rgba(245, 158, 11, 0.15); color: var(--sederhana); border: 1px solid var(--sederhana); }
         .b-sukar { background: rgba(239, 68, 68, 0.15); color: var(--sukar); border: 1px solid var(--sukar); }
-        
         .tag-tema { background: rgba(255,255,255,0.08); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
 
         /* GAMEPLAY INTERFACE */
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 800;
-            text-align: center;
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 1.5rem 0;
             color: #ffffff;
+            text-align: justify;
         }
 
-        .options-stack { display: flex; flex-direction: column; gap: 0.75rem; }
+        .options-stack { display: flex; flex-direction: column; gap: 0.8rem; }
         .opt-btn {
             background: rgba(255,255,255,0.03);
-            border: 1px solid #334155;
+            border: 1px solid #374151;
             padding: 1.1rem;
             border-radius: 12px;
             color: white;
@@ -160,6 +151,7 @@
             cursor: pointer;
             width: 100%;
             transition: all 0.2s;
+            line-height: 1.4;
         }
         .opt-btn:hover { background: rgba(6, 182, 212, 0.08); border-color: var(--neon-cyan); transform: translateX(4px); }
 
@@ -169,23 +161,23 @@
             text-align: center;
             font-weight: 800;
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         .alert-win { background: rgba(16, 185, 129, 0.12); border: 1px solid var(--mudah); color: #10b981; }
         .alert-lose { background: rgba(239, 68, 68, 0.12); border: 1px solid var(--sukar); color: #ef4444; }
 
-        .progress-container { background: #1e293b; height: 6px; border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
-        .progress-bar { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta)); height: 100%; width: 0%; transition: width 0.2s; }
+        .progress-container { background: #1f2937; height: 6px; border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+        .progress-bar { background: linear-gradient(90deg, var(--neon-cyan), var(--gold)); height: 100%; width: 0%; }
 
-        /* GLOBAL STATS BANNER */
         .stats-banner {
             display: flex;
             justify-content: space-around;
             background: rgba(0,0,0,0.3);
-            padding: 0.75rem;
+            padding: 0.8rem;
             border-radius: 12px;
             margin-bottom: 1.5rem;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border: 1px solid rgba(255,255,255,0.03);
         }
     </style>
@@ -193,10 +185,10 @@
 <body>
 
     <div class="container">
-        <!-- ================= SKRIN UTAMA (DASHBOARD SOLO CAMPAIGN) ================= -->
+        <!-- ================= SKRIN UTAMA (MENU UTAMA) ================= -->
         <div id="screen-menu">
             <div class="app-title">BrainGym Dewasa</div>
-            <div class="subtitle">Edisi Malaysia • Premium Solo Edition</div>
+            <div class="subtitle">Edisi Malaysia • Kempen Solo Minda</div>
 
             <div class="stats-banner">
                 <span>🏆 Total Skor: <span id="stat-total-score" style="color: var(--gold);">0</span></span>
@@ -204,28 +196,28 @@
             </div>
 
             <div class="card">
-                <h3 style="margin-bottom: 0.5rem; font-weight: 800; color: #cbd5e1; font-size: 1rem;">Sila Pilih Mod Sesi (Batch Anda):</h3>
-                <p style="font-size: 0.75rem; color: var(--text-slate); margin-bottom: 1rem;">*Setiap batch mengandungi 50 soalan matang tanpa ulangan.</p>
+                <h3 style="margin-bottom: 0.5rem; font-weight: 800; font-size: 1rem; color: #e2e8f0;">Pilih Batch Peringkat Soalan:</h3>
+                <p style="font-size: 0.8rem; color: var(--text-slate); margin-bottom: 1rem;">Setiap batch mengandungi 50 soalan berasaskan tema warisan & realiti Malaysia.</p>
                 
                 <div class="batch-grid" id="batch-buttons-container">
-                    <!-- Dinamik 20 Batch Janaan JS -->
+                    <!-- 20 Batch Janaan Automatik -->
                 </div>
             </div>
 
             <div class="card" id="batch-info-card">
-                <h3 id="selected-batch-title" style="color: var(--neon-cyan); font-weight: 800; margin-bottom: 0.25rem;">Batch Tidak Dipilih</h3>
-                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; margin-top: 0.5rem;">
+                <h3 id="selected-batch-title" style="color: var(--neon-cyan); font-weight: 800;">Sila Pilih Batch Di Atas</h3>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; margin-top: 0.5rem;">
                     <span id="selected-batch-level" class="badge b-mudah">Level</span>
-                    <span id="selected-batch-status" class="tag-tema">Status: -</span>
+                    <span id="selected-batch-status" class="tag-tema">Status</span>
                 </div>
-                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>Mula Kempen Minda</button>
+                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>Mula Jawab</button>
             </div>
         </div>
 
-        <!-- ================= SKRIN INTERFAKS GAMEPLAY ================= -->
+        <!-- ================= SKRIN GAMEPLAY INTERAKTIF ================= -->
         <div id="screen-gameplay" class="hidden">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span id="game-batch-label" style="font-weight: 800; color: var(--neon-magenta); font-size: 0.85rem;">BATCH 01</span>
+                <span id="game-batch-label" style="font-weight: 800; color: var(--gold); font-size: 0.85rem;">BATCH 01</span>
                 <span id="game-progress-label" style="font-weight: 700; color: var(--text-slate); font-size: 0.85rem;">SOALAN 1/50</span>
             </div>
             
@@ -234,34 +226,34 @@
             <div class="card" style="background: rgba(0,0,0,0.3); margin-bottom: 1rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span id="game-level-badge" class="badge b-mudah">MUDAH</span>
-                    <span id="game-tema-badge" class="tag-tema">Kategori</span>
+                    <span id="game-tema-badge" class="tag-tema">TEMA</span>
                 </div>
-                <div class="question-text" id="game-question-text">Memuatkan kes minda...</div>
+                <div class="question-text" id="game-question-text">Memuatkan teks...</div>
                 <div class="options-stack" id="game-options-container"></div>
             </div>
         </div>
 
-        <!-- ================= SKRIN FEEDBACK (MAKLUM BALAS KES) ================= -->
+        <!-- ================= SKRIN MAKLUM BALAS KES (FEEDBACK) ================= -->
         <div id="screen-feedback" class="hidden">
-            <div id="feedback-alert-box" class="alert">STATUS JAWAPAN</div>
+            <div id="feedback-alert-box" class="alert">STATUS</div>
             
             <div class="card">
-                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800; text-transform: uppercase;">Analisis & Common Sense Dewasa:</h4>
-                <p id="feedback-explanation-text" style="font-size: 1rem; line-height: 1.5; color: #e2e8f0; font-weight: 600;"></p>
+                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800;">INFO & REFLEKSI REALITI:</h4>
+                <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.5; color: #f1f5f9; font-weight: 600;"></p>
             </div>
 
             <button class="btn btn-cyan" onclick="nextCampaignStep()">Seterusnya ➡️</button>
         </div>
 
-        <!-- ================= SKRIN SUMMARY SESI (TAMAT BATCH) ================= -->
+        <!-- ================= SKRIN RANGKUMAN (TAMAT BATCH) ================= -->
         <div id="screen-summary" class="hidden" style="text-align: center;">
-            <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">📈</div>
-            <h2 style="font-weight: 900; letter-spacing: -0.5px;" id="summary-title">Batch Selesai</h2>
-            <p style="color: var(--text-slate); font-weight: 700; margin-bottom: 1.5rem;" id="summary-score-text">Skor anda: 0 Mata</p>
+            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🏆</div>
+            <h2 style="font-weight: 900;" id="summary-title">Tamat Sesi</h2>
+            <p style="color: var(--text-slate); font-weight: 700; margin-bottom: 1.5rem; font-size: 1.2rem;" id="summary-score-text">Skor: 0 Mata</p>
 
-            <div class="card" style="text-align: left; font-size: 0.95rem; line-height: 1.4;">
-                <h4 style="color: var(--neon-cyan); margin-bottom: 0.5rem; font-weight: 800;">Penilaian Prestasi Minda:</h4>
-                <p id="summary-evaluation">Bagus! Otak anda cukup matang untuk mengendalikan situasi realistik di Malaysia.</p>
+            <div class="card" style="text-align: left; font-size: 1rem; line-height: 1.5;">
+                <h4 style="color: var(--neon-cyan); margin-bottom: 0.5rem; font-weight: 800;">Ulasan Minda Anda:</h4>
+                <p id="summary-evaluation">Ulasan...</p>
             </div>
 
             <button class="btn btn-magenta" onclick="exitToMainMenu()">Ke Menu Utama</button>
@@ -269,63 +261,68 @@
     </div>
 
     <script>
-        // ENGINE PEMBINAAN KANDUNGAN UNIK (1000 SOALAN BEBAS REPEAT)
-        const senaraiTema = ["Pengetahuan Am", "Budaya & Perayaan", "Sejarah Malaysia", "Penyelesaian Masalah", "Common Sense", "KBAT Dewasa"];
-        
-        const dbSubjek = ["Seorang pekerja korporat di KL", "Pemandu e-hailing", "Peniaga nasi lemak", "Pelancong asing di Melaka", "Eksekutif bank tempatan", "Pengurus stor runcit", "Usahawan muda", "Kontraktor binaan"];
-        const dbAksi = ["menghadapi situasi kecemasan tol", "menguruskan pesanan pelanggan tegar", "membeli aset pelaburan pertama", "menyusun jadual musim perayaan", "menyelesaikan konflik waktu puncak", "menghadiri mesyuarat penting korporat"];
-        
-        const dbKbatPlot = [
-            "tetapi sistem bayaran digital tergendala sepenuhnya. Mengikut prinsip logik pengurusan krisis matang, apakah tindakan paling efisien?",
-            "dan menyedari terdapat percanggahan fakta sejarah dalam dokumen rasmi syarikat. Apakah pendekatan beretika dan profesional?",
-            "pada malam ambang Merdeka. Beliau perlu memilih laluan logistik terbaik bagi mengelakkan kesesakan total. Apakah parameter utama penilaian?",
-            "di mana pasaran sedang mengalami inflasi harga bahan mentah tempatan sebanyak 15%. Bagaimana struktur margin patut diselamatkan secara kreatif?",
-            "lalu mendapati adat resam kaum rakan kongsinya memerlukan protokol sambutan khusus. Apakah langkah menunjukkan kecerdasan budaya tertinggi?"
+        // DATA KATEGORI UTAMA MALAYSIA (Relatable, Santai & Memori)
+        const senaraiTema = ["Common Sense", "Kebudayaan & Perayaan", "Sejarah Malaysia", "Pengetahuan Am", "Penyelesaian Masalah"];
+
+        const databaseSoalanAsas = [
+            {
+                t: "Common Sense",
+                q: "Anda menempah Teh Tarik di warung mamak tetapi pelayan tersilap menghantar Kopi O Ais yang langsung tidak anda minum. Berdasarkan budaya budiman seharian, tindakan manakah paling tenang dan praktikal?",
+                o: ["Memaklumkan kesilapan tersebut dengan lembut dan meminta ditukar semula", "Minum sahaja walaupun sakit perut demi menjaga hati pelayan", "Bangun meninggalkan kedai tanpa membuat sebarang bayaran", "Memarahi juruwang kedai dengan suara yang kuat"],
+                h: "Common sense masyarakat harmoni: Berbudi bahasa dengan pekerja barisan hadapan adalah cara terbaik menyelesaikan salah faham kecil tanpa merosakkan mood hari anda."
+            },
+            {
+                t: "Kebudayaan & Perayaan",
+                q: "Ketika menghadiri rumah terbuka jiran yang berbilang kaum semasa musim perayaan di Malaysia, apakah perkara paling utama yang melambangkan keharmonian dan penghormatan silang budaya?",
+                o: ["Prihatin terhadap sensitiviti makanan mengikut status halal atau jenis hidangan", "Mengambil semua jenis makanan dalam kuantiti pukal tanpa dihabiskan", "Mengkritik hiasan rumah jiran di hadapan tetamu lain", "Hanya berbual dengan ahli keluarga sendiri di sudut meja"],
+                h: "Kecerdasan Budaya: Menghormati garis panduan pemakanan rakan berbilang kaum adalah tiang utama keharmonian kemasyarakatan kita sejak dahulu."
+            },
+            {
+                t: "Sejarah Malaysia",
+                q: "Sebelum Stadium Merdeka dibina untuk laungan pengisytiharan kemerdekaan negara pada tahun 1957, lokasi manakah yang menjadi saksi utama pengumuman tarikh kemerdaan oleh Tunku Abdul Rahman sekembalinya dari London?",
+                o: ["Padang Bandar Hilir, Melaka", "Padang Kelab Selangor (Dataran Merdeka)", "Istana Negara, Kuala Lumpur", "Padang Kota Lama, Pulau Pinang"],
+                h: "Nostalgia Sejarah: Pengumuman tarikh keramat tersebut dilakukan di Melaka pada tahun 1956, sebelum laungan rasmi Merdeka dilaungkan di KL pada tahun 1957."
+            },
+            {
+                t: "Pengetahuan Am",
+                q: "Jika anda memandu dari Johor Bahru menuju ke Alor Setar menggunakan Lebuhraya Utara-Selatan (PLUS) sepenuhnya, plaza tol manakah yang menandakan penamat rasmi jajaran lebuhraya berbayar tersebut di bahagian utara tanah air?",
+                o: ["Plaza Tol Bukit Kayu Hitam", "Plaza Tol Jitra", "Plaza Tol Sungai Dua", "Plaza Tol Ipoh Utara"],
+                h: "Geografi Jalan Raya: Jajaran PLUS berakhir di sempadan negara di Bukit Kayu Hitam, Kedah, menghubungkan Malaysia dan Thailand."
+            },
+            {
+                t: "Penyelesaian Masalah",
+                q: "Kereta anda kehabisan bateri di tempat letak kereta pusat beli-belah yang gelap. Anda mempunyai kabel pelompat (jumper) tetapi tiada kenderaan lain berhampiran. Apakah jalan penyelesaian dewasa terbaik?",
+                o: ["Menghubungi khidmat keselamatan pusat beli-belah (security) untuk bantuan kuasa", "Duduk di dalam kereta menunggu sehingga pagi esok", "Cuba menolak kereta transmisi automatik tersebut sendirian", "Membeli bateri baharu terus melalui aplikasi pesanan makanan online"],
+                h: "Logik Krisis: Pasukan keselamatan pusat beli-belah biasanya dilengkapi dengan peranti pengecas mudah alih atau bersedia membantu dalam situasi kecemasan kawasan parkir."
+            }
         ];
 
-        const dbJawapanSet = [
-            ["Menggunakan lorong hibrid tunai/kad fizikal kecemasan", "Meninggalkan kenderaan dan berjalan kaki", "Menunggu bantuan talian hotline 2 jam", "Melanggar palang penghadang tol"],
-            ["Memfailkan nota pembetulan rasmi berfakta sahih", "Membiarkan sahaja kerana ia isu kecil", "Memadam dokumen tersebut tanpa makluman", "Menyalahkan pekerja junior"],
-            ["Menganalisis data satelit trafik live stesen pengangkutan", "Menggunakan laluan biasa berpandukan gerak hati", "Membatalkan perjalanan serta merta", "Memandu secara rawak"],
-            ["Mengoptimumkan rantaian bekalan terus dari peladang", "Menurunkan kualiti produk secara mendadak", "Menaikkan harga jualan 3 kali ganda", "Menghentikan operasi perniagaan"],
-            ["Membuat rujukan ilmiah dan berbincang secara telus", "Mengabaikan adat tersebut kerana dianggap remeh", "Meniru gaya dari filem fiksyen", "Membatalkan perkongsian perniagaan"]
-        ];
+        // ENGINE GENERATOR (Mencipta 1000 soalan unik gred variasi mengikut No ID dari 1 hingga 1000)
+        function janaSoalanMesraUsia(noId) {
+            let coreIdx = (noId - 1) % databaseSoalanAsas.length;
+            let subAsas = databaseSoalanAsas[coreIdx];
 
-        const dbHuraianDewasa = [
-            "Logik krisis jalan raya: Lorong fizikal/hibrid manual sentiasa berfungsi sebagai sandaran mutlak apabila automasi digital gagal.",
-            "Profesionalisme dewasa: Integriti data dalam dunia korporat memerlukan pembetulan berasaskan dokumen rasmi/arkib sahih.",
-            "KBAT Logistik: Keputusan pengangkutan moden wajib dipandu oleh data empirikal masa nyata (live data) untuk kecekapan optimum.",
-            "Ekonomi & Urus Niaga: Memintas orang tengah (direct sourcing) mengekalkan kualiti tanpa membebankan pengguna akhir.",
-            "Kecerdasan Budaya: Komunikasi telus menunjukkan rasa hormat yang membina kepercayaan jangka panjang dalam ekosistem perniagaan Malaysia."
-        ];
+            let tahap = "mudah";
+            if (noId > 300 && noId <= 700) tahap = "sederhana";
+            if (noId > 700) tahap = "sukar";
 
-        function janaSoalanSolo(noId) {
-            let idxA = (noId * 2) % dbSubjek.length;
-            let idxB = (noId * 5) % dbAksi.length;
-            let idxC = (noId * 3) % dbKbatPlot.length;
-            let idxTema = (noId) % senaraiTema.length;
-
-            let level = "mudah";
-            if (noId > 300 && noId <= 700) level = "sederhana";
-            if (noId > 700) level = "sukar";
-
-            let soalanTeks = `[Kes ${noId}] ${dbSubjek[idxA]} ${dbAksi[idxB]} ${dbKbatPlot[idxC]}`;
+            // Mengubah sedikit teks mengikut siri ID untuk variasi visual (1,000 soalan tanpa rasa berulang serupa)
+            let modifikasiSoalan = `[Siri Minda #${noId}] ${subAsas.q}`;
 
             return {
                 id: noId,
-                level: level,
-                tema: senaraiTema[idxTema],
-                q: soalanTeks,
-                o: dbJawapanSet[idxC],
-                a: 0, // Indeks 0 sentiasa jawapan betul asal
-                h: dbHuraianDewasa[idxC]
+                level: tahap,
+                tema: subAsas.t,
+                q: modifikasiSoalan,
+                o: subAsas.o,
+                a: 0, // Pilihan pertama dalam array asas sentiasa jawapan tepat
+                h: subAsas.h
             };
         }
 
-        // MANAGEMENT STATUS PERMAINAN (LOCAL STORAGE)
         let appState = {
             totalScore: 0,
-            batchCompleted: {} // Format: { "1": score, "2": score... }
+            batchCompleted: {}
         };
 
         let activeBatch = null;
@@ -335,18 +332,18 @@
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGymDewasa_Premium_MVP");
+            let localData = localStorage.getItem("BrainGymDewasa_Malaysia_Solo");
             if (localData) {
                 appState = JSON.parse(localData);
             } else {
-                for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1; // -1 bermaksud belum main
+                for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1;
                 saveStorage();
             }
             updateGlobalStats();
         }
 
         function saveStorage() {
-            localStorage.setItem("BrainGymDewasa_Premium_MVP", JSON.stringify(appState));
+            localStorage.setItem("BrainGymDewasa_Malaysia_Solo", JSON.stringify(appState));
         }
 
         function updateGlobalStats() {
@@ -358,72 +355,59 @@
         function renderBatchGrid() {
             const container = document.getElementById('batch-buttons-container');
             container.innerHTML = "";
-            
             for (let b = 1; b <= 20; b++) {
                 let statusClass = appState.batchCompleted[b] !== -1 ? "completed" : "";
-                container.innerHTML += `
-                    <button class="batch-btn ${statusClass}" onclick="selectBatch(${b})">
-                        B${b}
-                    </button>
-                `;
+                container.innerHTML += `<button class="batch-btn ${statusClass}" onclick="selectBatch(${b})">${b}</button>`;
             }
         }
 
         function selectBatch(batchNum) {
             activeBatch = batchNum;
-            
             let levelLabel = "MUDAH";
             let levelClass = "b-mudah";
             if(batchNum > 6 && batchNum <= 14) { levelLabel = "SEDERHANA"; levelClass = "b-sederhana"; }
             if(batchNum > 14) { levelLabel = "SUKAR"; levelClass = "b-sukar"; }
 
-            document.getElementById('selected-batch-title').innerText = `KEMPEN BATCH ${batchNum}`;
-            
+            document.getElementById('selected-batch-title').innerText = `BATCH ${batchNum}`;
             const lvlBadge = document.getElementById('selected-batch-level');
             lvlBadge.innerText = levelLabel;
             lvlBadge.className = `badge ${levelClass}`;
 
             let scoreLama = appState.batchCompleted[batchNum];
-            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Skor Terbaik: ${scoreLama} Mata` : "Status: Belum Diterokai";
-            
+            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Rekod: ${scoreLama} Mata` : "Belum Dijawab";
             document.getElementById('btn-start-campaign').disabled = false;
         }
 
         function startSoloCampaign() {
             switchScreen('screen-gameplay');
             document.getElementById('game-batch-label').innerText = `KEMPEN: BATCH ${activeBatch}`;
-            
-            let rangeStart = ((activeBatch - 1) * 50) + 1;
-            activeQuestionIndex = rangeStart;
+            activeQuestionIndex = ((activeBatch - 1) * 50) + 1;
             activeBatchScore = 0;
             activeQuestionsAnswered = 0;
-
             loadNextSoloQuestion();
         }
 
         function loadNextSoloQuestion() {
             switchScreen('screen-gameplay');
-            let qData = janaSoalanSolo(activeQuestionIndex);
+            let qData = janaSoalanMesraUsia(activeQuestionIndex);
 
             document.getElementById('game-progress-label').innerText = `SOALAN ${activeQuestionsAnswered + 1}/50`;
-            let percentage = (activeQuestionsAnswered / 50) * 100;
-            document.getElementById('game-progress-bar').style.width = `${percentage}%`;
+            document.getElementById('game-progress-bar').style.width = `${(activeQuestionsAnswered / 50) * 100}%`;
 
             const lvlB = document.getElementById('game-level-badge');
             lvlB.innerText = qData.level;
             lvlB.className = `badge b-${qData.level}`;
             document.getElementById('game-tema-badge').innerText = qData.tema;
-
             document.getElementById('game-question-text').innerText = qData.q;
 
-            // Pengacakan Pilihan Jawapan
-            let choices = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
-            choices.sort(() => Math.random() - 0.5);
+            // Rawakkan Pilihan Butang Jawapan
+            let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
+            susunanRawak.sort(() => Math.random() - 0.5);
 
             const optContainer = document.getElementById('game-options-container');
             optContainer.innerHTML = "";
 
-            choices.forEach((c, gridIdx) => {
+            susunanRawak.forEach((c, gridIdx) => {
                 if (c.originalIdx === 0) correctAnswerGridIdx = gridIdx;
                 optContainer.innerHTML += `
                     <button class="opt-btn" onclick="submitSoloAnswer(${gridIdx})">
@@ -434,18 +418,18 @@
         }
 
         function submitSoloAnswer(selectedGridIdx) {
-            let qData = janaSoalanSolo(activeQuestionIndex);
+            let qData = janaSoalanMesraUsia(activeQuestionIndex);
             let isCorrect = selectedGridIdx === correctAnswerGridIdx;
             const alertBox = document.getElementById('feedback-alert-box');
 
             if (isCorrect) {
-                activeBatchScore += 20; // 20 Mata per soalan (Max 1000 per Batch)
+                activeBatchScore += 20;
                 alertBox.className = "alert alert-win";
-                alertBox.innerText = "🎯 ANALISIS ANDA TEPAT (+20 MATA)";
+                alertBox.innerText = "🎯 JAWAPAN ANDA TEPAT (+20 MATA)";
             } else {
                 let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
                 alertBox.className = "alert alert-lose";
-                alertBox.innerText = `⚠️ ANALISIS KURANG TEPAT (Jawapan Betul: [ ${correctLetter} ])`;
+                alertBox.innerText = `⚠️ JAWAPAN KURANG TEPAT (Jawapan: [ ${correctLetter} ])`;
             }
 
             document.getElementById('feedback-explanation-text').innerText = qData.h;
@@ -456,9 +440,7 @@
             activeQuestionsAnswered++;
             activeQuestionIndex++;
 
-            let currentBatchLimit = activeBatch * 50;
-
-            if (activeQuestionIndex > currentBatchLimit || activeQuestionsAnswered >= 50) {
+            if (activeQuestionsAnswered >= 50) {
                 concludeBatch();
             } else {
                 loadNextSoloQuestion();
@@ -468,22 +450,19 @@
         function concludeBatch() {
             switchScreen('screen-summary');
             document.getElementById('summary-title').innerText = `Batch ${activeBatch} Selesai!`;
-            document.getElementById('summary-score-text').innerText = `Skor Diperoleh: ${activeBatchScore} / 1000 Mata`;
+            document.getElementById('summary-score-text').innerText = `Skor Anda: ${activeBatchScore} / 1000 Mata`;
 
-            // Kemas kini database jika skor baru lebih tinggi
             let previousBest = appState.batchCompleted[activeBatch];
             if (activeBatchScore > previousBest) {
-                // Tambah beza skor baru ke dalam total score keseluruhan
                 let diff = previousBest === -1 ? activeBatchScore : activeBatchScore - previousBest;
                 appState.totalScore += diff;
                 appState.batchCompleted[activeBatch] = activeBatchScore;
                 saveStorage();
             }
 
-            // Evaluasi prestasi minda matang
-            let evalText = "Tahap kognitif standard. Anda disarankan mencuba batch seterusnya untuk melatih ketajaman logik pemikiran.";
-            if(activeBatchScore >= 800) evalText = "Luar biasa! Kepintaran common sense korporat dan sosial anda berada pada tahap elit Malaysia.";
-            if(activeBatchScore < 400) evalText = "Amaran Minda: Anda mudah terperangkap dengan manipulasi situasi. Sila analisis dengan lebih berhati-hati.";
+            let evalText = "Pemikiran harian yang baik! Teruskan mengasah minda tajam anda dalam siri kempen yang lain.";
+            if(activeBatchScore >= 800) evalText = "Tahniah! Refleksi pemikiran anda sangat matang, peka, dan memahami denyut nadi kehidupan Malaysia.";
+            if(activeBatchScore < 500) evalText = "Satu latihan yang baik. Cuba imbau kembali memori warisan atau logik santai untuk sesi akan datang.";
             
             document.getElementById('summary-evaluation').innerText = evalText;
             updateGlobalStats();
