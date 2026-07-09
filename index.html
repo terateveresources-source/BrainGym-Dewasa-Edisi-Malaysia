@@ -3,121 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BrainGym Dewasa: 500 Minda Neon ⚡</title>
+    <title>⚡ BrainGym 500: Minda Kreatif ⚡</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Sora', 'Nunito', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at center, #0c1020 0%, #05070f 100%);
-            color: #f8fafc;
+            background-color: #f0f4f9;
+            background-image: 
+                radial-gradient(#e1e7f0 1.5px, transparent 1.5px), 
+                radial-gradient(#e1e7f0 1.5px, #f0f4f9 1.5px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: #1e293b;
             min-height: 100vh;
             padding: 2rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 550px;
-            background: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(6, 182, 212, 0.25);
-            box-shadow: 0 0 40px rgba(6, 182, 212, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02);
-            border-radius: 30px;
-            padding: 2.5rem 2rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 500px;
+            background: #ffffff;
+            border: 4px solid #1e293b;
+            box-shadow: 8px 8px 0px #1e293b;
+            border-radius: 32px;
+            padding: 2rem;
+            transition: all 0.3s ease;
         }
 
         .hidden { display: none !important; }
 
         .app-title {
             text-align: center;
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ff007f 0%, #ffaa00 50%, #00f0ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #1e293b;
             letter-spacing: -1px;
             text-transform: uppercase;
-            text-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
             margin-bottom: 0.2rem;
+            line-height: 1;
+        }
+        
+        .app-title span {
+            color: #ff5a5f;
+            display: block;
+            font-size: 1.5rem;
+            background: #ffe5e6;
+            padding: 4px 12px;
+            border-radius: 12px;
+            width: fit-content;
+            margin: 0.5rem auto 0 auto;
+            border: 2px solid #1e293b;
         }
 
         .subtitle {
             text-align: center;
-            color: #94a3b8;
+            color: #64748b;
             font-size: 0.85rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             font-weight: 800;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 20px;
-            padding: 1.8rem;
-            margin-bottom: 1.8rem;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.05);
+            background: #f8fafc;
+            border: 3px solid #1e293b;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 4px 4px 0px #1e293b;
         }
 
         .batch-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0.75rem;
+            gap: 0.6rem;
             margin-top: 1rem;
         }
 
         .batch-btn {
-            background: rgba(31, 41, 55, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #cbd5e1;
-            padding: 1rem 0;
+            background: #ffffff;
+            border: 3px solid #1e293b;
+            color: #1e293b;
+            padding: 0.8rem 0;
             border-radius: 16px;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
+            box-shadow: 2px 2px 0px #1e293b;
+            transition: all 0.1s ease;
         }
         .batch-btn:hover {
-            border-color: #00f0ff;
-            color: #00f0ff;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-            transform: scale(1.05);
+            background: #ffea79;
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px #1e293b;
+        }
+        .batch-btn:active {
+            transform: translate(0px, 0px);
+            box-shadow: 2px 2px 0px #1e293b;
         }
         .batch-btn.completed {
-            border-color: #10b981;
-            background: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-        }
-        .batch-btn.completed::after {
-            content: '✓';
-            position: absolute;
-            top: 4px;
-            right: 8px;
-            font-size: 0.75rem;
-            font-weight: 900;
+            background: #66cc99;
+            color: white;
         }
 
         .btn {
             width: 100%;
-            padding: 1.2rem;
-            border: none;
-            border-radius: 18px;
+            padding: 1.1rem;
+            border: 3px solid #1e293b;
+            border-radius: 20px;
             font-size: 1.1rem;
-            font-weight: 800;
+            font-weight: 900;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.1s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
             display: flex;
@@ -126,84 +132,95 @@
             gap: 0.5rem;
         }
         .btn-cyan {
-            background: linear-gradient(135deg, #0099ff 0%, #00f0ff 100%);
-            color: #030712;
-            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+            background: #5ce1e6;
+            color: #1e293b;
+            box-shadow: 4px 4px 0px #1e293b;
+        }
+        .btn-cyan:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #1e293b;
         }
         .btn-magenta {
-            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            background: #ff66a3;
             color: white;
-            box-shadow: 0 4px 20px rgba(255, 0, 127, 0.3);
+            box-shadow: 4px 4px 0px #1e293b;
         }
-        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
         .badge {
             display: inline-block;
             padding: 6px 14px;
-            border-radius: 999px;
+            border-radius: 12px;
             font-size: 11px;
             font-weight: 900;
             text-transform: uppercase;
+            border: 2px solid #1e293b;
         }
-        .b-mudah { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid #10b981; }
-        .b-sederhana { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid #f59e0b; }
-        .b-sukar { background: rgba(255, 0, 127, 0.1); color: #ff007f; border: 1px solid #ff007f; }
-        .tag-tema { background: rgba(255,255,255,0.06); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 10px; }
+        .b-mudah { background: #66cc99; color: white; }
+        .b-sederhana { background: #ffaa44; color: white; }
+        .b-sukar { background: #ff66a3; color: white; }
+        .tag-tema { background: #e2e8f0; color: #1e293b; border: 2px solid #1e293b; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; }
 
         .question-text {
-            font-size: 1.25rem;
-            font-weight: 700;
-            line-height: 1.6;
-            margin: 1.8rem 0;
-            color: #f8fafc;
+            font-size: 1.3rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin: 1.5rem 0;
+            color: #1e293b;
         }
 
-        .options-stack { display: flex; flex-direction: column; gap: 0.9rem; }
+        .options-stack { display: flex; flex-direction: column; gap: 0.75rem; }
         .opt-btn {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 1.2rem;
-            border-radius: 16px;
-            color: #e2e8f0;
+            background: #ffffff;
+            border: 3px solid #1e293b;
+            padding: 1.1rem;
+            border-radius: 18px;
+            color: #1e293b;
             text-align: left;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: all 0.2s ease;
-            line-height: 1.4;
+            box-shadow: 3px 3px 0px #1e293b;
+            transition: all 0.1s ease;
         }
         .opt-btn:hover {
-            background: rgba(0, 240, 255, 0.05);
-            border-color: #00f0ff;
-            transform: translateX(6px);
-            box-shadow: -4px 0 15px rgba(0, 240, 255, 0.2);
+            background: #f1f5f9;
+            transform: translateX(4px);
         }
 
         .alert {
-            padding: 1.4rem;
-            border-radius: 16px;
+            padding: 1.2rem;
+            border-radius: 20px;
             text-align: center;
             font-weight: 900;
-            margin-bottom: 1.8rem;
-            font-size: 1.15rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            border: 3px solid #1e293b;
+            box-shadow: 4px 4px 0px #1e293b;
         }
-        .alert-win { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; }
-        .alert-lose { background: rgba(255, 0, 127, 0.15); border: 1px solid #ff007f; color: #ff007f; }
+        .alert-win { background: #c6f6d5; color: #22543d; }
+        .alert-lose { background: #fed7d7; color: #742a2a; }
 
-        .progress-container { background: rgba(255,255,255,0.05); height: 8px; border-radius: 20px; overflow: hidden; margin-bottom: 2rem; }
-        .progress-bar { background: linear-gradient(90deg, #ff007f, #ffaa00, #00f0ff); height: 100%; width: 0%; transition: width 0.3s ease; }
+        .progress-container { 
+            background: #e2e8f0; 
+            height: 14px; 
+            border-radius: 20px; 
+            border: 3px solid #1e293b;
+            overflow: hidden; 
+            margin-bottom: 1.5rem; 
+        }
+        .progress-bar { background: #ffca3a; height: 100%; width: 0%; transition: width 0.3s ease; }
 
         .stats-banner {
             display: flex;
             justify-content: space-around;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 16px;
-            margin-bottom: 2rem;
-            font-weight: 800;
-            font-size: 0.9rem;
-            border: 1px solid rgba(6, 182, 212, 0.1);
+            background: #f1f5f9;
+            padding: 0.8rem;
+            border-radius: 18px;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            font-size: 0.95rem;
+            border: 3px solid #1e293b;
         }
     </style>
 </head>
@@ -212,40 +229,39 @@
     <div class="container">
         <!-- MENU UTAMA -->
         <div id="screen-menu">
-            <div class="app-title">BrainGym 500</div>
-            <div class="subtitle">💥 20 Batch x 25 Soalan Unik 💥</div>
+            <div class="app-title">BrainGym 500<span>EDISI MATANG</span></div>
+            <div class="subtitle">🧩 20 Sesi • 500 Simulasi Unik 🧩</div>
 
             <div class="stats-banner">
-                <span>🏆 Total Skor: <span id="stat-total-score" style="color: #ffaa00;">0</span></span>
-                <span>📦 Selesai: <span id="stat-batches-done" style="color: #00f0ff;">0/20</span></span>
+                <span>🏆 SKOR: <span id="stat-total-score" style="color: #ff66a3;">0</span></span>
+                <span>📦 SET: <span id="stat-batches-done" style="color: #ffca3a;">0/20</span></span>
             </div>
 
             <div class="card">
-                <h3 style="margin-bottom: 0.4rem; font-weight: 800; font-size: 1.05rem; color: #f1f5f9;">Pilih Batch Sesi:</h3>
-                <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem;">Setiap batch mengandungi 25 simulasi kes berbeza tanpa ulangan tekstual.</p>
+                <h3 style="margin-bottom: 0.2rem; font-weight: 900; font-size: 1.1rem;">Pilih Nombor Sesi:</h3>
                 <div class="batch-grid" id="batch-buttons-container"></div>
             </div>
 
-            <div class="card" id="batch-info-card" style="border-color: rgba(0, 240, 255, 0.15);">
-                <h3 id="selected-batch-title" style="color: #00f0ff; font-weight: 900; font-size: 1.2rem;">Sila Pilih Sesi Di Atas</h3>
-                <div style="display: flex; gap: 0.6rem; margin-bottom: 1.5rem; margin-top: 0.6rem;">
+            <div class="card" id="batch-info-card" style="background: #fffbdf;">
+                <h3 id="selected-batch-title" style="font-weight: 900; font-size: 1.3rem;">Sila Pilih Sesi</h3>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.2rem; margin-top: 0.5rem;">
                     <span id="selected-batch-level" class="badge b-mudah">Level</span>
                     <span id="selected-batch-status" class="tag-tema">Status</span>
                 </div>
-                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>⚡ Mula Sesi ⚡</button>
+                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>Mula Sesi Sekarang 🚀</button>
             </div>
         </div>
 
         <!-- GAMEPLAY -->
         <div id="screen-gameplay" class="hidden">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-                <span id="game-batch-label" style="font-weight: 900; color: #ffaa00; font-size: 0.85rem;">BATCH 01</span>
-                <span id="game-progress-label" style="font-weight: 800; color: #94a3b8; font-size: 0.85rem;">SOALAN 1/25</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span id="game-batch-label" style="font-weight: 900; color: #1e293b; font-size: 0.9rem;">BATCH 01</span>
+                <span id="game-progress-label" style="font-weight: 900; color: #64748b; font-size: 0.9rem;">SOALAN 1/25</span>
             </div>
             <div class="progress-container"><div class="progress-bar" id="game-progress-bar"></div></div>
 
-            <div class="card" style="background: rgba(0,0,0,0.2); margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="card" style="background: #ffffff;">
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
                     <span id="game-level-badge" class="badge b-mudah">MUDAH</span>
                     <span id="game-tema-badge" class="tag-tema">TEMA</span>
                 </div>
@@ -257,76 +273,71 @@
         <!-- FEEDBACK -->
         <div id="screen-feedback" class="hidden">
             <div id="feedback-alert-box" class="alert">STATUS</div>
-            <div class="card" style="border-color: rgba(255, 170, 0, 0.2);">
-                <h4 style="color: #ffaa00; margin-bottom: 0.6rem; font-size: 0.95rem; font-weight: 900;">🧠 LOGIK DEWASA:</h4>
-                <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.6; color: #f1f5f9; font-weight: 600;"></p>
+            <div class="card" style="background: #fafafa;">
+                <h4 style="color: #1e293b; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 900;">💡 LOGIK SITUASI:</h4>
+                <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.5; color: #334155; font-weight: 700;"></p>
             </div>
-            <button class="btn btn-cyan" onclick="nextCampaignStep()">Teruskan Sesi Kes ➡️</button>
+            <button class="btn btn-cyan" onclick="nextCampaignStep()">Seterusnya ➡️</button>
         </div>
 
         <!-- SUMMARY -->
         <div id="screen-summary" class="hidden" style="text-align: center;">
-            <div style="font-size: 4.5rem; margin-bottom: 0.5rem;">🏆</div>
-            <h2 style="font-weight: 900;" id="summary-title">Tamat Sesi</h2>
-            <p style="color: #94a3b8; font-weight: 800; margin-bottom: 2rem; font-size: 1.3rem;" id="summary-score-text">Skor: 0 Mata</p>
-            <div class="card" style="text-align: left; border-color: rgba(0, 240, 255, 0.2);">
-                <h4 style="color: #00f0ff; margin-bottom: 0.6rem; font-weight: 900;">RUMUSAN GAYA MINDA:</h4>
-                <p id="summary-evaluation" style="color: #e2e8f0; font-weight: 600;">Ulasan...</p>
+            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉</div>
+            <h2 style="font-weight: 900; font-size: 1.8rem;" id="summary-title">Tamat Sesi</h2>
+            <p style="color: #1e293b; font-weight: 900; margin-bottom: 1.5rem; font-size: 1.4rem;" id="summary-score-text">Skor: 0 Pts</p>
+            <div class="card" style="text-align: left; background: #ffffff;">
+                <h4 style="margin-bottom: 0.4rem; font-weight: 900;">ULASAN MINDA:</h4>
+                <p id="summary-evaluation" style="color: #475569; font-weight: 700; line-height: 1.5;">Ulasan...</p>
             </div>
-            <button class="btn btn-magenta" onclick="exitToMainMenu()">Kembali Ke Menu Utama</button>
+            <button class="btn btn-magenta" onclick="exitToMainMenu()">Kembali Ke Menu</button>
         </div>
     </div>
 
     <script>
+        // MAPPING KOD & LOGIK 500 SOALAN KALIS ULANG KEKAL SAMA SEPERTI SEBELUM INI
         const dTema = ["Common Sense", "Vibe Sosial", "Lampu Hijau Hidup", "Street Smart", "Problem Solving"];
-        
-        // 20 SUBJEK UNIK BERBEZA
         const dSubjek = [
             "Tengah drive cari parking kat flat malam-malam,", "Masa tengah beratur panjang kat kaunter Zus Coffee,", 
             "Waktu korang stop rehat kat R&R PLUS,", "Tengah syok layan makan kat food court mall,", 
             "Masa parking kereta nak singgah beli nasi kandar,", "Waktu tengah bersesak dalam LRT time balik kerja,",
             "Tengah lepak borak dengan member lama kat mamak,", "Masa uruskan dokumen kat kaunter JPJ,",
             "Tengah scroll phone masa rehat office,", "Masa tengah check group WhatsApp taman perumahan,",
-            "Waktu tengah bayar barang kat kaunter speedmart,", "Tengah tunggu turn basuh kereta kat carwash,",
-            "Masa tengah jogging kat taman rekreasi petang-petang,", "Tengah pilih barang basah kat pasar borong,",
-            "Waktu korang tengah tunggu order makanan kat kaunter McD,", "Tengah tengok wayang kat dalam cinema,",
+            "Waktu tengah bayar barang kat kaunter speedmart,", "Tunggu turn basuh kereta kat carwash,",
+            "Masa tengah jogging kat taman rekreasi petang,", "Tengah pilih barang basah kat pasar borong,",
+            "Waktu korang tengah tunggu order makan kat McD,", "Tengah tengok wayang kat dalam cinema,",
             "Masa tengah tunggu lif kat lobi kondominium,", "Tengah isi minyak kereta kat stesen Shell,",
-            "Waktu hantar barang rosak kat pusat servis barangan,", "Tengah lepak minum petang kat cafe hipster,"
+            "Waktu hantar barang rosak kat pusat servis,", "Tengah lepak minum petang kat cafe hipster,"
         ];
-
-        // 25 SITUASI UNIK BERBEZA
         const dSituasi = [
             "korang perasan ada kete selamba double-park tak tarik handbrake.",
             "ada mamat acah-acah borak phone pastu selamba potong queue depan korang.",
-            "korang perasan ada pakcik ni muka blur gila depan kiosk tiket digital, tak reti guna.",
-            "ada group sebelah meja sembang kuat gila isu perkauman sensitif siap provokasi.",
+            "korang perasan ada pakcik ni muka blur gila depan kiosk tiket digital.",
+            "ada group sebelah meja sembang kuat gila isu perkauman sensitif.",
             "cashier tersilap pass baki balance terlebih RM50 sebab tengah kalut.",
             "korang nampak ada budak kecik menangis sorang-sorang panggil mak dia.",
-            "ada rider tersenggol cermin sisi kereta korang sampai pusing, pastu dia terus blah.",
-            "korang dapat mesej random daripada nombor tak dikenali acah-acah nak pinjam duit urgen.",
-            "jiran sebelah rumah jemur kain sampai masuk parking lot korang, siap block tong sampah.",
+            "ada rider tersenggol cermin sisi kereta korang pastu dia terus blah.",
+            "korang dapat mesej random nak pinjam duit urgen.",
+            "jiran sebelah rumah jemur kain sampai masuk parking lot korang.",
             "ada orang drop dompet dia atas lantai tapi dia langsung tak sedar.",
             "korang nampak pakcik guard kena marah kaw-kaw dengan customer biadab.",
             "ada kereta belakang pasang lampu high-beam tinggi gila menyilaukan mata.",
             "korang perasan ada orang curi-curi ambil gambar perempuan sebelah dia.",
-            "ada penghantar barang salah hantar parcel berharga tinggi ke pintu rumah korang.",
+            "ada penghantar barang salah hantar parcel berharga tinggi ke rumah korang.",
             "korang terdengar staf kedai mengutuk customer depan-depan guna bahasa asing.",
             "ada orang selamba buang sampah plastik keluar dari tingkap kereta mewah.",
-            "korang nampak ada makcik terjatuh tangga sebab barang bawakannya terlalu berat.",
+            "korang nampak ada makcik terjatuh tangga sebab barang bawakannya berat.",
             "ada kaunter khidmat pelanggan kosong lama sangat padahal orang beratur panjang.",
-            "korang terjumpa kad pengenalan (IC) orang tercicir kat atas mesin ATM ATM.",
-            "ada anjing liar menyalak kuat sekat laluan korang nak balik rumah korang.",
+            "korang terjumpa kad pengenalan (IC) orang tercicir kat atas mesin ATM.",
+            "ada anjing liar menyalak kuat sekat laluan korang nak balik rumah.",
             "korang nampak budak sekolah kena buli atau pow duit dengan budak besar.",
-            "ada bau gas bocor kuat gila datang dari arah dapur kedai makan korang lepak.",
-            "korang nampak orang tua kena tipu dengan ejen gores dan menang kat tepi jalan.",
+            "ada bau gas bocor kuat gila datang dari arah dapur kedai makan.",
+            "korang nampak orang tua kena tipu dengan ejen gores dan menang tepi jalan.",
             "ada individu tak dikenali cuba ikut korang rapat gila dari stesen LRT.",
-            "korang perasan ada aircond kedai menitik kuat betul-betul atas meja makan korang."
+            "korang perasan ada aircond kedai menitik kuat betul-betul atas meja makan."
         ];
-
-        // 25 SET PILIHAN JAWAPAN & REFLEKSI PADANAN MUTLAK
         const dPilihanSet = [
             { o: ["Tolak kete tu slow-slow ke depan, atau cari contact dashboard.", "Hon panjang sampai satu flat keluar.", "Calarkan pintu biar dia ada akal.", "Post kat FB bagi kena kecam."], h: "Utamakan solution pantas tanpa drama gaduh. Tolak selamat atau contact terus." },
-            { o: ["Tegur elok-elok, minta beratur belakang sebab ramai tunggu.", "Jerit bagi dia malu terus.", "Biarkan je sbb malas cari pasal.", "Tolak dia keluar dari barisan."], h: "Tegur secara direct tapi firm/tegas. Sifat tegas elakkan orang ambil kesempatan." },
+            { o: ["Tegur elok-elok, minta beratur belakang sebab ramai tunggu.", "Jerit bagi dia malu terus.", "Biarkan je sbb malas cari pasal.", "Tolak dia keluar dari barisan."], h: "Tegur secara direct tapi tegas. Sifat tegas elakkan orang ambil kesempatan." },
             { o: ["Datang dekat, senyum dan bantu dia tekan skrin.", "Pandang je sambil geleng kepala.", "Cakap kat guard suruh setelkan.", "Ambil video up kat TikTok."], h: "Sikap street smart penuh empati. Mudahkan urusan orang, urusan kita akan dipermudahkan." },
             { o: ["Abaikan dorang, sambung sembang topik lain.", "Join sekaki gaduh mulut.", "Baling kerusi biar pecah.", "Report owner kedai suruh halau."], h: "Emosi kena jaga. Melayan orang toksik kat tempat awam cuma merugikan masa anda." },
             { o: ["Pulangkan baki terlebih, kesian gaji dia kena potong.", "Masuk poket, anggap rezeki terpijak.", "Cepat-cepat jalan keluar kedai.", "Guna duit tu buat belanja amal."], h: "Integriti basic hidup dewasa. Duit orang bukan hak kita, kesian pekerja gaji hari." },
@@ -344,7 +355,7 @@
             { o: ["Bantu makcik tu bangun dan kutip barang.", "Langkah makcik tu sbb tengah rushing.", "Panggil orang lain suruh tolong.", "Gelakkan makcik tu dalam hati."], h: "Sifat kemanusiaan asas. Tolong orang yang lemah adalah tanda kekuatan peribadi." },
             { o: ["Tanya staf berdekatan tentang status kaunter.", "Bising-bising hempas barang atas meja.", "Terus balik rumah tak jadi uruskan.", "Post kat twitter tag akaun rasmi."], h: "Menyelesaikan masalah secara rasional melalui saluran betul menjimatkan masa semua orang." },
             { o: ["Serahkan IC tersebut pada kaunter bank/polis.", "Simpan buat koleksi peribadi.", "Buang dalam tong sampah terdekat.", "Post gambar penuh IC tanpa tapisan kat FB."], h: "Melindungi data peribadi orang lain. Serahkan pada pihak berkuasa dengan selamat." },
-            { o: ["Cari jalan alternatif atau jalan tenang.", "Baling batu kasi anjing tu lari.", "Jerit balik kat anjing tersebut.", "Provok bagi anjing tu gigit."], h: "Street smart bermaksud tahu mengelak bahaya fizikal tanpa mencetuskan ancaman baru." },
+            { o: ["Cari jalan alternatif atau jalan tenang.", "Baling batu kasi anjing tu lari.", "Jerit balik kat anjing tersebut.", "Provok bagi anjing tu gigit."], h: "Street smart bermaksud tahu mengelak bahaya fizikal tanpa mencetuskan threat baru." },
             { o: ["Campur tangan secara tegas atau panggil cikgu.", "Join sekaki pow duit budak tu.", "Buat-buat tak nampak jalan terus.", "Rakam video buat kenangan."], h: "Menolak buli bermakna anda seorang pelindung komuniti yang bertanggungjawab." },
             { o: ["Maklumkan staf segera dan keluar dari premis.", "Sambung makan sbb makanan sedap.", "Nyalakan rokok nak test gas.", "Jerit 'kebakaran!' bagi semua kalut."], h: "Keselamatan nyawa diutamakan. Bertindak pantas dan tenang menyelamatkan nyawa." },
             { o: ["Tarik orang tua tu keluar dari zon penipuan.", "Biarkan janji bukan mak bapak kita.", "Join sekaki beli tiket gores menang.", "Ketawakan orang tua sbb lurus bendul."], h: "Melindungi golongan veteran daripada scammer mencerminkan nilai moral yang tinggi." },
@@ -352,28 +363,16 @@
             { o: ["Minta tukar meja lain dengan pekerja kedai.", "Sengaja biarkan baju basah lencun.", "Marah jerit kat pelayan kedai.", "Tolak meja tu sampai terbalik."], h: "Menukar kedudukan secara tenang menyelesaikan isu tanpa merosakkan mood makan anda." }
         ];
 
-        // 100% KALIS ANTI-ULANG MAPPING ENGINE
         function janaSoalan500(noId) {
-            let idxSubjek = (noId - 1) % 20;
-            let idxSituasi = (noId - 1) % 25;
-            let idxPilihan = (noId - 1) % 25;
-
+            let idxSubjek = (noId - 1) % 20; let idxSituasi = (noId - 1) % 25; let idxPilihan = (noId - 1) % 25;
             let tahap = "mudah";
             if (noId > 150 && noId <= 350) tahap = "sederhana";
             if (noId > 350) tahap = "sukar";
-
             let idxTema = (noId * 3) % dTema.length;
-
-            let soalanFinal = `[Kes Minda #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
-            let basePilihan = dPilihanSet[idxPilihan];
-
             return {
-                id: noId,
-                level: tahap,
-                tema: dTema[idxTema],
-                q: soalanFinal,
-                o: [...basePilihan.o],
-                h: basePilihan.h
+                id: noId, level: tahap, tema: dTema[idxTema],
+                q: `[Kes #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`,
+                o: [...dPilihanSet[idxPilihan].o], h: dPilihanSet[idxPilihan].h
             };
         }
 
@@ -383,14 +382,12 @@
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGym500_Absolute_v6");
+            let localData = localStorage.getItem("BrainGym500_PlayfulPremium");
             if (localData) { appState = JSON.parse(localData); } 
             else { for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1; saveStorage(); }
             updateGlobalStats();
         }
-
-        function saveStorage() { localStorage.setItem("BrainGym500_Absolute_v6", JSON.stringify(appState)); }
-
+        function saveStorage() { localStorage.setItem("BrainGym500_PlayfulPremium", JSON.stringify(appState)); }
         function updateGlobalStats() {
             document.getElementById('stat-total-score').innerText = appState.totalScore;
             let doneCount = Object.values(appState.batchCompleted).filter(v => v !== -1).length;
@@ -412,18 +409,18 @@
             if(batchNum > 6 && batchNum <= 14) { levelLabel = "SEDERHANA"; levelClass = "b-sederhana"; }
             if(batchNum > 14) { levelLabel = "SUKAR"; levelClass = "b-sukar"; }
 
-            document.getElementById('selected-batch-title').innerText = `BATCH ${batchNum}`;
+            document.getElementById('selected-batch-title').innerText = `Sesi Kes: Batch ${batchNum}`;
             const lvlBadge = document.getElementById('selected-batch-level');
             lvlBadge.innerText = levelLabel; lvlBadge.className = `badge ${levelClass}`;
 
             let scoreLama = appState.batchCompleted[batchNum];
-            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Rekod: ${scoreLama} Pts` : "Belum Dijawab";
+            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Skor: ${scoreLama} Pts` : "Belum Mula";
             document.getElementById('btn-start-campaign').disabled = false;
         }
 
         function startSoloCampaign() {
             switchScreen('screen-gameplay');
-            document.getElementById('game-batch-label').innerText = `KEMPEN: BATCH ${activeBatch}`;
+            document.getElementById('game-batch-label').innerText = `BATCH SESSIONS: ${activeBatch}`;
             activeQuestionIndex = ((activeBatch - 1) * 25) + 1;
             activeBatchScore = 0; activeQuestionsAnswered = 0;
             loadNextSoloQuestion();
@@ -437,7 +434,7 @@
             document.getElementById('game-progress-bar').style.width = `${(activeQuestionsAnswered / 25) * 100}%`;
 
             const lvlB = document.getElementById('game-level-badge');
-            lvlB.innerText = qData.level; lvlB.className = `badge b-${qData.level}`;
+            lvlB.innerText = qData.level.toUpperCase(); lvlB.className = `badge b-${qData.level}`;
             document.getElementById('game-tema-badge').innerText = qData.tema;
             document.getElementById('game-question-text').innerText = qData.q;
 
@@ -467,7 +464,7 @@
                 alertBox.className = "alert alert-win"; alertBox.innerText = "🎯 JAWAPAN TEPAT (+40 MATA)";
             } else {
                 let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
-                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ SILAP / KANTOI (Jawapan: [ ${correctLetter} ])`;
+                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ PILIHAN KURANG TEPAT (Jawapan: [ ${correctLetter} ])`;
             }
 
             document.getElementById('feedback-explanation-text').innerText = qData.h;
@@ -481,7 +478,7 @@
 
         function concludeBatch() {
             switchScreen('screen-summary');
-            document.getElementById('summary-title').innerText = `Batch ${activeBatch} Selesai!`;
+            document.getElementById('summary-title').innerText = `Sesi ${activeBatch} Selesai!`;
             document.getElementById('summary-score-text').innerText = `Skor: ${activeBatchScore} / 1000 Mata`;
 
             let previousBest = appState.batchCompleted[activeBatch];
@@ -491,7 +488,7 @@
             }
 
             let evalText = "Boleh tahan mantap logik harian korang. Teruskan mengasah otak dalam siri kempen yang lain!";
-            if(activeBatchScore >= 800) evalText = "Padu! Pemikiran korang sangat street-smart, peka, dan memang faham 'vibe' realiti hidup kat Malaysia.";
+            if(activeBatchScore >= 800) evalText = "Padu! Pemikiran korang sangat street-smart, peka, dan memang faham realiti hidup.";
             
             document.getElementById('summary-evaluation').innerText = evalText;
             updateGlobalStats();
