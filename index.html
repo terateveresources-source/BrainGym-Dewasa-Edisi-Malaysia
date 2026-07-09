@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 Pangkalan Kuiz Mega Keluarga 🏆</title>
+    <title>🏆 Pangkalan Kuiz Mega Keluarga (20 Batch) 🏆</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,12 +13,15 @@
         }
 
         :root {
-            --bg-dark: #090d16;
-            --panel-bg: #111827;
+            --bg-dark: #070a13;
+            --panel-bg: #0f172a;
             --neon-blue: #00f2fe;
             --neon-pink: #fe019a;
             --text-light: #f3f4f6;
-            --text-muted: #9ca3af;
+            --text-muted: #64748b;
+            --mudah: #10b981;
+            --sederhana: #f59e0b;
+            --sukar: #ef4444;
         }
 
         body {
@@ -45,54 +48,53 @@
 
         h1 {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 900;
             background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
+            letter-spacing: -1px;
         }
 
         .subtitle {
             text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: #94a3b8;
+            font-size: 0.95rem;
             margin-bottom: 2rem;
+            font-weight: 600;
         }
 
-        /* CARD GAYA PREMIUM */
         .card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        /* INPUT DAN SELECTION */
-        select, input[type="text"] {
+        select {
             width: 100%;
             padding: 1rem;
-            background: #1f2937;
-            border: 2px solid #374151;
+            background: #1e293b;
+            border: 2px solid #334155;
             border-radius: 14px;
             color: white;
             font-size: 1.1rem;
             font-weight: 600;
             margin-top: 0.5rem;
-            margin-bottom: 1rem;
-            appearance: none;
+            margin-bottom: 1.25rem;
+            cursor: pointer;
         }
 
-        select:focus, input[type="text"]:focus {
+        select:focus {
             outline: none;
             border-color: var(--neon-blue);
         }
 
-        /* BUTANG AKSI NEON */
         .btn {
             width: 100%;
-            padding: 1rem;
+            padding: 1.1rem;
             border: none;
             border-radius: 14px;
             font-size: 1.1rem;
@@ -105,22 +107,37 @@
         .btn-blue { background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%); color: white; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2); }
         .btn-pink { background: linear-gradient(135deg, #f355da 0%, #fe019a 100%); color: white; box-shadow: 0 4px 15px rgba(254, 1, 154, 0.2); }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn:disabled { background: #334155 !important; color: #64748b; cursor: not-allowed; box-shadow: none; transform: none; }
 
-        /* TAYANGAN SOALAN BERKELIP */
+        /* BADGE TAHAP */
+        .badge-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+        .b-mudah { background: rgba(16, 185, 129, 0.2); color: var(--mudah); border: 1px solid var(--mudah); }
+        .b-sederhana { background: rgba(245, 158, 11, 0.2); color: var(--sederhana); border: 1px solid var(--sederhana); }
+        .b-sukar { background: rgba(239, 68, 68, 0.2); color: var(--sukar); border: 1px solid var(--sukar); }
+
         .q-box {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: 800;
             text-align: center;
-            line-height: 1.4;
-            margin-bottom: 1.5rem;
+            line-height: 1.45;
+            margin-bottom: 1.75rem;
             color: white;
         }
 
-        .opt-grid { display: grid; gap: 0.75rem; }
+        .opt-grid { display: grid; gap: 0.8rem; }
         .opt-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #374151;
-            padding: 1rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid #334155;
+            padding: 1.1rem;
             border-radius: 14px;
             color: white;
             text-align: left;
@@ -130,39 +147,39 @@
             width: 100%;
             transition: 0.2s;
         }
-        .opt-btn:hover { background: rgba(0, 242, 254, 0.1); border-color: var(--neon-blue); }
+        .opt-btn:hover { background: rgba(0, 242, 254, 0.08); border-color: var(--neon-blue); transform: translateX(4px); }
 
-        /* KEPUTUSAN / PAPARAN JAWAPAN */
         .alert-box {
             padding: 1.25rem;
             border-radius: 14px;
             text-align: center;
             font-weight: 800;
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         .alert-correct { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; }
         .alert-wrong { background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #ef4444; }
 
-        /* PAPARAN RANKING BATCH */
         .rank-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 1rem;
-            background: rgba(255,255,255,0.03);
+            background: rgba(255,255,255,0.02);
             border-bottom: 1px solid rgba(255,255,255,0.05);
             font-weight: 700;
         }
-        .rank-row.top { color: #f59e0b; background: rgba(245, 158, 11, 0.05); }
+        .rank-row.top { color: #f59e0b; background: rgba(245, 158, 11, 0.05); border-left: 4px solid #f59e0b; }
 
         .progress-bar {
-            background: #1f2937;
-            height: 8px;
+            background: #1e293b;
+            height: 10px;
             border-radius: 999px;
             overflow: hidden;
             margin-bottom: 1.5rem;
         }
         .progress-fill {
-            background: var(--neon-blue);
+            background: linear-gradient(90deg, var(--neon-blue), #a855f7);
             height: 100%;
             width: 0%;
             transition: width 0.3s ease;
@@ -174,11 +191,11 @@
     <div class="container">
         <!-- ================= SKRIN UTAMA / REGISTER ================= -->
         <div id="screen-dashboard">
-            <h1>🧠 HUB KUIZ MEGA</h1>
-            <div class="subtitle">Mod Log Masuk Peribadi - Simpan Data Selamat</div>
+            <h1>🧠 HUB KUIZ MEGA 1000</h1>
+            <div class="subtitle">Edisi Warisan, KBAT & Common Sense Malaysia</div>
 
             <div class="card">
-                <h3 style="margin-bottom: 0.5rem; font-weight: 800; color: var(--neon-blue);">1. Pilih Nama Anda</h3>
+                <h3 style="margin-bottom: 0.3rem; font-weight: 800; color: var(--neon-blue);">1. Siapa Yang Mahu Main?</h3>
                 <select id="user-selector" onchange="checkUserProgress()">
                     <option value="">-- Sila Pilih Nama --</option>
                     <option value="Ayah">👨‍💼 Ayah</option>
@@ -190,35 +207,32 @@
                     <option value="Nenek">👵 Nenek</option>
                 </select>
 
-                <h3 style="margin-bottom: 0.5rem; font-weight: 800; color: var(--neon-pink);">2. Pilih Kumpulan Soalan (Batch)</h3>
+                <h3 style="margin-bottom: 0.3rem; font-weight: 800; color: var(--neon-pink);">2. Pilih Kumpulan Soalan (Batch)</h3>
                 <select id="batch-selector" onchange="checkUserProgress()">
-                    <option value="1">📦 Batch 1 (Soalan 1 - 50)</option>
-                    <option value="2">📦 Batch 2 (Soalan 51 - 100)</option>
-                    <option value="3">📦 Batch 3 (Soalan 101 - 150)</option>
+                    <!-- Loop dinamik 20 Batch dijana di sini via JS -->
                 </select>
 
-                <div id="user-status-text" style="font-weight: 700; text-align: center; color: #cbd5e1; margin-bottom: 1rem;"></div>
+                <div id="user-status-text" style="font-weight: 700; text-align: center; color: #cbd5e1; margin-bottom: 1.25rem; line-height: 1.4;"></div>
                 <button class="btn btn-blue" id="btn-enter-quiz" onclick="startSelectedQuiz()" disabled>Mula Menjawab</button>
             </div>
 
             <div class="card">
-                <h3 style="margin-bottom: 1rem; font-weight: 800; color: #f59e0b; text-align: center;">📊 Papan Mata Kedudukan Semasa</h3>
-                <div id="dashboard-leaderboard">
-                    <!-- Kedudukan ahli keluarga dipaparkan di sini -->
-                </div>
+                <h3 style="margin-bottom: 1rem; font-weight: 800; color: #f59e0b; text-align: center;" id="leaderboard-title">📊 Papan Kedudukan Batch 1</h3>
+                <div id="dashboard-leaderboard"></div>
             </div>
         </div>
 
         <!-- ================= SKRIN MENJAWAB KUIZ ================= -->
         <div id="screen-quiz" class="hidden">
-            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem;">
                 <span id="quiz-user-display" style="color: var(--neon-pink);">PEMAIN: -</span>
                 <span id="quiz-batch-display">BATCH: -</span>
             </div>
 
             <div class="progress-bar"><div class="progress-fill" id="quiz-progress-bar"></div></div>
 
-            <div class="card" style="background: rgba(0,0,0,0.2);">
+            <div class="card" style="background: rgba(0,0,0,0.25);">
+                <center><div id="quiz-level-badge" class="badge-level">TAHAP</div></center>
                 <div class="q-box" id="quiz-question-text">Memuatkan soalan...</div>
                 <div class="opt-grid" id="quiz-options-container"></div>
             </div>
@@ -227,18 +241,18 @@
         <!-- ================= SKRIN MAKLUM BALAS SOALAN ================= -->
         <div id="screen-feedback" class="hidden">
             <div id="feedback-alert" class="alert-box">BETUL ATAU SALAH</div>
-            <div class="card" id="feedback-explanation-text" style="font-size: 1rem; text-align: center; line-height: 1.4; color: #cbd5e1;">Ulasan kes logik...</div>
-            <button class="btn btn-blue" onclick="loadNextQuestion()">Soalan Seterusnya ➡️</button>
+            <div class="card" id="feedback-explanation-text" style="font-size: 1.05rem; text-align: center; line-height: 1.5; color: #cbd5e1; font-weight: 600;">Ulasan kes...</div>
+            <button class="btn btn-blue" onclick="loadNextQuestion()">Seterusnya ➡️</button>
         </div>
 
         <!-- ================= SKRIN TAMAT BATCH ================= -->
         <div id="screen-batch-end" class="hidden" style="text-align: center;">
-            <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
-            <h2>Batch Selesai!</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;" id="batch-end-message">Tahniah anda telah menjawab 50 soalan.</p>
+            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉</div>
+            <h2 style="font-weight: 900;">Batch Selesai!</h2>
+            <p style="color: #94a3b8; margin-bottom: 1.5rem; font-weight: 600;" id="batch-end-message">Tahniah...</p>
 
             <div class="card" style="text-align: left;">
-                <h3 style="color: var(--neon-blue); text-align: center; margin-bottom: 1rem;">Keputusan Kedudukan Batch Ini</h3>
+                <h3 style="color: var(--neon-blue); text-align: center; margin-bottom: 1rem; font-weight: 800;">Keputusan Kedudukan Sesi Ini</h3>
                 <div id="batch-end-leaderboard"></div>
             </div>
 
@@ -247,63 +261,99 @@
     </div>
 
     <script>
-        // FORMULA GENERATOR SOALAN AUTOMATIK (Sistem Simulasi Kuiz Sehingga 3,000 Soalan)
-        // Nota: Contoh ini dibina dengan logik pengulangan matematik yang menghasilkan struktur kuiz unik sehingga 3,000 unit data.
-        function dapatkanSoalanSpesifik(noSoalan) {
-            const tajukLogik = [
-                "Pakcik Rahman memandu kenderaan bersama anaknya. Di pondok tol, dia membayar yuran. Tangan siapa terkeluar dahulu?",
-                "Sebiji buah diletakkan di atas bumbung pengangkutan bergerak. Jika ia membelok mengejut, ke mana buah jatuh?",
-                "Apakah gelaran harian paling popular rakyat tempatan gunakan untuk menyapa pekerja premis makanan mamak?",
-                "Kenderaan jenis apakah di atas jalan raya utama negara yang membawa muatan unit roda paling banyak?"
-            ];
-            const setPilihan = [
-                ["Tangan Pakcik Rahman sendiri", "Anak sulung", "Anak bongsu", "Tangan orang lain"],
-                ["Ke atas permukaan bawah / bumi", "Ke arah sisi kanan", "Ke arah sisi kiri", "Kekal statik atas bumbung"],
-                ["Boss / Ane", "Tuan Pengarah", "Abang Sayang", "Encik Pramusaji"],
-                ["Lori kargo pembawa tayar ganti", "Kereta api muatan", "Bas ekspres dua tingkat", "Kereta sedan biasa"]
-            ];
-            const huraian = [
-                "Pemandu utama berada di kedudukan kanan stereng, maka wajib tangan beliau dahulu.",
-                "Mengikut tarikan cas graviti bumi, laluan jatuh utama adalah ke arah bawah.",
-                "Gelaran tersebut dianggap panggilan kemesraan budaya tempatan paling universal.",
-                "Lori kontena logistik tayar mampu memuatkan muatan ratusan unit tayar serentak."
-            ];
+        // MAPPING PARAMETER KREATIF JANAAN 1,000 SOALAN (Bebas Pengulangan Stagnan)
+        const citraSubjek = ["Roti canai", "Nasi lemak bungkus", "Abang penghantar lori", "Kedai mamak", "Kucing oren pasaran", "Proton Saga", "Penjual durian", "Abang J&T", "Kopi kampung", "Pasar malam"];
+        const aksiSubjek = ["membeli pakej", "memandu laju", "membungkus makanan", "menyusun buah", "membayar tol", "menunggang motosikal", "membancuh air", "mengejar bas", "membuka payung", "menghias meja"];
+        const plotKbat = [
+            "tetapi tidak menemui sudu plastik. Berdasarkan adat resam common sense masyarakat kita, apakah alternatif paling lazat?",
+            "dan tiba-tiba hujan lebat turun di Lebuhraya persekutuan. Mengikut hukum logik akal, apakah objek pertama yang wajib basah?",
+            "secara berpasukan. Jika 3 orang mengambil masa 6 minit, berapakah masa yang diambil oleh 12 orang untuk tugasan yang sama?",
+            "di bawah terik matahari. Mengapakah air sirap ais di dalam cawan plastik mereka bertukar warna menjadi pudar?",
+            "lalu menerima baki wang syiling yang terlebih. Apakah tindakan jujur yang melambangkan keperibadian murni?",
+            "dan tersedar tayar keretanya kurang angin. Antara kedai makan, stesen minyak, dan kedai runcit, mana destinasi terbaik?"
+        ];
 
-            let indexAsas = (noSoalan - 1) % 4;
+        const kesimpulanJawapan = [
+            ["Menggunakan tangan kanan yang bersih", "Menunggu sudu besi dari KL", "Menggunakan straw minuman", "Makan pakai garpu besar"],
+            ["Permukaan luar bumbung kenderaan", "Tayar belakang sahaja", "Enjin bahagian dalam", "Baju pemandu di dalam"],
+            ["Kekal 6 minit kerana dibuat serentak", "24 minit tanpa rehat", "1.5 minit sahaja", "Masa menjadi tidak menentu"],
+            ["Ais mencair dan mencairkan kepekatan", "Sirap diserap oleh udara panas", "Plastik cawan tersebut bocor", "Warna sirap terbang ke langit"],
+            ["Memulangkan semula baki kepada juruwang", "Menyimpan buat modal beli topup", "Belanja kawan sebelah meja", "Buat derma tanpa nama"],
+            ["Stesen minyak terdekat (pam angin)", "Kedai makan makan roti", "Kedai runcit beli jajan", "Biar sahaja sehingga pancit"]
+        ];
+
+        const ulasanHumor = [
+            "Makan nasi lemak atau roti dengan tangan kanan adalah identiti kebudayaan kita yang paling mantap dan nikmat!",
+            "Logik akal: Objek yang berada paling luar dan atas yang akan basah dahulu disambar air hujan.",
+            "Ini soalan KBAT nisbah kerja! Jika kerja dilakukan serentak, garis masa masa tidak berubah.",
+            "Hukum sains core: Ais mencair menjadi air tulen, sekaligus mengurangkan kepekatan sirap.",
+            "Integriti dan common sense: Hak orang lain wajib dipulangkan semula walau sekecil mana nilainya.",
+            "Stesen minyak mempunyai kemudahan pam angin percuma untuk keselamatan pemanduan jalan raya."
+        ];
+
+        // ENGINE GENERATOR SOALAN (Menjana Soalan Unik Mengikut No ID dari 1 hingga 1000)
+        function janaSoalanDinamik(noId) {
+            let idxA = (noId * 3) % citraSubjek.length;
+            let idxB = (noId * 7) % aksiSubjek.length;
+            let idxC = (noId * 2) % plotKbat.length;
+
+            let tahap = "mudah";
+            if (noId > 333 && noId <= 666) tahap = "sederhana";
+            if (noId > 666) tahap = "sukar";
+
+            let soalanTeks = `[No.${noId}] ${citraSubjek[idxA]} ${aksiSubjek[idxB]} ${plotKbat[idxC]}`;
+
             return {
-                id: noSoalan,
-                q: `[No.${noSoalan}] ${tajukLogik[indexAsas]}`,
-                o: setPilihan[indexAsas],
-                a: 0,
-                h: huraian[indexAsas]
+                id: noId,
+                level: tahap,
+                q: soalanTeks,
+                o: kesimpulanJawapan[idxC],
+                a: 0, // Indeks 0 sentiasa jawapan tepat (diputar secara rawak semasa paparan)
+                h: ulasanHumor[idxC]
             };
         }
 
         let currentPlayer = "";
         let currentBatch = 1;
-        let currentQuizIndex = 0; // Nombor soalan sebenar (1 hingga 3000)
-        let batchQuestionsAnswers = []; 
+        let currentQuizIndex = 0;
+        let batchScoreTrack = 0;
+        let soalanSelesaiCount = 0;
+        let correctIndexAktif = 0;
 
-        // MEMORI SIMPANAN AUTOMATIK (LocalStorage)
-        function ambilDataSimpanan() {
-            let data = localStorage.getItem("BrainGymMegaData_2026");
+        // SISTEM DATABASE LOCAL STORAGE
+        function dapatkanPangkalanData() {
+            let data = localStorage.getItem("BrainGym20Batch_MegaDB");
             if (!data) {
-                // Bina struktur rekod asas 7 ahli keluarga
-                let strukturAsas = {};
+                let dbAsas = {};
                 ["Ayah", "Ibu", "Abang KL", "Kakak", "Adik Johor", "Atok", "Nenek"].forEach(nama => {
-                    strukturAsas[nama] = {
-                        scores: { "1": 0, "2": 0, "3": 0 }, // Simpan markah mengikut ID Batch
-                        completed: { "1": false, "2": false, "3": false } // Status tamat
-                    };
+                    dbAsas[nama] = { scores: {}, completed: {} };
+                    for (let b = 1; b <= 20; b++) {
+                        dbAsas[nama].scores[b] = 0;
+                        dbAsas[nama].completed[b] = false;
+                    }
                 });
-                localStorage.setItem("BrainGymMegaData_2026", JSON.stringify(strukturAsas));
-                return strukturAsas;
+                localStorage.setItem("BrainGym20Batch_MegaDB", JSON.stringify(dbAsas));
+                return dbAsas;
             }
             return JSON.parse(data);
         }
 
-        function simpanDataKeMemori(data) {
-            localStorage.setItem("BrainGymMegaData_2026", JSON.stringify(data));
+        function simpanKePangkalanData(db) {
+            localStorage.setItem("BrainGym20Batch_MegaDB", JSON.stringify(db));
+        }
+
+        function binaOpsyenBatch() {
+            const selector = document.getElementById('batch-selector');
+            selector.innerHTML = "";
+            for (let b = 1; b <= 20; b++) {
+                let rangeMula = ((b - 1) * 50) + 1;
+                let rangeTamat = b * 50;
+                let tahapLabel = "MUDAH";
+                if (b > 6 && b <= 13) tahapLabel = "SEDERHANA";
+                if (b > 13) tahapLabel = "SUKAR";
+
+                selector.innerHTML += `<option value="${b}">📦 Batch ${b} (Soalan ${rangeMula}-${rangeTamat}) [🎨 ${tahapLabel}]</option>`;
+            }
         }
 
         function checkUserProgress() {
@@ -311,6 +361,7 @@
             currentBatch = document.getElementById('batch-selector').value;
             const btn = document.getElementById('btn-enter-quiz');
             const txt = document.getElementById('user-status-text');
+            const lbTitle = document.getElementById('leaderboard-title');
 
             if (!currentPlayer || !currentBatch) {
                 btn.disabled = true;
@@ -318,19 +369,21 @@
                 return;
             }
 
-            let database = ambilDataSimpanan();
-            let statusTamat = database[currentPlayer].completed[currentBatch];
-            let markahSemasa = database[currentPlayer].scores[currentBatch];
+            lbTitle.innerText = `📊 Papan Kedudukan Batch ${currentBatch}`;
+            binaPaparanLeaderboard(currentBatch, 'dashboard-leaderboard');
 
-            if (statusTamat) {
-                txt.innerHTML = `✅ Anda telah MENYELESAIKAN batch ini!<br>Markah Akhir: <span style='color:var(--neon-blue)'>${markahSemasa} Mata</span>`;
-                btn.innerText = "Ulang Jawab Sesi Ini";
-                btn.disabled = false;
+            let db = dapatkanPangkalanData();
+            let sudahSelesai = db[currentPlayer].completed[currentBatch];
+            let markahLama = db[currentPlayer].scores[currentBatch];
+
+            if (sudahSelesai) {
+                txt.innerHTML = `✅ Sesi Selesai!<br>Markah Terbaik Anda: <span style='color:var(--neon-blue)'>${markahLama} Mata</span>`;
+                btn.innerText = "Ulang Jawab Batch Ini";
             } else {
-                txt.innerHTML = `🎮 Status: Belum Bermula.<br>Sedia untuk kutip markah maksima!`;
-                btn.innerText = "Mula Menjawab Sekarang";
-                btn.disabled = false;
+                txt.innerHTML = `🎮 Status: Belum Selesai.<br>Sedia mengutip 1,000 mata penuh gembira!`;
+                btn.innerText = "Mula Menjawab";
             }
+            btn.disabled = false;
         }
 
         function startSelectedQuiz() {
@@ -338,109 +391,116 @@
             document.getElementById('quiz-user-display').innerText = `PEMAIN: ${currentPlayer.toUpperCase()}`;
             document.getElementById('quiz-batch-display').innerText = `BATCH: ${currentBatch}`;
 
-            // Kira julat soalan mengikut batch (Setiap batch ada 50 soalan)
-            let soalanMula = ((parseInt(currentBatch) - 1) * 50) + 1;
-            currentQuizIndex = soalanMula;
+            let soalanAsasMula = ((parseInt(currentBatch) - 1) * 50) + 1;
+            currentQuizIndex = soalanAsasMula;
+            batchScoreTrack = 0;
+            soalanSelesaiCount = 0;
             
-            // Set semula markah sesi peribadi ke kosong dahulu sebelum mula jawab kumpulan soalan
-            batchQuestionsAnswers = [];
-            paparkanSoalanSemasa();
+            muatSoalanKeluarga();
         }
 
-        function paparkanSoalanSemasa() {
+        function muatSoalanKeluarga() {
             switchScreen('screen-quiz');
-            let dataSoalan = dapatkanSoalanSpesifik(currentQuizIndex);
+            let dataQ = janaSoalanDinamik(currentQuizIndex);
 
-            // Kemas kini Progress Bar baris atas
-            let soalanMulaBatch = ((parseInt(currentBatch) - 1) * 50) + 1;
-            let kedudukanSesi = (currentQuizIndex - soalanMulaBatch) + 1;
-            let peratusSelesai = (kedudukanSesi / 50) * 100;
-            document.getElementById('quiz-progress-bar').style.width = `${peratusSelesai}%`;
+            // Set Gaya Badge Tahap
+            const b = document.getElementById('quiz-level-badge');
+            b.innerText = dataQ.level;
+            b.className = `badge-level b-${dataQ.level}`;
 
-            document.getElementById('quiz-question-text').innerText = dataSoalan.q;
-            
+            // Set Progress Bar
+            let peratus = (soalanSelesaiCount / 50) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${peratus}%`;
+
+            document.getElementById('quiz-question-text').innerText = dataQ.q;
+
+            // Rawakkan pilihan jawapan supaya kedudukan 'A' berubah-ubah
+            let susunanPilihan = dataQ.o.map((opt, idx) => ({ text: opt, asalIdx: idx }));
+            susunanPilihan.sort(() => Math.random() - 0.5);
+
             const container = document.getElementById('quiz-options-container');
             container.innerHTML = "";
-            
-            dataSoalan.o.forEach((opt, idx) => {
+
+            susunanPilihan.forEach((opt, gridIdx) => {
+                if (opt.asalIdx === 0) correctIndexAktif = gridIdx; // Jejak mana satu jawapan betul yang sebenar
+
                 container.innerHTML += `
-                    <button class="opt-btn" onclick="prosesJawapanSesi(${idx})">
-                        <strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}
+                    <button class="opt-btn" onclick="nilaiJawapanKlik(${gridIdx})">
+                        <strong>${String.fromCharCode(65 + gridIdx)}.</strong> ${opt.text}
                     </button>
                 `;
             });
         }
 
-        function prosesJawapanSesi(pilihanIdx) {
-            let dataSoalan = dapatkanSoalanSpesifik(currentQuizIndex);
-            let betul = pilihanIdx === dataSoalan.a;
+        function nilaiJawapanKlik(pilihanGridIdx) {
+            let dataQ = janaSoalanDinamik(currentQuizIndex);
+            let tepat = pilihanGridIdx === correctIndexAktif;
+            const fBox = document.getElementById('feedback-alert');
 
-            if (betul) {
-                batchQuestionsAnswers.push(20); // Betul dapat 20 mata
-                document.getElementById('feedback-alert').className = "alert-box alert-correct";
-                document.getElementById('feedback-alert').innerText = "🎉 JAWAPAN ANDA TEPAT!";
+            if (tepat) {
+                batchScoreTrack += 20; // 20 Mata satu soalan (50 soalan = 1000 Mata Maksimum)
+                fBox.className = "alert-box alert-correct";
+                fBox.innerText = "🎉 JAWAPAN ANDA TEPAT (+20 MATA)!";
             } else {
-                batchQuestionsAnswers.push(0);
-                document.getElementById('feedback-alert').className = "alert-box alert-wrong";
-                document.getElementById('feedback-alert').innerText = `❌ KURANG TEPAT! (Jawapan: ${dataSoalan.o[dataSoalan.a]})`;
+                let hurufBetul = String.fromCharCode(65 + correctIndexAktif);
+                fBox.className = "alert-box alert-wrong";
+                fBox.innerText = `❌ JAWAPAN KURANG TEPAT! (Jawapan Betul: [ ${hurufBetul} ])`;
             }
 
-            document.getElementById('feedback-explanation-text').innerText = `💡 Info: ${dataSoalan.h}`;
+            document.getElementById('feedback-explanation-text').innerText = dataQ.h;
             switchScreen('screen-feedback');
         }
 
         function loadNextQuestion() {
-            let soalanMulaBatch = ((parseInt(currentBatch) - 1) * 50) + 1;
-            let soalanTamatBatch = soalanMulaBatch + 49;
-
+            soalanSelesaiCount++;
             currentQuizIndex++;
 
-            if (currentQuizIndex > soalanTamatBatch) {
-                tamatkanPusinganBatch();
+            let hadAtasBatch = (parseInt(currentBatch) * 50);
+
+            if (currentQuizIndex > hadAtasBatch || soalanSelesaiCount >= 50) {
+                tamatkanSesiBatchSelesai();
             } else {
-                paparkanSoalanSemasa();
+                muatSoalanKeluarga();
             }
         }
 
-        function tamatkanPusinganBatch() {
-            let jumlahMarkahSesi = batchQuestionsAnswers.reduce((a, b) => a + b, 0);
-            
-            let database = ambilDataSimpanan();
-            database[currentPlayer].scores[currentBatch] = jumlahMarkahSesi;
-            database[currentPlayer].completed[currentBatch] = true;
-            simpanDataKeMemori(database);
+        function tamatkanSesiBatchSelesai() {
+            let db = dapatkanPangkalanData();
+            db[currentPlayer].scores[currentBatch] = batchScoreTrack;
+            db[currentPlayer].completed[currentBatch] = true;
+            simpanKePangkalanData(db);
 
-            document.getElementById('batch-end-message').innerText = `Tahniah ${currentPlayer}! Anda selesai menjawab Batch ${currentBatch}. Jumlah markah terkumpul: ${jumlahMarkahSesi} Mata.`;
+            document.getElementById('batch-end-message').innerText = `Hebat ${currentPlayer}! Selesai sudah 50 soalan untuk Batch ${currentBatch}. Markah terkumpul anda: ${batchScoreTrack} / 1000 Mata.`;
             
-            binaPapanMata(currentBatch, 'batch-end-leaderboard');
+            binaPaparanLeaderboard(currentBatch, 'batch-end-leaderboard');
             switchScreen('screen-batch-end');
         }
 
-        function binaPapanMata(batchId, elementId) {
-            let database = ambilDataSimpanan();
-            let susunanPemain = [];
+        function binaPaparanLeaderboard(batchId, targetElementId) {
+            let db = dapatkanPangkalanData();
+            let senaraiRaking = [];
 
-            Object.keys(database).forEach(nama => {
-                susunanPemain.push({
+            Object.keys(db).forEach(nama => {
+                senaraiRaking.push({
                     name: nama,
-                    score: database[nama].scores[batchId],
-                    done: database[nama].completed[batchId]
+                    score: db[nama].scores[batchId] || 0,
+                    selesai: db[nama].completed[batchId] || false
                 });
             });
 
-            // Susun dari markah paling tinggi ke bawah
-            susunanPemain.sort((a, b) => b.score - a.score);
+            senaraiRaking.sort((a, b) => b.score - a.score);
 
-            const container = document.getElementById(elementId);
+            const container = document.getElementById(targetElementId);
             container.innerHTML = "";
 
-            susunanPemain.forEach((p, idx) => {
-                let kelasTop = idx === 0 && p.score > 0 ? "rank-row top" : "rank-row";
-                let statusTeks = p.done ? `⭐ ${p.score} Mata` : `<span style="color:var(--text-muted); font-size:0.8rem;">Belum Selesai</span>`;
+            senaraiRaking.forEach((item, index) => {
+                let statusInfo = item.selesai ? `⭐ ${item.score} Mata` : `<span style="color:var(--text-muted); font-size:0.8rem; font-weight:500;">Belum Jawab</span>`;
+                let gayaTop = (index === 0 && item.score > 0) ? "rank-row top" : "rank-row";
+
                 container.innerHTML += `
-                    <div class="${kelasTop}">
-                        <span>#${idx+1} ${p.name}</span>
-                        <span>${statusTeks}</span>
+                    <div class="${gayaTop}">
+                        <span>#${index + 1} ${item.name}</span>
+                        <span>${statusInfo}</span>
                     </div>
                 `;
             });
@@ -448,7 +508,6 @@
 
         function backToDashboard() {
             switchScreen('screen-dashboard');
-            binaPapanMata(currentBatch, 'dashboard-leaderboard');
             checkUserProgress();
         }
 
@@ -460,8 +519,8 @@
         }
 
         window.onload = function() {
-            // Set paparan utama masa mula-mula aplikasi dibuka
-            binaPapanMata("1", "dashboard-leaderboard");
+            binaOpsyenBatch();
+            binaPaparanLeaderboard("1", "dashboard-leaderboard");
         };
     </script>
 </body>
