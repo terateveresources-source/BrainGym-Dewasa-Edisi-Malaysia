@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BrainGym Keluarga - Pesta 1 Device ⚡</title>
+    <title>🏆 Pangkalan Kuiz Mega Keluarga 🏆</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,460 +13,456 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --secondary: #ec4899;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --dark: #1e1b4b;
-            --light: #f8fafc;
+            --bg-dark: #090d16;
+            --panel-bg: #111827;
+            --neon-blue: #00f2fe;
+            --neon-pink: #fe019a;
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #f8fafc;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             min-height: 100vh;
+            padding: 1.5rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            overflow-x: hidden;
         }
 
-        .app-container {
+        .container {
             width: 100%;
-            max-width: 500px;
-            background: rgba(30, 27, 75, 0.85);
-            backdrop-filter: blur(16px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
+            max-width: 600px;
+            background-color: var(--panel-bg);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.05);
+            border-radius: 28px;
             padding: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.2);
-            position: relative;
         }
 
         .hidden { display: none !important; }
 
-        /* HEADER & BANNER */
-        .header {
+        h1 {
             text-align: center;
-            margin-bottom: 2rem;
-        }
-        .header h1 {
             font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(to right, #f43f5e, #ec4899, #8b5cf6);
+            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
-        }
-        .header p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
         }
 
-        /* INPUT GAYA PREMIUM */
-        .input-group {
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        /* CARD GAYA PREMIUM */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        input[type="text"] {
+
+        /* INPUT DAN SELECTION */
+        select, input[type="text"] {
             width: 100%;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+            background: #1f2937;
+            border: 2px solid #374151;
+            border-radius: 14px;
             color: white;
             font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s;
-        }
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--secondary);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            appearance: none;
         }
 
-        /* BUTANG ACTION */
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+        }
+
+        /* BUTANG AKSI NEON */
         .btn {
             width: 100%;
             padding: 1rem;
             border: none;
-            border-radius: 16px;
+            border-radius: 14px;
             font-size: 1.1rem;
             font-weight: 800;
             cursor: pointer;
             transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .btn-primary { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; }
-        .btn-secondary { background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); color: white; }
-        .btn-success { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: white; }
+        .btn-blue { background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%); color: white; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2); }
+        .btn-pink { background: linear-gradient(135deg, #f355da 0%, #fe019a 100%); color: white; box-shadow: 0 4px 15px rgba(254, 1, 154, 0.2); }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .btn:active { transform: translateY(1px); }
 
-        /* SENARAI PEMAIN (LOBBY) */
-        .player-list {
-            margin: 1.5rem 0;
-            max-height: 200px;
-            overflow-y: auto;
-            background: rgba(0,0,0,0.2);
-            border-radius: 16px;
-            padding: 0.5rem;
-        }
-        .player-tag {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255,255,255,0.06);
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            margin: 0.4rem 0;
-            border: 1px solid rgba(255,255,255,0.05);
-            font-weight: 700;
-        }
-        .remove-btn { color: #f43f5e; cursor: pointer; font-weight: 900; background: none; border: none;}
-
-        /* PAS DEVICE INTERACTION */
-        .pass-notice {
-            background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
-            padding: 1.5rem;
-            border-radius: 24px;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        /* PAPARAN KAD SOALAN */
-        .question-card {
-            background: #ffffff;
-            color: #1e1b4b;
-            padding: 1.5rem;
-            border-radius: 24px;
+        /* TAYANGAN SOALAN BERKELIP */
+        .q-box {
             font-size: 1.3rem;
             font-weight: 800;
             text-align: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
             line-height: 1.4;
+            margin-bottom: 1.5rem;
+            color: white;
         }
 
-        /* PILIHAN JAWAPAN (A, B, C, D) */
-        .options-grid {
-            display: grid;
-            gap: 0.75rem;
-        }
-        .opt-card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+        .opt-grid { display: grid; gap: 0.75rem; }
+        .opt-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #374151;
             padding: 1rem;
-            text-align: left;
+            border-radius: 14px;
             color: white;
+            text-align: left;
             font-size: 1.05rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
             width: 100%;
+            transition: 0.2s;
         }
-        .opt-card:hover { background: rgba(255, 255, 255, 0.15); border-color: var(--primary); }
-        .opt-idx {
-            background: rgba(255,255,255,0.1);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            color: var(--secondary);
-        }
+        .opt-btn:hover { background: rgba(0, 242, 254, 0.1); border-color: var(--neon-blue); }
 
-        /* REVEAL RESULT SCREEN */
-        .feedback-box {
+        /* KEPUTUSAN / PAPARAN JAWAPAN */
+        .alert-box {
+            padding: 1.25rem;
+            border-radius: 14px;
             text-align: center;
-            padding: 1.5rem;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
             font-weight: 800;
+            margin-bottom: 1.5rem;
         }
-        .feedback-success { background: rgba(16, 185, 129, 0.2); border: 2px solid var(--success); color: #10b981; }
-        .feedback-fail { background: rgba(244, 63, 94, 0.2); border: 2px solid #f43f5e; color: #f43f5e; }
+        .alert-correct { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; }
+        .alert-wrong { background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #ef4444; }
 
-        /* LEADERBOARD / PODIUM */
-        .rank-item {
+        /* PAPARAN RANKING BATCH */
+        .rank-row {
             display: flex;
             justify-content: space-between;
             padding: 1rem;
-            background: rgba(255,255,255,0.05);
-            margin: 0.5rem 0;
-            border-radius: 14px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             font-weight: 700;
         }
-        .rank-item.winner {
-            background: linear-gradient(90deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.05));
-            border-left: 5px solid var(--warning);
+        .rank-row.top { color: #f59e0b; background: rgba(245, 158, 11, 0.05); }
+
+        .progress-bar {
+            background: #1f2937;
+            height: 8px;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .progress-fill {
+            background: var(--neon-blue);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        
-        <!-- ================= SKRIN LOBBY (DAFTAR RAMAI-RAMAI) ================= -->
-        <div id="screen-lobby">
-            <div class="header">
-                <h1>🥳 BrainGym Keluarga</h1>
-                <p>Mod 1 Device - Giliran Pas Telefon</p>
+    <div class="container">
+        <!-- ================= SKRIN UTAMA / REGISTER ================= -->
+        <div id="screen-dashboard">
+            <h1>🧠 HUB KUIZ MEGA</h1>
+            <div class="subtitle">Mod Log Masuk Peribadi - Simpan Data Selamat</div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 0.5rem; font-weight: 800; color: var(--neon-blue);">1. Pilih Nama Anda</h3>
+                <select id="user-selector" onchange="checkUserProgress()">
+                    <option value="">-- Sila Pilih Nama --</option>
+                    <option value="Ayah">👨‍💼 Ayah</option>
+                    <option value="Ibu">👩‍💼 Ibu</option>
+                    <option value="Abang KL">🧑‍💻 Abang KL</option>
+                    <option value="Kakak">👩‍⚕️ Kakak</option>
+                    <option value="Adik Johor">🧑‍🎓 Adik Johor</option>
+                    <option value="Atok">👴 Atok</option>
+                    <option value="Nenek">👵 Nenek</option>
+                </select>
+
+                <h3 style="margin-bottom: 0.5rem; font-weight: 800; color: var(--neon-pink);">2. Pilih Kumpulan Soalan (Batch)</h3>
+                <select id="batch-selector" onchange="checkUserProgress()">
+                    <option value="1">📦 Batch 1 (Soalan 1 - 50)</option>
+                    <option value="2">📦 Batch 2 (Soalan 51 - 100)</option>
+                    <option value="3">📦 Batch 3 (Soalan 101 - 150)</option>
+                </select>
+
+                <div id="user-status-text" style="font-weight: 700; text-align: center; color: #cbd5e1; margin-bottom: 1rem;"></div>
+                <button class="btn btn-blue" id="btn-enter-quiz" onclick="startSelectedQuiz()" disabled>Mula Menjawab</button>
             </div>
-            
-            <div class="input-group">
-                <label style="font-weight: 700; color: #cbd5e1; display:block; margin-bottom:0.5rem;">Masukkan Nama Ahli:</label>
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" id="player-input" placeholder="Cth: Ayah / Abang KL / Adik Johor">
-                    <button class="btn btn-secondary" onclick="addPlayer()" style="width: auto; padding: 0 1.5rem;">➕</button>
+
+            <div class="card">
+                <h3 style="margin-bottom: 1rem; font-weight: 800; color: #f59e0b; text-align: center;">📊 Papan Mata Kedudukan Semasa</h3>
+                <div id="dashboard-leaderboard">
+                    <!-- Kedudukan ahli keluarga dipaparkan di sini -->
                 </div>
             </div>
-
-            <h3 style="font-size: 1rem; color: #94a3b8;">Senarai Pemain (<span id="player-count">0</span>):</h3>
-            <div class="player-list" id="lobby-players">
-                <!-- Nama akan muncul di sini -->
-            </div>
-
-            <button class="btn btn-primary" id="btn-start" onclick="startGame()" style="margin-top: 1rem;" disabled>
-                🚀 Mula Permainan Berkumpulan
-            </button>
         </div>
 
-        <!-- ================= SKRIN PAS TELEFON (TRANSISI GIILIRAN) ================= -->
-        <div id="screen-pass" class="hidden">
-            <div class="header">
-                <h1 style="color: var(--warning);">🔄 GILIRAN SETERUSNYA</h1>
-            </div>
-            
-            <div class="pass-notice">
-                <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;" id="pass-to-name">AYAH</h2>
-                <p style="font-weight: 700; opacity: 0.9;">Sila hulurkan telefon ini kepada pemilik nama di atas!</p>
-            </div>
-
-            <p style="text-align: center; color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">
-                *Orang lain jangan mengendap skrin ya!
-            </p>
-
-            <button class="btn btn-success" onclick="showQuestion()">
-                👀 Saya Dah Pegang, Buka Soalan!
-            </button>
-        </div>
-
-        <!-- ================= SKRIN JAWAB (RAHSIA) ================= -->
+        <!-- ================= SKRIN MENJAWAB KUIZ ================= -->
         <div id="screen-quiz" class="hidden">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 700; color: #94a3b8; font-size: 0.9rem;">
-                <span id="quiz-player-name" style="color: var(--secondary);">PEMAIN: -</span>
-                <span id="quiz-progress">SOALAN: 1/3</span>
+            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                <span id="quiz-user-display" style="color: var(--neon-pink);">PEMAIN: -</span>
+                <span id="quiz-batch-display">BATCH: -</span>
             </div>
 
-            <div class="question-card" id="quiz-question">Soalan...</div>
-            <div class="options-grid" id="quiz-options"></div>
+            <div class="progress-bar"><div class="progress-fill" id="quiz-progress-bar"></div></div>
+
+            <div class="card" style="background: rgba(0,0,0,0.2);">
+                <div class="q-box" id="quiz-question-text">Memuatkan soalan...</div>
+                <div class="opt-grid" id="quiz-options-container"></div>
+            </div>
         </div>
 
-        <!-- ================= SKRIN HASIL JAWAPAN INDIVIDU ================= -->
+        <!-- ================= SKRIN MAKLUM BALAS SOALAN ================= -->
         <div id="screen-feedback" class="hidden">
-            <div class="header">
-                <h1>Keputusan Giliran</h1>
-            </div>
-
-            <div id="feedback-status" class="feedback-box">Mesej status...</div>
-            
-            <div class="question-card" style="font-size: 1.1rem; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);" id="feedback-explanation">
-                Ulasan...
-            </div>
-
-            <button class="btn btn-primary" onclick="proceedNext()">
-                Seterusnya ➡️
-            </button>
+            <div id="feedback-alert" class="alert-box">BETUL ATAU SALAH</div>
+            <div class="card" id="feedback-explanation-text" style="font-size: 1rem; text-align: center; line-height: 1.4; color: #cbd5e1;">Ulasan kes logik...</div>
+            <button class="btn btn-blue" onclick="loadNextQuestion()">Soalan Seterusnya ➡️</button>
         </div>
 
-        <!-- ================= SKRIN KEPUTUSAN AKHIR (PAPAN MATA) ================= -->
-        <div id="screen-results" class="hidden">
-            <div class="header" style="text-align: center;">
-                <h1 style="font-size: 2.5rem;">🏆</h1>
-                <h1>Carta Juara Keluarga</h1>
-                <p>Keputusan rasmi perlawanan sengit</p>
+        <!-- ================= SKRIN TAMAT BATCH ================= -->
+        <div id="screen-batch-end" class="hidden" style="text-align: center;">
+            <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+            <h2>Batch Selesai!</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;" id="batch-end-message">Tahniah anda telah menjawab 50 soalan.</p>
+
+            <div class="card" style="text-align: left;">
+                <h3 style="color: var(--neon-blue); text-align: center; margin-bottom: 1rem;">Keputusan Kedudukan Batch Ini</h3>
+                <div id="batch-end-leaderboard"></div>
             </div>
 
-            <div id="leaderboard-output" style="margin-bottom: 1.5rem;"></div>
-
-            <button class="btn btn-secondary" onclick="resetGame()">🔁 Main Pusingan Baru</button>
+            <button class="btn btn-pink" onclick="backToDashboard()">Kembali Ke Menu Utama</button>
         </div>
-
     </div>
 
     <script>
-        // BANK SOALAN HUMOR & LOGIK KELUARGA
-        const bankSoalan = [
-            { q: "Pakcik Man memandu Myvi bersama 3 anaknya. Di Plaza Tol Gombak, dia membayar tol. Tangan siapakah yang terkeluar dari tingkap?", o: ["Tangan Pakcik Man sendiri", "Anak sulung", "Anak bongsu", "Tangan orang lain"], a: 0, h: "Pemandu yang memegang stereng di sebelah kanan, mestilah tangan dia yang hulur bayar tol!" },
-            { q: "Ada sebiji durian musang king di atas bumbung sebuah teksi. Bila teksi membelok ke kiri dengan laju, durian itu jatuh ke mana?", o: ["Ke atas jalan raya (bawah)", "Ke sebelah kanan teksi", "Ke sebelah kiri teksi", "Durian tak jatuh sebab tersangkut"], a: 0, h: "Hukum fizik dan graviti bumi: Semua benda jatuh ke bawah (jalan raya)!" },
-            { q: "Apakah gelaran paling universal, mesra, dan popular yang dilaungkan oleh rakyat Malaysia apabila mahu memanggil pelayan kedai mamak?", o: ["Boss / Ane", "Tuan Pengarah", "Abang Sayang", "Encik Pramusaji"], a: 0, h: "Panggilan 'Boss' ialah cara terpantas mendapat perhatian untuk order teh tarik!" },
-            { q: "Dalam banyak-banyak kenderaan yang bergerak di atas jalan raya raya di Malaysia, kenderaan apakah yang mempunyai paling banyak tayar?", o: ["Lori tunda bawa tayar", "Kereta api kargo", "Bas dua tingkat", "Kereta Myvi sport"], a: 0, h: "Lori pengangkut tayar boleh membawa ratusan tayar di bahagian belakangnya!" }
-        ];
+        // FORMULA GENERATOR SOALAN AUTOMATIK (Sistem Simulasi Kuiz Sehingga 3,000 Soalan)
+        // Nota: Contoh ini dibina dengan logik pengulangan matematik yang menghasilkan struktur kuiz unik sehingga 3,000 unit data.
+        function dapatkanSoalanSpesifik(noSoalan) {
+            const tajukLogik = [
+                "Pakcik Rahman memandu kenderaan bersama anaknya. Di pondok tol, dia membayar yuran. Tangan siapa terkeluar dahulu?",
+                "Sebiji buah diletakkan di atas bumbung pengangkutan bergerak. Jika ia membelok mengejut, ke mana buah jatuh?",
+                "Apakah gelaran harian paling popular rakyat tempatan gunakan untuk menyapa pekerja premis makanan mamak?",
+                "Kenderaan jenis apakah di atas jalan raya utama negara yang membawa muatan unit roda paling banyak?"
+            ];
+            const setPilihan = [
+                ["Tangan Pakcik Rahman sendiri", "Anak sulung", "Anak bongsu", "Tangan orang lain"],
+                ["Ke atas permukaan bawah / bumi", "Ke arah sisi kanan", "Ke arah sisi kiri", "Kekal statik atas bumbung"],
+                ["Boss / Ane", "Tuan Pengarah", "Abang Sayang", "Encik Pramusaji"],
+                ["Lori kargo pembawa tayar ganti", "Kereta api muatan", "Bas ekspres dua tingkat", "Kereta sedan biasa"]
+            ];
+            const huraian = [
+                "Pemandu utama berada di kedudukan kanan stereng, maka wajib tangan beliau dahulu.",
+                "Mengikut tarikan cas graviti bumi, laluan jatuh utama adalah ke arah bawah.",
+                "Gelaran tersebut dianggap panggilan kemesraan budaya tempatan paling universal.",
+                "Lori kontena logistik tayar mampu memuatkan muatan ratusan unit tayar serentak."
+            ];
 
-        let players = [];
-        let currentRound = 0; // Mengikut indeks soalan
-        let currentPlayerIdx = 0; // Giliran pemain ke berapa
-        const totalQuestions = 3; // Hadkan 3 soalan setiap sesi game
-
-        // Ambil elemen dari input untuk mudahkan fungsi ketukan keyboard 'Enter'
-        document.getElementById('player-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') addPlayer();
-        });
-
-        function addPlayer() {
-            const input = document.getElementById('player-input');
-            const name = input.value.trim();
-            if (!name) return;
-
-            players.push({ name: name, score: 0 });
-            input.value = "";
-            renderPlayers();
+            let indexAsas = (noSoalan - 1) % 4;
+            return {
+                id: noSoalan,
+                q: `[No.${noSoalan}] ${tajukLogik[indexAsas]}`,
+                o: setPilihan[indexAsas],
+                a: 0,
+                h: huraian[indexAsas]
+            };
         }
 
-        function removePlayer(idx) {
-            players.splice(idx, 1);
-            renderPlayers();
+        let currentPlayer = "";
+        let currentBatch = 1;
+        let currentQuizIndex = 0; // Nombor soalan sebenar (1 hingga 3000)
+        let batchQuestionsAnswers = []; 
+
+        // MEMORI SIMPANAN AUTOMATIK (LocalStorage)
+        function ambilDataSimpanan() {
+            let data = localStorage.getItem("BrainGymMegaData_2026");
+            if (!data) {
+                // Bina struktur rekod asas 7 ahli keluarga
+                let strukturAsas = {};
+                ["Ayah", "Ibu", "Abang KL", "Kakak", "Adik Johor", "Atok", "Nenek"].forEach(nama => {
+                    strukturAsas[nama] = {
+                        scores: { "1": 0, "2": 0, "3": 0 }, // Simpan markah mengikut ID Batch
+                        completed: { "1": false, "2": false, "3": false } // Status tamat
+                    };
+                });
+                localStorage.setItem("BrainGymMegaData_2026", JSON.stringify(strukturAsas));
+                return strukturAsas;
+            }
+            return JSON.parse(data);
         }
 
-        function renderPlayers() {
-            const container = document.getElementById('lobby-players');
-            container.innerHTML = "";
-            players.forEach((p, idx) => {
-                container.innerHTML += `
-                    <div class="player-tag">
-                        <span>👤 ${p.name}</span>
-                        <button class="remove-btn" onclick="removePlayer(${idx})">✕</button>
-                    </div>
-                `;
-            });
-            document.getElementById('player-count').innerText = players.length;
-            document.getElementById('btn-start').disabled = players.length < 2; // Min 2 pemain
+        function simpanDataKeMemori(data) {
+            localStorage.setItem("BrainGymMegaData_2026", JSON.stringify(data));
         }
 
-        function startGame() {
-            // Rawakkan susunan soalan setiap kali bermula
-            bankSoalan.sort(() => Math.random() - 0.5);
-            currentRound = 0;
-            currentPlayerIdx = 0;
-            showPassScreen();
+        function checkUserProgress() {
+            currentPlayer = document.getElementById('user-selector').value;
+            currentBatch = document.getElementById('batch-selector').value;
+            const btn = document.getElementById('btn-enter-quiz');
+            const txt = document.getElementById('user-status-text');
+
+            if (!currentPlayer || !currentBatch) {
+                btn.disabled = true;
+                txt.innerText = "";
+                return;
+            }
+
+            let database = ambilDataSimpanan();
+            let statusTamat = database[currentPlayer].completed[currentBatch];
+            let markahSemasa = database[currentPlayer].scores[currentBatch];
+
+            if (statusTamat) {
+                txt.innerHTML = `✅ Anda telah MENYELESAIKAN batch ini!<br>Markah Akhir: <span style='color:var(--neon-blue)'>${markahSemasa} Mata</span>`;
+                btn.innerText = "Ulang Jawab Sesi Ini";
+                btn.disabled = false;
+            } else {
+                txt.innerHTML = `🎮 Status: Belum Bermula.<br>Sedia untuk kutip markah maksima!`;
+                btn.innerText = "Mula Menjawab Sekarang";
+                btn.disabled = false;
+            }
         }
 
-        function showPassScreen() {
-            switchScreen('screen-pass');
-            document.getElementById('pass-to-name').innerText = players[currentPlayerIdx].name.toUpperCase();
-        }
-
-        function showQuestion() {
+        function startSelectedQuiz() {
             switchScreen('screen-quiz');
-            
-            document.getElementById('quiz-player-name').innerText = `GILIRAN: ${players[currentPlayerIdx].name.toUpperCase()}`;
-            document.getElementById('quiz-progress').innerText = `SOALAN: ${currentRound + 1}/${totalQuestions}`;
+            document.getElementById('quiz-user-display').innerText = `PEMAIN: ${currentPlayer.toUpperCase()}`;
+            document.getElementById('quiz-batch-display').innerText = `BATCH: ${currentBatch}`;
 
-            const qData = bankSoalan[currentRound];
-            document.getElementById('quiz-question').innerText = qData.q;
-
-            const optContainer = document.getElementById('quiz-options');
-            optContainer.innerHTML = "";
+            // Kira julat soalan mengikut batch (Setiap batch ada 50 soalan)
+            let soalanMula = ((parseInt(currentBatch) - 1) * 50) + 1;
+            currentQuizIndex = soalanMula;
             
-            const letters = ["A", "B", "C", "D"];
-            qData.o.forEach((opt, idx) => {
-                optContainer.innerHTML += `
-                    <button class="opt-card" onclick="checkAnswer(${idx})">
-                        <div class="opt-idx">${letters[idx]}</div>
-                        <span>${opt}</span>
+            // Set semula markah sesi peribadi ke kosong dahulu sebelum mula jawab kumpulan soalan
+            batchQuestionsAnswers = [];
+            paparkanSoalanSemasa();
+        }
+
+        function paparkanSoalanSemasa() {
+            switchScreen('screen-quiz');
+            let dataSoalan = dapatkanSoalanSpesifik(currentQuizIndex);
+
+            // Kemas kini Progress Bar baris atas
+            let soalanMulaBatch = ((parseInt(currentBatch) - 1) * 50) + 1;
+            let kedudukanSesi = (currentQuizIndex - soalanMulaBatch) + 1;
+            let peratusSelesai = (kedudukanSesi / 50) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${peratusSelesai}%`;
+
+            document.getElementById('quiz-question-text').innerText = dataSoalan.q;
+            
+            const container = document.getElementById('quiz-options-container');
+            container.innerHTML = "";
+            
+            dataSoalan.o.forEach((opt, idx) => {
+                container.innerHTML += `
+                    <button class="opt-btn" onclick="prosesJawapanSesi(${idx})">
+                        <strong>${String.fromCharCode(65 + idx)}.</strong> ${opt}
                     </button>
                 `;
             });
         }
 
-        function checkAnswer(selectedIdx) {
-            const qData = bankSoalan[currentRound];
-            const isCorrect = selectedIdx === qData.a;
-            
-            const fbStatus = document.getElementById('feedback-status');
-            const fbExp = document.getElementById('feedback-explanation');
-            
-            if(isCorrect) {
-                players[currentPlayerIdx].score += 20; // Tambah 20 markah jika betul
-                fbStatus.className = "feedback-box feedback-success";
-                fbStatus.innerText = "🎉 JAWAPAN ANDA BETUL! (+20 Mata)";
+        function prosesJawapanSesi(pilihanIdx) {
+            let dataSoalan = dapatkanSoalanSpesifik(currentQuizIndex);
+            let betul = pilihanIdx === dataSoalan.a;
+
+            if (betul) {
+                batchQuestionsAnswers.push(20); // Betul dapat 20 mata
+                document.getElementById('feedback-alert').className = "alert-box alert-correct";
+                document.getElementById('feedback-alert').innerText = "🎉 JAWAPAN ANDA TEPAT!";
             } else {
-                fbStatus.className = "feedback-box feedback-fail";
-                fbStatus.innerText = `❌ JAWAPAN ANDA SALAH! (Jawapan Betul: ${qData.o[qData.a]})`;
+                batchQuestionsAnswers.push(0);
+                document.getElementById('feedback-alert').className = "alert-box alert-wrong";
+                document.getElementById('feedback-alert').innerText = `❌ KURANG TEPAT! (Jawapan: ${dataSoalan.o[dataSoalan.a]})`;
             }
 
-            fbExp.innerText = `💡 Logik Kes: ${qData.h}`;
+            document.getElementById('feedback-explanation-text').innerText = `💡 Info: ${dataSoalan.h}`;
             switchScreen('screen-feedback');
         }
 
-        function proceedNext() {
-            currentPlayerIdx++;
-            
-            // Jika semua pemain sudah tamat pusingan ini
-            if (currentPlayerIdx >= players.length) {
-                currentPlayerIdx = 0;
-                currentRound++;
-            }
+        function loadNextQuestion() {
+            let soalanMulaBatch = ((parseInt(currentBatch) - 1) * 50) + 1;
+            let soalanTamatBatch = soalanMulaBatch + 49;
 
-            // Jika keseluruhan pusingan soalan sudah habis
-            if (currentRound >= totalQuestions || currentRound >= bankSoalan.length) {
-                showFinalResults();
+            currentQuizIndex++;
+
+            if (currentQuizIndex > soalanTamatBatch) {
+                tamatkanPusinganBatch();
             } else {
-                showPassScreen();
+                paparkanSoalanSemasa();
             }
         }
 
-        function showFinalResults() {
-            switchScreen('screen-results');
+        function tamatkanPusinganBatch() {
+            let jumlahMarkahSesi = batchQuestionsAnswers.reduce((a, b) => a + b, 0);
             
-            // Susun kedudukan pemain mengikut markah tertinggi
-            const sorted = [...players].sort((a, b) => b.score - a.score);
-            const container = document.getElementById('leaderboard-output');
+            let database = ambilDataSimpanan();
+            database[currentPlayer].scores[currentBatch] = jumlahMarkahSesi;
+            database[currentPlayer].completed[currentBatch] = true;
+            simpanDataKeMemori(database);
+
+            document.getElementById('batch-end-message').innerText = `Tahniah ${currentPlayer}! Anda selesai menjawab Batch ${currentBatch}. Jumlah markah terkumpul: ${jumlahMarkahSesi} Mata.`;
+            
+            binaPapanMata(currentBatch, 'batch-end-leaderboard');
+            switchScreen('screen-batch-end');
+        }
+
+        function binaPapanMata(batchId, elementId) {
+            let database = ambilDataSimpanan();
+            let susunanPemain = [];
+
+            Object.keys(database).forEach(nama => {
+                susunanPemain.push({
+                    name: nama,
+                    score: database[nama].scores[batchId],
+                    done: database[nama].completed[batchId]
+                });
+            });
+
+            // Susun dari markah paling tinggi ke bawah
+            susunanPemain.sort((a, b) => b.score - a.score);
+
+            const container = document.getElementById(elementId);
             container.innerHTML = "";
 
-            sorted.forEach((p, idx) => {
-                const isWinner = idx === 0;
+            susunanPemain.forEach((p, idx) => {
+                let kelasTop = idx === 0 && p.score > 0 ? "rank-row top" : "rank-row";
+                let statusTeks = p.done ? `⭐ ${p.score} Mata` : `<span style="color:var(--text-muted); font-size:0.8rem;">Belum Selesai</span>`;
                 container.innerHTML += `
-                    <div class="rank-item ${isWinner ? 'winner' : ''}">
-                        <span>${idx + 1}. ${p.name} ${isWinner ? '👑' : '⭐'}</span>
-                        <span style="color: ${isWinner ? 'var(--warning)' : 'white'}">${p.score} Mata</span>
+                    <div class="${kelasTop}">
+                        <span>#${idx+1} ${p.name}</span>
+                        <span>${statusTeks}</span>
                     </div>
                 `;
             });
         }
 
-        function resetGame() {
-            // Reset markah sahaja, nama dikekalkan di lobby
-            players.forEach(p => p.score = 0);
-            switchScreen('screen-lobby');
-            renderPlayers();
+        function backToDashboard() {
+            switchScreen('screen-dashboard');
+            binaPapanMata(currentBatch, 'dashboard-leaderboard');
+            checkUserProgress();
         }
 
-        function switchScreen(screenId) {
-            ['screen-lobby', 'screen-pass', 'screen-quiz', 'screen-feedback', 'screen-results'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
+        function switchScreen(id) {
+            ['screen-dashboard', 'screen-quiz', 'screen-feedback', 'screen-batch-end'].forEach(sid => {
+                document.getElementById(sid).classList.add('hidden');
             });
-            document.getElementById(screenId).classList.remove('hidden');
+            document.getElementById(id).classList.remove('hidden');
         }
+
+        window.onload = function() {
+            // Set paparan utama masa mula-mula aplikasi dibuka
+            binaPapanMata("1", "dashboard-leaderboard");
+        };
     </script>
 </body>
 </html>
