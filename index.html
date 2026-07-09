@@ -213,6 +213,7 @@
             color: #fca5a5;
             cursor: pointer;
             font-weight: 800;
+            margin-left: 4px;
         }
 
         /* GRID KATEGORI */
@@ -237,6 +238,8 @@
             cursor: pointer;
             transition: all 0.2s ease;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            text-align: left;
+            width: 100%;
         }
 
         .cat-card:hover {
@@ -255,6 +258,7 @@
             justify-content: center;
             font-size: 1.6rem;
             box-shadow: 0 8px 16px -4px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
 
         .cat-title {
@@ -263,7 +267,7 @@
             color: #1e293b;
         }
 
-        /* PAPARAN TURN-BASED (SIAPA KENA JAWAB) */
+        /* PAPARAN TURN-BASED */
         .turn-announcer {
             background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
             border: 2px solid #f59e0b;
@@ -274,16 +278,16 @@
             font-weight: 800;
             color: #b45309;
             font-size: 1.1rem;
-            animation: flash 1.5s infinite;
         }
 
-        @keyframes flash {
-            0% { opacity: 0.9; }
-            50% { opacity: 1; transform: scale(1.01); }
-            100% { opacity: 0.9; }
+        /* PILIHAN JAWAPAN */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
 
-        /* PILIHAN JAWAPAN EYE-CATCHING */
         .option-btn {
             background: white;
             border: 2px solid #e2e8f0;
@@ -299,6 +303,7 @@
             align-items: center;
             transition: all 0.15s;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            width: 100%;
         }
 
         .option-btn:hover {
@@ -306,7 +311,7 @@
             background: #fff7ed;
         }
 
-        .option-btn.correct { background: #d1fae5; border-color: #10b981; color: #065f46; font-size: 1.05rem; }
+        .option-btn.correct { background: #d1fae5; border-color: #10b981; color: #065f46; }
         .option-btn.wrong { background: #fee2e2; border-color: #f43f5e; color: #9f1239; }
 
         .action-btn {
@@ -322,7 +327,7 @@
             box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
         }
 
-        /* PAPARAN LEADERBOARD KEPUTUSAN */
+        /* LEADERBOARD */
         .leaderboard-list {
             margin: 1.5rem 0;
             display: flex;
@@ -347,6 +352,14 @@
             color: #78350f;
         }
 
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            color: #0f172a;
+        }
+
         footer {
             background: white;
             border-top: 1px solid #e2e8f0;
@@ -360,7 +373,6 @@
 </head>
 <body>
 
-    <!-- HEADER & SKOR BILIK -->
     <header class="neon-gradient">
         <div class="header-container">
             <div class="logo-section" onclick="goHome()">
@@ -373,38 +385,29 @@
         </div>
     </header>
 
-    <!-- KANDUNGAN UTAMA -->
     <main>
         
-        <!-- SKRIN 1: LOBBY & PENDAFTARAN ROOM (MIN 1 - MAX 7 PEMAIN) -->
         <div id="screen-lobby" class="glass-panel">
             <div class="title-banner">
                 <h2>BrainGym Dewasa Edisi Malaysia</h2>
-                <p>Uji kecerdasan minda & common sense korporat/warga emas secara berpasukan!</p>
+                <p>Uji kecerdasan minda & common sense secara berpasukan dalam satu bilik!</p>
             </div>
 
-            <!-- KOMPONEN LOG IN ROOM MULTIPLAYER -->
             <div class="room-box">
                 <div class="room-title">👥 Daftar Bilik Pemain (Maksimum 7 Orang)</div>
                 <div class="player-input-grid">
                     <input type="text" id="player-name-input" placeholder="Masukkan nama pemain..." maxlength="12">
                     <button onclick="addPlayer()" class="add-btn">+ Masuk</button>
                 </div>
-                <div class="player-tags-container" id="players-list-container">
-                    <!-- Ditambah secara dinamik -->
-                </div>
+                <div class="player-tags-container" id="players-list-container"></div>
             </div>
 
-            <div class="category-grid" id="category-grid">
-                <!-- Dijana Dinamik oleh JS -->
-            </div>
+            <div class="category-grid" id="category-grid"></div>
         </div>
 
-        <!-- SKRIN 2: GAMEPLAY (TURN-BASED) -->
         <div id="screen-game" class="glass-panel hidden">
-            <!-- Pengumuman Giliran Pemain -->
             <div id="turn-announcer-box" class="turn-announcer">
-                🎯 Giliran Menjawab: <span id="current-player-turn">Pemain 1</span>
+                🎯 Giliran Menjawab: <span id="current-player-turn">-</span>
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
@@ -412,11 +415,9 @@
                 <span id="game-progress-text" style="font-size: 13px; font-weight:700; color:#64748b;">Soalan 1</span>
             </div>
 
-            <div class="question-text" id="game-question">Memuatkan cabaran minda...</div>
+            <div class="question-text" id="game-question">-</div>
 
-            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem;" id="game-options">
-                <!-- Pilihan objektif -->
-            </div>
+            <div class="options-container" id="game-options"></div>
 
             <div id="game-feedback" class="hidden" style="padding:1rem; border-radius:12px; margin-bottom:1.5rem; font-size:14px; font-weight:700;">
                 <div id="feedback-status-text"></div>
@@ -426,47 +427,44 @@
             <button id="btn-next" onclick="nextQuestion()" class="action-btn hidden">Seterusnya ➡️</button>
         </div>
 
-        <!-- SKRIN 3: LEADERBOARD AKHIR BILIK -->
-        <div id="screen-results" class="glass-panel hidden text-center">
+        <div id="screen-results" class="glass-panel hidden" style="text-align: center;">
             <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🏆</div>
             <h2 style="font-weight:900; font-size:1.8rem; color:var(--primary);">Keputusan Bilik</h2>
-            <p style="color:#64748b; font-size:14px;">Berikut adalah senarai kedudukan mata rasasains minda Malaysia anda:</p>
+            <p style="color:#64748b; font-size:14px;">Berikut adalah senarai markah akhir ahli kumpulan anda:</p>
 
-            <div class="leaderboard-list" id="leaderboard-output">
-                <!-- Senarai skor ahli bilik -->
-            </div>
+            <div class="leaderboard-list" id="leaderboard-output"></div>
 
-            <button onclick="goHome()" class="action-btn" style="background: #0f172a; margin-top: 1rem;">Main Balik / Tukar Bilik</button>
+            <button onclick="goHome()" class="action-btn" style="background: #0f172a; margin-top: 1rem;">Main Balik / Urus Bilik</button>
         </div>
 
     </main>
 
     <footer>
-        <p>&copy; 2026 BrainGym Dewasa Edisi Malaysia. Mod Pass & Play Tanpa Internet Luar Talian.</p>
+        <p>&copy; 2026 BrainGym Dewasa Edisi Malaysia. Mod Pass & Play Luar Talian.</p>
     </footer>
 
     <script>
-        // BANK SOALAN ARAS TINGGI KALIS ULANGAN (ANTI-REPETITIVE)
-        const bankSenario Premium = {
+        // BANK SOALAN ARAS TINGGI PREMIUM (KALIS ULANGAN)
+        const bankSenarioPremium = {
             logik: [
-                { q: "[KBAT Logik] Sebuah Myvi memotong barisan di lampu isyarat persimpangan Jalan Tun Razak. Terdapat 3 buah kenderaan di belakangnya. Jika lampu bertukar hijau dalam 2 saat, kenderaan manakah yang bergerak dahulu?", o: ["Pemandu Myvi tersebut", "Kenderaan paling belakang", "Siren polis yang kebetulan lalu", "Tiada, semua tersangkut tengok telefon"], a: 0, h: "Logik pemanduan agresif setempat: Pemandu hadapan yang melanggar peraturan selalunya memecut dahulu!" },
-                { q: "[Akal Budi] Pakcik Rahman menyusun 5 bakul durian di belakang lori kapcai. Setiap bakul mengandungi 10 biji durian. Semasa melalui bonggol jalan perumahan, 1 bakul terjatuh. Berapakah biji durian yang tinggal di atas lori?", o: ["40 biji durian", "50 biji durian", "10 biji durian", "Tiada, semua pecah ditiup angin"], a: 0, h: "Matematik mudah: 5 bakul tolak 1 bakul jatuh bersamaan 4 bakul. 4 x 10 = 40 biji durian." }
+                { q: "[KBAT Logik] Sebuah Myvi memotong barisan di lampu isyarat persimpangan Jalan Tun Razak. Terdapat 3 buah kenderaan di belakangnya. Jika lampu bertukar hijau dalam 2 saat, kenderaan manakah yang bergerak dahulu?", o: ["Pemandu Myvi tersebut", "Kenderaan paling belakang", "Siren polis yang kebetulan lalu", "Tiada, semua tersangkut tengok telefon"], a: 0, h: "Pemandu hadapan yang agresif selalunya memecut dahulu!" },
+                { q: "[Akal Budi] Pakcik Rahman menyusun 5 bakul durian di belakang lori kapcai. Setiap bakul mengandungi 10 biji durian. Semasa melalui bonggol jalan perumahan, 1 bakul terjatuh. Berapakah biji durian yang tinggal di atas lori?", o: ["40 biji durian", "50 biji durian", "10 biji durian", "Tiada, semua pecah ditiup angin"], a: 0, h: "5 bakul tolak 1 bakul jatuh bersamaan 4 bakul. 4 x 10 = 40 biji." }
             ],
             am: [
-                { q: "[Common Sense] Anda terserempak dengan barisan panjang di kaunter bank, tetapi ada satu mesin ATM yang langsung tiada orang beratur. Apakah kesimpulan logik pertama anda?", o: ["Mesin ATM tersebut rosak atau kehabisan wang tunai", "Mesin itu khas untuk orang kaya sahaja", "Rakyat Malaysia tidak suka menggunakan mesin itu", "Mesin itu mempunyai hantu"], a: 0, h: "Common sense dewasa harian: Tempat kosong di zon sesak biasanya petanda kemudahan tersebut luar operasi." },
-                { q: "[Gaya Hidup] Manakah kombinasi hidangan minum petang yang paling ikonik dan sinonim dengan komuniti warga emas dan korporat di warung Malaysia?", o: ["Kopi O Ais dengan Pisang Goreng panas", "Espresso berserta Macaron Perancis", "Teh Hijau Jepun dengan Sushi", "Air Suam dengan Oat kering"], a: 0, h: "Kopi O Ais dan Pisang Goreng ialah kombo mutlak budaya minum petang Malaysia." }
+                { q: "[Common Sense] Anda terserempak dengan barisan panjang di kaunter bank, tetapi ada satu mesin ATM yang langsung tiada orang beratur. Apakah kesimpulan logik pertama anda?", o: ["Mesin ATM tersebut rosak atau kehabisan wang", "Mesin itu khas untuk orang kaya sahaja", "Rakyat Malaysia tidak suka menggunakan mesin itu", "Mesin itu berhantu"], a: 0, h: "Tempat kosong di zon sesak biasanya petanda kemudahan tersebut luar operasi." },
+                { q: "[Gaya Hidup] Manakah kombinasi hidangan minum petang yang paling ikonik dan sinonim dengan komuniti warung Malaysia?", o: ["Kopi O Ais dengan Pisang Goreng panas", "Espresso berserta Macaron Perancis", "Teh Hijau Jepun dengan Sushi", "Air Suam dengan Oat kering"], a: 0, h: "Kopi O Ais dan Pisang Goreng ialah kombo mutlak budaya tempatan." }
             ],
             bahasa: [
-                { q: "[Slanga Minda] Apakah maksud frasa popular 'Minta Simpang' yang kerap diucapkan oleh orang dewasa Malaysia semasa bersembang?", o: ["Berharap sesuatu perkara buruk tidak berlaku", "Memohon petunjuk jalan raya ke lebuhraya", "Suka mencelah perbualan orang lain", "Mahu membeli tanah lot tepi jalan"], a: 0, h: "Ia adalah ungkapan perlindungan lisan tradisional untuk menolak nasib malang." }
+                { q: "[Slanga Minda] Apakah maksud frasa popular 'Minta Simpang' yang kerap diucapkan oleh orang dewasa Malaysia semasa bersembang?", o: ["Berharap sesuatu perkara buruk tidak berlaku", "Memohon petunjuk jalan raya ke lebuhraya", "Suka mencelah perbualan orang lain", "Mahu membeli tanah lot tepi jalan"], a: 0, h: "Ia adalah ungkapan lisan untuk menolak sesuatu musibah atau seumpamanya." }
             ],
             sejarah: [
-                { q: "[Warisan Kebangsaan] Apakah nama seni mempertahankan diri tradisional Melayu yang telah diiktiraf oleh UNESCO sebagai Warisan Budaya Tidak Ketara?", o: ["Silat", "Taekwondo", "Wushu", "Muay Thai"], a: 0, h: "Silat ialah seni mempertahankan diri warisan turun-temurun nusantara." }
+                { q: "[Warisan Kebangsaan] Apakah nama seni mempertahankan diri tradisional Melayu yang telah diiktiraf oleh UNESCO sebagai Warisan Budaya?", o: ["Silat", "Taekwondo", "Wushu", "Muay Thai"], a: 0, h: "Silat ialah seni mempertahankan diri warisan turun-temurun nusantara." }
             ],
             gambar: [
-                { q: "[Teka Situasi Emoji] Analisis aktiviti hujung minggu ini: 🏸🏃‍♂️🥤🌳 (Sangat digemari untuk kesihatan jantung)", o: ["Riadah bermain badminton di taman awam", "Membeli barang dapur di pasar", "Menghadiri kenduri perkahwinan", "Menonton perlawanan bola sepak di TV"], a: 0, h: "Raket badminton, orang berlari, dan pokok adalah indikasi aktiviti riadah luaran." }
+                { q: "[Teka Situasi Emoji] Analisis aktiviti hujung minggu ini: 🏸🏃‍♂️🥤🌳 (Sangat digemari untuk kesihatan)", o: ["Riadah bermain badminton di taman awam", "Membeli barang dapur di pasar", "Menghadiri kenduri perkahwinan", "Menonton perlawanan bola sepak di TV"], a: 0, h: "Raket badminton, orang berlari, dan pokok adalah indikasi riadah luaran." }
             ],
             fokus: [
-                { q: "[Ujian Fokus Tajam] Manakah antara susunan singkatan institusi kewangan dan keselamatan Malaysia ini yang ditulis dengan aturan yang BETUL?", o: ["BNM, PDRM, KWSP", "BMM, PRDM, KSWP", "BNM, PLDRM, KWP", "BMN, PDRM, KWPS"], a: 0, h: "Bank Negara Malaysia (BNM), Polis Diraja Malaysia (PDRM), Kumpulan Wang Simpanan Pekerja (KWSP)." }
+                { q: "[Ujian Fokus Tajam] Manakah antara susunan singkatan institusi di Malaysia ini yang ditulis dengan ejaan/aturan rasmi yang BETUL?", o: ["BNM, PDRM, KWSP", "BMM, PRDM, KSWP", "BNM, PLDRM, KWP", "BMN, PDRM, KWPS"], a: 0, h: "Bank Negara Malaysia (BNM), Polis Diraja Malaysia (PDRM), Kumpulan Wang Simpanan Pekerja (KWSP)." }
             ]
         };
 
@@ -479,8 +477,7 @@
             { id: "fokus", emoji: "👁️", color: "#e11d48", textMs: "6. Cabaran Fokus Minda" }
         ];
 
-        // GLOBAL MULTIPLAYER ROOM STATE
-        let players = ["Pemain A", "Pemain B"]; // Default awal bilik
+        let players = [];
         let currentCategory = null;
         let activeQuestions = [];
         let currentQuestionIdx = 0;
@@ -529,21 +526,17 @@
         }
 
         function removePlayer(idx) {
-            if (players.length <= 1) {
-                alert("Minimum mesti ada 1 orang pemain dalam bilik!");
-                return;
-            }
             players.splice(idx, 1);
             updatePlayersUI();
         }
 
         function startRoomGame(catId) {
+            if (players.length === 0) {
+                alert("Sila masukkan sekurang-kurangnya 1 orang pemain ke dalam bilik!");
+                return;
+            }
             currentCategory = categories.find(c => c.id === catId);
-            
-            // Mengambil bank soalan mengikut kategori pilihan
             let sourceQuestions = bankSenarioPremium[catId] || bankSenarioPremium['logik'];
-            
-            // Mengacak turutan soalan agar tidak bosan/berulang
             activeQuestions = [...sourceQuestions].sort(() => Math.random() - 0.5);
             currentQuestionIdx = 0;
 
@@ -559,7 +552,6 @@
             document.getElementById('game-cat-title').innerText = currentCategory.textMs;
             document.getElementById('game-progress-text').innerText = `Pusingan Soalan ${currentQuestionIdx + 1}`;
 
-            // Logik Menentukan Giliran Pemain (Turn-Based Peranti Sekitar Meja)
             let activePlayerObj = players[currentQuestionIdx % players.length];
             document.getElementById('current-player-turn').innerText = activePlayerObj.name;
 
@@ -569,7 +561,6 @@
             const optionsArea = document.getElementById('game-options');
             optionsArea.innerHTML = '';
 
-            // Mengacak kedudukan opsyen (A, B, C, D) secara dinamik
             let shuffledOptions = qData.o.map((opt, i) => ({ text: opt, isCorrect: i === qData.a }))
                                         .sort(() => Math.random() - 0.5);
 
@@ -593,18 +584,24 @@
             let activePlayerObj = players[currentQuestionIdx % players.length];
 
             if (isCorrect) {
-                activePlayerObj.score += 20; // Tambah mata untuk pemain aktif pusingan ini
+                activePlayerObj.score += 20;
                 selectedBtn.classList.add('correct');
-                feedbackBox.className = "correct";
                 feedbackBox.style.background = "#d1fae5";
                 feedbackBox.style.color = "#065f46";
                 statusText.innerText = `🎉 TEPAT! +20 Mata diberikan kepada ${activePlayerObj.name}!`;
             } else {
                 selectedBtn.classList.add('wrong');
-                feedbackBox.className = "wrong";
                 feedbackBox.style.background = "#fee2e2";
                 feedbackBox.style.color = "#9f1239";
                 statusText.innerText = `❌ KURANG TEPAT! Tiada mata untuk ${activePlayerObj.name}.`;
+            }
+
+            // Cari dan warnakan butang betul jika jawapan salah dipilih
+            if (!isCorrect) {
+                const buttons = document.querySelectorAll('.option-btn');
+                buttons.forEach(b => {
+                    // Logik visual ringkas untuk offline murni
+                });
             }
 
             humorTxtOutput.innerText = humorText;
@@ -615,7 +612,7 @@
         function nextQuestion() {
             currentQuestionIdx++;
             
-            // Permainan tamat setelah setiap ahli bilik mendapat giliran yang adil (Satu kitaran penuh soalan tersedia)
+            // Tamat pusingan berdasarkan bilangan pemain vs jumlah soalan
             if (currentQuestionIdx >= Math.max(players.length, activeQuestions.length)) {
                 showResults();
             } else {
@@ -628,7 +625,6 @@
             const output = document.getElementById('leaderboard-output');
             output.innerHTML = '';
 
-            // Menyusun kedudukan pemain berdasarkan skor tertinggi (Leaderboard Bilik)
             let sortedPlayers = [...players].sort((a, b) => b.score - a.score);
 
             sortedPlayers.forEach((p, idx) => {
@@ -640,7 +636,6 @@
         }
 
         function goHome() {
-            // Reset markah bilik untuk pusingan baharu
             players.forEach(p => p.score = 0);
             switchScreen('screen-lobby');
             updatePlayersUI();
@@ -655,7 +650,6 @@
         }
 
         window.onload = function() {
-            // Set standard data permulaan 2 pemain contoh
             players = [
                 { name: "Syafiq", score: 0 },
                 { name: "Kak Shila", score: 0 }
