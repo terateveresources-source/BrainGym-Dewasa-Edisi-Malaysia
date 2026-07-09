@@ -3,430 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BrainGym 500: Edisi Kalis Ulang ⚡</title>
+    <title>⚡ BrainGym 500: Edisi Minda Matang ⚡</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800;900&display=swap');
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Sora', 'Nunito', system-ui, -apple-system, sans-serif;
+            font-family: 'Sora', sans-serif;
         }
 
         body {
-            background-color: #f0f4f9;
-            background-image: 
-                radial-gradient(#e1e7f0 1.5px, transparent 1.5px), 
-                radial-gradient(#e1e7f0 1.5px, #f0f4f9 1.5px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            color: #1e293b;
-            min-height: 100vh;
+            background-color: #FFDE4D;
+            color: #000000;
             padding: 2rem 1rem;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
 
         .container {
             width: 100%;
-            max-width: 500px;
-            background: #ffffff;
-            border: 4px solid #1e293b;
-            box-shadow: 8px 8px 0px #1e293b;
-            border-radius: 32px;
+            max-width: 520px;
+            background: #FFFFFF;
+            border: 4px solid #000000;
+            box-shadow: 8px 8px 0px #000000;
+            border-radius: 24px;
             padding: 2rem;
-            transition: all 0.3s ease;
+            position: relative;
         }
 
         .hidden { display: none !important; }
 
+        /* NEO-BRUTALISM ELEMENTS */
         .app-title {
-            text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 900;
-            color: #1e293b;
-            letter-spacing: -1px;
             text-transform: uppercase;
-            margin-bottom: 0.2rem;
-            line-height: 1;
-        }
-        
-        .app-title span {
-            color: #ff5a5f;
-            display: block;
-            font-size: 1.3rem;
-            background: #ffe5e6;
-            padding: 4px 12px;
-            border-radius: 12px;
-            width: fit-content;
-            margin: 0.5rem auto 0 auto;
-            border: 2px solid #1e293b;
-            letter-spacing: 0px;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            -webkit-text-stroke: 1px #000000;
+            color: #FF6B6B;
+            text-shadow: 3px 3px 0px #000000;
         }
 
         .subtitle {
             text-align: center;
-            color: #64748b;
-            font-size: 0.85rem;
-            margin-bottom: 2rem;
             font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            font-size: 0.85rem;
+            background: #4F46E5;
+            color: #FFFFFF;
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: 2px solid #000000;
+            width: fit-content;
+            margin: 0 auto 2rem auto;
+            box-shadow: 2px 2px 0px #000000;
         }
 
         .card {
-            background: #f8fafc;
-            border: 3px solid #1e293b;
-            border-radius: 24px;
+            background: #FFFFFF;
+            border: 4px solid #000000;
+            box-shadow: 5px 5px 0px #000000;
+            border-radius: 20px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 4px 4px 0px #1e293b;
         }
 
+        .input-neo {
+            width: 100%;
+            padding: 1rem;
+            border: 4px solid #000000;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            box-shadow: 4px 4px 0px #000000;
+            outline: none;
+            margin-bottom: 1.5rem;
+            background: #F8FAFC;
+        }
+        .input-neo:focus {
+            background: #E0E7FF;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1.1rem;
+            border: 4px solid #000000;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 4px 4px 0px #000000;
+            transition: all 0.1s ease;
+            position: relative;
+        }
+        .btn:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0px #000000;
+        }
+        .btn-green { background: #6BCB77; color: #000000; }
+        .btn-cyan { background: #4D96FF; color: #000000; }
+        .btn-magenta { background: #FF6B6B; color: #FFFFFF; }
+        .btn-yellow { background: #FFD93D; color: #000000; }
+
+        /* BATCH GRID */
         .batch-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 0.6rem;
             margin-top: 1rem;
         }
-
         .batch-btn {
-            background: #ffffff;
-            border: 3px solid #1e293b;
-            color: #1e293b;
+            background: #FFFFFF;
+            border: 3px solid #000000;
             padding: 0.8rem 0;
-            border-radius: 16px;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 1.1rem;
+            border-radius: 12px;
             cursor: pointer;
-            box-shadow: 2px 2px 0px #1e293b;
+            box-shadow: 2px 2px 0px #000000;
             transition: all 0.1s ease;
         }
-        .batch-btn:hover {
-            background: #ffea79;
-            transform: translate(-2px, -2px);
-            box-shadow: 4px 4px 0px #1e293b;
-        }
+        .batch-btn:hover { background: #FFD93D; }
         .batch-btn:active {
-            transform: translate(0px, 0px);
-            box-shadow: 2px 2px 0px #1e293b;
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px #000000;
         }
         .batch-btn.completed {
-            background: #66cc99;
-            color: white;
+            background: #6BCB77;
+            color: #000000;
         }
 
-        .btn {
-            width: 100%;
-            padding: 1.1rem;
-            border: 3px solid #1e293b;
-            border-radius: 20px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            cursor: pointer;
-            transition: all 0.1s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        /* REWARD ITEM */
+        .reward-item {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 0.5rem;
+            padding: 1rem;
+            border: 3px solid #000000;
+            border-radius: 16px;
+            background: #F8FAFC;
+            margin-bottom: 0.75rem;
+            box-shadow: 3px 3px 0px #000000;
         }
-        .btn-cyan {
-            background: #5ce1e6;
-            color: #1e293b;
-            box-shadow: 4px 4px 0px #1e293b;
-        }
-        .btn-cyan:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #1e293b;
-        }
-        .btn-magenta {
-            background: #ff66a3;
-            color: white;
-            box-shadow: 4px 4px 0px #1e293b;
+        .reward-item.owned {
+            background: #E0E7FF;
+            border-color: #4F46E5;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 12px;
+        .badge-neo {
+            padding: 4px 10px;
+            border: 2px solid #000000;
             font-size: 11px;
             font-weight: 900;
             text-transform: uppercase;
-            border: 2px solid #1e293b;
+            border-radius: 8px;
+            box-shadow: 1px 1px 0px #000000;
         }
-        .b-mudah { background: #66cc99; color: white; }
-        .b-sederhana { background: #ffaa44; color: white; }
-        .b-sukar { background: #ff66a3; color: white; }
-        .tag-tema { background: #e2e8f0; color: #1e293b; border: 2px solid #1e293b; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; }
 
         .question-text {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
             line-height: 1.5;
             margin: 1.5rem 0;
-            color: #1e293b;
         }
 
-        .options-stack { display: flex; flex-direction: column; gap: 0.75rem; }
+        .opt-stack { display: flex; flex-direction: column; gap: 0.75rem; }
         .opt-btn {
-            background: #ffffff;
-            border: 3px solid #1e293b;
+            background: #FFFFFF;
+            border: 3px solid #000000;
             padding: 1.1rem;
-            border-radius: 18px;
-            color: #1e293b;
+            border-radius: 16px;
             text-align: left;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            width: 100%;
-            box-shadow: 3px 3px 0px #1e293b;
+            box-shadow: 3px 3px 0px #000000;
             transition: all 0.1s ease;
+            line-height: 1.4;
         }
         .opt-btn:hover {
-            background: #f1f5f9;
-            transform: translateX(4px);
+            background: #F1F5F9;
+            transform: translateX(3px);
         }
 
-        .alert {
+        .alert-box {
             padding: 1.2rem;
-            border-radius: 20px;
+            border-radius: 16px;
+            border: 4px solid #000000;
             text-align: center;
             font-weight: 900;
+            font-size: 1.2rem;
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            border: 3px solid #1e293b;
-            box-shadow: 4px 4px 0px #1e293b;
+            box-shadow: 4px 4px 0px #000000;
         }
-        .alert-win { background: #c6f6d5; color: #22543d; }
-        .alert-lose { background: #fed7d7; color: #742a2a; }
+        .alert-win { background: #6BCB77; }
+        .alert-lose { background: #FF6B6B; color: #FFFFFF; }
 
-        .progress-container { 
-            background: #e2e8f0; 
-            height: 14px; 
-            border-radius: 20px; 
-            border: 3px solid #1e293b;
-            overflow: hidden; 
-            margin-bottom: 1.5rem; 
+        .progress-container {
+            background: #000000;
+            height: 16px;
+            border-radius: 10px;
+            padding: 2px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
         }
-        .progress-bar { background: #ffca3a; height: 100%; width: 0%; transition: width 0.3s ease; }
+        .progress-bar {
+            background: #6BCB77;
+            height: 100%;
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
 
-        .stats-banner {
+        .nav-tabs {
             display: flex;
-            justify-content: space-around;
-            background: #f1f5f9;
-            padding: 0.8rem;
-            border-radius: 18px;
+            gap: 0.5rem;
             margin-bottom: 1.5rem;
-            font-weight: 900;
-            font-size: 0.95rem;
-            border: 3px solid #1e293b;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- MENU UTAMA -->
-        <div id="screen-menu">
-            <div class="app-title">BrainGym 500<span>MATRIX ANTI-ULANG</span></div>
-            <div class="subtitle">🧩 20 Sesi • 500 Simulasi Unik 🧩</div>
-
-            <div class="stats-banner">
-                <span>🏆 SKOR: <span id="stat-total-score" style="color: #ff66a3;">0</span></span>
-                <span>📦 SET: <span id="stat-batches-done" style="color: #ffca3a;">0/20</span></span>
-            </div>
-
+        
+        <div id="screen-login">
+            <div class="app-title">BrainGym 500</div>
+            <div class="subtitle">💥 EDISI MINDA MATANG v2.0 💥</div>
             <div class="card">
-                <h3 style="margin-bottom: 0.2rem; font-weight: 900; font-size: 1.1rem;">Pilih Nombor Sesi:</h3>
-                <div class="batch-grid" id="batch-buttons-container"></div>
-            </div>
-
-            <div class="card" id="batch-info-card" style="background: #fffbdf;">
-                <h3 id="selected-batch-title" style="font-weight: 900; font-size: 1.3rem;">Sila Pilih Sesi</h3>
-                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.2rem; margin-top: 0.5rem;">
-                    <span id="selected-batch-level" class="badge b-mudah">Level</span>
-                    <span id="selected-batch-status" class="tag-tema">Status</span>
-                </div>
-                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>Mula Sesi Sekarang 🚀</button>
+                <h3 style="margin-bottom: 0.8rem; font-weight: 900;">Daftar Profil Minda:</h3>
+                <input type="text" id="player-name-input" class="input-neo" placeholder="Masukkan nama panggilan anda...">
+                <button class="btn btn-green" onclick="registerProfile()">Mula Pengembaraan Minda 🚀</button>
             </div>
         </div>
 
-        <!-- GAMEPLAY -->
+        <div id="screen-menu" class="hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div>
+                    <span style="font-size: 0.8rem; font-weight: 800; color: #64748b;">PENGGUNA:</span>
+                    <h4 id="display-player-name" style="font-weight: 900; font-size: 1.2rem; text-transform: uppercase;">PLAYER</h4>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 0.8rem; font-weight: 800; color: #64748b;">TOTAL MATA:</span>
+                    <h4 id="display-total-score" style="font-weight: 900; font-size: 1.2rem; color: #4F46E5;">0 PTS</h4>
+                </div>
+            </div>
+
+            <div class="nav-tabs">
+                <button class="btn btn-yellow" style="padding: 0.6rem; font-size: 0.85rem;" onclick="switchTab('sessions')">📦 Sesi Batches</button>
+                <button class="btn btn-cyan" style="padding: 0.6rem; font-size: 0.85rem;" onclick="switchTab('rewards')">🏆 Kedai Ganjaran</button>
+            </div>
+
+            <div id="tab-sessions">
+                <div class="card">
+                    <h3 style="font-weight: 900; font-size: 1.1rem; margin-bottom: 0.2rem;">Pilih Sesi Ujian:</h3>
+                    <p style="font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 1rem;">Setiap batch mengandungi 25 simulasi 100% kalis ulang.</p>
+                    <div class="batch-grid" id="batch-buttons-container"></div>
+                </div>
+
+                <div class="card" id="selected-batch-card" style="background: #F8FAFC;">
+                    <h3 id="selected-batch-title" style="font-weight: 900;">Sila Pilih Mana-mana Batch</h3>
+                    <div style="display: flex; gap: 0.5rem; margin: 0.6rem 0 1.2rem 0;">
+                        <span id="selected-batch-level" class="badge-neo" style="background: #FFD93D;">LEVEL</span>
+                        <span id="selected-batch-status" class="badge-neo" style="background: #FFFFFF;">STATUS</span>
+                    </div>
+                    <button class="btn btn-magenta" id="btn-start-session" onclick="startSessionCampaign()" disabled>⚡ Kunci & Buka Sesi ⚡</button>
+                </div>
+            </div>
+
+            <div id="tab-rewards" class="hidden">
+                <div class="card">
+                    <h3 style="font-weight: 900; margin-bottom: 1rem;">🏆 Ganjaran Pencapaian Minda</h3>
+                    <div id="rewards-list-container"></div>
+                </div>
+            </div>
+        </div>
+
         <div id="screen-gameplay" class="hidden">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span id="game-batch-label" style="font-weight: 900; color: #1e293b; font-size: 0.9rem;">BATCH 01</span>
-                <span id="game-progress-label" style="font-weight: 900; color: #64748b; font-size: 0.9rem;">SOALAN 1/25</span>
+                <span id="game-batch-label" style="font-weight: 900; text-transform: uppercase; font-size: 0.85rem;">BATCH</span>
+                <span id="game-progress-label" style="font-weight: 900; font-size: 0.85rem; color: #4F46E5;">SOALAN 1/25</span>
             </div>
             <div class="progress-container"><div class="progress-bar" id="game-progress-bar"></div></div>
 
-            <div class="card" style="background: #ffffff;">
-                <div style="display: flex; gap: 0.5rem; align-items: center;">
-                    <span id="game-level-badge" class="badge b-mudah">MUDAH</span>
-                    <span id="game-tema-badge" class="tag-tema">TEMA</span>
+            <div class="card">
+                <div style="display: flex; gap: 0.4rem; margin-bottom: 1rem;">
+                    <span id="game-level-badge" class="badge-neo" style="background: #6BCB77;">MUDAH</span>
+                    <span id="game-tema-badge" class="badge-neo" style="background: #E2E8F0;">TEMA</span>
                 </div>
-                <div class="question-text" id="game-question-text">Memuatkan kes simulasi...</div>
-                <div class="options-stack" id="game-options-container"></div>
+                <div class="question-text" id="game-question-text">Memuatkan simulasi kes...</div>
+                <div class="opt-stack" id="game-options-container"></div>
             </div>
         </div>
 
-        <!-- FEEDBACK -->
         <div id="screen-feedback" class="hidden">
-            <div id="feedback-alert-box" class="alert">STATUS</div>
-            <div class="card" style="background: #fafafa;">
-                <h4 style="color: #1e293b; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 900;">💡 LOGIK SITUASI:</h4>
-                <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.5; color: #334155; font-weight: 700;"></p>
+            <div id="feedback-alert-box" class="alert-box">STATUS JAWAPAN</div>
+            <div class="card" style="background: #F8FAFC; border-color: #4F46E5;">
+                <h4 style="font-weight: 900; color: #4F46E5; margin-bottom: 0.4rem;">🧠 REFLEKSI LOGIK MATANG:</h4>
+                <p id="feedback-explanation-text" style="font-size: 1rem; font-weight: 700; line-height: 1.5; color: #1E293B;"></p>
             </div>
-            <button class="btn btn-cyan" onclick="nextCampaignStep()">Seterusnya ➡️</button>
+            <button class="btn btn-green" onclick="nextCampaignStep()">Teruskan Langkah Simulasi ➡️</button>
         </div>
 
-        <!-- SUMMARY -->
         <div id="screen-summary" class="hidden" style="text-align: center;">
             <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉</div>
-            <h2 style="font-weight: 900; font-size: 1.8rem;" id="summary-title">Tamat Sesi</h2>
-            <p style="color: #1e293b; font-weight: 900; margin-bottom: 1.5rem; font-size: 1.4rem;" id="summary-score-text">Skor: 0 Pts</p>
-            <div class="card" style="text-align: left; background: #ffffff;">
-                <h4 style="margin-bottom: 0.4rem; font-weight: 900;">ULASAN MINDA:</h4>
-                <p id="summary-evaluation" style="color: #475569; font-weight: 700; line-height: 1.5;">Ulasan...</p>
+            <h2 style="font-weight: 900; text-transform: uppercase; margin-bottom: 0.2rem;" id="summary-title">Sesi Selesai!</h2>
+            <p style="font-weight: 900; font-size: 1.4rem; color: #4F46E5; margin-bottom: 1.5rem;" id="summary-score-text">Skor: 0 Mata</p>
+            
+            <div class="card" style="text-align: left;">
+                <h4 style="font-weight: 900; margin-bottom: 0.4rem;">ULASAN PEMIKIRAN:</h4>
+                <p id="summary-evaluation" style="font-weight: 700; font-size: 0.95rem; color: #475569; line-height: 1.5;">Ulasan...</p>
             </div>
-            <button class="btn btn-magenta" onclick="exitToMainMenu()">Kembali Ke Menu</button>
+            <button class="btn btn-magenta" onclick="exitToMainMenu()">Kembali Ke Papan Dashboard</button>
         </div>
+
     </div>
 
     <script>
-        const dTema = ["Common Sense", "Vibe Sosial", "Street Smart", "Problem Solving", "Integriti Awam"];
-        
-        // 25 Subjek Unik tempatan
-        const dSubjek = [
-            "Tengah drive cari parking kat flat malam-malam,", 
-            "Masa tengah beratur panjang kat kaunter Zus Coffee,", 
-            "Waktu korang stop rehat kat R&R PLUS,", 
-            "Tengah syok layan makan kat food court mall,", 
-            "Masa parking kereta nak singgah beli nasi kandar,", 
-            "Waktu tengah bersesak dalam LRT time balik kerja,",
-            "Tengah lepak borak dengan member lama kat mamak,", 
-            "Masa uruskan dokumen kat kaunter JPJ,",
-            "Tengah scroll phone masa rehat office,", 
-            "Masa tengah check group WhatsApp taman perumahan,",
-            "Waktu tengah bayar barang kat kaunter speedmart,", 
-            "Tunggu turn basuh kereta kat carwash,",
-            "Masa tengah jogging kat taman rekreasi petang,", 
-            "Tengah pilih barang basah kat pasar borong,",
-            "Waktu korang tengah tunggu order makan kat McD,", 
-            "Tengah tengok wayang kat dalam cinema,",
-            "Masa tengah tunggu lif kat lobi kondominium,", 
-            "Tengah isi minyak kereta kat stesen Shell,",
-            "Waktu hantar barang rosak kat pusat servis,", 
-            "Tengah lepak minum petang kat cafe hipster,",
-            "Masa tengah urusan withdraw duit kat mesin ATM,",
-            "Tengah beli tiket dekat kaunter ETS stesen KTM,",
-            "Waktu tersangkut dalam jem teruk kat depan sekolah,",
-            "Masa tengah pusing-pusing kiosk karnival jualan jom heboh,",
-            "Tengah teman adik beli buku kat kedai Popular,"
+        // DATA KLUSTER PENJAMIN KESAHIHAN LOGIK & ANTI-BERULANG (500 UNIQUE COMBINATIONS METRIC)
+        const klusterLokasi = [
+            "di kawasan flat kos rendah waktu malam", "di kaunter premis perniagaan yang sesak", "di kawasan hentian R&R lebuhraya",
+            "di medan selera pusat membeli-belah", "di kawasan parkir restoran nasi kandar", "di dalam tren pengangkutan awam waktu puncak",
+            "di sebuah restoran mamak 24 jam", "di kaunter pejabat urusan dokumentasi kerajaan", "di dalam ruang pantri pejabat waktu rehat",
+            "di pekarangan kawasan perumahan berpagar", "di kaunter kedai serbaneka rangkaian tempatan", "di ruang menunggu pusat cuci kereta",
+            "di kawasan trek rekreasi taman awam", "di tapak jualan pasar borong waktu awal pagi", "di kaunter pesanan restoran makanan segera",
+            "di dalam ruang panggung wayang", "di lobi lif utama bangunan kondominium", "di pam stesen minyak lebuhraya",
+            "di kaunter khidmat pelanggan pusat servis", "di dalam ruang kafe hipster tempatan", "di hadapan mesin pengeluaran wang ATM",
+            "di kaunter tiket stesen pengangkutan bersepadu", "di persimpangan lampu isyarat utama", "di kawasan pasar malam hujung minggu",
+            "di ruang legar pusat perpustakaan awam"
         ];
 
-        // 25 Situasi Unik (Tiada ayat bertindih)
-        const dSituasi = [
-            "korang perasan ada kete selamba double-park tak tarik handbrake.",
-            "ada mamat acah-acah borak phone pastu selamba potong queue depan korang.",
-            "korang perasan ada pakcik ni muka blur gila depan kiosk tiket digital.",
-            "ada group sebelah meja sembang kuat gila isu perkauman sensitif.",
-            "cashier tersilap pass baki balance terlebih RM50 sebab tengah kalut.",
-            "korang nampak ada budak kecik menangis sorang-sorang panggil mak dia.",
-            "ada rider tersenggol cermin sisi kereta korang pastu dia terus blah.",
-            "korang dapat mesej random nak pinjam duit urgen.",
-            "jiran sebelah rumah jemur kain sampai masuk parking lot korang.",
-            "ada orang drop dompet dia atas lantai tapi dia langsung tak sedar.",
-            "korang nampak pakcik guard kena marah kaw-kaw dengan customer biadab.",
-            "ada kereta belakang pasang lampu high-beam tinggi gila menyilaukan mata.",
-            "korang perasan ada orang curi-curi ambil gambar perempuan sebelah dia.",
-            "ada penghantar barang salah hantar parcel berharga tinggi ke rumah korang.",
-            "korang terdengar staf kedai mengutuk customer depan-depan guna bahasa asing.",
-            "ada orang selamba buang sampah plastik keluar dari tingkap kereta mewah.",
-            "korang nampak ada makcik terjatuh tangga sebab barang bawakannya berat.",
-            "ada kaunter khidmat pelanggan kosong lama sangat padahal orang beratur panjang.",
-            "korang terjumpa kad pengenalan (IC) orang tercicir kat atas mesin ATM.",
-            "ada anjing liar menyalak kuat sekat laluan korang nak balik rumah.",
-            "korang nampak budak sekolah kena buli atau pow duit dengan budak besar.",
-            "ada bau gas bocor kuat gila datang dari arah dapur kedai makan.",
-            "korang nampak orang tua kena tipu dengan ejen gores dan menang tepi jalan.",
-            "ada individu tak dikenali cuba ikut korang rapat gila dari stesen LRT.",
-            "korang perasan ada aircond kedai menitik kuat betul-betul atas meja makan."
+        const klusterIsu = [
+            "sebuah kenderaan sengaja melakukan double-park tanpa menarik brek tangan dan menghalang laluan utama pemanduan.",
+            "seorang individu tidak dikenali berpura-pura menggunakan telefon bimbit untuk memotong barisan giliran anda secara terang-terangan.",
+            "seorang warga emas kelihatan tersangat bingung dan buntu untuk mengendalikan skrin mesin transaksi layan diri digital.",
+            "sekumpulan pelanggan di meja sebelah dengan sengaja bersembang kuat mengenai isu sensitif serta provokasi melampau.",
+            "petugas kaunter tersilap memulangkan baki bayaran tunai yang berlebihan RM50 kepada anda akibat keadaan keliru.",
+            "seorang kanak-kanak kecil kelihatan menangis bersendirian tanpa pengawasan penjaga sambil memanggil ibu bapanya.",
+            "seorang penunggang motosikal tersenggol cermin sisi kenderaan anda sehingga berpusing lalu dia terus melarikan diri.",
+            "anda menerima mesej ringkas mencurigakan daripada kenalan lama yang cuba meminjam wang kecemasan dalam kadar segera.",
+            "jiran kediaman selamba menyidai ampaian kain sehingga memasuki petak ruang halaman rumah milik anda.",
+            "seorang individu di hadapan anda tercicir beg dompetnya yang tebal di atas lantai tanpa dia sedari.",
+            "seorang pelanggan bertindak biadab dengan memaki hamun petugas keselamatan barisan hadapan atas isu teknikal kecil.",
+            "pemandu kenderaan di belakang anda bertindak mengekor rapat sambil menyalakan lampu limpah (high-beam) secara agresif.",
+            "anda mengesan tindakan seorang individu yang sedang merakam gambar penumpang lain secara sembunyi dan mencurigakan.",
+            "pihak kurier tersalah menghantar bungkusan barangan bernilai tinggi terus ke hadapan pintu rumah kediaman anda.",
+            "pekerja premis secara terbuka memperlekehkan pelanggan lain menggunakan bahasa asing yang kebetulan anda fahami.",
+            "pemandu sebuah kenderaan mewah bertindak membuang sisa sampah domestik keluar dari tingkap kereta ke atas jalan.",
+            "seorang warga emas wanita hilang keseimbangan lalu terjatuh akibat membawa barang muatan yang terlalu sarat.",
+            "kaunter utama dibiarkan kosong tanpa petugas dalam tempoh yang lama menyebabkan barisan menunggu menjadi terlalu panjang.",
+            "anda menemui sekeping kad pengenalan warganegara yang ditinggalkan secara tidak sengaja di atas slot mesin ATM.",
+            "beberapa ekor haiwan liar bertindak agresif menyekat laluan jalan kaki utama komuniti untuk pulang ke rumah.",
+            "seorang remaja kelihatan sedang ditekan, dibuli, serta dipaksa menyerahkan wang saku oleh sekumpulan remaja lain.",
+            "anda terhidu dengan jelas impak kebocoran gas yang amat kuat datang dari arah zon rantaian dapur premis makanan.",
+            "seorang warga tua sedang dikelilingi oleh sekumpulan ejen jualan yang cuba menawarkan skim gores dan menang meragukan.",
+            "anda menyedari diri anda sedang diekori secara rapat oleh individu mencurigakan sejurus keluar dari fasiliti awam.",
+            "sistem penghawa dingin premis mengalami kebocoran kritikal lalu menitiskan air kotor tepat ke atas hidangan makanan anda."
         ];
 
-        // 25 Set jawapan & huraian khusus untuk padanan situasi
-        const dPilihanSet = [
-            { o: ["Tolak kete tu slow-slow ke depan, atau cari contact dashboard.", "Hon panjang sampai satu flat keluar.", "Calarkan pintu biar dia ada akal.", "Post kat FB bagi kena kecam."], h: "Utamakan solution pantas tanpa drama gaduh. Tolak selamat atau contact terus." },
-            { o: ["Tegur elok-elok, minta beratur belakang sebab ramai tunggu.", "Jerit bagi dia malu terus.", "Biarkan je sbb malas cari pasal.", "Tolak dia keluar dari barisan."], h: "Tegur secara direct tapi tegas. Sifat tegas elakkan orang ambil kesempatan." },
-            { o: ["Datang dekat, senyum dan bantu dia tekan skrin.", "Pandang je sambil geleng kepala.", "Cakap kat guard suruh setelkan.", "Ambil video up kat TikTok."], h: "Sikap street smart penuh empati. Mudahkan urusan orang, urusan kita akan dipermudahkan." },
-            { o: ["Abaikan dorang, sambung sembang topik lain.", "Join sekaki gaduh mulut.", "Baling kerusi biar pecah.", "Report owner kedai suruh halau."], h: "Emosi kena jaga. Melayan orang toksik kat tempat awam cuma merugikan masa anda." },
-            { o: ["Pulangkan baki terlebih, kesian gaji dia kena potong.", "Masuk poket, anggap rezeki terpijak.", "Cepat-cepat jalan keluar kedai.", "Guna duit tu buat belanja amal."], h: "Integriti basic hidup dewasa. Duit orang bukan hak kita, kesian pekerja gaji hari." },
-            { o: ["Bawa budak ke kaunter info/security terdekat.", "Biarkan je, mak bapak dia nanti cari.", "Bawa balik rumah terus bela.", "Jerit kuat-kuat tanya anak siapa."], h: "Langkah paling selamat elak salah faham kes culik: serahkan pada pihak berkuasa premis." },
-            { o: ["Biarkan je kalau tak pecah, malas cari fasal.", "Kejar sampai dapat paksa ganti rugi.", "Ambil plat, terus pi buat report polis.", "Sumpah seranah dalam kereta."], h: "Kalau tak rosak teruk, beralah lebih jimat masa dan tenaga. Settle guna dashcam jika parah." },
-            { o: ["Call nombor tu terus untuk verify suara mamat tu.", "Terus transfer sebab kesian sangat.", "Block terus nombor tanpa fikir.", "Kutuk nombor tu dalam group scam."], h: "Jangan mudah percaya taktik pinjam duit urgen kat chat. Verify pakai suara dulu!" },
-            { o: ["Tolak ampaian tu elok-elok, borak face-to-face.", "Campak kain baju dia atas jalan.", "Report majlis perbandaran terus.", "Simbah air kotor kat kain jemuran."], h: "Hubungan jiran kena jaga. Tegur elok-elok secara matang elak permusuhan berpanjangan." },
-            { o: ["Panggil dia kuat-kuat pulangkan dompet.", "Ambil dompet tu simpan buat aset.", "Biarkan je orang lain ambil.", "Tendang dompet bawah kerusi."], h: "Kejujuran refleksi diri. Memulangkan hak orang adalah sifat dewasa yang terpuji." },
-            { o: ["Tegur customer tu suruh hormat pekerja.", "Sokong customer tu sekali.", "Buat video viral tanpa tolong.", "Jalan terus buat tak tahu."], h: "Pertahankan orang yang tertindas secara profesional mendedahkan nilai kematangan anda." },
-            { o: ["Adjust cermin sisi atau bagi dia potong.", "Break mengejut bagi dia langgar.", "Pasang lampu spotlight balas balik.", "Berhenti tengah jalan ajak gaduh."], h: "Jaga keselamatan diri di jalan raya. Mengalah bukan kalah, tapi mengelak kemalangan." },
-            { o: ["Tegur pelaku face-to-face atau maklum mangsa.", "Biarkan je bukan urusan kita.", "Ikut ambil gambar pelaku juga.", "Jerit 'oi pencuri!' kuat-kuat."], h: "Sikap peka keadaan sekeliling mampu menyelamatkan orang lain daripada menjadi mangsa jenayah." },
-            { o: ["Hantar semula ke rumah jiran yang sepatutnya.", "Buka parcel ambil barang dalam tu.", "Jual barang tu kat Carousell.", "Simpan sorang-sorang dalam stor."], h: "Amanah harta benda. Bukan hak kita wajib dikembalikan kepada pemilik sebenar." },
-            { o: ["Tegur staf tu secara direct dengan tegas.", "Buat tak tahu sbb tak faham bahasa.", "Tulis review buruk kat Google Maps.", "Ajak member boikot kedai tu."], h: "Menegur salah laku profesional di hadapan mereka menunjukkan keberanian berkomunikasi." },
-            { o: ["Ambil sampah tu, letak balik atas bonet kete dia.", "Biarkan je sbb ada tukang sapu.", "Sumpah seranah pemandu tersebut.", "Ambil gambar report aplikasi JPJ."], h: "Sumbangan sivik terbaik ialah melaporkan atau bertindak matang tanpa merosakkan harta benda." },
-            { o: ["Bantu makcik tu bangun dan kutip barang.", "Langkah makcik tu sbb tengah rushing.", "Panggil orang lain suruh tolong.", "Gelakkan makcik tu dalam hati."], h: "Sifat kemanusiaan asas. Tolong orang yang lemah adalah tanda kekuatan peribadi." },
-            { o: ["Tanya staf berdekatan tentang status kaunter.", "Bising-bising hempas barang atas meja.", "Terus balik rumah tak jadi uruskan.", "Post kat twitter tag akaun rasmi."], h: "Menyelesaikan masalah secara rasional melalui saluran betul menjimatkan masa semua orang." },
-            { o: ["Serahkan IC tersebut pada kaunter bank/polis.", "Simpan buat koleksi peribadi.", "Buang dalam tong sampah terdekat.", "Post gambar penuh IC tanpa tapisan kat FB."], h: "Melindungi data peribadi orang lain. Serahkan pada pihak berkuasa dengan selamat." },
-            { o: ["Cari jalan alternatif atau jalan tenang.", "Baling batu kasi anjing tu lari.", "Jerit balik kat anjing tersebut.", "Provok bagi anjing tu gigit."], h: "Street smart bermaksud tahu mengelak bahaya fizikal tanpa mencetuskan ancaman baharu." },
-            { o: ["Campur tangan secara tegas atau panggil cikgu.", "Join sekaki pow duit budak tu.", "Buat-buat tak nampak jalan terus.", "Rakam video buat kenangan."], h: "Menolak buli bermakna anda seorang pelindung komuniti yang bertanggungjawab." },
-            { o: ["Maklumkan staf segera dan keluar dari premis.", "Sambung makan sbb makanan sedap.", "Nyalakan rokok nak test gas.", "Jerit 'kebakaran!' bagi semua kalut."], h: "Keselamatan nyawa diutamakan. Bertindak pantas dan tenang menyelamatkan nyawa." },
-            { o: ["Tarik orang tua tu keluar dari zon penipuan.", "Biarkan janji bukan mak bapak kita.", "Join sekaki beli tiket gores menang.", "Ketawakan orang tua sbb lurus bendul."], h: "Melindungi golongan veteran daripada scammer mencerminkan nilai moral yang tinggi." },
-            { o: ["Masuk ke kedai makan ramai orang/hubungi polis.", "Berhenti ajak bertumbuk kat lorong.", "Jalan makin laju ke tempat sunyi.", "Menangis tepi jalan sorang-sorang."], h: "Kesedaran keselamatan tinggi. Cari kawasan tumpuan ramai bagi menghalang niat jahat pelaku." },
-            { o: ["Minta tukar meja lain dengan pekerja kedai.", "Sengaja biarkan baju basah lencun.", "Marah jerit kat pelayan kedai.", "Tolak meja tu sampai terbalik."], h: "Menukar kedudukan secara tenang menyelesaikan isu tanpa merosakkan mood makan anda." }
+        const klusterPilihan = [
+            { o: ["Mengajak jiran terdekat untuk menolak kenderaan tersebut dialihkan ke tepi secara selamat.", "Membunyikan hon tanpa henti sehingga pemilik keluar.", "Menggariskan pintu kereta tersebut menggunakan kunci sebagai pengajaran.", "Merakam gambar dan menularkannya di platform media sosial komuniti."], h: "Mengutamakan solusi praktikal yang pantas berbanding tindakan emosi yang memanjangkan konflik." },
+            { o: ["Menegur individu tersebut secara bersemuka dengan nada tegas namun mengekalkan adab profesional.", "Menjerit ke arahnya bagi memastikan dia mendapat malu di khalayak ramai.", "Mendiamkan diri sahaja kerana enggan mencetuskan sebarang pergaduhan.", "Bertindak menolak tubuhnya keluar daripada barisan secara fizikal."], h: "Ketegasan diri yang matang mampu menetapkan sempadan sosial tanpa perlu bertindak agresif." },
+            { o: ["Menghampiri beliau dengan senyuman lalu menawarkan bantuan navigasi sistem secara mesra.", "Memandang sinis dari jauh sambil merungut kerana beliau melambatkan urusan.", "Meminta pengawal keselamatan untuk menguruskan situasi warga emas tersebut.", "Merakam gelagat beliau untuk dijadikan kandungan video jenaka di media sosial."], h: "Nilai street smart yang tinggi sentiasa diiringi oleh rasa empati sosial terhadap golongan yang memerlukan." },
+            { o: ["Mengabaikan provokasi tersebut dan memilih untuk fokus kepada perbualan atau urusan sendiri.", "Mencelah perbualan mereka lalu memulakan pertengkaran hujah yang agresif.", "Bertindak agresif merosakkan harta benda premis bagi menunjukkan protes.", "Mendesak pemilik premis menghalau keluar kumpulan tersebut serta-merta."], h: "Kematangan emosi dewasa diukur daripada keupayaan mengawal diri daripada terjebak dalam perangkap toksik." },
+            { o: ["Memulangkan semula wang lebihan tersebut kepada juruwang demi menjaga integriti dan nasib pekerja.", "Menyimpan wang tersebut ke dalam dompet sebagai bonus rezeki terpijak.", "Segera beredar meninggalkan lokasi kejadian agar tidak dikesan semula.", "Menggunakan wang tersebut untuk tujuan sumbangan tanpa persetujuan pemilik asal."], h: "Integriti asas kehidupan tidak boleh digadaikan oleh peluang keuntungan jangka pendek." },
+            { o: ["Membawa kanak-kanak tersebut ke pusat kawalan keselamatan atau kaunter informasi rasmi terdekat.", "Membiarkannya sahaja dengan tanggapan ibu bapa mereka akan menemuinya kelak.", "Mengambil keputusan membawa budak itu pulang ke rumah anda untuk dijaga.", "Menjerit dengan kuat bertanya hak milik anak siapakah yang sedang menangis itu."], h: "Mengendalikan situasi berisiko memerlukan pematuhan terhadap protokol keselamatan awam bagi mengelak salah faham." },
+            { o: ["Meneruskan pemanduan secara tenang, menyemak impak melalui dashcam, lalu membuat laporan jika perlu.", "Mengejar penunggang tersebut secara berbahaya demi menuntut ganti rugi segera.", "Membuat laporan polis on-the-spot tanpa mempunyai bukti nombor plat yang jelas.", "Meluahkan kemarahan dengan memaki hamun di dalam ruang kenderaan anda sendiri."], h: "Keselamatan nyawa di jalan raya jauh lebih bernilai berbanding kerosakan fizikal kos rendah." },
+            { o: ["Menghubungi talian kenalan itu terus untuk pengesahan identiti dan suara bagi mengelak taktik scammer.", "Terus melakukan pemindahan wang atas dasar simpati tanpa berfikir panjang.", "Menyekat (block) nombor tersebut serta-merta tanpa mahu menyiasat kebenaran.", "Menularkan nombor akaun bank yang diberikan ke dalam group perbualan awam."], h: "Sikap berhati-hati dan rasional adalah benteng utama daripada menjadi mangsa penipuan digital moden." },
+            { o: ["Mengajak jiran berbincang secara matang face-to-face untuk mencari solusi ruang perkongsian.", "Bertindak mencampak ampaian kain jiran ke atas permukaan jalan raya.", "Membuat aduan rasmi kepada majlis perbandaran agar tindakan saman dikenakan.", "Sengaja menyimbah air kotor ke arah pakaian jiran yang sedang dijemur itu."], h: "Keharmonian kejiranan jangka panjang memerlukan komunikasi interaktif yang berhemah tinggi." },
+            { o: ["Memanggil individu tersebut dengan kuat sambil menyerahkan semula dompet yang tercicir.", "Mengambil dompet itu lalu menyembunyikannya untuk kepentingan kegunaan peribadi.", "Membiarkan sahaja dompet itu di lantai dengan andaian orang lain akan mengambilnya.", "Menendang dompet itu ke bawah struktur kerusi berdekatan agar tidak kelihatan."], h: "Memulangkan hak milik orang lain mencerminkan kualiti moral paling tulen seseorang dewasa." },
+            { o: ["Intervensi situasi secara tenang dengan meminta pelanggan tersebut menghormati ruang tugas pekerja.", "Menyokong tindakan pelanggan tersebut untuk memeriahkan suasana pertengkaran.", "Merakam video kejadian untuk ditularkan tanpa melakukan sebarang bantuan fizikal.", "Segera melangkah pergi daripada kawasan tersebut bagi mengelak penglibatan."], h: "Mempertahankan maruah pekerja barisan hadapan secara profesional adalah tanda komuniti yang sihat." },
+            { o: ["Mengekalkan kelajuan selamat, mengasingkan silauan cermin, atau memberi ruang untuk dia memotong.", "Bertindak menekan brek secara mengejut (brake-check) untuk memberi amaran keras.", "Memasang lampu limpah tambahan bahagian belakang kenderaan untuk membalas dendam.", "Menghentikan kenderaan di tengah jalan raya lalu turun mencabar pemandu tersebut."], h: "Pemandu defensif mengutamakan pengurusan risiko kemalangan berbanding kemenangan ego." },
+            { o: ["Memaklumkan perkara tersebut secara bijak kepada mangsa atau melaporkannya kepada pihak pengurusan.", "Mengabaikan situasi tersebut kerana beranggapan ia bukan urusan peribadi anda.", "Turut serta mengambil gambar pelaku berkenaan untuk disimpan sebagai koleksi.", "Menjerit menuduh pelaku sebagai penjenayah secara meluru tanpa usul periksa."], h: "Kepekaan terhadap keselamatan persekitaran mampu membanteras gejala gangguan seksual awam." },
+            { o: ["Menghubungi pihak kurier atau menghantar semula bungkusan ke alamat jiran yang sepatutnya.", "Membuka bungkusan tersebut dan menggunakan barangan di dalamnya secara percuma.", "Menjual semula barangan bernilai tinggi itu di platform e-dagang untuk untung mudah.", "Menyimpan bungkusan itu di dalam stor rumah dan berpura-pura tidak tahu."], h: "Amanah menguruskan harta benda tersalah hantar adalah sebahagian daripada tanggungjawab sivil." },
+            { o: ["Menegur salah laku profesional staf tersebut secara terus dengan tegas dan beradab.", "Mendiamkan diri kerana berasa bersyukur bukan diri anda yang menjadi mangsa kutukan.", "Menulis ulasan (review) berbaur emosi ekstrem di platform carian digital kedai.", "Mengajak rakan-rakan lain memboikot perniagaan tersebut tanpa menyatakan sebab."], h: "Menegur secara profesional di tempat kejadian memberi peluang penambahbaikan kualiti khidmat." },
+            { o: ["Merakam bukti visual plat kenderaan tersebut lalu membuat laporan rasmi sivil.", "Mengutip semula sampah tersebut lalu mencampakkannya semula ke dalam kereta mewah itu.", "Meluahkan makian berbaur kemarahan ekstrem ke arah pemandu kereta tersebut.", "Membiarkan sahaja kerana menganggap ia adalah bidang tugas rasmi pekerja pembersihan."], h: "Tindakan sivil yang berlandaskan undang-undang mendidik masyarakat dengan lebih berkesan." },
+            { o: ["Membantu memapah warga emas tersebut serta mengutip kembali barangan yang bertaburan.", "Melangkah melepasi beliau begitu sahaja kerana anda sedang mengejar masa.", "Menjerit meminta orang asing lain untuk datang memberikan bantuan.", "Mentertawakan kejadian tersebut dari jauh secara senyap dalam hati."], h: "Sifat ihsan dan tolong-menolong adalah asas utama kekuatan moral sesebuah bangsa." },
+            { o: ["Mencari staf lain yang berdekatan untuk bertanyakan status pengurusan kaunter secara rasional.", "Menghempas barangan di atas meja kaunter bagi menunjukkan protes kemarahan anda.", "Mengambil keputusan untuk membatalkan urusan lalu pulang ke rumah dengan marah.", "Membuat hantaran luahan emosi negatif di media sosial sambil menandakan akaun menteri."], h: "Menyelesaikan masalah birokrasi secara matang memerlukan tindakan melalui saluran rasmi." },
+            { o: ["Menyerahkan kad pengenalan tersebut kepada pihak pengurusan bank atau balai polis terdekat.", "Menyimpan kad tersebut sebagai koleksi simpanan peribadi yang unik.", "Membuang kad pengenalan itu ke dalam tong sampah terdekat supaya tidak disalahguna.", "Memuat naik gambar penuh dokumen tersebut di media sosial tanpa menapis data privasi."], h: "Melindungi kerahsiaan data peribadi pihak ketiga adalah satu keperluan undang-undang moden." },
+            { o: ["Mencari laluan alternatif yang lebih selamat atau bergerak secara tenang tanpa mencetuskan panik.", "Bertindak membaling batu batu kerikil ke arah haiwan tersebut agar ia lari.", "Menjerit dengan kuat ke arah haiwan berkenaan untuk menguji tahap agresif.", "Sengaja melakukan provokasi fizikal untuk melihat reaksi tindak balas haiwan itu."], h: "Mengelak daripada potensi ancaman fizikal secara bijak adalah sebahagian daripada kemahiran street smart." },
+            { o: ["Melakukan intervensi lisan secara tegas untuk menghentikan perbuatan tersebut atau memanggil otoriti.", "Menyertai kumpulan tersebut untuk bersama-sama menindas mangsa buli.", "Berpura-pura tidak melihat kejadian dan meneruskan langkah kaki keluar.", "Mengeluarkan telefon pintar untuk merakam video demi tujuan tontonan peribadi."], h: "Menentang kezaliman buli dalam komuniti menunjukkan keberanian sivil yang tinggi." },
+            { o: ["Segera mengarahkan orang sekeliling menjauhi kawasan dan memaklumkan pengurusan premis.", "Meneruskan aktiviti makan minum kerana hidangan yang dipesan baru sahaja tiba.", "Mencuba menyalakan pemetik api untuk menguji tahap kepekatan gas tersebut.", "Menjerit mencetuskan keadaan panik berskala besar sehingga orang ramai bertindak merempuh."], h: "Tindakan pantas, berstruktur dan bertenang semasa situasi kecemasan mampu menyelamatkan banyak nyawa." },
+            { o: ["Menarik warga tua tersebut keluar secara sopan daripada zon interaksi ejen meragukan itu.", "Membiarkan sahaja senario itu berlaku kerana menganggap ia bukan ahli keluarga sendiri.", "Turut serta mendaftar nama untuk membeli pakej gores dan menang yang ditawarkan.", "Mentertawakan warga tua tersebut kerana dianggap terlalu lurus bendul."], h: "Melindungi golongan rentan daripada eksploitasi sindiket adalah tanggungjawab sosial bersama." },
+            { o: ["Melangkah masuk ke dalam premis komersial yang ramai orang dan menghubungi talian kecemasan.", "Berhenti mengejut di kawasan lorong gelap lalu mengajak individu tersebut bertumbuk.", "Mempercepatkan langkah kaki menuju ke arah kawasan semak yang lebih sunyi.", "Duduk menangis di tepi jalan raya sambil berserah kepada takdir persekitaran."], h: "Kesedaran keselamatan diri yang tinggi mengutamakan zon tumpuan ramai sebagai perlindungan." },
+            { o: ["Meminta pertukaran meja makan yang baharu daripada pengurusan restoran secara baik.", "Membiarkan sahaja sisa air kotor tersebut menitik ke atas pakaian dan tubuh anda.", "Menjerit memarahi pelayan restoran peringkat bawahan dengan perkataan kesat.", "Bertindak menterbalikkan meja makan tersebut sebagai tanda protes kemarahan."], h: "Menyelesaikan isu fasiliti secara tenang memastikan emosi dan selera makan anda tidak terjejas." }
         ];
 
-        // ALGORITMA UTAMA ANTI-ULANG MUTLAK
-        function janaSoalan500(noId) {
-            // Rotational Offset Mapping menggunakan pusingan matematik berbeza bagi setiap index array
-            let idxSubjek = (noId - 1) % 25;
+        const ganjaranStore = [
+            { id: "r1", nama: "Sijil Street-Smart", kos: 1200, icon: "📜", desc: "Membuktikan anda faham selok-belok vibe jalanan." },
+            { id: "r2", nama: "Lencana Master Logik", kos: 2500, icon: "🧠", desc: "Pengiktirafan otak kelas pertama anti-emosi." },
+            { id: "r3", nama: "Trofi Neon Minda", kos: 5000, icon: "🏆", desc: "Anugerah agung komuniti BrainGym dewasa." },
+            { id: "r4", nama: "Pingat Kebal Manipulasi", kos: 8000, icon: "🥇", desc: "Tahap maksima minda kalis taktik scammer sivil." }
+        ];
+
+        // ENGINE GENERATOR DATABASE 500 SOALAN MUTLAK (DYNAMIC LOGIC PATTERN)
+        function dapatkanSoalanSpesifik(noId) {
+            let indexLokasi = (noId - 1) % 25;
+            // Formula anjakan berstruktur memastikan pasangan situasi sentiasa unik & tiada ulangan ayat dalam 500 kombinasi
+            let indexIsu = ((noId - 1) * 7 + Math.floor((noId - 1) / 25)) % 25;
             
-            // Menggunakan pendaraban nombor perdana (7) dan anjakan mengikut blok id untuk tukar pasangan situasi
-            let idxSituasi = ((noId - 1) * 7 + Math.floor((noId - 1) / 25)) % 25;
-            
-            // Set jawapan dipadankan mengikut situasi supaya logiknya sentiasa betul & tidak lari skop
-            let idxPilihan = idxSituasi; 
-
+            let dataPilihan = klusterPilihan[indexIsu];
             let tahap = "mudah";
             if (noId > 150 && noId <= 350) tahap = "sederhana";
             if (noId > 350) tahap = "sukar";
-            
-            let idxTema = (noId * 3) % dTema.length;
+
+            let temaIdx = (noId * 3) % dTema.length;
 
             return {
-                id: noId, 
-                level: tahap, 
-                tema: dTema[idxTema],
-                q: `[Kes #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`,
-                o: [...dPilihanSet[idxPilihan].o], 
-                h: dPilihanSet[idxPilihan].h
+                id: noId,
+                batch: Math.ceil(noId / 25),
+                level: tahap,
+                tema: dTema[temaIdx],
+                q: `Semasa anda berada ${klusterLokasi[indexLokasi]}, tiba-tiba ${klusterIsu[indexIsu]}`,
+                o: [...dataPilihan.o],
+                h: dataPilihan.h,
+                ans: 0, // Pilihan pertama senantiasa merupakan jawapan terbaik berlandaskan logik matang
+                points: 40
             };
         }
 
-        let appState = { totalScore: 0, batchCompleted: {} };
-        let activeBatch = null; let activeQuestionIndex = 0;
-        let activeBatchScore = 0; let activeQuestionsAnswered = 0;
-        let correctAnswerGridIdx = 0;
+        // STATE APLIKASI
+        let appState = {
+            playerName: "",
+            totalScore: 0,
+            batchCompleted: {},
+            ownedRewards: []
+        };
 
-        function loadStorage() {
-            let localData = localStorage.getItem("BrainGym500_AntiLoop_Premium");
-            if (localData) { appState = JSON.parse(localData); } 
-            else { for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1; saveStorage(); }
-            updateGlobalStats();
+        let activeBatch = null;
+        let currentQuestionInBatch = 0; // 0 hingga 24
+        let currentActiveQuestionData = null;
+        let activeBatchScore = 0;
+        let randomOptionsOrder = [];
+
+        // LOAD & SAVE DATA
+        function initApp() {
+            let localData = localStorage.getItem("BrainGym500_MindaMatang_v3");
+            if (localData) {
+                appState = JSON.parse(localData);
+                document.getElementById('screen-login').classList.add('hidden');
+                document.getElementById('screen-menu').classList.remove('hidden');
+                setupDashboard();
+            } else {
+                for (let i = 1; i <= 20; i++) appState.batchCompleted[i] = -1;
+            }
         }
-        function saveStorage() { localStorage.setItem("BrainGym500_AntiLoop_Premium", JSON.stringify(appState)); }
-        function updateGlobalStats() {
-            document.getElementById('stat-total-score').innerText = appState.totalScore;
-            let doneCount = Object.values(appState.batchCompleted).filter(v => v !== -1).length;
-            document.getElementById('stat-batches-done').innerText = `${doneCount}/20`;
+
+        function saveState() {
+            localStorage.setItem("BrainGym500_MindaMatang_v3", JSON.stringify(appState));
+        }
+
+        function registerProfile() {
+            let inputName = document.getElementById('player-name-input').value.trim();
+            if (inputName === "") {
+                alert("Sila masukkan nama panggilan anda untuk profil!");
+                return;
+            }
+            appState.playerName = inputName;
+            saveState();
+            document.getElementById('screen-login').classList.add('hidden');
+            document.getElementById('screen-menu').classList.remove('hidden');
+            setupDashboard();
+        }
+
+        function setupDashboard() {
+            document.getElementById('display-player-name').innerText = appState.playerName;
+            document.getElementById('display-total-score').innerText = `${appState.totalScore} PTS`;
+            renderBatchGrid();
+            renderRewardsStore();
         }
 
         function renderBatchGrid() {
@@ -440,106 +493,19 @@
 
         function selectBatch(batchNum) {
             activeBatch = batchNum;
-            let levelLabel = "MUDAH"; let levelClass = "b-mudah";
-            if(batchNum > 6 && batchNum <= 14) { levelLabel = "SEDERHANA"; levelClass = "b-sederhana"; }
-            if(batchNum > 14) { levelLabel = "SUKAR"; levelClass = "b-sukar"; }
+            let levelLabel = "MUDAH";
+            if (batchNum > 6 && batchNum <= 14) levelLabel = "SEDERHANA";
+            if (batchNum > 14) levelLabel = "SUKAR";
 
-            document.getElementById('selected-batch-title').innerText = `Sesi Kes: Batch ${batchNum}`;
-            const lvlBadge = document.getElementById('selected-batch-level');
-            lvlBadge.innerText = levelLabel; lvlBadge.className = `badge ${levelClass}`;
-
-            let scoreLama = appState.batchCompleted[batchNum];
-            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Skor: ${scoreLama} Pts` : "Belum Mula";
-            document.getElementById('btn-start-campaign').disabled = false;
-        }
-
-        function startSoloCampaign() {
-            switchScreen('screen-gameplay');
-            document.getElementById('game-batch-label').innerText = `BATCH SESSIONS: ${activeBatch}`;
-            activeQuestionIndex = ((activeBatch - 1) * 25) + 1;
-            activeBatchScore = 0; activeQuestionsAnswered = 0;
-            loadNextSoloQuestion();
-        }
-
-        function loadNextSoloQuestion() {
-            switchScreen('screen-gameplay');
-            let qData = janaSoalan500(activeQuestionIndex);
-
-            document.getElementById('game-progress-label').innerText = `SOALAN ${activeQuestionsAnswered + 1}/25`;
-            document.getElementById('game-progress-bar').style.width = `${(activeQuestionsAnswered / 25) * 100}%`;
-
-            const lvlB = document.getElementById('game-level-badge');
-            lvlB.innerText = qData.level.toUpperCase(); lvlB.className = `badge b-${qData.level}`;
-            document.getElementById('game-tema-badge').innerText = qData.tema;
-            document.getElementById('game-question-text').innerText = qData.q;
-
-            // Rawakkan paparan susunan butang pilihan A, B, C, D di skrin
-            let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
-            susunanRawak.sort(() => Math.random() - 0.5);
-
-            const optContainer = document.getElementById('game-options-container');
-            optContainer.innerHTML = "";
-
-            susunanRawak.forEach((c, gridIdx) => {
-                if (c.originalIdx === 0) correctAnswerGridIdx = gridIdx;
-                optContainer.innerHTML += `
-                    <button class="opt-btn" onclick="submitSoloAnswer(${gridIdx})">
-                        <strong>${String.fromCharCode(65 + gridIdx)}.</strong> ${c.text}
-                    </button>
-                `;
-            });
-        }
-
-        function submitSoloAnswer(selectedGridIdx) {
-            let qData = janaSoalan500(activeQuestionIndex);
-            let isCorrect = selectedGridIdx === correctAnswerGridIdx;
-            const alertBox = document.getElementById('feedback-alert-box');
-
-            if (isCorrect) {
-                activeBatchScore += 40;
-                alertBox.className = "alert alert-win"; alertBox.innerText = "🎯 JAWAPAN TEPAT (+40 MATA)";
-            } else {
-                let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
-                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ PILIHAN KURANG TEPAT (Jawapan: [ ${correctLetter} ])`;
-            }
-
-            document.getElementById('feedback-explanation-text').innerText = qData.h;
-            switchScreen('screen-feedback');
-        }
-
-        function nextCampaignStep() {
-            activeQuestionsAnswered++; activeQuestionIndex++;
-            if (activeQuestionsAnswered >= 25) { concludeBatch(); } else { loadNextSoloQuestion(); }
-        }
-
-        function concludeBatch() {
-            switchScreen('screen-summary');
-            document.getElementById('summary-title').innerText = `Sesi ${activeBatch} Selesai!`;
-            document.getElementById('summary-score-text').innerText = `Skor: ${activeBatchScore} / 1000 Mata`;
-
-            let previousBest = appState.batchCompleted[activeBatch];
-            if (activeBatchScore > previousBest) {
-                let diff = previousBest === -1 ? activeBatchScore : activeBatchScore - previousBest;
-                appState.totalScore += diff; appState.batchCompleted[activeBatch] = activeBatchScore; saveStorage();
-            }
-
-            let evalText = "Boleh tahan mantap logik harian korang. Teruskan mengasah otak dalam siri kempen yang lain!";
-            if(activeBatchScore >= 800) evalText = "Padu! Pemikiran korang sangat street-smart, peka, dan memang faham realiti hidup.";
+            document.getElementById('selected-batch-title').innerText = `BATCH SESI ${batchNum}`;
+            document.getElementById('selected-batch-level').innerText = levelLabel;
             
-            document.getElementById('summary-evaluation').innerText = evalText;
-            updateGlobalStats();
+            let rekodSkor = appState.batchCompleted[batchNum];
+            document.getElementById('selected-batch-status').innerText = rekodSkor !== -1 ? `SKOR: ${rekodSkor}/1000` : "BELUM MULA";
+            document.getElementById('btn-start-session').disabled = false;
         }
 
-        function exitToMainMenu() { switchScreen('screen-menu'); renderBatchGrid(); selectBatch(activeBatch); }
-
-        function switchScreen(id) {
-            ['screen-menu', 'screen-gameplay', 'screen-feedback', 'screen-summary'].forEach(sid => {
-                document.getElementById(sid).classList.add('hidden');
-            });
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        window.onload = function() { loadStorage(); renderBatchGrid(); };
-    </script>
-</body>
-</html>
+        function switchTab(tabName) {
+            if (tabName === 'sessions') {
+                document.getElementById('tab-sessions').classList.remove('hidden');
+                document.getElementById('tab-rewards').classList.add('hidden');
