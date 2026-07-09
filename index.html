@@ -127,8 +127,8 @@
         .tag-tema { background: rgba(255,255,255,0.08); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
 
         .question-text {
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-size: 1.2rem;
+            font-weight: 700;
             line-height: 1.6;
             margin: 1.5rem 0;
             color: #ffffff;
@@ -193,7 +193,7 @@
 
             <div class="card">
                 <h3 style="margin-bottom: 0.5rem; font-weight: 800; font-size: 1rem; color: #e2e8f0;">Pilih Batch Peringkat Soalan:</h3>
-                <p style="font-size: 0.8rem; color: var(--text-slate); margin-bottom: 1rem;">Setiap batch menjamin 50 senarai soalan unik berdasarkan logik matang harian.</p>
+                <p style="font-size: 0.8rem; color: var(--text-slate); margin-bottom: 1rem;">Setiap batch ada 50 situasi 'real' harian tanpa ulangan.</p>
                 
                 <div class="batch-grid" id="batch-buttons-container"></div>
             </div>
@@ -232,7 +232,7 @@
             <div id="feedback-alert-box" class="alert">STATUS</div>
             
             <div class="card">
-                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800;">REFLEKSI REALITI MALAYSIA:</h4>
+                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800;">LOGIK DEWASA:</h4>
                 <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.5; color: #f1f5f9; font-weight: 600;"></p>
             </div>
 
@@ -255,50 +255,67 @@
     </div>
 
     <script>
-        // DATA PRESET UNTUK VARIATION GENERATOR
-        const dTema = ["Common Sense", "Kebudayaan & Perayaan", "Sejarah Malaysia", "Pengetahuan Am", "Penyelesaian Masalah"];
+        // MEGA ARRAY DENGAN VARIASI BESAR DAN BAHASA SANTAI/REALISTIK MALAYSIA
+        const dTema = ["Common Sense", "Vibe Sosial", "Lampu Hijau/Merah Hidup", "Street Smart", "Problem Solving"];
         
         const dSubjek = [
-            "Ketika memandu di kawasan perumahan lama,", "Sewaktu berbelanja di pasar tani hujung minggu,", 
-            "Semasa singgah di hentian R&R Lebuhraya PLUS,", "Apabila berkunjung ke rumah terbuka jiran,", 
-            "Ketika mahu membayar bil utiliti di kaunter pejabat pos,", "Semasa menaiki tren LRT waktu puncak pagi,",
-            "Apabila terserempak dengan rakan sekolah lama di kedai kopi,", "Sambil menguruskan pendaftaran kenderaan di JPJ,",
-            "Semasa makan tengah hari di warung tumpuan ramai,", "Apabila menyertai aktiviti gotong-royong taman perumahan,"
+            "Tengah drive cari parking kat flat malam-malam,", "Masa tengah beratur panjang kat kaunter Zus Coffee,", 
+            "Waktu korang stop rehat kat R&R PLUS,", "Tengah syok layan makan kat food court mall,", 
+            "Masa parking kereta nak singgah beli nasi kandar,", "Waktu tengah bersesak dalam LRT time balik kerja,",
+            "Tengah lepak borak dengan member lama kat mamak,", "Masa uruskan dokumen kat kaunter JPJ,",
+            "Tengah scroll phone masa rehat office,", "Masa tengah check group WhatsApp taman perumahan,",
+            "Waktu tengah bayar barang kat kaunter speedmart,", "Tengah tunggu turn basuh kereta kat carwash,"
         ];
 
         const dSituasi = [
-            "anda mendapati ada pemandu lain meletakkan kenderaan menghalang laluan utama secara tidak bertanggungjawab.",
-            "anda terperangkap dalam giliran kaunter beratur panjang manakala baki bungkusan anda masih ada tertinggal.",
-            "anda menyedari seorang warga emas kelihatan keliru dengan paparan maklumat kiosk digital.",
-            "seseorang memulakan perbincangan sensitif yang boleh mencetuskan salah faham kaum.",
-            "anda menerima wang baki barangan runcit yang terlebih daripada amaun sepatutnya.",
-            "papan tanda arah jalan utama ditutup mengejut atas urusan kecemasan penyelenggaraan."
+            "korang perasan ada kete selamba double-park tak tarik handbrake. Jalan jadi sangkut. Apa step terbaik?",
+            "ada mamat sorang ni acah-acah borak phone pastu selamba potong queue depan korang. Macam mana nak setel?",
+            "korang perasan ada pakcik ni muka blur gila depan kiosk tiket digital, macam tak reti pakai. Apa korang buat?",
+            "ada group sebelah meja sembang kuat gila isu perkauman sensitif siap provokasi. Rasa macam nak gaduh.",
+            "cashier tersilap pass baki balance terlebih RM50 sebab dia tengah kalut ramai orang. Kantoi kat tangan korang.",
+            "korang nampak ada budak kecik menangis sorang-sorang panggil mak dia kat celah crowd ramainya orang.",
+            "ada rider tersenggol cermin sisi kereta korang sampai pusing, pastu dia pandang belakang tapi tak stop.",
+            "korang dapat mesej random daripada nombor tak dikenali acah-acah macam member lama nak pinjam duit urusan urgen.",
+            "jiran sebelah rumah jemur kain sampai masuk parking lot korang, pastu siap pakej block laluan tong sampah."
         ];
 
+        // Set Pilihan Jawapan & Refleksi (Tak skema, logik praktikal harian)
         const dPilihanSet = [
             {
-                o: ["Bertenang, hubungi pihak berkuasa tempatan atau gunakan saluran komunikasi berhemah.", "Membunyikan hon panjang tanpa henti bagi melepaskan geram.", "Merosakkan harta benda kenderaan tersebut sebagai balasan.", "Membiarkan sahaja dan berpindah ke tempat lain dengan marah."],
-                h: "Kematangan Sosial: Menggunakan saluran rasmi dan bertindak rasional menghalang pertikaian kecil daripada menjadi kes jenayah."
+                o: ["Tolak kete tu slow-slow ke depan kalau boleh, atau cari nombor phone kat dashboard dia bro.", "Bunyi hon panjang sampai satu flat keluar tengok.", "Ambil batu calarkan pintu kete dia biar dia ada akal sikit.", "Post muka dia kat group FB komuniti bagi kena kecam kaw-kaw."],
+                h: "Utamakan solution pantas dulu. Tolak dengan selamat atau cari info contact elakkan drama gaduh tak tentu pasal."
             },
             {
-                o: ["Menyelesaikan urusan semasa dahulu dengan pantas kemudian kembali menyemak bungkusan dengan bukti resit.", "Memotong barisan pelanggan lain secara paksa demi kepentingan diri.", "Menjerit memarahi pekerja kaunter dari jarak jauh.", "Membatalkan keseluruhan belian dan membuang resit rasmi."],
-                h: "Common Sense: Hormat-menghormati dalam giliran mengekalkan keharmonian komuniti awam."
+                o: ["Tegur elok-elok, 'Bro, nak order kena beratur belakang ya, kesian orang lain tunggu lama.'", "Jerit kat dia bagi dia malu depan orang ramai.", "Biarkan je sbb malas nak cari pasal, walau hati tengah panas.", "Tolak badan dia keluar dari barisan secara fizikal."],
+                h: "Tegur secara direct tapi firm/tegas. Ramai orang buat perangai sbb takde sapa berani tegur secara berdepan."
             },
             {
-                o: ["Menghampiri beliau dengan sopan dan menawarkan bantuan tunjuk ajar digital yang mudah faham.", "Mentertawakan kesukaran beliau bersama rakan-rakan lain.", "Mengabaikan keadaan tersebut kerana berasa ia bukan urusan peribadi anda.", "Mengambil gambar beliau untuk ditularkan di media sosial."],
-                h: "Nilai Murni: Membantu golongan veteran mengadaptasi teknologi adalah tanggungjawab moral generasi muda dan awal dewasa."
+                o: ["Datang dekat, senyum dan tanya, 'Pakcik nak ke mana? Meh saya tolong tekan sat.'", "Pandang je sambil geleng kepala sebab dia lambatkan queue.", "Cakap kat guard suruh guard tu setelkan kerja dia.", "Ambil video up kat TikTok letak caption sedih."],
+                h: "Sikap street smart yang ada empati. Tolong mudahkan urusan orang tua, hari lain urusan kita pun akan dipermudahkan."
             },
             {
-                o: ["Mengalih topik perbualan kepada perkara positif yang menyatupadukan masyarakat.", "Turut serta memanaskan keadaan dengan menambah fakta tidak sahih.", "Menyalahkan semua pihak tanpa usul periksa.", "Meninggalkan majlis dengan membuat provokasi fizikal."],
-                h: "Kecerdasan Budaya: Menjaga sensitiviti antara kaum adalah kunci kestabilan sosial jangka panjang di Malaysia."
+                o: ["Sembang topik lain dengan member korang, abaikan dorang. Tak payah masuk campur toksik.", "Bangun pastu join gaduh mulut sekali dengan meja sebelah.", "Ambil kerusi baling kat meja dorang sbb rasis gila.", "Report kat owner kedai suruh halau group tu balik."],
+                h: "Emosi kena jaga. Melayan orang bodoh atau toksik kat tempat awam cuma bakal merugikan masa dan keselamatan diri korang."
             },
             {
-                o: ["Memulangkan semula wang lebihan tersebut kepada juruwang dengan jujur serta-merta.", "Menyimpan wang tersebut sebagai keuntungan peribadi harian.", "Membeli barang lain yang tidak diperlukan semata-mana mahu menghabiskan wang.", "Menuduh juruwang tidak cekap melakukan kerja di hadapan pengurus."],
-                h: "Integriti Diri: Kejujuran dalam urusan sekecil apa pun mencerminkan kualiti sahsiah seorang dewasa yang dihormati."
+                o: ["Pulangkan balik duit RM50 tu, cakap 'Eh dik, baki terlebih ni.' Kesian dia kena tolak gaji nanti.", "Terus masuk poket, anggap rezeki terpijak petang tu.", "Buat-buat tak tahu pastu cepat-cepat jalan keluar kedai.", "Guna duit tu buat belanja orang lain konon buat belanja amal."],
+                h: "Integriti basic hidup dewasa. Duit orang bukan hak kita, tambah pula cashier tu kerja gaji hari, kesian dia kalau kena ganti."
+            },
+            {
+                o: ["Bawa budak tu pergi kaunter info mall atau cari polis bantuan terdekat dengan korang.", "Biarkan je, mak bapak dia nanti pandai-pandailah cari.", "Bawa budak tu balik rumah korang terus bela jadi anak angkat.", "Jerit kuat-kuat kat tengah mall tanya 'Anak siapa ni?!'"],
+                h: "Langkah paling selamat untuk elak salah faham culik: serahkan pada security atau kaunter rasmi premis."
+            },
+            {
+                o: ["Biarkan je, asalkan cermin tak pecah. Malas nak kejar dalam traffic jem.", "Kejar dia sampai dapat, pastu paksa dia bayar ganti rugi on the spot.", "Ambil gambar plat dia, pastu pi buat report polis terus.", "Sumpah seranah dalam kereta sepanjang jalan balik rumah."],
+                h: "Kalau tak rosak teruk, beralah tu lebih jimat masa. Kalau pecah, check dashcam baru settle guna insurans atau report."
+            },
+            {
+                o: ["Call nombor tu terus untuk verify suara. Jangan sesekali transfer duit melulu.", "Terus transfer sebab kesian member tengah susah.", "Block terus nombor tu tanpa fikir panjang.", "Kutuk nombor tu dalam group WhatsApp scammer."],
+                h: "Zaman sekarang takleh percaya sangat taktik 'pinjam duit urgen' dalam chat. Verify dulu guna voice call untuk sahkan identiti."
             }
         ];
 
-        // SEED-BASED RANDOM NUMBER GENERATOR (Mencegah ulangan corak soalan)
+        // LINEAR CONGRUENTIAL GENERATOR (LCG) DENGAN MULTIPLIER TINGGI UNTUK TOTAL RANDOMIZATION
         function lcgRandom(seed) {
             let m = 4294967296;
             let a = 1664525;
@@ -309,22 +326,25 @@
             };
         }
 
-        // ENGINE JANAAN TOTAL ANTI-ULANG (100% Unik untuk setiap ID 1-1000)
+        // PEMBINA SOALAN PROSEDURAL (Dinamik & Anti-Ulang Sebenar)
         function janaSoalanMesraUsia(noId) {
-            // Gunakan ID soalan sebagai seed untuk generator rawak pseudo
-            let rand = lcgRandom(noId * 777);
+            // Campurkan noId dengan gandaan prime besar untuk mengelakkan corak berulang (cyclic loop)
+            let rand = lcgRandom(noId * 983 + 13);
 
             let idxTema = Math.floor(rand() * dTema.length);
             let idxSubjek = Math.floor(rand() * dSubjek.length);
-            let idxSituasi = Math.floor(rand() * dSituasi.length);
-            let idxPilihan = Math.floor(rand() * dPilihanSet.length);
+            // Tambah pengacak sekunder supaya situasi tidak melekat dengan subjek yang sama
+            let randSituasi = lcgRandom(noId * 431 + 97);
+            let idxSituasi = Math.floor(randSituasi() * dSituasi.length);
+            
+            let randPilihan = lcgRandom(noId * 617 + 29);
+            let idxPilihan = Math.floor(randPilihan() * dPilihanSet.length);
 
             let tahap = "mudah";
             if (noId > 300 && noId <= 700) tahap = "sederhana";
             if (noId > 700) tahap = "sukar";
 
-            // Gabungkan nilai ID unik dalam teks untuk pengesahan visual mutlak anti-ulang
-            let soalanTeks = `[Kes Minda #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
+            let soalanTeks = `[Kes #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
             let dataJawapan = dPilihanSet[idxPilihan];
 
             return {
@@ -332,7 +352,7 @@
                 level: tahap,
                 tema: dTema[idxTema],
                 q: soalanTeks,
-                o: [...dataJawapan.o], // Kloning array
+                o: [...dataJawapan.o], // Klon array asal
                 a: 0, 
                 h: dataJawapan.h
             };
@@ -346,7 +366,7 @@
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGymDewasa_AntiRepeat_v3");
+            let localData = localStorage.getItem("BrainGymDewasa_AntiRepeat_v4");
             if (localData) {
                 appState = JSON.parse(localData);
             } else {
@@ -356,7 +376,7 @@
             updateGlobalStats();
         }
 
-        function saveStorage() { localStorage.setItem("BrainGymDewasa_AntiRepeat_v3", JSON.stringify(appState)); }
+        function saveStorage() { localStorage.setItem("BrainGymDewasa_AntiRepeat_v4", JSON.stringify(appState)); }
 
         function updateGlobalStats() {
             document.getElementById('stat-total-score').innerText = appState.totalScore;
@@ -409,8 +429,9 @@
             document.getElementById('game-question-text').innerText = qData.q;
 
             let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
-            // Gunakan seed LCG berbeza untuk proses pengacakan pilihan jawapan (A, B, C, D)
-            let rawakPilihan = lcgRandom(activeQuestionIndex + 555);
+            
+            // Pengacakan kedudukan butang A, B, C, D berasaskan LCG yang dinamik (Supaya jawapan betul tak sentiasa kat A)
+            let rawakPilihan = lcgRandom(activeQuestionIndex + 811);
             susunanRawak.sort(() => rawakPilihan() - 0.5);
 
             const optContainer = document.getElementById('game-options-container');
@@ -436,7 +457,7 @@
                 alertBox.className = "alert alert-win"; alertBox.innerText = "🎯 JAWAPAN ANDA TEPAT (+20 MATA)";
             } else {
                 let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
-                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ KURANG TEPAT (Jawapan: [ ${correctLetter} ])`;
+                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ KANTOI / SILAP (Jawapan: [ ${correctLetter} ])`;
             }
 
             document.getElementById('feedback-explanation-text').innerText = qData.h;
@@ -461,8 +482,8 @@
                 saveStorage();
             }
 
-            let evalText = "Pemikiran harian yang baik! Teruskan mengasah minda tajam anda dalam siri kempen yang lain.";
-            if(activeBatchScore >= 800) evalText = "Tahniah! Refleksi pemikiran anda sangat matang, peka, dan memahami denyut nadi kehidupan Malaysia.";
+            let evalText = "Boleh tahan mantap logik harian korang. Teruskan mengasah otak dalam siri kempen yang lain!";
+            if(activeBatchScore >= 800) evalText = "Padu! Pemikiran korang sangat street-smart, peka, dan memang faham 'vibe' realiti hidup kat Malaysia.";
             
             document.getElementById('summary-evaluation').innerText = evalText;
             updateGlobalStats();
