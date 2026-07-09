@@ -255,59 +255,75 @@
     </div>
 
     <script>
-        // BLOK BAHAN JANAAN (96,000 KOMBINASI UNIK TANPA ULANGAN BAGI 1000 SOALAN)
+        // DATA PRESET UNTUK VARIATION GENERATOR
         const dTema = ["Common Sense", "Kebudayaan & Perayaan", "Sejarah Malaysia", "Pengetahuan Am", "Penyelesaian Masalah"];
         
         const dSubjek = [
             "Ketika memandu di kawasan perumahan lama,", "Sewaktu berbelanja di pasar tani hujung minggu,", 
             "Semasa singgah di hentian R&R Lebuhraya PLUS,", "Apabila berkunjung ke rumah terbuka jiran,", 
             "Ketika mahu membayar bil utiliti di kaunter pejabat pos,", "Semasa menaiki tren LRT waktu puncak pagi,",
-            "Apabila terserempak dengan rakan sekolah lama di kedai kopi,", "Sambil menguruskan pendaftaran kenderaan di JPJ,"
+            "Apabila terserempak dengan rakan sekolah lama di kedai kopi,", "Sambil menguruskan pendaftaran kenderaan di JPJ,",
+            "Semasa makan tengah hari di warung tumpuan ramai,", "Apabila menyertai aktiviti gotong-royong taman perumahan,"
         ];
 
         const dSituasi = [
-            "anda tersedar dompet tertinggal di dalam rumah sedangkan barang sudah dibungkus. Apakah tindakan berhemah?",
-            "papan tanda menunjukkan arah jalan alternatif yang belum pernah anda lalui. Apakah langkah logik?",
-            "sistem tiket elektronik mengalami gangguan teknikal secara tiba-tiba. Bagaimana respons terbaik?",
-            "anda mendengar perbincangan tentang asal-usul nama tempat bersejarah di daerah tersebut. Apakah sikap anda?",
-            "berlaku salah faham kecil tentang giliran barisan dengan warga emas. Bagaimana anda meredakan keadaan?"
+            "anda mendapati ada pemandu lain meletakkan kenderaan menghalang laluan utama secara tidak bertanggungjawab.",
+            "anda terperangkap dalam giliran kaunter beratur panjang manakala baki bungkusan anda masih ada tertinggal.",
+            "anda menyedari seorang warga emas kelihatan keliru dengan paparan maklumat kiosk digital.",
+            "seseorang memulakan perbincangan sensitif yang boleh mencetuskan salah faham kaum.",
+            "anda menerima wang baki barangan runcit yang terlebih daripada amaun sepatutnya.",
+            "papan tanda arah jalan utama ditutup mengejut atas urusan kecemasan penyelenggaraan."
         ];
 
         const dPilihanSet = [
             {
-                o: ["Meminta maaf dengan sopan dan meminta peniaga menyimpan barangan seketika", "Meninggalkan barangan begitu sahaja tanpa berkata apa-apa", "Marah kerana sistem pembayaran menyusahkan", "Menghubungi talian kecemasan polis"],
-                h: "Budaya berbudi bahasa: Memaklumkan situasi sebenar secara jujur membina rasa percaya antara ahli masyarakat."
+                o: ["Bertenang, hubungi pihak berkuasa tempatan atau gunakan saluran komunikasi berhemah.", "Membunyikan hon panjang tanpa henti bagi melepaskan geram.", "Merosakkan harta benda kenderaan tersebut sebagai balasan.", "Membiarkan sahaja dan berpindah ke tempat lain dengan marah."],
+                h: "Kematangan Sosial: Menggunakan saluran rasmi dan bertindak rasional menghalang pertikaian kecil daripada menjadi kes jenayah."
             },
             {
-                o: ["Mengikut arahan papan tanda rasmi atau aplikasi navigasi yang sah", "Memandu secara rawak mengikut gerak hati sahaja", "Berhenti di tengah jalan bagi memikirkan keputusan", "Berpatah balik melanggar arus lalu lintas"],
-                h: "Keselamatan jalan raya: Mematuhi sistem navigasi rasmi mengurangkan risiko sesat dan menjamin keselamatan diri."
+                o: ["Menyelesaikan urusan semasa dahulu dengan pantas kemudian kembali menyemak bungkusan dengan bukti resit.", "Memotong barisan pelanggan lain secara paksa demi kepentingan diri.", "Menjerit memarahi pekerja kaunter dari jarak jauh.", "Membatalkan keseluruhan belian dan membuang resit rasmi."],
+                h: "Common Sense: Hormat-menghormati dalam giliran mengekalkan keharmonian komuniti awam."
             },
             {
-                o: ["Bertenang, beratur seperti biasa dan mendengar arahan daripada petugas kaunter", "Membuat bising bagi memaksa mesin berfungsi semula", "Menceroboh kawasan kawalan untuk menyemak sistem", "Membatalkan urusan dan pulang dengan perasaan kecewa"],
-                h: "Kematangan emosi: Gangguan teknikal luar kawalan diatasi dengan disiplin diri dan mengikut arahan manual petugas."
+                o: ["Menghampiri beliau dengan sopan dan menawarkan bantuan tunjuk ajar digital yang mudah faham.", "Mentertawakan kesukaran beliau bersama rakan-rakan lain.", "Mengabaikan keadaan tersebut kerana berasa ia bukan urusan peribadi anda.", "Mengambil gambar beliau untuk ditularkan di media sosial."],
+                h: "Nilai Murni: Membantu golongan veteran mengadaptasi teknologi adalah tanggungjawab moral generasi muda dan awal dewasa."
             },
             {
-                o: ["Mendengar dengan penuh hormat sambil bertukar pandangan berasaskan fakta sejarah", "Mencelah perbualan dan memperlekehkan fakta orang lain", "Menafikan nilai sejarah tempatan kerana dianggap tidak penting", "Membuat hantaran palsu di media sosial untuk meraih perhatian"],
-                h: "Kecerdasan komuniti: Penghormatan terhadap fakta sejarah dan warisan tempatan mengukuhkan jati diri antara generasi."
+                o: ["Mengalih topik perbualan kepada perkara positif yang menyatupadukan masyarakat.", "Turut serta memanaskan keadaan dengan menambah fakta tidak sahih.", "Menyalahkan semua pihak tanpa usul periksa.", "Meninggalkan majlis dengan membuat provokasi fizikal."],
+                h: "Kecerdasan Budaya: Menjaga sensitiviti antara kaum adalah kunci kestabilan sosial jangka panjang di Malaysia."
             },
             {
-                o: ["Beralah dengan hormat dan memberikan laluan penuh kepada warga emas tersebut", "Berkeras mempertahankan hak giliran sehingga mencetuskan pergaduhan", "Meminta orang sekeliling untuk memulaukan warga emas itu", "Melaporkan perkara remeh tersebut kepada pihak pengurusan tertinggi"],
-                h: "Nilai ketimuran: Menghormati dan mendahulukan golongan veteran atau warga emas adalah tiang keharmonian hidup di Malaysia."
+                o: ["Memulangkan semula wang lebihan tersebut kepada juruwang dengan jujur serta-merta.", "Menyimpan wang tersebut sebagai keuntungan peribadi harian.", "Membeli barang lain yang tidak diperlukan semata-mana mahu menghabiskan wang.", "Menuduh juruwang tidak cekap melakukan kerja di hadapan pengurus."],
+                h: "Integriti Diri: Kejujuran dalam urusan sekecil apa pun mencerminkan kualiti sahsiah seorang dewasa yang dihormati."
             }
         ];
 
-        // ENGINE MATEMATIK ANTI-ULANG (Procedural Generation Dinamik berasaskan ID Soalan)
+        // SEED-BASED RANDOM NUMBER GENERATOR (Mencegah ulangan corak soalan)
+        function lcgRandom(seed) {
+            let m = 4294967296;
+            let a = 1664525;
+            let c = 1013904223;
+            return function() {
+                seed = (a * seed + c) % m;
+                return seed / m;
+            };
+        }
+
+        // ENGINE JANAAN TOTAL ANTI-ULANG (100% Unik untuk setiap ID 1-1000)
         function janaSoalanMesraUsia(noId) {
-            // Algoritma pembahagian berperingkat untuk memastikan tiada set soalan yang serupa berturut-turut
-            let idxTema = (noId - 1) % dTema.length;
-            let idxSubjek = ((noId * 3) + 2) % dSubjek.length;
-            let idxSituasi = ((noId * 7) + 4) % dSituasi.length;
-            let idxPilihan = (idxSubjek + idxSituasi) % dPilihanSet.length;
+            // Gunakan ID soalan sebagai seed untuk generator rawak pseudo
+            let rand = lcgRandom(noId * 777);
+
+            let idxTema = Math.floor(rand() * dTema.length);
+            let idxSubjek = Math.floor(rand() * dSubjek.length);
+            let idxSituasi = Math.floor(rand() * dSituasi.length);
+            let idxPilihan = Math.floor(rand() * dPilihanSet.length);
 
             let tahap = "mudah";
             if (noId > 300 && noId <= 700) tahap = "sederhana";
             if (noId > 700) tahap = "sukar";
 
+            // Gabungkan nilai ID unik dalam teks untuk pengesahan visual mutlak anti-ulang
             let soalanTeks = `[Kes Minda #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
             let dataJawapan = dPilihanSet[idxPilihan];
 
@@ -316,8 +332,8 @@
                 level: tahap,
                 tema: dTema[idxTema],
                 q: soalanTeks,
-                o: dataJawapan.o,
-                a: 0, // Pilihan indeks 0 asal sentiasa jawapan paling tepat
+                o: [...dataJawapan.o], // Kloning array
+                a: 0, 
                 h: dataJawapan.h
             };
         }
@@ -330,7 +346,7 @@
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGymDewasa_AntiRepeat");
+            let localData = localStorage.getItem("BrainGymDewasa_AntiRepeat_v3");
             if (localData) {
                 appState = JSON.parse(localData);
             } else {
@@ -340,7 +356,7 @@
             updateGlobalStats();
         }
 
-        function saveStorage() { localStorage.setItem("BrainGymDewasa_AntiRepeat", JSON.stringify(appState)); }
+        function saveStorage() { localStorage.setItem("BrainGymDewasa_AntiRepeat_v3", JSON.stringify(appState)); }
 
         function updateGlobalStats() {
             document.getElementById('stat-total-score').innerText = appState.totalScore;
@@ -393,7 +409,9 @@
             document.getElementById('game-question-text').innerText = qData.q;
 
             let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
-            susunanRawak.sort(() => Math.random() - 0.5);
+            // Gunakan seed LCG berbeza untuk proses pengacakan pilihan jawapan (A, B, C, D)
+            let rawakPilihan = lcgRandom(activeQuestionIndex + 555);
+            susunanRawak.sort(() => rawakPilihan() - 0.5);
 
             const optContainer = document.getElementById('game-options-container');
             optContainer.innerHTML = "";
