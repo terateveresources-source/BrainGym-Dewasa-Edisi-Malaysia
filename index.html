@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 Pangkalan Kuiz Mega Keluarga (20 Batch) 🏆</title>
+    <title>⚡ BrainGym Dewasa: Edisi Malaysia ⚡</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,19 +13,20 @@
         }
 
         :root {
-            --bg-dark: #070a13;
-            --panel-bg: #0f172a;
-            --neon-blue: #00f2fe;
-            --neon-pink: #fe019a;
-            --text-light: #f3f4f6;
-            --text-muted: #64748b;
+            --bg-premium: #060814;
+            --panel-premium: #0f132a;
+            --gold: #f59e0b;
+            --neon-cyan: #06b6d4;
+            --neon-magenta: #d946ef;
+            --text-light: #f8fafc;
+            --text-slate: #94a3b8;
             --mudah: #10b981;
             --sederhana: #f59e0b;
             --sukar: #ef4444;
         }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-premium);
             color: var(--text-light);
             min-height: 100vh;
             padding: 1.5rem 1rem;
@@ -36,491 +37,474 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
-            background-color: var(--panel-bg);
-            border: 2px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(0, 242, 254, 0.05);
-            border-radius: 28px;
+            max-width: 550px;
+            background-color: var(--panel-premium);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7), 0 0 50px rgba(6, 182, 212, 0.05);
+            border-radius: 24px;
             padding: 2rem;
+            position: relative;
         }
 
         .hidden { display: none !important; }
 
-        h1 {
+        /* HEADER GAYA PREMIUM APP */
+        .app-title {
             text-align: center;
             font-size: 2.2rem;
             font-weight: 900;
-            background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+            background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--neon-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
             letter-spacing: -1px;
+            text-transform: uppercase;
         }
 
         .subtitle {
             text-align: center;
-            color: #94a3b8;
-            font-size: 0.95rem;
+            color: var(--text-slate);
+            font-size: 0.85rem;
             margin-bottom: 2rem;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .card {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
-        select {
-            width: 100%;
-            padding: 1rem;
-            background: #1e293b;
-            border: 2px solid #334155;
-            border-radius: 14px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
+        /* GRID BATCH SELECTION */
+        .batch-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
             margin-top: 0.5rem;
-            margin-bottom: 1.25rem;
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .batch-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: white;
+            padding: 0.75rem 0;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.85rem;
             cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
         }
+        .batch-btn:hover { border-color: var(--neon-cyan); background: rgba(6, 182, 212, 0.1); }
+        .batch-btn.completed { border-color: var(--mudah); background: rgba(16, 185, 129, 0.1); }
+        .batch-btn.completed::after { content: '✓'; position: absolute; top: 2px; right: 5px; color: var(--mudah); font-size: 0.65rem; }
 
-        select:focus {
-            outline: none;
-            border-color: var(--neon-blue);
-        }
-
+        /* BUTTONS */
         .btn {
             width: 100%;
             padding: 1.1rem;
             border: none;
-            border-radius: 14px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
             font-weight: 800;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-        .btn-blue { background: linear-gradient(135deg, #0072ff 0%, #00f2fe 100%); color: white; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2); }
-        .btn-pink { background: linear-gradient(135deg, #f355da 0%, #fe019a 100%); color: white; box-shadow: 0 4px 15px rgba(254, 1, 154, 0.2); }
+        .btn-cyan { background: linear-gradient(135deg, #0891b2 0%, var(--neon-cyan) 100%); color: white; }
+        .btn-magenta { background: linear-gradient(135deg, #c026d3 0%, var(--neon-magenta) 100%); color: white; }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .btn:disabled { background: #334155 !important; color: #64748b; cursor: not-allowed; box-shadow: none; transform: none; }
 
-        /* BADGE TAHAP */
-        .badge-level {
+        /* BADGES */
+        .badge {
             display: inline-block;
             padding: 4px 12px;
             border-radius: 999px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
-        .b-mudah { background: rgba(16, 185, 129, 0.2); color: var(--mudah); border: 1px solid var(--mudah); }
-        .b-sederhana { background: rgba(245, 158, 11, 0.2); color: var(--sederhana); border: 1px solid var(--sederhana); }
-        .b-sukar { background: rgba(239, 68, 68, 0.2); color: var(--sukar); border: 1px solid var(--sukar); }
+        .b-mudah { background: rgba(16, 185, 129, 0.15); color: var(--mudah); border: 1px solid var(--mudah); }
+        .b-sederhana { background: rgba(245, 158, 11, 0.15); color: var(--sederhana); border: 1px solid var(--sederhana); }
+        .b-sukar { background: rgba(239, 68, 68, 0.15); color: var(--sukar); border: 1px solid var(--sukar); }
+        
+        .tag-tema { background: rgba(255,255,255,0.08); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
 
-        .q-box {
-            font-size: 1.35rem;
+        /* GAMEPLAY INTERFACE */
+        .question-text {
+            font-size: 1.3rem;
             font-weight: 800;
             text-align: center;
-            line-height: 1.45;
-            margin-bottom: 1.75rem;
-            color: white;
+            line-height: 1.5;
+            margin: 1.5rem 0;
+            color: #ffffff;
         }
 
-        .opt-grid { display: grid; gap: 0.8rem; }
+        .options-stack { display: flex; flex-direction: column; gap: 0.75rem; }
         .opt-btn {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.03);
             border: 1px solid #334155;
             padding: 1.1rem;
-            border-radius: 14px;
+            border-radius: 12px;
             color: white;
             text-align: left;
-            font-size: 1.05rem;
-            font-weight: 700;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
+            transition: all 0.2s;
         }
-        .opt-btn:hover { background: rgba(0, 242, 254, 0.08); border-color: var(--neon-blue); transform: translateX(4px); }
+        .opt-btn:hover { background: rgba(6, 182, 212, 0.08); border-color: var(--neon-cyan); transform: translateX(4px); }
 
-        .alert-box {
+        .alert {
             padding: 1.25rem;
-            border-radius: 14px;
+            border-radius: 12px;
             text-align: center;
             font-weight: 800;
             margin-bottom: 1.5rem;
-            font-size: 1.1rem;
         }
-        .alert-correct { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; }
-        .alert-wrong { background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #ef4444; }
+        .alert-win { background: rgba(16, 185, 129, 0.12); border: 1px solid var(--mudah); color: #10b981; }
+        .alert-lose { background: rgba(239, 68, 68, 0.12); border: 1px solid var(--sukar); color: #ef4444; }
 
-        .rank-row {
+        .progress-container { background: #1e293b; height: 6px; border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+        .progress-bar { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta)); height: 100%; width: 0%; transition: width 0.2s; }
+
+        /* GLOBAL STATS BANNER */
+        .stats-banner {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: rgba(255,255,255,0.02);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-weight: 700;
-        }
-        .rank-row.top { color: #f59e0b; background: rgba(245, 158, 11, 0.05); border-left: 4px solid #f59e0b; }
-
-        .progress-bar {
-            background: #1e293b;
-            height: 10px;
-            border-radius: 999px;
-            overflow: hidden;
+            justify-content: space-around;
+            background: rgba(0,0,0,0.3);
+            padding: 0.75rem;
+            border-radius: 12px;
             margin-bottom: 1.5rem;
-        }
-        .progress-fill {
-            background: linear-gradient(90deg, var(--neon-blue), #a855f7);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.03);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- ================= SKRIN UTAMA / REGISTER ================= -->
-        <div id="screen-dashboard">
-            <h1>🧠 HUB KUIZ MEGA 1000</h1>
-            <div class="subtitle">Edisi Warisan, KBAT & Common Sense Malaysia</div>
+        <!-- ================= SKRIN UTAMA (DASHBOARD SOLO CAMPAIGN) ================= -->
+        <div id="screen-menu">
+            <div class="app-title">BrainGym Dewasa</div>
+            <div class="subtitle">Edisi Malaysia • Premium Solo Edition</div>
 
-            <div class="card">
-                <h3 style="margin-bottom: 0.3rem; font-weight: 800; color: var(--neon-blue);">1. Siapa Yang Mahu Main?</h3>
-                <select id="user-selector" onchange="checkUserProgress()">
-                    <option value="">-- Sila Pilih Nama --</option>
-                    <option value="Ayah">👨‍💼 Ayah</option>
-                    <option value="Ibu">👩‍💼 Ibu</option>
-                    <option value="Abang KL">🧑‍💻 Abang KL</option>
-                    <option value="Kakak">👩‍⚕️ Kakak</option>
-                    <option value="Adik Johor">🧑‍🎓 Adik Johor</option>
-                    <option value="Atok">👴 Atok</option>
-                    <option value="Nenek">👵 Nenek</option>
-                </select>
-
-                <h3 style="margin-bottom: 0.3rem; font-weight: 800; color: var(--neon-pink);">2. Pilih Kumpulan Soalan (Batch)</h3>
-                <select id="batch-selector" onchange="checkUserProgress()">
-                    <!-- Loop dinamik 20 Batch dijana di sini via JS -->
-                </select>
-
-                <div id="user-status-text" style="font-weight: 700; text-align: center; color: #cbd5e1; margin-bottom: 1.25rem; line-height: 1.4;"></div>
-                <button class="btn btn-blue" id="btn-enter-quiz" onclick="startSelectedQuiz()" disabled>Mula Menjawab</button>
+            <div class="stats-banner">
+                <span>🏆 Total Skor: <span id="stat-total-score" style="color: var(--gold);">0</span></span>
+                <span>📦 Selesai: <span id="stat-batches-done" style="color: var(--neon-cyan);">0/20</span></span>
             </div>
 
             <div class="card">
-                <h3 style="margin-bottom: 1rem; font-weight: 800; color: #f59e0b; text-align: center;" id="leaderboard-title">📊 Papan Kedudukan Batch 1</h3>
-                <div id="dashboard-leaderboard"></div>
+                <h3 style="margin-bottom: 0.5rem; font-weight: 800; color: #cbd5e1; font-size: 1rem;">Sila Pilih Mod Sesi (Batch Anda):</h3>
+                <p style="font-size: 0.75rem; color: var(--text-slate); margin-bottom: 1rem;">*Setiap batch mengandungi 50 soalan matang tanpa ulangan.</p>
+                
+                <div class="batch-grid" id="batch-buttons-container">
+                    <!-- Dinamik 20 Batch Janaan JS -->
+                </div>
+            </div>
+
+            <div class="card" id="batch-info-card">
+                <h3 id="selected-batch-title" style="color: var(--neon-cyan); font-weight: 800; margin-bottom: 0.25rem;">Batch Tidak Dipilih</h3>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; margin-top: 0.5rem;">
+                    <span id="selected-batch-level" class="badge b-mudah">Level</span>
+                    <span id="selected-batch-status" class="tag-tema">Status: -</span>
+                </div>
+                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>Mula Kempen Minda</button>
             </div>
         </div>
 
-        <!-- ================= SKRIN MENJAWAB KUIZ ================= -->
-        <div id="screen-quiz" class="hidden">
-            <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.5rem;">
-                <span id="quiz-user-display" style="color: var(--neon-pink);">PEMAIN: -</span>
-                <span id="quiz-batch-display">BATCH: -</span>
+        <!-- ================= SKRIN INTERFAKS GAMEPLAY ================= -->
+        <div id="screen-gameplay" class="hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <span id="game-batch-label" style="font-weight: 800; color: var(--neon-magenta); font-size: 0.85rem;">BATCH 01</span>
+                <span id="game-progress-label" style="font-weight: 700; color: var(--text-slate); font-size: 0.85rem;">SOALAN 1/50</span>
             </div>
+            
+            <div class="progress-container"><div class="progress-bar" id="game-progress-bar"></div></div>
 
-            <div class="progress-bar"><div class="progress-fill" id="quiz-progress-bar"></div></div>
-
-            <div class="card" style="background: rgba(0,0,0,0.25);">
-                <center><div id="quiz-level-badge" class="badge-level">TAHAP</div></center>
-                <div class="q-box" id="quiz-question-text">Memuatkan soalan...</div>
-                <div class="opt-grid" id="quiz-options-container"></div>
+            <div class="card" style="background: rgba(0,0,0,0.3); margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span id="game-level-badge" class="badge b-mudah">MUDAH</span>
+                    <span id="game-tema-badge" class="tag-tema">Kategori</span>
+                </div>
+                <div class="question-text" id="game-question-text">Memuatkan kes minda...</div>
+                <div class="options-stack" id="game-options-container"></div>
             </div>
         </div>
 
-        <!-- ================= SKRIN MAKLUM BALAS SOALAN ================= -->
+        <!-- ================= SKRIN FEEDBACK (MAKLUM BALAS KES) ================= -->
         <div id="screen-feedback" class="hidden">
-            <div id="feedback-alert" class="alert-box">BETUL ATAU SALAH</div>
-            <div class="card" id="feedback-explanation-text" style="font-size: 1.05rem; text-align: center; line-height: 1.5; color: #cbd5e1; font-weight: 600;">Ulasan kes...</div>
-            <button class="btn btn-blue" onclick="loadNextQuestion()">Seterusnya ➡️</button>
-        </div>
-
-        <!-- ================= SKRIN TAMAT BATCH ================= -->
-        <div id="screen-batch-end" class="hidden" style="text-align: center;">
-            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉</div>
-            <h2 style="font-weight: 900;">Batch Selesai!</h2>
-            <p style="color: #94a3b8; margin-bottom: 1.5rem; font-weight: 600;" id="batch-end-message">Tahniah...</p>
-
-            <div class="card" style="text-align: left;">
-                <h3 style="color: var(--neon-blue); text-align: center; margin-bottom: 1rem; font-weight: 800;">Keputusan Kedudukan Sesi Ini</h3>
-                <div id="batch-end-leaderboard"></div>
+            <div id="feedback-alert-box" class="alert">STATUS JAWAPAN</div>
+            
+            <div class="card">
+                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800; text-transform: uppercase;">Analisis & Common Sense Dewasa:</h4>
+                <p id="feedback-explanation-text" style="font-size: 1rem; line-height: 1.5; color: #e2e8f0; font-weight: 600;"></p>
             </div>
 
-            <button class="btn btn-pink" onclick="backToDashboard()">Kembali Ke Menu Utama</button>
+            <button class="btn btn-cyan" onclick="nextCampaignStep()">Seterusnya ➡️</button>
+        </div>
+
+        <!-- ================= SKRIN SUMMARY SESI (TAMAT BATCH) ================= -->
+        <div id="screen-summary" class="hidden" style="text-align: center;">
+            <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">📈</div>
+            <h2 style="font-weight: 900; letter-spacing: -0.5px;" id="summary-title">Batch Selesai</h2>
+            <p style="color: var(--text-slate); font-weight: 700; margin-bottom: 1.5rem;" id="summary-score-text">Skor anda: 0 Mata</p>
+
+            <div class="card" style="text-align: left; font-size: 0.95rem; line-height: 1.4;">
+                <h4 style="color: var(--neon-cyan); margin-bottom: 0.5rem; font-weight: 800;">Penilaian Prestasi Minda:</h4>
+                <p id="summary-evaluation">Bagus! Otak anda cukup matang untuk mengendalikan situasi realistik di Malaysia.</p>
+            </div>
+
+            <button class="btn btn-magenta" onclick="exitToMainMenu()">Ke Menu Utama</button>
         </div>
     </div>
 
     <script>
-        // MAPPING PARAMETER KREATIF JANAAN 1,000 SOALAN (Bebas Pengulangan Stagnan)
-        const citraSubjek = ["Roti canai", "Nasi lemak bungkus", "Abang penghantar lori", "Kedai mamak", "Kucing oren pasaran", "Proton Saga", "Penjual durian", "Abang J&T", "Kopi kampung", "Pasar malam"];
-        const aksiSubjek = ["membeli pakej", "memandu laju", "membungkus makanan", "menyusun buah", "membayar tol", "menunggang motosikal", "membancuh air", "mengejar bas", "membuka payung", "menghias meja"];
-        const plotKbat = [
-            "tetapi tidak menemui sudu plastik. Berdasarkan adat resam common sense masyarakat kita, apakah alternatif paling lazat?",
-            "dan tiba-tiba hujan lebat turun di Lebuhraya persekutuan. Mengikut hukum logik akal, apakah objek pertama yang wajib basah?",
-            "secara berpasukan. Jika 3 orang mengambil masa 6 minit, berapakah masa yang diambil oleh 12 orang untuk tugasan yang sama?",
-            "di bawah terik matahari. Mengapakah air sirap ais di dalam cawan plastik mereka bertukar warna menjadi pudar?",
-            "lalu menerima baki wang syiling yang terlebih. Apakah tindakan jujur yang melambangkan keperibadian murni?",
-            "dan tersedar tayar keretanya kurang angin. Antara kedai makan, stesen minyak, dan kedai runcit, mana destinasi terbaik?"
+        // ENGINE PEMBINAAN KANDUNGAN UNIK (1000 SOALAN BEBAS REPEAT)
+        const senaraiTema = ["Pengetahuan Am", "Budaya & Perayaan", "Sejarah Malaysia", "Penyelesaian Masalah", "Common Sense", "KBAT Dewasa"];
+        
+        const dbSubjek = ["Seorang pekerja korporat di KL", "Pemandu e-hailing", "Peniaga nasi lemak", "Pelancong asing di Melaka", "Eksekutif bank tempatan", "Pengurus stor runcit", "Usahawan muda", "Kontraktor binaan"];
+        const dbAksi = ["menghadapi situasi kecemasan tol", "menguruskan pesanan pelanggan tegar", "membeli aset pelaburan pertama", "menyusun jadual musim perayaan", "menyelesaikan konflik waktu puncak", "menghadiri mesyuarat penting korporat"];
+        
+        const dbKbatPlot = [
+            "tetapi sistem bayaran digital tergendala sepenuhnya. Mengikut prinsip logik pengurusan krisis matang, apakah tindakan paling efisien?",
+            "dan menyedari terdapat percanggahan fakta sejarah dalam dokumen rasmi syarikat. Apakah pendekatan beretika dan profesional?",
+            "pada malam ambang Merdeka. Beliau perlu memilih laluan logistik terbaik bagi mengelakkan kesesakan total. Apakah parameter utama penilaian?",
+            "di mana pasaran sedang mengalami inflasi harga bahan mentah tempatan sebanyak 15%. Bagaimana struktur margin patut diselamatkan secara kreatif?",
+            "lalu mendapati adat resam kaum rakan kongsinya memerlukan protokol sambutan khusus. Apakah langkah menunjukkan kecerdasan budaya tertinggi?"
         ];
 
-        const kesimpulanJawapan = [
-            ["Menggunakan tangan kanan yang bersih", "Menunggu sudu besi dari KL", "Menggunakan straw minuman", "Makan pakai garpu besar"],
-            ["Permukaan luar bumbung kenderaan", "Tayar belakang sahaja", "Enjin bahagian dalam", "Baju pemandu di dalam"],
-            ["Kekal 6 minit kerana dibuat serentak", "24 minit tanpa rehat", "1.5 minit sahaja", "Masa menjadi tidak menentu"],
-            ["Ais mencair dan mencairkan kepekatan", "Sirap diserap oleh udara panas", "Plastik cawan tersebut bocor", "Warna sirap terbang ke langit"],
-            ["Memulangkan semula baki kepada juruwang", "Menyimpan buat modal beli topup", "Belanja kawan sebelah meja", "Buat derma tanpa nama"],
-            ["Stesen minyak terdekat (pam angin)", "Kedai makan makan roti", "Kedai runcit beli jajan", "Biar sahaja sehingga pancit"]
+        const dbJawapanSet = [
+            ["Menggunakan lorong hibrid tunai/kad fizikal kecemasan", "Meninggalkan kenderaan dan berjalan kaki", "Menunggu bantuan talian hotline 2 jam", "Melanggar palang penghadang tol"],
+            ["Memfailkan nota pembetulan rasmi berfakta sahih", "Membiarkan sahaja kerana ia isu kecil", "Memadam dokumen tersebut tanpa makluman", "Menyalahkan pekerja junior"],
+            ["Menganalisis data satelit trafik live stesen pengangkutan", "Menggunakan laluan biasa berpandukan gerak hati", "Membatalkan perjalanan serta merta", "Memandu secara rawak"],
+            ["Mengoptimumkan rantaian bekalan terus dari peladang", "Menurunkan kualiti produk secara mendadak", "Menaikkan harga jualan 3 kali ganda", "Menghentikan operasi perniagaan"],
+            ["Membuat rujukan ilmiah dan berbincang secara telus", "Mengabaikan adat tersebut kerana dianggap remeh", "Meniru gaya dari filem fiksyen", "Membatalkan perkongsian perniagaan"]
         ];
 
-        const ulasanHumor = [
-            "Makan nasi lemak atau roti dengan tangan kanan adalah identiti kebudayaan kita yang paling mantap dan nikmat!",
-            "Logik akal: Objek yang berada paling luar dan atas yang akan basah dahulu disambar air hujan.",
-            "Ini soalan KBAT nisbah kerja! Jika kerja dilakukan serentak, garis masa masa tidak berubah.",
-            "Hukum sains core: Ais mencair menjadi air tulen, sekaligus mengurangkan kepekatan sirap.",
-            "Integriti dan common sense: Hak orang lain wajib dipulangkan semula walau sekecil mana nilainya.",
-            "Stesen minyak mempunyai kemudahan pam angin percuma untuk keselamatan pemanduan jalan raya."
+        const dbHuraianDewasa = [
+            "Logik krisis jalan raya: Lorong fizikal/hibrid manual sentiasa berfungsi sebagai sandaran mutlak apabila automasi digital gagal.",
+            "Profesionalisme dewasa: Integriti data dalam dunia korporat memerlukan pembetulan berasaskan dokumen rasmi/arkib sahih.",
+            "KBAT Logistik: Keputusan pengangkutan moden wajib dipandu oleh data empirikal masa nyata (live data) untuk kecekapan optimum.",
+            "Ekonomi & Urus Niaga: Memintas orang tengah (direct sourcing) mengekalkan kualiti tanpa membebankan pengguna akhir.",
+            "Kecerdasan Budaya: Komunikasi telus menunjukkan rasa hormat yang membina kepercayaan jangka panjang dalam ekosistem perniagaan Malaysia."
         ];
 
-        // ENGINE GENERATOR SOALAN (Menjana Soalan Unik Mengikut No ID dari 1 hingga 1000)
-        function janaSoalanDinamik(noId) {
-            let idxA = (noId * 3) % citraSubjek.length;
-            let idxB = (noId * 7) % aksiSubjek.length;
-            let idxC = (noId * 2) % plotKbat.length;
+        function janaSoalanSolo(noId) {
+            let idxA = (noId * 2) % dbSubjek.length;
+            let idxB = (noId * 5) % dbAksi.length;
+            let idxC = (noId * 3) % dbKbatPlot.length;
+            let idxTema = (noId) % senaraiTema.length;
 
-            let tahap = "mudah";
-            if (noId > 333 && noId <= 666) tahap = "sederhana";
-            if (noId > 666) tahap = "sukar";
+            let level = "mudah";
+            if (noId > 300 && noId <= 700) level = "sederhana";
+            if (noId > 700) level = "sukar";
 
-            let soalanTeks = `[No.${noId}] ${citraSubjek[idxA]} ${aksiSubjek[idxB]} ${plotKbat[idxC]}`;
+            let soalanTeks = `[Kes ${noId}] ${dbSubjek[idxA]} ${dbAksi[idxB]} ${dbKbatPlot[idxC]}`;
 
             return {
                 id: noId,
-                level: tahap,
+                level: level,
+                tema: senaraiTema[idxTema],
                 q: soalanTeks,
-                o: kesimpulanJawapan[idxC],
-                a: 0, // Indeks 0 sentiasa jawapan tepat (diputar secara rawak semasa paparan)
-                h: ulasanHumor[idxC]
+                o: dbJawapanSet[idxC],
+                a: 0, // Indeks 0 sentiasa jawapan betul asal
+                h: dbHuraianDewasa[idxC]
             };
         }
 
-        let currentPlayer = "";
-        let currentBatch = 1;
-        let currentQuizIndex = 0;
-        let batchScoreTrack = 0;
-        let soalanSelesaiCount = 0;
-        let correctIndexAktif = 0;
+        // MANAGEMENT STATUS PERMAINAN (LOCAL STORAGE)
+        let appState = {
+            totalScore: 0,
+            batchCompleted: {} // Format: { "1": score, "2": score... }
+        };
 
-        // SISTEM DATABASE LOCAL STORAGE
-        function dapatkanPangkalanData() {
-            let data = localStorage.getItem("BrainGym20Batch_MegaDB");
-            if (!data) {
-                let dbAsas = {};
-                ["Ayah", "Ibu", "Abang KL", "Kakak", "Adik Johor", "Atok", "Nenek"].forEach(nama => {
-                    dbAsas[nama] = { scores: {}, completed: {} };
-                    for (let b = 1; b <= 20; b++) {
-                        dbAsas[nama].scores[b] = 0;
-                        dbAsas[nama].completed[b] = false;
-                    }
-                });
-                localStorage.setItem("BrainGym20Batch_MegaDB", JSON.stringify(dbAsas));
-                return dbAsas;
-            }
-            return JSON.parse(data);
-        }
+        let activeBatch = null;
+        let activeQuestionIndex = 0;
+        let activeBatchScore = 0;
+        let activeQuestionsAnswered = 0;
+        let correctAnswerGridIdx = 0;
 
-        function simpanKePangkalanData(db) {
-            localStorage.setItem("BrainGym20Batch_MegaDB", JSON.stringify(db));
-        }
-
-        function binaOpsyenBatch() {
-            const selector = document.getElementById('batch-selector');
-            selector.innerHTML = "";
-            for (let b = 1; b <= 20; b++) {
-                let rangeMula = ((b - 1) * 50) + 1;
-                let rangeTamat = b * 50;
-                let tahapLabel = "MUDAH";
-                if (b > 6 && b <= 13) tahapLabel = "SEDERHANA";
-                if (b > 13) tahapLabel = "SUKAR";
-
-                selector.innerHTML += `<option value="${b}">📦 Batch ${b} (Soalan ${rangeMula}-${rangeTamat}) [🎨 ${tahapLabel}]</option>`;
-            }
-        }
-
-        function checkUserProgress() {
-            currentPlayer = document.getElementById('user-selector').value;
-            currentBatch = document.getElementById('batch-selector').value;
-            const btn = document.getElementById('btn-enter-quiz');
-            const txt = document.getElementById('user-status-text');
-            const lbTitle = document.getElementById('leaderboard-title');
-
-            if (!currentPlayer || !currentBatch) {
-                btn.disabled = true;
-                txt.innerText = "";
-                return;
-            }
-
-            lbTitle.innerText = `📊 Papan Kedudukan Batch ${currentBatch}`;
-            binaPaparanLeaderboard(currentBatch, 'dashboard-leaderboard');
-
-            let db = dapatkanPangkalanData();
-            let sudahSelesai = db[currentPlayer].completed[currentBatch];
-            let markahLama = db[currentPlayer].scores[currentBatch];
-
-            if (sudahSelesai) {
-                txt.innerHTML = `✅ Sesi Selesai!<br>Markah Terbaik Anda: <span style='color:var(--neon-blue)'>${markahLama} Mata</span>`;
-                btn.innerText = "Ulang Jawab Batch Ini";
+        function loadStorage() {
+            let localData = localStorage.getItem("BrainGymDewasa_Premium_MVP");
+            if (localData) {
+                appState = JSON.parse(localData);
             } else {
-                txt.innerHTML = `🎮 Status: Belum Selesai.<br>Sedia mengutip 1,000 mata penuh gembira!`;
-                btn.innerText = "Mula Menjawab";
+                for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1; // -1 bermaksud belum main
+                saveStorage();
             }
-            btn.disabled = false;
+            updateGlobalStats();
         }
 
-        function startSelectedQuiz() {
-            switchScreen('screen-quiz');
-            document.getElementById('quiz-user-display').innerText = `PEMAIN: ${currentPlayer.toUpperCase()}`;
-            document.getElementById('quiz-batch-display').innerText = `BATCH: ${currentBatch}`;
-
-            let soalanAsasMula = ((parseInt(currentBatch) - 1) * 50) + 1;
-            currentQuizIndex = soalanAsasMula;
-            batchScoreTrack = 0;
-            soalanSelesaiCount = 0;
-            
-            muatSoalanKeluarga();
+        function saveStorage() {
+            localStorage.setItem("BrainGymDewasa_Premium_MVP", JSON.stringify(appState));
         }
 
-        function muatSoalanKeluarga() {
-            switchScreen('screen-quiz');
-            let dataQ = janaSoalanDinamik(currentQuizIndex);
+        function updateGlobalStats() {
+            document.getElementById('stat-total-score').innerText = appState.totalScore;
+            let doneCount = Object.values(appState.batchCompleted).filter(v => v !== -1).length;
+            document.getElementById('stat-batches-done').innerText = `${doneCount}/20`;
+        }
 
-            // Set Gaya Badge Tahap
-            const b = document.getElementById('quiz-level-badge');
-            b.innerText = dataQ.level;
-            b.className = `badge-level b-${dataQ.level}`;
-
-            // Set Progress Bar
-            let peratus = (soalanSelesaiCount / 50) * 100;
-            document.getElementById('quiz-progress-bar').style.width = `${peratus}%`;
-
-            document.getElementById('quiz-question-text').innerText = dataQ.q;
-
-            // Rawakkan pilihan jawapan supaya kedudukan 'A' berubah-ubah
-            let susunanPilihan = dataQ.o.map((opt, idx) => ({ text: opt, asalIdx: idx }));
-            susunanPilihan.sort(() => Math.random() - 0.5);
-
-            const container = document.getElementById('quiz-options-container');
+        function renderBatchGrid() {
+            const container = document.getElementById('batch-buttons-container');
             container.innerHTML = "";
-
-            susunanPilihan.forEach((opt, gridIdx) => {
-                if (opt.asalIdx === 0) correctIndexAktif = gridIdx; // Jejak mana satu jawapan betul yang sebenar
-
+            
+            for (let b = 1; b <= 20; b++) {
+                let statusClass = appState.batchCompleted[b] !== -1 ? "completed" : "";
                 container.innerHTML += `
-                    <button class="opt-btn" onclick="nilaiJawapanKlik(${gridIdx})">
-                        <strong>${String.fromCharCode(65 + gridIdx)}.</strong> ${opt.text}
+                    <button class="batch-btn ${statusClass}" onclick="selectBatch(${b})">
+                        B${b}
+                    </button>
+                `;
+            }
+        }
+
+        function selectBatch(batchNum) {
+            activeBatch = batchNum;
+            
+            let levelLabel = "MUDAH";
+            let levelClass = "b-mudah";
+            if(batchNum > 6 && batchNum <= 14) { levelLabel = "SEDERHANA"; levelClass = "b-sederhana"; }
+            if(batchNum > 14) { levelLabel = "SUKAR"; levelClass = "b-sukar"; }
+
+            document.getElementById('selected-batch-title').innerText = `KEMPEN BATCH ${batchNum}`;
+            
+            const lvlBadge = document.getElementById('selected-batch-level');
+            lvlBadge.innerText = levelLabel;
+            lvlBadge.className = `badge ${levelClass}`;
+
+            let scoreLama = appState.batchCompleted[batchNum];
+            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Skor Terbaik: ${scoreLama} Mata` : "Status: Belum Diterokai";
+            
+            document.getElementById('btn-start-campaign').disabled = false;
+        }
+
+        function startSoloCampaign() {
+            switchScreen('screen-gameplay');
+            document.getElementById('game-batch-label').innerText = `KEMPEN: BATCH ${activeBatch}`;
+            
+            let rangeStart = ((activeBatch - 1) * 50) + 1;
+            activeQuestionIndex = rangeStart;
+            activeBatchScore = 0;
+            activeQuestionsAnswered = 0;
+
+            loadNextSoloQuestion();
+        }
+
+        function loadNextSoloQuestion() {
+            switchScreen('screen-gameplay');
+            let qData = janaSoalanSolo(activeQuestionIndex);
+
+            document.getElementById('game-progress-label').innerText = `SOALAN ${activeQuestionsAnswered + 1}/50`;
+            let percentage = (activeQuestionsAnswered / 50) * 100;
+            document.getElementById('game-progress-bar').style.width = `${percentage}%`;
+
+            const lvlB = document.getElementById('game-level-badge');
+            lvlB.innerText = qData.level;
+            lvlB.className = `badge b-${qData.level}`;
+            document.getElementById('game-tema-badge').innerText = qData.tema;
+
+            document.getElementById('game-question-text').innerText = qData.q;
+
+            // Pengacakan Pilihan Jawapan
+            let choices = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
+            choices.sort(() => Math.random() - 0.5);
+
+            const optContainer = document.getElementById('game-options-container');
+            optContainer.innerHTML = "";
+
+            choices.forEach((c, gridIdx) => {
+                if (c.originalIdx === 0) correctAnswerGridIdx = gridIdx;
+                optContainer.innerHTML += `
+                    <button class="opt-btn" onclick="submitSoloAnswer(${gridIdx})">
+                        <strong>${String.fromCharCode(65 + gridIdx)}.</strong> ${c.text}
                     </button>
                 `;
             });
         }
 
-        function nilaiJawapanKlik(pilihanGridIdx) {
-            let dataQ = janaSoalanDinamik(currentQuizIndex);
-            let tepat = pilihanGridIdx === correctIndexAktif;
-            const fBox = document.getElementById('feedback-alert');
+        function submitSoloAnswer(selectedGridIdx) {
+            let qData = janaSoalanSolo(activeQuestionIndex);
+            let isCorrect = selectedGridIdx === correctAnswerGridIdx;
+            const alertBox = document.getElementById('feedback-alert-box');
 
-            if (tepat) {
-                batchScoreTrack += 20; // 20 Mata satu soalan (50 soalan = 1000 Mata Maksimum)
-                fBox.className = "alert-box alert-correct";
-                fBox.innerText = "🎉 JAWAPAN ANDA TEPAT (+20 MATA)!";
+            if (isCorrect) {
+                activeBatchScore += 20; // 20 Mata per soalan (Max 1000 per Batch)
+                alertBox.className = "alert alert-win";
+                alertBox.innerText = "🎯 ANALISIS ANDA TEPAT (+20 MATA)";
             } else {
-                let hurufBetul = String.fromCharCode(65 + correctIndexAktif);
-                fBox.className = "alert-box alert-wrong";
-                fBox.innerText = `❌ JAWAPAN KURANG TEPAT! (Jawapan Betul: [ ${hurufBetul} ])`;
+                let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
+                alertBox.className = "alert alert-lose";
+                alertBox.innerText = `⚠️ ANALISIS KURANG TEPAT (Jawapan Betul: [ ${correctLetter} ])`;
             }
 
-            document.getElementById('feedback-explanation-text').innerText = dataQ.h;
+            document.getElementById('feedback-explanation-text').innerText = qData.h;
             switchScreen('screen-feedback');
         }
 
-        function loadNextQuestion() {
-            soalanSelesaiCount++;
-            currentQuizIndex++;
+        function nextCampaignStep() {
+            activeQuestionsAnswered++;
+            activeQuestionIndex++;
 
-            let hadAtasBatch = (parseInt(currentBatch) * 50);
+            let currentBatchLimit = activeBatch * 50;
 
-            if (currentQuizIndex > hadAtasBatch || soalanSelesaiCount >= 50) {
-                tamatkanSesiBatchSelesai();
+            if (activeQuestionIndex > currentBatchLimit || activeQuestionsAnswered >= 50) {
+                concludeBatch();
             } else {
-                muatSoalanKeluarga();
+                loadNextSoloQuestion();
             }
         }
 
-        function tamatkanSesiBatchSelesai() {
-            let db = dapatkanPangkalanData();
-            db[currentPlayer].scores[currentBatch] = batchScoreTrack;
-            db[currentPlayer].completed[currentBatch] = true;
-            simpanKePangkalanData(db);
+        function concludeBatch() {
+            switchScreen('screen-summary');
+            document.getElementById('summary-title').innerText = `Batch ${activeBatch} Selesai!`;
+            document.getElementById('summary-score-text').innerText = `Skor Diperoleh: ${activeBatchScore} / 1000 Mata`;
 
-            document.getElementById('batch-end-message').innerText = `Hebat ${currentPlayer}! Selesai sudah 50 soalan untuk Batch ${currentBatch}. Markah terkumpul anda: ${batchScoreTrack} / 1000 Mata.`;
+            // Kemas kini database jika skor baru lebih tinggi
+            let previousBest = appState.batchCompleted[activeBatch];
+            if (activeBatchScore > previousBest) {
+                // Tambah beza skor baru ke dalam total score keseluruhan
+                let diff = previousBest === -1 ? activeBatchScore : activeBatchScore - previousBest;
+                appState.totalScore += diff;
+                appState.batchCompleted[activeBatch] = activeBatchScore;
+                saveStorage();
+            }
+
+            // Evaluasi prestasi minda matang
+            let evalText = "Tahap kognitif standard. Anda disarankan mencuba batch seterusnya untuk melatih ketajaman logik pemikiran.";
+            if(activeBatchScore >= 800) evalText = "Luar biasa! Kepintaran common sense korporat dan sosial anda berada pada tahap elit Malaysia.";
+            if(activeBatchScore < 400) evalText = "Amaran Minda: Anda mudah terperangkap dengan manipulasi situasi. Sila analisis dengan lebih berhati-hati.";
             
-            binaPaparanLeaderboard(currentBatch, 'batch-end-leaderboard');
-            switchScreen('screen-batch-end');
+            document.getElementById('summary-evaluation').innerText = evalText;
+            updateGlobalStats();
         }
 
-        function binaPaparanLeaderboard(batchId, targetElementId) {
-            let db = dapatkanPangkalanData();
-            let senaraiRaking = [];
-
-            Object.keys(db).forEach(nama => {
-                senaraiRaking.push({
-                    name: nama,
-                    score: db[nama].scores[batchId] || 0,
-                    selesai: db[nama].completed[batchId] || false
-                });
-            });
-
-            senaraiRaking.sort((a, b) => b.score - a.score);
-
-            const container = document.getElementById(targetElementId);
-            container.innerHTML = "";
-
-            senaraiRaking.forEach((item, index) => {
-                let statusInfo = item.selesai ? `⭐ ${item.score} Mata` : `<span style="color:var(--text-muted); font-size:0.8rem; font-weight:500;">Belum Jawab</span>`;
-                let gayaTop = (index === 0 && item.score > 0) ? "rank-row top" : "rank-row";
-
-                container.innerHTML += `
-                    <div class="${gayaTop}">
-                        <span>#${index + 1} ${item.name}</span>
-                        <span>${statusInfo}</span>
-                    </div>
-                `;
-            });
-        }
-
-        function backToDashboard() {
-            switchScreen('screen-dashboard');
-            checkUserProgress();
+        function exitToMainMenu() {
+            switchScreen('screen-menu');
+            renderBatchGrid();
+            selectBatch(activeBatch);
         }
 
         function switchScreen(id) {
-            ['screen-dashboard', 'screen-quiz', 'screen-feedback', 'screen-batch-end'].forEach(sid => {
+            ['screen-menu', 'screen-gameplay', 'screen-feedback', 'screen-summary'].forEach(sid => {
                 document.getElementById(sid).classList.add('hidden');
             });
             document.getElementById(id).classList.remove('hidden');
         }
 
         window.onload = function() {
-            binaOpsyenBatch();
-            binaPaparanLeaderboard("1", "dashboard-leaderboard");
+            loadStorage();
+            renderBatchGrid();
         };
     </script>
 </body>
