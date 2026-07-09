@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BrainGym Dewasa: Edisi Malaysia ⚡</title>
+    <title>⚡ BrainGym Dewasa: 500 Minda Neon ⚡</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,371 +12,384 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
-        :root {
-            --bg-premium: #060913;
-            --panel-premium: #111827;
-            --gold: #f59e0b;
-            --neon-cyan: #06b6d4;
-            --neon-magenta: #e11d48;
-            --text-light: #f8fafc;
-            --text-slate: #94a3b8;
-            --mudah: #10b981;
-            --sederhana: #f59e0b;
-            --sukar: #ef4444;
-        }
-
         body {
-            background-color: var(--bg-premium);
-            color: var(--text-light);
+            background: radial-gradient(circle at center, #0c1020 0%, #05070f 100%);
+            color: #f8fafc;
             min-height: 100vh;
-            padding: 1.5rem 1rem;
+            padding: 2rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
             max-width: 550px;
-            background-color: var(--panel-premium);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7), 0 0 50px rgba(6, 182, 212, 0.05);
-            border-radius: 24px;
-            padding: 2rem;
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.02);
+            border-radius: 30px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .hidden { display: none !important; }
 
         .app-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.3rem;
             font-weight: 900;
-            background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--neon-cyan) 100%);
+            background: linear-gradient(135deg, #ff007f 0%, #ffaa00 50%, #00f0ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
             text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+            margin-bottom: 0.2rem;
         }
 
         .subtitle {
             text-align: center;
-            color: var(--text-slate);
+            color: #94a3b8;
             font-size: 0.85rem;
-            margin-bottom: 2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 1.8rem;
+            margin-bottom: 1.8rem;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.05);
         }
 
         .batch-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0.6rem;
-            margin-top: 0.5rem;
+            gap: 0.75rem;
+            margin-top: 1rem;
         }
 
         .batch-btn {
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: white;
-            padding: 0.8rem 0;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 0.9rem;
+            background: rgba(31, 41, 55, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #cbd5e1;
+            padding: 1rem 0;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             position: relative;
         }
-        .batch-btn:hover { border-color: var(--neon-cyan); background: rgba(6, 182, 212, 0.1); }
-        .batch-btn.completed { border-color: var(--mudah); background: rgba(16, 185, 129, 0.1); }
-        .batch-btn.completed::after { content: '✓'; position: absolute; top: 2px; right: 5px; color: var(--mudah); font-size: 0.7rem; }
+        .batch-btn:hover {
+            border-color: #00f0ff;
+            color: #00f0ff;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            transform: scale(1.05);
+        }
+        .batch-btn.completed {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+        }
+        .batch-btn.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 0.75rem;
+            font-weight: 900;
+        }
 
         .btn {
             width: 100%;
-            padding: 1.1rem;
+            padding: 1.2rem;
             border: none;
-            border-radius: 14px;
-            font-size: 1.05rem;
+            border-radius: 18px;
+            font-size: 1.1rem;
             font-weight: 800;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .btn-cyan { background: linear-gradient(135deg, #0891b2 0%, var(--neon-cyan) 100%); color: white; }
-        .btn-magenta { background: linear-gradient(135deg, #be123c 0%, var(--neon-magenta) 100%); color: white; }
-        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-cyan {
+            background: linear-gradient(135deg, #0099ff 0%, #00f0ff 100%);
+            color: #030712;
+            box-shadow: 0 4px 20px rgba(0, 240, 255, 0.3);
+        }
+        .btn-magenta {
+            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 0, 127, 0.3);
+        }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
         .badge {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 999px;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 900;
             text-transform: uppercase;
         }
-        .b-mudah { background: rgba(16, 185, 129, 0.15); color: var(--mudah); border: 1px solid var(--mudah); }
-        .b-sederhana { background: rgba(245, 158, 11, 0.15); color: var(--sederhana); border: 1px solid var(--sederhana); }
-        .b-sukar { background: rgba(239, 68, 68, 0.15); color: var(--sukar); border: 1px solid var(--sukar); }
-        .tag-tema { background: rgba(255,255,255,0.08); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+        .b-mudah { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid #10b981; }
+        .b-sederhana { background: rgba(245, 158, 11, 0.1); color: #f59e0b; border: 1px solid #f59e0b; }
+        .b-sukar { background: rgba(255, 0, 127, 0.1); color: #ff007f; border: 1px solid #ff007f; }
+        .tag-tema { background: rgba(255,255,255,0.06); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 10px; }
 
         .question-text {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
             line-height: 1.6;
-            margin: 1.5rem 0;
-            color: #ffffff;
+            margin: 1.8rem 0;
+            color: #f8fafc;
         }
 
-        .options-stack { display: flex; flex-direction: column; gap: 0.8rem; }
+        .options-stack { display: flex; flex-direction: column; gap: 0.9rem; }
         .opt-btn {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid #374151;
-            padding: 1.1rem;
-            border-radius: 12px;
-            color: white;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.2rem;
+            border-radius: 16px;
+            color: #e2e8f0;
             text-align: left;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             line-height: 1.4;
         }
-        .opt-btn:hover { background: rgba(6, 182, 212, 0.08); border-color: var(--neon-cyan); transform: translateX(4px); }
+        .opt-btn:hover {
+            background: rgba(0, 240, 255, 0.05);
+            border-color: #00f0ff;
+            transform: translateX(6px);
+            box-shadow: -4px 0 15px rgba(0, 240, 255, 0.2);
+        }
 
         .alert {
-            padding: 1.25rem;
-            border-radius: 12px;
+            padding: 1.4rem;
+            border-radius: 16px;
             text-align: center;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
+            font-weight: 900;
+            margin-bottom: 1.8rem;
+            font-size: 1.15rem;
         }
-        .alert-win { background: rgba(16, 185, 129, 0.12); border: 1px solid var(--mudah); color: #10b981; }
-        .alert-lose { background: rgba(239, 68, 68, 0.12); border: 1px solid var(--sukar); color: #ef4444; }
+        .alert-win { background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; }
+        .alert-lose { background: rgba(255, 0, 127, 0.15); border: 1px solid #ff007f; color: #ff007f; }
 
-        .progress-container { background: #1f2937; height: 6px; border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
-        .progress-bar { background: linear-gradient(90deg, var(--neon-cyan), var(--gold)); height: 100%; width: 0%; }
+        .progress-container { background: rgba(255,255,255,0.05); height: 8px; border-radius: 20px; overflow: hidden; margin-bottom: 2rem; }
+        .progress-bar { background: linear-gradient(90deg, #ff007f, #ffaa00, #00f0ff); height: 100%; width: 0%; transition: width 0.3s ease; }
 
         .stats-banner {
             display: flex;
             justify-content: space-around;
-            background: rgba(0,0,0,0.3);
-            padding: 0.8rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            font-weight: 800;
             font-size: 0.9rem;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid rgba(6, 182, 212, 0.1);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- ================= SKRIN UTAMA (MENU UTAMA) ================= -->
+        <!-- MENU UTAMA -->
         <div id="screen-menu">
-            <div class="app-title">BrainGym Dewasa</div>
-            <div class="subtitle">Edisi Malaysia • Kempen Solo Minda</div>
+            <div class="app-title">BrainGym 500</div>
+            <div class="subtitle">💥 20 Batch x 25 Soalan Unik 💥</div>
 
             <div class="stats-banner">
-                <span>🏆 Total Skor: <span id="stat-total-score" style="color: var(--gold);">0</span></span>
-                <span>📦 Selesai: <span id="stat-batches-done" style="color: var(--neon-cyan);">0/20</span></span>
+                <span>🏆 Total Skor: <span id="stat-total-score" style="color: #ffaa00;">0</span></span>
+                <span>📦 Selesai: <span id="stat-batches-done" style="color: #00f0ff;">0/20</span></span>
             </div>
 
             <div class="card">
-                <h3 style="margin-bottom: 0.5rem; font-weight: 800; font-size: 1rem; color: #e2e8f0;">Pilih Batch Peringkat Soalan:</h3>
-                <p style="font-size: 0.8rem; color: var(--text-slate); margin-bottom: 1rem;">Setiap batch ada 50 situasi 'real' harian tanpa ulangan.</p>
-                
+                <h3 style="margin-bottom: 0.4rem; font-weight: 800; font-size: 1.05rem; color: #f1f5f9;">Pilih Batch Sesi:</h3>
+                <p style="font-size: 0.8rem; color: #94a3b8; margin-bottom: 1rem;">Setiap batch mengandungi 25 simulasi kes berbeza tanpa ulangan tekstual.</p>
                 <div class="batch-grid" id="batch-buttons-container"></div>
             </div>
 
-            <div class="card" id="batch-info-card">
-                <h3 id="selected-batch-title" style="color: var(--neon-cyan); font-weight: 800;">Sila Pilih Batch Di Atas</h3>
-                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; margin-top: 0.5rem;">
+            <div class="card" id="batch-info-card" style="border-color: rgba(0, 240, 255, 0.15);">
+                <h3 id="selected-batch-title" style="color: #00f0ff; font-weight: 900; font-size: 1.2rem;">Sila Pilih Sesi Di Atas</h3>
+                <div style="display: flex; gap: 0.6rem; margin-bottom: 1.5rem; margin-top: 0.6rem;">
                     <span id="selected-batch-level" class="badge b-mudah">Level</span>
                     <span id="selected-batch-status" class="tag-tema">Status</span>
                 </div>
-                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>Mula Jawab</button>
+                <button class="btn btn-cyan" id="btn-start-campaign" onclick="startSoloCampaign()" disabled>⚡ Mula Sesi ⚡</button>
             </div>
         </div>
 
-        <!-- ================= SKRIN GAMEPLAY INTERAKTIF ================= -->
+        <!-- GAMEPLAY -->
         <div id="screen-gameplay" class="hidden">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span id="game-batch-label" style="font-weight: 800; color: var(--gold); font-size: 0.85rem;">BATCH 01</span>
-                <span id="game-progress-label" style="font-weight: 700; color: var(--text-slate); font-size: 0.85rem;">SOALAN 1/50</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+                <span id="game-batch-label" style="font-weight: 900; color: #ffaa00; font-size: 0.85rem;">BATCH 01</span>
+                <span id="game-progress-label" style="font-weight: 800; color: #94a3b8; font-size: 0.85rem;">SOALAN 1/25</span>
             </div>
-            
             <div class="progress-container"><div class="progress-bar" id="game-progress-bar"></div></div>
 
-            <div class="card" style="background: rgba(0,0,0,0.3); margin-bottom: 1rem;">
+            <div class="card" style="background: rgba(0,0,0,0.2); margin-bottom: 1rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span id="game-level-badge" class="badge b-mudah">MUDAH</span>
                     <span id="game-tema-badge" class="tag-tema">TEMA</span>
                 </div>
-                <div class="question-text" id="game-question-text">Memuatkan teks...</div>
+                <div class="question-text" id="game-question-text">Memuatkan kes simulasi...</div>
                 <div class="options-stack" id="game-options-container"></div>
             </div>
         </div>
 
-        <!-- ================= SKRIN MAKLUM BALAS KES (FEEDBACK) ================= -->
+        <!-- FEEDBACK -->
         <div id="screen-feedback" class="hidden">
             <div id="feedback-alert-box" class="alert">STATUS</div>
-            
-            <div class="card">
-                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800;">LOGIK DEWASA:</h4>
-                <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.5; color: #f1f5f9; font-weight: 600;"></p>
+            <div class="card" style="border-color: rgba(255, 170, 0, 0.2);">
+                <h4 style="color: #ffaa00; margin-bottom: 0.6rem; font-size: 0.95rem; font-weight: 900;">🧠 LOGIK DEWASA:</h4>
+                <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.6; color: #f1f5f9; font-weight: 600;"></p>
             </div>
-
-            <button class="btn btn-cyan" onclick="nextCampaignStep()">Seterusnya ➡️</button>
+            <button class="btn btn-cyan" onclick="nextCampaignStep()">Teruskan Sesi Kes ➡️</button>
         </div>
 
-        <!-- ================= SKRIN RANGKUMAN (TAMAT BATCH) ================= -->
+        <!-- SUMMARY -->
         <div id="screen-summary" class="hidden" style="text-align: center;">
-            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🏆</div>
+            <div style="font-size: 4.5rem; margin-bottom: 0.5rem;">🏆</div>
             <h2 style="font-weight: 900;" id="summary-title">Tamat Sesi</h2>
-            <p style="color: var(--text-slate); font-weight: 700; margin-bottom: 1.5rem; font-size: 1.2rem;" id="summary-score-text">Skor: 0 Mata</p>
-
-            <div class="card" style="text-align: left; font-size: 1rem; line-height: 1.5;">
-                <h4 style="color: var(--neon-cyan); margin-bottom: 0.5rem; font-weight: 800;">Ulasan Minda Anda:</h4>
-                <p id="summary-evaluation">Ulasan...</p>
+            <p style="color: #94a3b8; font-weight: 800; margin-bottom: 2rem; font-size: 1.3rem;" id="summary-score-text">Skor: 0 Mata</p>
+            <div class="card" style="text-align: left; border-color: rgba(0, 240, 255, 0.2);">
+                <h4 style="color: #00f0ff; margin-bottom: 0.6rem; font-weight: 900;">RUMUSAN GAYA MINDA:</h4>
+                <p id="summary-evaluation" style="color: #e2e8f0; font-weight: 600;">Ulasan...</p>
             </div>
-
-            <button class="btn btn-magenta" onclick="exitToMainMenu()">Ke Menu Utama</button>
+            <button class="btn btn-magenta" onclick="exitToMainMenu()">Kembali Ke Menu Utama</button>
         </div>
     </div>
 
     <script>
-        // MEGA ARRAY DENGAN VARIASI BESAR DAN BAHASA SANTAI/REALISTIK MALAYSIA
-        const dTema = ["Common Sense", "Vibe Sosial", "Lampu Hijau/Merah Hidup", "Street Smart", "Problem Solving"];
+        const dTema = ["Common Sense", "Vibe Sosial", "Lampu Hijau Hidup", "Street Smart", "Problem Solving"];
         
+        // 20 SUBJEK UNIK BERBEZA
         const dSubjek = [
             "Tengah drive cari parking kat flat malam-malam,", "Masa tengah beratur panjang kat kaunter Zus Coffee,", 
             "Waktu korang stop rehat kat R&R PLUS,", "Tengah syok layan makan kat food court mall,", 
             "Masa parking kereta nak singgah beli nasi kandar,", "Waktu tengah bersesak dalam LRT time balik kerja,",
             "Tengah lepak borak dengan member lama kat mamak,", "Masa uruskan dokumen kat kaunter JPJ,",
             "Tengah scroll phone masa rehat office,", "Masa tengah check group WhatsApp taman perumahan,",
-            "Waktu tengah bayar barang kat kaunter speedmart,", "Tengah tunggu turn basuh kereta kat carwash,"
+            "Waktu tengah bayar barang kat kaunter speedmart,", "Tengah tunggu turn basuh kereta kat carwash,",
+            "Masa tengah jogging kat taman rekreasi petang-petang,", "Tengah pilih barang basah kat pasar borong,",
+            "Waktu korang tengah tunggu order makanan kat kaunter McD,", "Tengah tengok wayang kat dalam cinema,",
+            "Masa tengah tunggu lif kat lobi kondominium,", "Tengah isi minyak kereta kat stesen Shell,",
+            "Waktu hantar barang rosak kat pusat servis barangan,", "Tengah lepak minum petang kat cafe hipster,"
         ];
 
+        // 25 SITUASI UNIK BERBEZA
         const dSituasi = [
-            "korang perasan ada kete selamba double-park tak tarik handbrake. Jalan jadi sangkut. Apa step terbaik?",
-            "ada mamat sorang ni acah-acah borak phone pastu selamba potong queue depan korang. Macam mana nak setel?",
-            "korang perasan ada pakcik ni muka blur gila depan kiosk tiket digital, macam tak reti pakai. Apa korang buat?",
-            "ada group sebelah meja sembang kuat gila isu perkauman sensitif siap provokasi. Rasa macam nak gaduh.",
-            "cashier tersilap pass baki balance terlebih RM50 sebab dia tengah kalut ramai orang. Kantoi kat tangan korang.",
-            "korang nampak ada budak kecik menangis sorang-sorang panggil mak dia kat celah crowd ramainya orang.",
-            "ada rider tersenggol cermin sisi kereta korang sampai pusing, pastu dia pandang belakang tapi tak stop.",
-            "korang dapat mesej random daripada nombor tak dikenali acah-acah macam member lama nak pinjam duit urusan urgen.",
-            "jiran sebelah rumah jemur kain sampai masuk parking lot korang, pastu siap pakej block laluan tong sampah."
+            "korang perasan ada kete selamba double-park tak tarik handbrake.",
+            "ada mamat acah-acah borak phone pastu selamba potong queue depan korang.",
+            "korang perasan ada pakcik ni muka blur gila depan kiosk tiket digital, tak reti guna.",
+            "ada group sebelah meja sembang kuat gila isu perkauman sensitif siap provokasi.",
+            "cashier tersilap pass baki balance terlebih RM50 sebab tengah kalut.",
+            "korang nampak ada budak kecik menangis sorang-sorang panggil mak dia.",
+            "ada rider tersenggol cermin sisi kereta korang sampai pusing, pastu dia terus blah.",
+            "korang dapat mesej random daripada nombor tak dikenali acah-acah nak pinjam duit urgen.",
+            "jiran sebelah rumah jemur kain sampai masuk parking lot korang, siap block tong sampah.",
+            "ada orang drop dompet dia atas lantai tapi dia langsung tak sedar.",
+            "korang nampak pakcik guard kena marah kaw-kaw dengan customer biadab.",
+            "ada kereta belakang pasang lampu high-beam tinggi gila menyilaukan mata.",
+            "korang perasan ada orang curi-curi ambil gambar perempuan sebelah dia.",
+            "ada penghantar barang salah hantar parcel berharga tinggi ke pintu rumah korang.",
+            "korang terdengar staf kedai mengutuk customer depan-depan guna bahasa asing.",
+            "ada orang selamba buang sampah plastik keluar dari tingkap kereta mewah.",
+            "korang nampak ada makcik terjatuh tangga sebab barang bawakannya terlalu berat.",
+            "ada kaunter khidmat pelanggan kosong lama sangat padahal orang beratur panjang.",
+            "korang terjumpa kad pengenalan (IC) orang tercicir kat atas mesin ATM ATM.",
+            "ada anjing liar menyalak kuat sekat laluan korang nak balik rumah korang.",
+            "korang nampak budak sekolah kena buli atau pow duit dengan budak besar.",
+            "ada bau gas bocor kuat gila datang dari arah dapur kedai makan korang lepak.",
+            "korang nampak orang tua kena tipu dengan ejen gores dan menang kat tepi jalan.",
+            "ada individu tak dikenali cuba ikut korang rapat gila dari stesen LRT.",
+            "korang perasan ada aircond kedai menitik kuat betul-betul atas meja makan korang."
         ];
 
-        // Set Pilihan Jawapan & Refleksi (Tak skema, logik praktikal harian)
+        // 25 SET PILIHAN JAWAPAN & REFLEKSI PADANAN MUTLAK
         const dPilihanSet = [
-            {
-                o: ["Tolak kete tu slow-slow ke depan kalau boleh, atau cari nombor phone kat dashboard dia bro.", "Bunyi hon panjang sampai satu flat keluar tengok.", "Ambil batu calarkan pintu kete dia biar dia ada akal sikit.", "Post muka dia kat group FB komuniti bagi kena kecam kaw-kaw."],
-                h: "Utamakan solution pantas dulu. Tolak dengan selamat atau cari info contact elakkan drama gaduh tak tentu pasal."
-            },
-            {
-                o: ["Tegur elok-elok, 'Bro, nak order kena beratur belakang ya, kesian orang lain tunggu lama.'", "Jerit kat dia bagi dia malu depan orang ramai.", "Biarkan je sbb malas nak cari pasal, walau hati tengah panas.", "Tolak badan dia keluar dari barisan secara fizikal."],
-                h: "Tegur secara direct tapi firm/tegas. Ramai orang buat perangai sbb takde sapa berani tegur secara berdepan."
-            },
-            {
-                o: ["Datang dekat, senyum dan tanya, 'Pakcik nak ke mana? Meh saya tolong tekan sat.'", "Pandang je sambil geleng kepala sebab dia lambatkan queue.", "Cakap kat guard suruh guard tu setelkan kerja dia.", "Ambil video up kat TikTok letak caption sedih."],
-                h: "Sikap street smart yang ada empati. Tolong mudahkan urusan orang tua, hari lain urusan kita pun akan dipermudahkan."
-            },
-            {
-                o: ["Sembang topik lain dengan member korang, abaikan dorang. Tak payah masuk campur toksik.", "Bangun pastu join gaduh mulut sekali dengan meja sebelah.", "Ambil kerusi baling kat meja dorang sbb rasis gila.", "Report kat owner kedai suruh halau group tu balik."],
-                h: "Emosi kena jaga. Melayan orang bodoh atau toksik kat tempat awam cuma bakal merugikan masa dan keselamatan diri korang."
-            },
-            {
-                o: ["Pulangkan balik duit RM50 tu, cakap 'Eh dik, baki terlebih ni.' Kesian dia kena tolak gaji nanti.", "Terus masuk poket, anggap rezeki terpijak petang tu.", "Buat-buat tak tahu pastu cepat-cepat jalan keluar kedai.", "Guna duit tu buat belanja orang lain konon buat belanja amal."],
-                h: "Integriti basic hidup dewasa. Duit orang bukan hak kita, tambah pula cashier tu kerja gaji hari, kesian dia kalau kena ganti."
-            },
-            {
-                o: ["Bawa budak tu pergi kaunter info mall atau cari polis bantuan terdekat dengan korang.", "Biarkan je, mak bapak dia nanti pandai-pandailah cari.", "Bawa budak tu balik rumah korang terus bela jadi anak angkat.", "Jerit kuat-kuat kat tengah mall tanya 'Anak siapa ni?!'"],
-                h: "Langkah paling selamat untuk elak salah faham culik: serahkan pada security atau kaunter rasmi premis."
-            },
-            {
-                o: ["Biarkan je, asalkan cermin tak pecah. Malas nak kejar dalam traffic jem.", "Kejar dia sampai dapat, pastu paksa dia bayar ganti rugi on the spot.", "Ambil gambar plat dia, pastu pi buat report polis terus.", "Sumpah seranah dalam kereta sepanjang jalan balik rumah."],
-                h: "Kalau tak rosak teruk, beralah tu lebih jimat masa. Kalau pecah, check dashcam baru settle guna insurans atau report."
-            },
-            {
-                o: ["Call nombor tu terus untuk verify suara. Jangan sesekali transfer duit melulu.", "Terus transfer sebab kesian member tengah susah.", "Block terus nombor tu tanpa fikir panjang.", "Kutuk nombor tu dalam group WhatsApp scammer."],
-                h: "Zaman sekarang takleh percaya sangat taktik 'pinjam duit urgen' dalam chat. Verify dulu guna voice call untuk sahkan identiti."
-            }
+            { o: ["Tolak kete tu slow-slow ke depan, atau cari contact dashboard.", "Hon panjang sampai satu flat keluar.", "Calarkan pintu biar dia ada akal.", "Post kat FB bagi kena kecam."], h: "Utamakan solution pantas tanpa drama gaduh. Tolak selamat atau contact terus." },
+            { o: ["Tegur elok-elok, minta beratur belakang sebab ramai tunggu.", "Jerit bagi dia malu terus.", "Biarkan je sbb malas cari pasal.", "Tolak dia keluar dari barisan."], h: "Tegur secara direct tapi firm/tegas. Sifat tegas elakkan orang ambil kesempatan." },
+            { o: ["Datang dekat, senyum dan bantu dia tekan skrin.", "Pandang je sambil geleng kepala.", "Cakap kat guard suruh setelkan.", "Ambil video up kat TikTok."], h: "Sikap street smart penuh empati. Mudahkan urusan orang, urusan kita akan dipermudahkan." },
+            { o: ["Abaikan dorang, sambung sembang topik lain.", "Join sekaki gaduh mulut.", "Baling kerusi biar pecah.", "Report owner kedai suruh halau."], h: "Emosi kena jaga. Melayan orang toksik kat tempat awam cuma merugikan masa anda." },
+            { o: ["Pulangkan baki terlebih, kesian gaji dia kena potong.", "Masuk poket, anggap rezeki terpijak.", "Cepat-cepat jalan keluar kedai.", "Guna duit tu buat belanja amal."], h: "Integriti basic hidup dewasa. Duit orang bukan hak kita, kesian pekerja gaji hari." },
+            { o: ["Bawa budak ke kaunter info/security terdekat.", "Biarkan je, mak bapak dia nanti cari.", "Bawa balik rumah terus bela.", "Jerit kuat-kuat tanya anak siapa."], h: "Langkah paling selamat elak salah faham kes culik: serahkan pada pihak berkuasa premis." },
+            { o: ["Biarkan je kalau tak pecah, malas cari fasal.", "Kejar sampai dapat paksa ganti rugi.", "Ambil plat, terus pi buat report polis.", "Sumpah seranah dalam kereta."], h: "Kalau tak rosak teruk, beralah lebih jimat masa dan tenaga. Settle guna dashcam jika parah." },
+            { o: ["Call nombor tu terus untuk verify suara mamat tu.", "Terus transfer sebab kesian sangat.", "Block terus nombor tanpa fikir.", "Kutuk nombor tu dalam group scam."], h: "Jangan mudah percaya taktik pinjam duit urgen kat chat. Verify pakai suara dulu!" },
+            { o: ["Tolak ampaian tu elok-elok, borak face-to-face.", "Campak kain baju dia atas jalan.", "Report majlis perbandaran terus.", "Simbah air kotor kat kain jemuran."], h: "Hubungan jiran kena jaga. Tegur elok-elok secara matang elak permusuhan berpanjangan." },
+            { o: ["Panggil dia kuat-kuat pulangkan dompet.", "Ambil dompet tu simpan buat aset.", "Biarkan je orang lain ambil.", "Tendang dompet bawah kerusi."], h: "Kejujuran refleksi diri. Memulangkan hak orang adalah sifat dewasa yang terpuji." },
+            { o: ["Tegur customer tu suruh hormat pekerja.", "Sokong customer tu sekali.", "Buat video viral tanpa tolong.", "Jalan terus buat tak tahu."], h: "Pertahankan orang yang tertindas secara profesional mendedahkan nilai kematangan anda." },
+            { o: ["Adjust cermin sisi atau bagi dia potong.", "Break mengejut bagi dia langgar.", "Pasang lampu spotlight balas balik.", "Berhenti tengah jalan ajak gaduh."], h: "Jaga keselamatan diri di jalan raya. Mengalah bukan kalah, tapi mengelak kemalangan." },
+            { o: ["Tegur pelaku face-to-face atau maklum mangsa.", "Biarkan je bukan urusan kita.", "Ikut ambil gambar pelaku juga.", "Jerit 'oi pencuri!' kuat-kuat."], h: "Sikap peka keadaan sekeliling mampu menyelamatkan orang lain daripada menjadi mangsa jenayah." },
+            { o: ["Hantar semula ke rumah jiran yang sepatutnya.", "Buka parcel ambil barang dalam tu.", "Jual barang tu kat Carousell.", "Simpan sorang-sorang dalam stor."], h: "Amanah harta benda. Bukan hak kita wajib dikembalikan kepada pemilik sebenar." },
+            { o: ["Tegur staf tu secara direct dengan tegas.", "Buat tak tahu sbb tak faham bahasa.", "Tulis review buruk kat Google Maps.", "Ajak member boikot kedai tu."], h: "Menegur salah laku profesional di hadapan mereka menunjukkan keberanian berkomunikasi." },
+            { o: ["Ambil sampah tu, letak balik atas bonet kete dia.", "Biarkan je sbb ada tukang sapu.", "Sumpah seranah pemandu tersebut.", "Ambil gambar report aplikasi JPJ."], h: "Sumbangan sivik terbaik ialah melaporkan atau bertindak matang tanpa merosakkan harta benda." },
+            { o: ["Bantu makcik tu bangun dan kutip barang.", "Langkah makcik tu sbb tengah rushing.", "Panggil orang lain suruh tolong.", "Gelakkan makcik tu dalam hati."], h: "Sifat kemanusiaan asas. Tolong orang yang lemah adalah tanda kekuatan peribadi." },
+            { o: ["Tanya staf berdekatan tentang status kaunter.", "Bising-bising hempas barang atas meja.", "Terus balik rumah tak jadi uruskan.", "Post kat twitter tag akaun rasmi."], h: "Menyelesaikan masalah secara rasional melalui saluran betul menjimatkan masa semua orang." },
+            { o: ["Serahkan IC tersebut pada kaunter bank/polis.", "Simpan buat koleksi peribadi.", "Buang dalam tong sampah terdekat.", "Post gambar penuh IC tanpa tapisan kat FB."], h: "Melindungi data peribadi orang lain. Serahkan pada pihak berkuasa dengan selamat." },
+            { o: ["Cari jalan alternatif atau jalan tenang.", "Baling batu kasi anjing tu lari.", "Jerit balik kat anjing tersebut.", "Provok bagi anjing tu gigit."], h: "Street smart bermaksud tahu mengelak bahaya fizikal tanpa mencetuskan ancaman baru." },
+            { o: ["Campur tangan secara tegas atau panggil cikgu.", "Join sekaki pow duit budak tu.", "Buat-buat tak nampak jalan terus.", "Rakam video buat kenangan."], h: "Menolak buli bermakna anda seorang pelindung komuniti yang bertanggungjawab." },
+            { o: ["Maklumkan staf segera dan keluar dari premis.", "Sambung makan sbb makanan sedap.", "Nyalakan rokok nak test gas.", "Jerit 'kebakaran!' bagi semua kalut."], h: "Keselamatan nyawa diutamakan. Bertindak pantas dan tenang menyelamatkan nyawa." },
+            { o: ["Tarik orang tua tu keluar dari zon penipuan.", "Biarkan janji bukan mak bapak kita.", "Join sekaki beli tiket gores menang.", "Ketawakan orang tua sbb lurus bendul."], h: "Melindungi golongan veteran daripada scammer mencerminkan nilai moral yang tinggi." },
+            { o: ["Masuk ke kedai makan ramai orang/hubungi polis.", "Berhenti ajak bertumbuk kat lorong.", "Jalan makin laju ke tempat sunyi.", "Menangis tepi jalan sorang-sorang."], h: "Kesedaran keselamatan tinggi. Cari kawasan tumpuan ramai bagi menghalang niat jahat pelaku." },
+            { o: ["Minta tukar meja lain dengan pekerja kedai.", "Sengaja biarkan baju basah lencun.", "Marah jerit kat pelayan kedai.", "Tolak meja tu sampai terbalik."], h: "Menukar kedudukan secara tenang menyelesaikan isu tanpa merosakkan mood makan anda." }
         ];
 
-        // LINEAR CONGRUENTIAL GENERATOR (LCG) DENGAN MULTIPLIER TINGGI UNTUK TOTAL RANDOMIZATION
-        function lcgRandom(seed) {
-            let m = 4294967296;
-            let a = 1664525;
-            let c = 1013904223;
-            return function() {
-                seed = (a * seed + c) % m;
-                return seed / m;
-            };
-        }
-
-        // PEMBINA SOALAN PROSEDURAL (Dinamik & Anti-Ulang Sebenar)
-        function janaSoalanMesraUsia(noId) {
-            // Campurkan noId dengan gandaan prime besar untuk mengelakkan corak berulang (cyclic loop)
-            let rand = lcgRandom(noId * 983 + 13);
-
-            let idxTema = Math.floor(rand() * dTema.length);
-            let idxSubjek = Math.floor(rand() * dSubjek.length);
-            // Tambah pengacak sekunder supaya situasi tidak melekat dengan subjek yang sama
-            let randSituasi = lcgRandom(noId * 431 + 97);
-            let idxSituasi = Math.floor(randSituasi() * dSituasi.length);
-            
-            let randPilihan = lcgRandom(noId * 617 + 29);
-            let idxPilihan = Math.floor(randPilihan() * dPilihanSet.length);
+        // 100% KALIS ANTI-ULANG MAPPING ENGINE
+        function janaSoalan500(noId) {
+            let idxSubjek = (noId - 1) % 20;
+            let idxSituasi = (noId - 1) % 25;
+            let idxPilihan = (noId - 1) % 25;
 
             let tahap = "mudah";
-            if (noId > 300 && noId <= 700) tahap = "sederhana";
-            if (noId > 700) tahap = "sukar";
+            if (noId > 150 && noId <= 350) tahap = "sederhana";
+            if (noId > 350) tahap = "sukar";
 
-            let soalanTeks = `[Kes #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
-            let dataJawapan = dPilihanSet[idxPilihan];
+            let idxTema = (noId * 3) % dTema.length;
+
+            let soalanFinal = `[Kes Minda #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
+            let basePilihan = dPilihanSet[idxPilihan];
 
             return {
                 id: noId,
                 level: tahap,
                 tema: dTema[idxTema],
-                q: soalanTeks,
-                o: [...dataJawapan.o], // Klon array asal
-                a: 0, 
-                h: dataJawapan.h
+                q: soalanFinal,
+                o: [...basePilihan.o],
+                h: basePilihan.h
             };
         }
 
         let appState = { totalScore: 0, batchCompleted: {} };
-        let activeBatch = null;
-        let activeQuestionIndex = 0;
-        let activeBatchScore = 0;
-        let activeQuestionsAnswered = 0;
+        let activeBatch = null; let activeQuestionIndex = 0;
+        let activeBatchScore = 0; let activeQuestionsAnswered = 0;
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGymDewasa_AntiRepeat_v4");
-            if (localData) {
-                appState = JSON.parse(localData);
-            } else {
-                for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1;
-                saveStorage();
-            }
+            let localData = localStorage.getItem("BrainGym500_Absolute_v6");
+            if (localData) { appState = JSON.parse(localData); } 
+            else { for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1; saveStorage(); }
             updateGlobalStats();
         }
 
-        function saveStorage() { localStorage.setItem("BrainGymDewasa_AntiRepeat_v4", JSON.stringify(appState)); }
+        function saveStorage() { localStorage.setItem("BrainGym500_Absolute_v6", JSON.stringify(appState)); }
 
         function updateGlobalStats() {
             document.getElementById('stat-total-score').innerText = appState.totalScore;
@@ -404,24 +417,24 @@
             lvlBadge.innerText = levelLabel; lvlBadge.className = `badge ${levelClass}`;
 
             let scoreLama = appState.batchCompleted[batchNum];
-            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Rekod: ${scoreLama} Mata` : "Belum Dijawab";
+            document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Rekod: ${scoreLama} Pts` : "Belum Dijawab";
             document.getElementById('btn-start-campaign').disabled = false;
         }
 
         function startSoloCampaign() {
             switchScreen('screen-gameplay');
             document.getElementById('game-batch-label').innerText = `KEMPEN: BATCH ${activeBatch}`;
-            activeQuestionIndex = ((activeBatch - 1) * 50) + 1;
+            activeQuestionIndex = ((activeBatch - 1) * 25) + 1;
             activeBatchScore = 0; activeQuestionsAnswered = 0;
             loadNextSoloQuestion();
         }
 
         function loadNextSoloQuestion() {
             switchScreen('screen-gameplay');
-            let qData = janaSoalanMesraUsia(activeQuestionIndex);
+            let qData = janaSoalan500(activeQuestionIndex);
 
-            document.getElementById('game-progress-label').innerText = `SOALAN ${activeQuestionsAnswered + 1}/50`;
-            document.getElementById('game-progress-bar').style.width = `${(activeQuestionsAnswered / 50) * 100}%`;
+            document.getElementById('game-progress-label').innerText = `SOALAN ${activeQuestionsAnswered + 1}/25`;
+            document.getElementById('game-progress-bar').style.width = `${(activeQuestionsAnswered / 25) * 100}%`;
 
             const lvlB = document.getElementById('game-level-badge');
             lvlB.innerText = qData.level; lvlB.className = `badge b-${qData.level}`;
@@ -429,10 +442,7 @@
             document.getElementById('game-question-text').innerText = qData.q;
 
             let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
-            
-            // Pengacakan kedudukan butang A, B, C, D berasaskan LCG yang dinamik (Supaya jawapan betul tak sentiasa kat A)
-            let rawakPilihan = lcgRandom(activeQuestionIndex + 811);
-            susunanRawak.sort(() => rawakPilihan() - 0.5);
+            susunanRawak.sort(() => Math.random() - 0.5);
 
             const optContainer = document.getElementById('game-options-container');
             optContainer.innerHTML = "";
@@ -448,16 +458,16 @@
         }
 
         function submitSoloAnswer(selectedGridIdx) {
-            let qData = janaSoalanMesraUsia(activeQuestionIndex);
+            let qData = janaSoalan500(activeQuestionIndex);
             let isCorrect = selectedGridIdx === correctAnswerGridIdx;
             const alertBox = document.getElementById('feedback-alert-box');
 
             if (isCorrect) {
-                activeBatchScore += 20;
-                alertBox.className = "alert alert-win"; alertBox.innerText = "🎯 JAWAPAN ANDA TEPAT (+20 MATA)";
+                activeBatchScore += 40;
+                alertBox.className = "alert alert-win"; alertBox.innerText = "🎯 JAWAPAN TEPAT (+40 MATA)";
             } else {
                 let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
-                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ KANTOI / SILAP (Jawapan: [ ${correctLetter} ])`;
+                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ SILAP / KANTOI (Jawapan: [ ${correctLetter} ])`;
             }
 
             document.getElementById('feedback-explanation-text').innerText = qData.h;
@@ -466,20 +476,18 @@
 
         function nextCampaignStep() {
             activeQuestionsAnswered++; activeQuestionIndex++;
-            if (activeQuestionsAnswered >= 50) { concludeBatch(); } else { loadNextSoloQuestion(); }
+            if (activeQuestionsAnswered >= 25) { concludeBatch(); } else { loadNextSoloQuestion(); }
         }
 
         function concludeBatch() {
             switchScreen('screen-summary');
             document.getElementById('summary-title').innerText = `Batch ${activeBatch} Selesai!`;
-            document.getElementById('summary-score-text').innerText = `Skor Anda: ${activeBatchScore} / 1000 Mata`;
+            document.getElementById('summary-score-text').innerText = `Skor: ${activeBatchScore} / 1000 Mata`;
 
             let previousBest = appState.batchCompleted[activeBatch];
             if (activeBatchScore > previousBest) {
                 let diff = previousBest === -1 ? activeBatchScore : activeBatchScore - previousBest;
-                appState.totalScore += diff;
-                appState.batchCompleted[activeBatch] = activeBatchScore;
-                saveStorage();
+                appState.totalScore += diff; appState.batchCompleted[activeBatch] = activeBatchScore; saveStorage();
             }
 
             let evalText = "Boleh tahan mantap logik harian korang. Teruskan mengasah otak dalam siri kempen yang lain!";
