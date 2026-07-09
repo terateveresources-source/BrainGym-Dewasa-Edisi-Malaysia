@@ -3,284 +3,470 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainGym Keluarga Jauh - Online Multiplayer</title>
-    <!-- Guna Supabase CDN untuk sambungan internet real-time -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <title>⚡ BrainGym Keluarga - Pesta 1 Device ⚡</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --dark: #1e1b4b;
+            --light: #f8fafc;
         }
 
         body {
-            background-color: #f0f2f5;
-            color: #1e293b;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 1rem;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
+        .app-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(30, 27, 75, 0.85);
+            backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
             padding: 2rem;
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        h1 {
-            color: #4f46e5;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.2);
+            position: relative;
         }
 
         .hidden { display: none !important; }
 
-        input, button {
+        /* HEADER & BANNER */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, #f43f5e, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        /* INPUT GAYA PREMIUM */
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        input[type="text"] {
             width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        button {
-            background: #4f46e5;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        button:hover { background: #4338ca; }
-
-        .player-list {
-            margin: 1rem 0;
             padding: 1rem;
-            background: #f8fafc;
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
         }
 
-        .player-badge {
-            display: inline-block;
-            background: #e0e7ff;
-            color: #4338ca;
-            padding: 4px 12px;
-            border-radius: 999px;
-            margin: 4px;
-            font-size: 14px;
+        /* BUTANG ACTION */
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .btn-primary { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; }
+        .btn-secondary { background: linear-gradient(135deg, #ec4899 0%, #be185d 100%); color: white; }
+        .btn-success { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: white; }
+        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn:active { transform: translateY(1px); }
+
+        /* SENARAI PEMAIN (LOBBY) */
+        .player-list {
+            margin: 1.5rem 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 0.5rem;
+        }
+        .player-tag {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.06);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            margin: 0.4rem 0;
+            border: 1px solid rgba(255,255,255,0.05);
             font-weight: 700;
         }
+        .remove-btn { color: #f43f5e; cursor: pointer; font-weight: 900; background: none; border: none;}
 
-        .question-box {
-            background: #fef3c7;
+        /* PAS DEVICE INTERACTION */
+        .pass-notice {
+            background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
             padding: 1.5rem;
-            border-radius: 16px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            border: 1px solid #f59e0b;
+            border-radius: 24px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
-        .opt-btn {
-            background: white;
-            color: #334155;
-            border: 2px solid #e2e8f0;
-            text-align: left;
-            margin-top: 0.5rem;
+        /* PAPARAN KAD SOALAN */
+        .question-card {
+            background: #ffffff;
+            color: #1e1b4b;
+            padding: 1.5rem;
+            border-radius: 24px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            line-height: 1.4;
         }
-        .opt-btn:hover { background: #f8fafc; color: #334155; }
-        
-        .opt-btn.selected {
-            background: #e0e7ff;
-            border-color: #4f46e5;
+
+        /* PILIHAN JAWAPAN (A, B, C, D) */
+        .options-grid {
+            display: grid;
+            gap: 0.75rem;
+        }
+        .opt-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: left;
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+        }
+        .opt-card:hover { background: rgba(255, 255, 255, 0.15); border-color: var(--primary); }
+        .opt-idx {
+            background: rgba(255,255,255,0.1);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: var(--secondary);
+        }
+
+        /* REVEAL RESULT SCREEN */
+        .feedback-box {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        .feedback-success { background: rgba(16, 185, 129, 0.2); border: 2px solid var(--success); color: #10b981; }
+        .feedback-fail { background: rgba(244, 63, 94, 0.2); border: 2px solid #f43f5e; color: #f43f5e; }
+
+        /* LEADERBOARD / PODIUM */
+        .rank-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            margin: 0.5rem 0;
+            border-radius: 14px;
+            font-weight: 700;
+        }
+        .rank-item.winner {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.05));
+            border-left: 5px solid var(--warning);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>👨‍👩‍👧‍👦 BrainGym Jarak Jauh</h1>
-
-    <!-- SKRIN LOG MASUK & BILIK -->
-    <div id="screen-lobby">
-        <p style="text-align: center; color: #64748b; margin-bottom: 1rem;">Meskipun abang di KL, adik di Johor & ayah di mamak, kita tetap satu meja!</p>
+    <div class="app-container">
         
-        <input type="text" id="input-room" placeholder="Masukkan Kod Bilik Contoh: KELUARGAKU">
-        <input type="text" id="input-name" placeholder="Nama Anda (cth: Ayah / Adik)">
-        <button onclick="joinRoom()">Masuk Bilik Sembang & Main</button>
+        <!-- ================= SKRIN LOBBY (DAFTAR RAMAI-RAMAI) ================= -->
+        <div id="screen-lobby">
+            <div class="header">
+                <h1>🥳 BrainGym Keluarga</h1>
+                <p>Mod 1 Device - Giliran Pas Telefon</p>
+            </div>
+            
+            <div class="input-group">
+                <label style="font-weight: 700; color: #cbd5e1; display:block; margin-bottom:0.5rem;">Masukkan Nama Ahli:</label>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="player-input" placeholder="Cth: Ayah / Abang KL / Adik Johor">
+                    <button class="btn btn-secondary" onclick="addPlayer()" style="width: auto; padding: 0 1.5rem;">➕</button>
+                </div>
+            </div>
 
-        <div id="area-waiting" class="hidden">
-            <h3 style="margin-top: 1.5rem;">Ahli yang dah masuk:</h3>
-            <div class="player-list" id="lobby-players"></div>
-            <button id="btn-start-game" onclick="hostStartGame()" style="background: #10b981;">Mula Permainan (Ketua Sahaja)</button>
+            <h3 style="font-size: 1rem; color: #94a3b8;">Senarai Pemain (<span id="player-count">0</span>):</h3>
+            <div class="player-list" id="lobby-players">
+                <!-- Nama akan muncul di sini -->
+            </div>
+
+            <button class="btn btn-primary" id="btn-start" onclick="startGame()" style="margin-top: 1rem;" disabled>
+                🚀 Mula Permainan Berkumpulan
+            </button>
         </div>
-    </div>
 
-    <!-- SKRIN PERMAINAN REAL-TIME -->
-    <div id="screen-game" class="hidden">
-        <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 0.5rem;">
-            <span id="txt-room-id">Bilik: -</span>
-            <span id="txt-timer">Masa: 20s</span>
+        <!-- ================= SKRIN PAS TELEFON (TRANSISI GIILIRAN) ================= -->
+        <div id="screen-pass" class="hidden">
+            <div class="header">
+                <h1 style="color: var(--warning);">🔄 GILIRAN SETERUSNYA</h1>
+            </div>
+            
+            <div class="pass-notice">
+                <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;" id="pass-to-name">AYAH</h2>
+                <p style="font-weight: 700; opacity: 0.9;">Sila hulurkan telefon ini kepada pemilik nama di atas!</p>
+            </div>
+
+            <p style="text-align: center; color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.5rem; font-style: italic;">
+                *Orang lain jangan mengendap skrin ya!
+            </p>
+
+            <button class="btn btn-success" onclick="showQuestion()">
+                👀 Saya Dah Pegang, Buka Soalan!
+            </button>
         </div>
-        
-        <div class="question-box" id="display-question">Memuatkan soalan dari server...</div>
-        <div id="options-area"></div>
-        
-        <p style="text-align: center; margin-top: 1rem; font-size: 13px; color: #94a3b8;" id="txt-status-submit">Sila pilih satu jawapan...</p>
+
+        <!-- ================= SKRIN JAWAB (RAHSIA) ================= -->
+        <div id="screen-quiz" class="hidden">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-weight: 700; color: #94a3b8; font-size: 0.9rem;">
+                <span id="quiz-player-name" style="color: var(--secondary);">PEMAIN: -</span>
+                <span id="quiz-progress">SOALAN: 1/3</span>
+            </div>
+
+            <div class="question-card" id="quiz-question">Soalan...</div>
+            <div class="options-grid" id="quiz-options"></div>
+        </div>
+
+        <!-- ================= SKRIN HASIL JAWAPAN INDIVIDU ================= -->
+        <div id="screen-feedback" class="hidden">
+            <div class="header">
+                <h1>Keputusan Giliran</h1>
+            </div>
+
+            <div id="feedback-status" class="feedback-box">Mesej status...</div>
+            
+            <div class="question-card" style="font-size: 1.1rem; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);" id="feedback-explanation">
+                Ulasan...
+            </div>
+
+            <button class="btn btn-primary" onclick="proceedNext()">
+                Seterusnya ➡️
+            </button>
+        </div>
+
+        <!-- ================= SKRIN KEPUTUSAN AKHIR (PAPAN MATA) ================= -->
+        <div id="screen-results" class="hidden">
+            <div class="header" style="text-align: center;">
+                <h1 style="font-size: 2.5rem;">🏆</h1>
+                <h1>Carta Juara Keluarga</h1>
+                <p>Keputusan rasmi perlawanan sengit</p>
+            </div>
+
+            <div id="leaderboard-output" style="margin-bottom: 1.5rem;"></div>
+
+            <button class="btn btn-secondary" onclick="resetGame()">🔁 Main Pusingan Baru</button>
+        </div>
+
     </div>
 
-    <!-- SKRIN LEADERBOARD TERKUMPUL -->
-    <div id="screen-results" class="hidden" style="text-align: center;">
-        <h2>🏆 Keputusan Akhir Keluarga</h2>
-        <div class="player-list" id="leaderboard-output" style="text-align: left; margin-top: 1rem;"></div>
-        <button onclick="location.reload()">Main Semula</button>
-    </div>
-</div>
+    <script>
+        // BANK SOALAN HUMOR & LOGIK KELUARGA
+        const bankSoalan = [
+            { q: "Pakcik Man memandu Myvi bersama 3 anaknya. Di Plaza Tol Gombak, dia membayar tol. Tangan siapakah yang terkeluar dari tingkap?", o: ["Tangan Pakcik Man sendiri", "Anak sulung", "Anak bongsu", "Tangan orang lain"], a: 0, h: "Pemandu yang memegang stereng di sebelah kanan, mestilah tangan dia yang hulur bayar tol!" },
+            { q: "Ada sebiji durian musang king di atas bumbung sebuah teksi. Bila teksi membelok ke kiri dengan laju, durian itu jatuh ke mana?", o: ["Ke atas jalan raya (bawah)", "Ke sebelah kanan teksi", "Ke sebelah kiri teksi", "Durian tak jatuh sebab tersangkut"], a: 0, h: "Hukum fizik dan graviti bumi: Semua benda jatuh ke bawah (jalan raya)!" },
+            { q: "Apakah gelaran paling universal, mesra, dan popular yang dilaungkan oleh rakyat Malaysia apabila mahu memanggil pelayan kedai mamak?", o: ["Boss / Ane", "Tuan Pengarah", "Abang Sayang", "Encik Pramusaji"], a: 0, h: "Panggilan 'Boss' ialah cara terpantas mendapat perhatian untuk order teh tarik!" },
+            { q: "Dalam banyak-banyak kenderaan yang bergerak di atas jalan raya raya di Malaysia, kenderaan apakah yang mempunyai paling banyak tayar?", o: ["Lori tunda bawa tayar", "Kereta api kargo", "Bas dua tingkat", "Kereta Myvi sport"], a: 0, h: "Lori pengangkut tayar boleh membawa ratusan tayar di bahagian belakangnya!" }
+        ];
 
-<script>
-    // --- PANDUAN CONFIGURATION SUPABASE ---
-    // 1. Daftar akaun percuma di https://supabase.com
-    // 2. Buat projek baru, pergi ke Project Settings -> API.
-    // 3. Salin URL dan Anon Key anda, tampal di bawah:
-    const SUPABASE_URL = "https://zlqxctzryejevctyhtbb.supabase.co/rest/v1/"; 
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpscXhjdHpyeWVqZXZjdHlodGJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0MTg4MjcsImV4cCI6MjA5ODk5NDgyN30.EWo4qfDyyeyC4b4Xd6e2HPBop_65-lI0lF-mf4HcaAI";
-    
-    let supabase = null;
-    if(SUPABASE_URL !== "https://YOUR_PROJECT_ID.supabase.co") {
-        supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    }
+        let players = [];
+        let currentRound = 0; // Mengikut indeks soalan
+        let currentPlayerIdx = 0; // Giliran pemain ke berapa
+        const totalQuestions = 3; // Hadkan 3 soalan setiap sesi game
 
-    let myName = "";
-    let roomId = "";
-    let currentQuestionIdx = 0;
-    let myScore = 0;
+        // Ambil elemen dari input untuk mudahkan fungsi ketukan keyboard 'Enter'
+        document.getElementById('player-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addPlayer();
+        });
 
-    const bankSoalan = [
-        { q: "Pakcik Rahman memandu Myvi bersama 3 anaknya. Di Plaza Tol Gombak, dia membayar tol. Tangan siapakah yang keluar dari tingkap?", o: ["Tangan Pakcik Rahman", "Anak sulung", "Anak bongsu", "Tangan orang lain"], a: 0 },
-        { q: "Apakah panggilan mesra paling popular untuk pekerja di kedai makan mamak?", o: ["Boss / Ane", "Tuan Pengarah", "Abang Sayang", "Encik Steward"], a: 0 }
-    ];
+        function addPlayer() {
+            const input = document.getElementById('player-input');
+            const name = input.value.trim();
+            if (!name) return;
 
-    async function joinRoom() {
-        if(!supabase) {
-            alert("Sila masukkan SUPABASE_URL & SUPABASE_KEY anda di dalam kod terlebih dahulu untuk fungsi online!");
-            return;
-        }
-        roomId = document.getElementById('input-room').value.trim().toUpperCase();
-        myName = document.getElementById('input-name').value.trim();
-
-        if(!roomId || !myName) {
-            alert("Sila isi kod bilik dan nama anda!");
-            return;
+            players.push({ name: name, score: 0 });
+            input.value = "";
+            renderPlayers();
         }
 
-        document.getElementById('area-waiting').classList.remove('hidden');
-        
-        // Simpan data kehadiran ke server database
-        await supabase.from('room_players').insert([{ room_id: roomId, player_name: myName, score: 0 }]);
+        function removePlayer(idx) {
+            players.splice(idx, 1);
+            renderPlayers();
+        }
 
-        // Dengar perubahan database secara Real-Time (Jika ada adik/abang masuk, nama auto-kemas kini!)
-        supabase.channel(`room:${roomId}`)
-            .on('postgres_changes', { event: '*', schema: 'public', table: 'room_players', filter: `room_id=eq.${roomId}` }, payload => {
-                updateLobbyList();
-            })
-            .on('broadcast', { event: 'start-game' }, () => {
-                goToGame();
-            })
-            .subscribe();
+        function renderPlayers() {
+            const container = document.getElementById('lobby-players');
+            container.innerHTML = "";
+            players.forEach((p, idx) => {
+                container.innerHTML += `
+                    <div class="player-tag">
+                        <span>👤 ${p.name}</span>
+                        <button class="remove-btn" onclick="removePlayer(${idx})">✕</button>
+                    </div>
+                `;
+            });
+            document.getElementById('player-count').innerText = players.length;
+            document.getElementById('btn-start').disabled = players.length < 2; // Min 2 pemain
+        }
 
-        updateLobbyList();
-    }
+        function startGame() {
+            // Rawakkan susunan soalan setiap kali bermula
+            bankSoalan.sort(() => Math.random() - 0.5);
+            currentRound = 0;
+            currentPlayerIdx = 0;
+            showPassScreen();
+        }
 
-    async function updateLobbyList() {
-        const { data } = await supabase.from('room_players').select('player_name').eq('room_id', roomId);
-        const container = document.getElementById('lobby-players');
-        container.innerHTML = '';
-        if(data) {
-            data.forEach(p => {
-                container.innerHTML += `<span class="player-badge">👤 ${p.player_name}</span>`;
+        function showPassScreen() {
+            switchScreen('screen-pass');
+            document.getElementById('pass-to-name').innerText = players[currentPlayerIdx].name.toUpperCase();
+        }
+
+        function showQuestion() {
+            switchScreen('screen-quiz');
+            
+            document.getElementById('quiz-player-name').innerText = `GILIRAN: ${players[currentPlayerIdx].name.toUpperCase()}`;
+            document.getElementById('quiz-progress').innerText = `SOALAN: ${currentRound + 1}/${totalQuestions}`;
+
+            const qData = bankSoalan[currentRound];
+            document.getElementById('quiz-question').innerText = qData.q;
+
+            const optContainer = document.getElementById('quiz-options');
+            optContainer.innerHTML = "";
+            
+            const letters = ["A", "B", "C", "D"];
+            qData.o.forEach((opt, idx) => {
+                optContainer.innerHTML += `
+                    <button class="opt-card" onclick="checkAnswer(${idx})">
+                        <div class="opt-idx">${letters[idx]}</div>
+                        <span>${opt}</span>
+                    </button>
+                `;
             });
         }
-    }
 
-    async function hostStartGame() {
-        // Hantar isyarat "Mula" kepada semua ahli keluarga serentak via Broadcast
-        await supabase.channel(`room:${roomId}`).send({
-            type: 'broadcast',
-            event: 'start-game'
-        });
-        goToGame();
-    }
+        function checkAnswer(selectedIdx) {
+            const qData = bankSoalan[currentRound];
+            const isCorrect = selectedIdx === qData.a;
+            
+            const fbStatus = document.getElementById('feedback-status');
+            const fbExp = document.getElementById('feedback-explanation');
+            
+            if(isCorrect) {
+                players[currentPlayerIdx].score += 20; // Tambah 20 markah jika betul
+                fbStatus.className = "feedback-box feedback-success";
+                fbStatus.innerText = "🎉 JAWAPAN ANDA BETUL! (+20 Mata)";
+            } else {
+                fbStatus.className = "feedback-box feedback-fail";
+                fbStatus.innerText = `❌ JAWAPAN ANDA SALAH! (Jawapan Betul: ${qData.o[qData.a]})`;
+            }
 
-    function goToGame() {
-        document.getElementById('screen-lobby').classList.add('hidden');
-        document.getElementById('screen-game').classList.remove('hidden');
-        document.getElementById('txt-room-id').innerText = `Bilik: ${roomId}`;
-        loadQuestion();
-    }
-
-    function loadQuestion() {
-        if(currentQuestionIdx >= bankSoalan.length) {
-            showFinalResults();
-            return;
-        }
-        const qData = bankSoalan[currentQuestionIdx];
-        document.getElementById('display-question').innerText = qData.q;
-        
-        const area = document.getElementById('options-area');
-        area.innerHTML = '';
-        
-        qData.o.forEach((opt, idx) => {
-            let btn = document.createElement('button');
-            btn.className = "opt-btn";
-            btn.innerText = opt;
-            btn.onclick = () => submitAnswer(idx, qData.a);
-            area.appendChild(btn);
-        });
-        document.getElementById('txt-status-submit').innerText = "Sila pilih jawapan...";
-    }
-
-    async function submitAnswer(selectedIdx, correctIdx) {
-        // Matikan butang pilihan lepas klik
-        const buttons = document.querySelectorAll('.opt-btn');
-        buttons.forEach(b => b.disabled = true);
-        buttons[selectedIdx].classList.add('selected');
-
-        if(selectedIdx === correctIdx) {
-            myScore += 20;
-            document.getElementById('txt-status-submit').innerText = "Jawapan anda disimpan! (Betul +20)";
-            // Kemas kini markah anda ke server secara senyap
-            await supabase.from('room_players').update({ score: myScore }).eq('room_id', roomId).eq('player_name', myName);
-        } else {
-            document.getElementById('txt-status-submit').innerText = "Jawapan anda disimpan! (Salah)";
+            fbExp.innerText = `💡 Logik Kes: ${qData.h}`;
+            switchScreen('screen-feedback');
         }
 
-        // Tunggu 4 saat, kemudian bawa semua ke soalan seterusnya
-        setTimeout(() => {
-            currentQuestionIdx++;
-            loadQuestion();
-        }, 4000);
-    }
+        function proceedNext() {
+            currentPlayerIdx++;
+            
+            // Jika semua pemain sudah tamat pusingan ini
+            if (currentPlayerIdx >= players.length) {
+                currentPlayerIdx = 0;
+                currentRound++;
+            }
 
-    async function showFinalResults() {
-        document.getElementById('screen-game').classList.add('hidden');
-        document.getElementById('screen-results').classList.remove('hidden');
+            // Jika keseluruhan pusingan soalan sudah habis
+            if (currentRound >= totalQuestions || currentRound >= bankSoalan.length) {
+                showFinalResults();
+            } else {
+                showPassScreen();
+            }
+        }
 
-        // Tarik markah semua orang daripada database untuk buat perbandingan
-        const { data } = await supabase.from('room_players').select('player_name, score').eq('room_id', roomId).order('score', { ascending: false });
-        
-        const output = document.getElementById('leaderboard-output');
-        output.innerHTML = '';
-        if(data) {
-            data.forEach((p, idx) => {
-                output.innerHTML += `<div><strong>#${idx+1} ${p.player_name}</strong>: ${p.score} Mata</div>`;
+        function showFinalResults() {
+            switchScreen('screen-results');
+            
+            // Susun kedudukan pemain mengikut markah tertinggi
+            const sorted = [...players].sort((a, b) => b.score - a.score);
+            const container = document.getElementById('leaderboard-output');
+            container.innerHTML = "";
+
+            sorted.forEach((p, idx) => {
+                const isWinner = idx === 0;
+                container.innerHTML += `
+                    <div class="rank-item ${isWinner ? 'winner' : ''}">
+                        <span>${idx + 1}. ${p.name} ${isWinner ? '👑' : '⭐'}</span>
+                        <span style="color: ${isWinner ? 'var(--warning)' : 'white'}">${p.score} Mata</span>
+                    </div>
+                `;
             });
         }
-    }
-</script>
+
+        function resetGame() {
+            // Reset markah sahaja, nama dikekalkan di lobby
+            players.forEach(p => p.score = 0);
+            switchScreen('screen-lobby');
+            renderPlayers();
+        }
+
+        function switchScreen(screenId) {
+            ['screen-lobby', 'screen-pass', 'screen-quiz', 'screen-feedback', 'screen-results'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
