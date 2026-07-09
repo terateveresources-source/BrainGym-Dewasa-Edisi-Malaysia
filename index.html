@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BrainGym 500: Minda Kreatif ⚡</title>
+    <title>⚡ BrainGym 500: Edisi Kalis Ulang ⚡</title>
     <style>
         * {
             box-sizing: border-box;
@@ -54,13 +54,14 @@
         .app-title span {
             color: #ff5a5f;
             display: block;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             background: #ffe5e6;
             padding: 4px 12px;
             border-radius: 12px;
             width: fit-content;
             margin: 0.5rem auto 0 auto;
             border: 2px solid #1e293b;
+            letter-spacing: 0px;
         }
 
         .subtitle {
@@ -161,7 +162,7 @@
         .tag-tema { background: #e2e8f0; color: #1e293b; border: 2px solid #1e293b; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; }
 
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 800;
             line-height: 1.5;
             margin: 1.5rem 0;
@@ -229,7 +230,7 @@
     <div class="container">
         <!-- MENU UTAMA -->
         <div id="screen-menu">
-            <div class="app-title">BrainGym 500<span>EDISI MATANG</span></div>
+            <div class="app-title">BrainGym 500<span>MATRIX ANTI-ULANG</span></div>
             <div class="subtitle">🧩 20 Sesi • 500 Simulasi Unik 🧩</div>
 
             <div class="stats-banner">
@@ -294,20 +295,38 @@
     </div>
 
     <script>
-        // MAPPING KOD & LOGIK 500 SOALAN KALIS ULANG KEKAL SAMA SEPERTI SEBELUM INI
-        const dTema = ["Common Sense", "Vibe Sosial", "Lampu Hijau Hidup", "Street Smart", "Problem Solving"];
+        const dTema = ["Common Sense", "Vibe Sosial", "Street Smart", "Problem Solving", "Integriti Awam"];
+        
+        // 25 Subjek Unik tempatan
         const dSubjek = [
-            "Tengah drive cari parking kat flat malam-malam,", "Masa tengah beratur panjang kat kaunter Zus Coffee,", 
-            "Waktu korang stop rehat kat R&R PLUS,", "Tengah syok layan makan kat food court mall,", 
-            "Masa parking kereta nak singgah beli nasi kandar,", "Waktu tengah bersesak dalam LRT time balik kerja,",
-            "Tengah lepak borak dengan member lama kat mamak,", "Masa uruskan dokumen kat kaunter JPJ,",
-            "Tengah scroll phone masa rehat office,", "Masa tengah check group WhatsApp taman perumahan,",
-            "Waktu tengah bayar barang kat kaunter speedmart,", "Tunggu turn basuh kereta kat carwash,",
-            "Masa tengah jogging kat taman rekreasi petang,", "Tengah pilih barang basah kat pasar borong,",
-            "Waktu korang tengah tunggu order makan kat McD,", "Tengah tengok wayang kat dalam cinema,",
-            "Masa tengah tunggu lif kat lobi kondominium,", "Tengah isi minyak kereta kat stesen Shell,",
-            "Waktu hantar barang rosak kat pusat servis,", "Tengah lepak minum petang kat cafe hipster,"
+            "Tengah drive cari parking kat flat malam-malam,", 
+            "Masa tengah beratur panjang kat kaunter Zus Coffee,", 
+            "Waktu korang stop rehat kat R&R PLUS,", 
+            "Tengah syok layan makan kat food court mall,", 
+            "Masa parking kereta nak singgah beli nasi kandar,", 
+            "Waktu tengah bersesak dalam LRT time balik kerja,",
+            "Tengah lepak borak dengan member lama kat mamak,", 
+            "Masa uruskan dokumen kat kaunter JPJ,",
+            "Tengah scroll phone masa rehat office,", 
+            "Masa tengah check group WhatsApp taman perumahan,",
+            "Waktu tengah bayar barang kat kaunter speedmart,", 
+            "Tunggu turn basuh kereta kat carwash,",
+            "Masa tengah jogging kat taman rekreasi petang,", 
+            "Tengah pilih barang basah kat pasar borong,",
+            "Waktu korang tengah tunggu order makan kat McD,", 
+            "Tengah tengok wayang kat dalam cinema,",
+            "Masa tengah tunggu lif kat lobi kondominium,", 
+            "Tengah isi minyak kereta kat stesen Shell,",
+            "Waktu hantar barang rosak kat pusat servis,", 
+            "Tengah lepak minum petang kat cafe hipster,",
+            "Masa tengah urusan withdraw duit kat mesin ATM,",
+            "Tengah beli tiket dekat kaunter ETS stesen KTM,",
+            "Waktu tersangkut dalam jem teruk kat depan sekolah,",
+            "Masa tengah pusing-pusing kiosk karnival jualan jom heboh,",
+            "Tengah teman adik beli buku kat kedai Popular,"
         ];
+
+        // 25 Situasi Unik (Tiada ayat bertindih)
         const dSituasi = [
             "korang perasan ada kete selamba double-park tak tarik handbrake.",
             "ada mamat acah-acah borak phone pastu selamba potong queue depan korang.",
@@ -335,6 +354,8 @@
             "ada individu tak dikenali cuba ikut korang rapat gila dari stesen LRT.",
             "korang perasan ada aircond kedai menitik kuat betul-betul atas meja makan."
         ];
+
+        // 25 Set jawapan & huraian khusus untuk padanan situasi
         const dPilihanSet = [
             { o: ["Tolak kete tu slow-slow ke depan, atau cari contact dashboard.", "Hon panjang sampai satu flat keluar.", "Calarkan pintu biar dia ada akal.", "Post kat FB bagi kena kecam."], h: "Utamakan solution pantas tanpa drama gaduh. Tolak selamat atau contact terus." },
             { o: ["Tegur elok-elok, minta beratur belakang sebab ramai tunggu.", "Jerit bagi dia malu terus.", "Biarkan je sbb malas cari pasal.", "Tolak dia keluar dari barisan."], h: "Tegur secara direct tapi tegas. Sifat tegas elakkan orang ambil kesempatan." },
@@ -355,7 +376,7 @@
             { o: ["Bantu makcik tu bangun dan kutip barang.", "Langkah makcik tu sbb tengah rushing.", "Panggil orang lain suruh tolong.", "Gelakkan makcik tu dalam hati."], h: "Sifat kemanusiaan asas. Tolong orang yang lemah adalah tanda kekuatan peribadi." },
             { o: ["Tanya staf berdekatan tentang status kaunter.", "Bising-bising hempas barang atas meja.", "Terus balik rumah tak jadi uruskan.", "Post kat twitter tag akaun rasmi."], h: "Menyelesaikan masalah secara rasional melalui saluran betul menjimatkan masa semua orang." },
             { o: ["Serahkan IC tersebut pada kaunter bank/polis.", "Simpan buat koleksi peribadi.", "Buang dalam tong sampah terdekat.", "Post gambar penuh IC tanpa tapisan kat FB."], h: "Melindungi data peribadi orang lain. Serahkan pada pihak berkuasa dengan selamat." },
-            { o: ["Cari jalan alternatif atau jalan tenang.", "Baling batu kasi anjing tu lari.", "Jerit balik kat anjing tersebut.", "Provok bagi anjing tu gigit."], h: "Street smart bermaksud tahu mengelak bahaya fizikal tanpa mencetuskan threat baru." },
+            { o: ["Cari jalan alternatif atau jalan tenang.", "Baling batu kasi anjing tu lari.", "Jerit balik kat anjing tersebut.", "Provok bagi anjing tu gigit."], h: "Street smart bermaksud tahu mengelak bahaya fizikal tanpa mencetuskan ancaman baharu." },
             { o: ["Campur tangan secara tegas atau panggil cikgu.", "Join sekaki pow duit budak tu.", "Buat-buat tak nampak jalan terus.", "Rakam video buat kenangan."], h: "Menolak buli bermakna anda seorang pelindung komuniti yang bertanggungjawab." },
             { o: ["Maklumkan staf segera dan keluar dari premis.", "Sambung makan sbb makanan sedap.", "Nyalakan rokok nak test gas.", "Jerit 'kebakaran!' bagi semua kalut."], h: "Keselamatan nyawa diutamakan. Bertindak pantas dan tenang menyelamatkan nyawa." },
             { o: ["Tarik orang tua tu keluar dari zon penipuan.", "Biarkan janji bukan mak bapak kita.", "Join sekaki beli tiket gores menang.", "Ketawakan orang tua sbb lurus bendul."], h: "Melindungi golongan veteran daripada scammer mencerminkan nilai moral yang tinggi." },
@@ -363,16 +384,30 @@
             { o: ["Minta tukar meja lain dengan pekerja kedai.", "Sengaja biarkan baju basah lencun.", "Marah jerit kat pelayan kedai.", "Tolak meja tu sampai terbalik."], h: "Menukar kedudukan secara tenang menyelesaikan isu tanpa merosakkan mood makan anda." }
         ];
 
+        // ALGORITMA UTAMA ANTI-ULANG MUTLAK
         function janaSoalan500(noId) {
-            let idxSubjek = (noId - 1) % 20; let idxSituasi = (noId - 1) % 25; let idxPilihan = (noId - 1) % 25;
+            // Rotational Offset Mapping menggunakan pusingan matematik berbeza bagi setiap index array
+            let idxSubjek = (noId - 1) % 25;
+            
+            // Menggunakan pendaraban nombor perdana (7) dan anjakan mengikut blok id untuk tukar pasangan situasi
+            let idxSituasi = ((noId - 1) * 7 + Math.floor((noId - 1) / 25)) % 25;
+            
+            // Set jawapan dipadankan mengikut situasi supaya logiknya sentiasa betul & tidak lari skop
+            let idxPilihan = idxSituasi; 
+
             let tahap = "mudah";
             if (noId > 150 && noId <= 350) tahap = "sederhana";
             if (noId > 350) tahap = "sukar";
+            
             let idxTema = (noId * 3) % dTema.length;
+
             return {
-                id: noId, level: tahap, tema: dTema[idxTema],
+                id: noId, 
+                level: tahap, 
+                tema: dTema[idxTema],
                 q: `[Kes #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`,
-                o: [...dPilihanSet[idxPilihan].o], h: dPilihanSet[idxPilihan].h
+                o: [...dPilihanSet[idxPilihan].o], 
+                h: dPilihanSet[idxPilihan].h
             };
         }
 
@@ -382,12 +417,12 @@
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGym500_PlayfulPremium");
+            let localData = localStorage.getItem("BrainGym500_AntiLoop_Premium");
             if (localData) { appState = JSON.parse(localData); } 
             else { for(let i=1; i<=20; i++) appState.batchCompleted[i] = -1; saveStorage(); }
             updateGlobalStats();
         }
-        function saveStorage() { localStorage.setItem("BrainGym500_PlayfulPremium", JSON.stringify(appState)); }
+        function saveStorage() { localStorage.setItem("BrainGym500_AntiLoop_Premium", JSON.stringify(appState)); }
         function updateGlobalStats() {
             document.getElementById('stat-total-score').innerText = appState.totalScore;
             let doneCount = Object.values(appState.batchCompleted).filter(v => v !== -1).length;
@@ -438,6 +473,7 @@
             document.getElementById('game-tema-badge').innerText = qData.tema;
             document.getElementById('game-question-text').innerText = qData.q;
 
+            // Rawakkan paparan susunan butang pilihan A, B, C, D di skrin
             let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
             susunanRawak.sort(() => Math.random() - 0.5);
 
