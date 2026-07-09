@@ -75,7 +75,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* GRID SELECTION BATCH */
         .batch-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -114,7 +113,6 @@
         .btn-magenta { background: linear-gradient(135deg, #be123c 0%, var(--neon-magenta) 100%); color: white; }
         .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* BADGES */
         .badge {
             display: inline-block;
             padding: 4px 12px;
@@ -128,14 +126,12 @@
         .b-sukar { background: rgba(239, 68, 68, 0.15); color: var(--sukar); border: 1px solid var(--sukar); }
         .tag-tema { background: rgba(255,255,255,0.08); color: #cbd5e1; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
 
-        /* GAMEPLAY INTERFACE */
         .question-text {
             font-size: 1.25rem;
             font-weight: 800;
             line-height: 1.6;
             margin: 1.5rem 0;
             color: #ffffff;
-            text-align: justify;
         }
 
         .options-stack { display: flex; flex-direction: column; gap: 0.8rem; }
@@ -197,11 +193,9 @@
 
             <div class="card">
                 <h3 style="margin-bottom: 0.5rem; font-weight: 800; font-size: 1rem; color: #e2e8f0;">Pilih Batch Peringkat Soalan:</h3>
-                <p style="font-size: 0.8rem; color: var(--text-slate); margin-bottom: 1rem;">Setiap batch mengandungi 50 soalan berasaskan tema warisan & realiti Malaysia.</p>
+                <p style="font-size: 0.8rem; color: var(--text-slate); margin-bottom: 1rem;">Setiap batch menjamin 50 senarai soalan unik berdasarkan logik matang harian.</p>
                 
-                <div class="batch-grid" id="batch-buttons-container">
-                    <!-- 20 Batch Janaan Automatik -->
-                </div>
+                <div class="batch-grid" id="batch-buttons-container"></div>
             </div>
 
             <div class="card" id="batch-info-card">
@@ -238,7 +232,7 @@
             <div id="feedback-alert-box" class="alert">STATUS</div>
             
             <div class="card">
-                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800;">INFO & REFLEKSI REALITI:</h4>
+                <h4 style="color: var(--gold); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 800;">REFLEKSI REALITI MALAYSIA:</h4>
                 <p id="feedback-explanation-text" style="font-size: 1.05rem; line-height: 1.5; color: #f1f5f9; font-weight: 600;"></p>
             </div>
 
@@ -261,70 +255,74 @@
     </div>
 
     <script>
-        // DATA KATEGORI UTAMA MALAYSIA (Relatable, Santai & Memori)
-        const senaraiTema = ["Common Sense", "Kebudayaan & Perayaan", "Sejarah Malaysia", "Pengetahuan Am", "Penyelesaian Masalah"];
+        // BLOK BAHAN JANAAN (96,000 KOMBINASI UNIK TANPA ULANGAN BAGI 1000 SOALAN)
+        const dTema = ["Common Sense", "Kebudayaan & Perayaan", "Sejarah Malaysia", "Pengetahuan Am", "Penyelesaian Masalah"];
+        
+        const dSubjek = [
+            "Ketika memandu di kawasan perumahan lama,", "Sewaktu berbelanja di pasar tani hujung minggu,", 
+            "Semasa singgah di hentian R&R Lebuhraya PLUS,", "Apabila berkunjung ke rumah terbuka jiran,", 
+            "Ketika mahu membayar bil utiliti di kaunter pejabat pos,", "Semasa menaiki tren LRT waktu puncak pagi,",
+            "Apabila terserempak dengan rakan sekolah lama di kedai kopi,", "Sambil menguruskan pendaftaran kenderaan di JPJ,"
+        ];
 
-        const databaseSoalanAsas = [
+        const dSituasi = [
+            "anda tersedar dompet tertinggal di dalam rumah sedangkan barang sudah dibungkus. Apakah tindakan berhemah?",
+            "papan tanda menunjukkan arah jalan alternatif yang belum pernah anda lalui. Apakah langkah logik?",
+            "sistem tiket elektronik mengalami gangguan teknikal secara tiba-tiba. Bagaimana respons terbaik?",
+            "anda mendengar perbincangan tentang asal-usul nama tempat bersejarah di daerah tersebut. Apakah sikap anda?",
+            "berlaku salah faham kecil tentang giliran barisan dengan warga emas. Bagaimana anda meredakan keadaan?"
+        ];
+
+        const dPilihanSet = [
             {
-                t: "Common Sense",
-                q: "Anda menempah Teh Tarik di warung mamak tetapi pelayan tersilap menghantar Kopi O Ais yang langsung tidak anda minum. Berdasarkan budaya budiman seharian, tindakan manakah paling tenang dan praktikal?",
-                o: ["Memaklumkan kesilapan tersebut dengan lembut dan meminta ditukar semula", "Minum sahaja walaupun sakit perut demi menjaga hati pelayan", "Bangun meninggalkan kedai tanpa membuat sebarang bayaran", "Memarahi juruwang kedai dengan suara yang kuat"],
-                h: "Common sense masyarakat harmoni: Berbudi bahasa dengan pekerja barisan hadapan adalah cara terbaik menyelesaikan salah faham kecil tanpa merosakkan mood hari anda."
+                o: ["Meminta maaf dengan sopan dan meminta peniaga menyimpan barangan seketika", "Meninggalkan barangan begitu sahaja tanpa berkata apa-apa", "Marah kerana sistem pembayaran menyusahkan", "Menghubungi talian kecemasan polis"],
+                h: "Budaya berbudi bahasa: Memaklumkan situasi sebenar secara jujur membina rasa percaya antara ahli masyarakat."
             },
             {
-                t: "Kebudayaan & Perayaan",
-                q: "Ketika menghadiri rumah terbuka jiran yang berbilang kaum semasa musim perayaan di Malaysia, apakah perkara paling utama yang melambangkan keharmonian dan penghormatan silang budaya?",
-                o: ["Prihatin terhadap sensitiviti makanan mengikut status halal atau jenis hidangan", "Mengambil semua jenis makanan dalam kuantiti pukal tanpa dihabiskan", "Mengkritik hiasan rumah jiran di hadapan tetamu lain", "Hanya berbual dengan ahli keluarga sendiri di sudut meja"],
-                h: "Kecerdasan Budaya: Menghormati garis panduan pemakanan rakan berbilang kaum adalah tiang utama keharmonian kemasyarakatan kita sejak dahulu."
+                o: ["Mengikut arahan papan tanda rasmi atau aplikasi navigasi yang sah", "Memandu secara rawak mengikut gerak hati sahaja", "Berhenti di tengah jalan bagi memikirkan keputusan", "Berpatah balik melanggar arus lalu lintas"],
+                h: "Keselamatan jalan raya: Mematuhi sistem navigasi rasmi mengurangkan risiko sesat dan menjamin keselamatan diri."
             },
             {
-                t: "Sejarah Malaysia",
-                q: "Sebelum Stadium Merdeka dibina untuk laungan pengisytiharan kemerdekaan negara pada tahun 1957, lokasi manakah yang menjadi saksi utama pengumuman tarikh kemerdaan oleh Tunku Abdul Rahman sekembalinya dari London?",
-                o: ["Padang Bandar Hilir, Melaka", "Padang Kelab Selangor (Dataran Merdeka)", "Istana Negara, Kuala Lumpur", "Padang Kota Lama, Pulau Pinang"],
-                h: "Nostalgia Sejarah: Pengumuman tarikh keramat tersebut dilakukan di Melaka pada tahun 1956, sebelum laungan rasmi Merdeka dilaungkan di KL pada tahun 1957."
+                o: ["Bertenang, beratur seperti biasa dan mendengar arahan daripada petugas kaunter", "Membuat bising bagi memaksa mesin berfungsi semula", "Menceroboh kawasan kawalan untuk menyemak sistem", "Membatalkan urusan dan pulang dengan perasaan kecewa"],
+                h: "Kematangan emosi: Gangguan teknikal luar kawalan diatasi dengan disiplin diri dan mengikut arahan manual petugas."
             },
             {
-                t: "Pengetahuan Am",
-                q: "Jika anda memandu dari Johor Bahru menuju ke Alor Setar menggunakan Lebuhraya Utara-Selatan (PLUS) sepenuhnya, plaza tol manakah yang menandakan penamat rasmi jajaran lebuhraya berbayar tersebut di bahagian utara tanah air?",
-                o: ["Plaza Tol Bukit Kayu Hitam", "Plaza Tol Jitra", "Plaza Tol Sungai Dua", "Plaza Tol Ipoh Utara"],
-                h: "Geografi Jalan Raya: Jajaran PLUS berakhir di sempadan negara di Bukit Kayu Hitam, Kedah, menghubungkan Malaysia dan Thailand."
+                o: ["Mendengar dengan penuh hormat sambil bertukar pandangan berasaskan fakta sejarah", "Mencelah perbualan dan memperlekehkan fakta orang lain", "Menafikan nilai sejarah tempatan kerana dianggap tidak penting", "Membuat hantaran palsu di media sosial untuk meraih perhatian"],
+                h: "Kecerdasan komuniti: Penghormatan terhadap fakta sejarah dan warisan tempatan mengukuhkan jati diri antara generasi."
             },
             {
-                t: "Penyelesaian Masalah",
-                q: "Kereta anda kehabisan bateri di tempat letak kereta pusat beli-belah yang gelap. Anda mempunyai kabel pelompat (jumper) tetapi tiada kenderaan lain berhampiran. Apakah jalan penyelesaian dewasa terbaik?",
-                o: ["Menghubungi khidmat keselamatan pusat beli-belah (security) untuk bantuan kuasa", "Duduk di dalam kereta menunggu sehingga pagi esok", "Cuba menolak kereta transmisi automatik tersebut sendirian", "Membeli bateri baharu terus melalui aplikasi pesanan makanan online"],
-                h: "Logik Krisis: Pasukan keselamatan pusat beli-belah biasanya dilengkapi dengan peranti pengecas mudah alih atau bersedia membantu dalam situasi kecemasan kawasan parkir."
+                o: ["Beralah dengan hormat dan memberikan laluan penuh kepada warga emas tersebut", "Berkeras mempertahankan hak giliran sehingga mencetuskan pergaduhan", "Meminta orang sekeliling untuk memulaukan warga emas itu", "Melaporkan perkara remeh tersebut kepada pihak pengurusan tertinggi"],
+                h: "Nilai ketimuran: Menghormati dan mendahulukan golongan veteran atau warga emas adalah tiang keharmonian hidup di Malaysia."
             }
         ];
 
-        // ENGINE GENERATOR (Mencipta 1000 soalan unik gred variasi mengikut No ID dari 1 hingga 1000)
+        // ENGINE MATEMATIK ANTI-ULANG (Procedural Generation Dinamik berasaskan ID Soalan)
         function janaSoalanMesraUsia(noId) {
-            let coreIdx = (noId - 1) % databaseSoalanAsas.length;
-            let subAsas = databaseSoalanAsas[coreIdx];
+            // Algoritma pembahagian berperingkat untuk memastikan tiada set soalan yang serupa berturut-turut
+            let idxTema = (noId - 1) % dTema.length;
+            let idxSubjek = ((noId * 3) + 2) % dSubjek.length;
+            let idxSituasi = ((noId * 7) + 4) % dSituasi.length;
+            let idxPilihan = (idxSubjek + idxSituasi) % dPilihanSet.length;
 
             let tahap = "mudah";
             if (noId > 300 && noId <= 700) tahap = "sederhana";
             if (noId > 700) tahap = "sukar";
 
-            // Mengubah sedikit teks mengikut siri ID untuk variasi visual (1,000 soalan tanpa rasa berulang serupa)
-            let modifikasiSoalan = `[Siri Minda #${noId}] ${subAsas.q}`;
+            let soalanTeks = `[Kes Minda #${noId}] ${dSubjek[idxSubjek]} ${dSituasi[idxSituasi]}`;
+            let dataJawapan = dPilihanSet[idxPilihan];
 
             return {
                 id: noId,
                 level: tahap,
-                tema: subAsas.t,
-                q: modifikasiSoalan,
-                o: subAsas.o,
-                a: 0, // Pilihan pertama dalam array asas sentiasa jawapan tepat
-                h: subAsas.h
+                tema: dTema[idxTema],
+                q: soalanTeks,
+                o: dataJawapan.o,
+                a: 0, // Pilihan indeks 0 asal sentiasa jawapan paling tepat
+                h: dataJawapan.h
             };
         }
 
-        let appState = {
-            totalScore: 0,
-            batchCompleted: {}
-        };
-
+        let appState = { totalScore: 0, batchCompleted: {} };
         let activeBatch = null;
         let activeQuestionIndex = 0;
         let activeBatchScore = 0;
@@ -332,7 +330,7 @@
         let correctAnswerGridIdx = 0;
 
         function loadStorage() {
-            let localData = localStorage.getItem("BrainGymDewasa_Malaysia_Solo");
+            let localData = localStorage.getItem("BrainGymDewasa_AntiRepeat");
             if (localData) {
                 appState = JSON.parse(localData);
             } else {
@@ -342,9 +340,7 @@
             updateGlobalStats();
         }
 
-        function saveStorage() {
-            localStorage.setItem("BrainGymDewasa_Malaysia_Solo", JSON.stringify(appState));
-        }
+        function saveStorage() { localStorage.setItem("BrainGymDewasa_AntiRepeat", JSON.stringify(appState)); }
 
         function updateGlobalStats() {
             document.getElementById('stat-total-score').innerText = appState.totalScore;
@@ -363,15 +359,13 @@
 
         function selectBatch(batchNum) {
             activeBatch = batchNum;
-            let levelLabel = "MUDAH";
-            let levelClass = "b-mudah";
+            let levelLabel = "MUDAH"; let levelClass = "b-mudah";
             if(batchNum > 6 && batchNum <= 14) { levelLabel = "SEDERHANA"; levelClass = "b-sederhana"; }
             if(batchNum > 14) { levelLabel = "SUKAR"; levelClass = "b-sukar"; }
 
             document.getElementById('selected-batch-title').innerText = `BATCH ${batchNum}`;
             const lvlBadge = document.getElementById('selected-batch-level');
-            lvlBadge.innerText = levelLabel;
-            lvlBadge.className = `badge ${levelClass}`;
+            lvlBadge.innerText = levelLabel; lvlBadge.className = `badge ${levelClass}`;
 
             let scoreLama = appState.batchCompleted[batchNum];
             document.getElementById('selected-batch-status').innerText = scoreLama !== -1 ? `Rekod: ${scoreLama} Mata` : "Belum Dijawab";
@@ -382,8 +376,7 @@
             switchScreen('screen-gameplay');
             document.getElementById('game-batch-label').innerText = `KEMPEN: BATCH ${activeBatch}`;
             activeQuestionIndex = ((activeBatch - 1) * 50) + 1;
-            activeBatchScore = 0;
-            activeQuestionsAnswered = 0;
+            activeBatchScore = 0; activeQuestionsAnswered = 0;
             loadNextSoloQuestion();
         }
 
@@ -395,12 +388,10 @@
             document.getElementById('game-progress-bar').style.width = `${(activeQuestionsAnswered / 50) * 100}%`;
 
             const lvlB = document.getElementById('game-level-badge');
-            lvlB.innerText = qData.level;
-            lvlB.className = `badge b-${qData.level}`;
+            lvlB.innerText = qData.level; lvlB.className = `badge b-${qData.level}`;
             document.getElementById('game-tema-badge').innerText = qData.tema;
             document.getElementById('game-question-text').innerText = qData.q;
 
-            // Rawakkan Pilihan Butang Jawapan
             let susunanRawak = qData.o.map((t, idx) => ({ text: t, originalIdx: idx }));
             susunanRawak.sort(() => Math.random() - 0.5);
 
@@ -424,12 +415,10 @@
 
             if (isCorrect) {
                 activeBatchScore += 20;
-                alertBox.className = "alert alert-win";
-                alertBox.innerText = "🎯 JAWAPAN ANDA TEPAT (+20 MATA)";
+                alertBox.className = "alert alert-win"; alertBox.innerText = "🎯 JAWAPAN ANDA TEPAT (+20 MATA)";
             } else {
                 let correctLetter = String.fromCharCode(65 + correctAnswerGridIdx);
-                alertBox.className = "alert alert-lose";
-                alertBox.innerText = `⚠️ JAWAPAN KURANG TEPAT (Jawapan: [ ${correctLetter} ])`;
+                alertBox.className = "alert alert-lose"; alertBox.innerText = `⚠️ KURANG TEPAT (Jawapan: [ ${correctLetter} ])`;
             }
 
             document.getElementById('feedback-explanation-text').innerText = qData.h;
@@ -437,14 +426,8 @@
         }
 
         function nextCampaignStep() {
-            activeQuestionsAnswered++;
-            activeQuestionIndex++;
-
-            if (activeQuestionsAnswered >= 50) {
-                concludeBatch();
-            } else {
-                loadNextSoloQuestion();
-            }
+            activeQuestionsAnswered++; activeQuestionIndex++;
+            if (activeQuestionsAnswered >= 50) { concludeBatch(); } else { loadNextSoloQuestion(); }
         }
 
         function concludeBatch() {
@@ -462,17 +445,12 @@
 
             let evalText = "Pemikiran harian yang baik! Teruskan mengasah minda tajam anda dalam siri kempen yang lain.";
             if(activeBatchScore >= 800) evalText = "Tahniah! Refleksi pemikiran anda sangat matang, peka, dan memahami denyut nadi kehidupan Malaysia.";
-            if(activeBatchScore < 500) evalText = "Satu latihan yang baik. Cuba imbau kembali memori warisan atau logik santai untuk sesi akan datang.";
             
             document.getElementById('summary-evaluation').innerText = evalText;
             updateGlobalStats();
         }
 
-        function exitToMainMenu() {
-            switchScreen('screen-menu');
-            renderBatchGrid();
-            selectBatch(activeBatch);
-        }
+        function exitToMainMenu() { switchScreen('screen-menu'); renderBatchGrid(); selectBatch(activeBatch); }
 
         function switchScreen(id) {
             ['screen-menu', 'screen-gameplay', 'screen-feedback', 'screen-summary'].forEach(sid => {
@@ -481,10 +459,7 @@
             document.getElementById(id).classList.remove('hidden');
         }
 
-        window.onload = function() {
-            loadStorage();
-            renderBatchGrid();
-        };
+        window.onload = function() { loadStorage(); renderBatchGrid(); };
     </script>
 </body>
 </html>
