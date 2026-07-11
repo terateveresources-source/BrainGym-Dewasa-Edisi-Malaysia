@@ -3,509 +3,904 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BrainGym 500: Edisi Minda Matang ⚡</title>
+    <title>BrainGym Anak Malaysia 🇲🇾</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;700;800;900&display=swap');
+        :root {
+            --primary-yellow: #FFD166;
+            --chili-red: #EF476F;
+            --electric-blue: #118AB2;
+            --jungle-green: #06D6A0;
+            --dark-navy: #073B4C;
+        }
 
         * {
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Sora', sans-serif;
         }
 
         body {
-            background-color: #FFDE4D;
-            color: #000000;
-            padding: 2rem 1rem;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--chili-red));
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
-        .container {
+        .game-container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 0px var(--dark-navy);
+            border: 4px solid var(--dark-navy);
             width: 100%;
-            max-width: 520px;
-            background: #FFFFFF;
-            border: 4px solid #000000;
-            box-shadow: 8px 8px 0px #000000;
-            border-radius: 24px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .hidden { display: none !important; }
-
-        /* NEO-BRUTALISM ELEMENTS */
-        .app-title {
-            font-size: 2.3rem;
-            font-weight: 900;
-            text-transform: uppercase;
+            max-width: 600px;
+            padding: 30px;
             text-align: center;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            -webkit-text-stroke: 1px #000000;
-            color: #FF6B6B;
-            text-shadow: 3px 3px 0px #000000;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            background: #4F46E5;
-            color: #FFFFFF;
-            padding: 6px 12px;
-            border-radius: 10px;
-            border: 2px solid #000000;
-            width: fit-content;
-            margin: 0 auto 2rem auto;
-            box-shadow: 2px 2px 0px #000000;
-        }
-
-        .card {
-            background: #FFFFFF;
-            border: 4px solid #000000;
-            box-shadow: 5px 5px 0px #000000;
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .input-neo {
-            width: 100%;
-            padding: 1rem;
-            border: 4px solid #000000;
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            box-shadow: 4px 4px 0px #000000;
-            outline: none;
-            margin-bottom: 1.5rem;
-            background: #F8FAFC;
-        }
-        .input-neo:focus {
-            background: #E0E7FF;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 1.1rem;
-            border: 4px solid #000000;
-            border-radius: 18px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 4px 4px 0px #000000;
-            transition: all 0.1s ease;
             position: relative;
-        }
-        .btn:active {
-            transform: translate(3px, 3px);
-            box-shadow: 1px 1px 0px #000000;
-        }
-        .btn-green { background: #6BCB77; color: #000000; }
-        .btn-cyan { background: #4D96FF; color: #000000; }
-        .btn-magenta { background: #FF6B6B; color: #FFFFFF; }
-        .btn-yellow { background: #FFD93D; color: #000000; }
-
-        /* BATCH GRID */
-        .batch-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0.6rem;
-            margin-top: 1rem;
-        }
-        .batch-btn {
-            background: #FFFFFF;
-            border: 3px solid #000000;
-            padding: 0.8rem 0;
-            font-weight: 900;
-            font-size: 1.1rem;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 2px 2px 0px #000000;
-            transition: all 0.1s ease;
-        }
-        .batch-btn:hover { background: #FFD93D; }
-        .batch-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0px #000000;
-        }
-        .batch-btn.completed {
-            background: #6BCB77;
-            color: #000000;
+            overflow: hidden;
         }
 
-        /* REWARD ITEM */
-        .reward-item {
+        .header-panel {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem;
-            border: 3px solid #000000;
-            border-radius: 16px;
-            background: #F8FAFC;
-            margin-bottom: 0.75rem;
-            box-shadow: 3px 3px 0px #000000;
-        }
-        .reward-item.owned {
-            background: #E0E7FF;
-            border-color: #4F46E5;
+            margin-bottom: 20px;
         }
 
-        .badge-neo {
-            padding: 4px 10px;
-            border: 2px solid #000000;
-            font-size: 11px;
-            font-weight: 900;
-            text-transform: uppercase;
-            border-radius: 8px;
-            box-shadow: 1px 1px 0px #000000;
+        .badge {
+            background: var(--dark-navy);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 14px;
         }
 
-        .question-text {
-            font-size: 1.2rem;
-            font-weight: 800;
-            line-height: 1.5;
-            margin: 1.5rem 0;
-        }
-
-        .opt-stack { display: flex; flex-direction: column; gap: 0.75rem; }
-        .opt-btn {
-            background: #FFFFFF;
-            border: 3px solid #000000;
-            padding: 1.1rem;
-            border-radius: 16px;
-            text-align: left;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 3px 3px 0px #000000;
-            transition: all 0.1s ease;
-            line-height: 1.4;
-        }
-        .opt-btn:hover {
-            background: #F1F5F9;
-            transform: translateX(3px);
-        }
-
-        .alert-box {
-            padding: 1.2rem;
-            border-radius: 16px;
-            border: 4px solid #000000;
-            text-align: center;
-            font-weight: 900;
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 4px 4px 0px #000000;
-        }
-        .alert-win { background: #6BCB77; }
-        .alert-lose { background: #FF6B6B; color: #FFFFFF; }
-
-        .progress-container {
-            background: #000000;
-            height: 16px;
+        .category-tag {
+            background: var(--electric-blue);
+            color: white;
+            padding: 5px 15px;
             border-radius: 10px;
-            padding: 2px;
-            overflow: hidden;
-            margin-bottom: 1.5rem;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
         }
+
+        h2 {
+            color: var(--dark-navy);
+            font-size: 22px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .btn-option {
+            background: white;
+            border: 3px solid var(--dark-navy);
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--dark-navy);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            box-shadow: 0 5px 0 var(--dark-navy);
+        }
+
+        .btn-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 var(--dark-navy);
+            background: #f0f0f0;
+        }
+
+        .btn-option:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 var(--dark-navy);
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            height: 15px;
+            border-radius: 50px;
+            border: 2px solid var(--dark-navy);
+            overflow: hidden;
+        }
+
         .progress-bar {
-            background: #6BCB77;
+            background: var(--jungle-green);
             height: 100%;
-            border-radius: 6px;
             width: 0%;
             transition: width 0.3s ease;
         }
 
-        .nav-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+        .score-screen {
+            display: none;
+        }
+
+        .score-screen h1 {
+            font-size: 40px;
+            color: var(--chili-red);
+            margin-bottom: 10px;
+        }
+
+        .btn-next {
+            background: var(--jungle-green);
+            color: var(--dark-navy);
+            border: 3px solid var(--dark-navy);
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 var(--dark-navy);
+            margin-top: 20px;
+        }
+
+        .btn-next:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 var(--dark-navy);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+<div class="game-container">
+    <!-- Skrin Kuiz -->
+    <div id="quiz-screen">
+        <div class="header-panel">
+            <span class="badge" id="question-number">Soalan 1/20</span>
+            <span class="badge" style="background: var(--chili-red);" id="score-badge">Skor: 0</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        <br>
+        <div class="category-tag" id="category">KBAT LOKAL</div>
+        <h2 id="question-text">Loading soalan paling ngam untuk otak korang...</h2>
         
-        <div id="screen-login">
-            <div class="app-title">BrainGym 500</div>
-            <div class="subtitle">💥 EDISI MINDA MATANG v2.0 💥</div>
-            <div class="card">
-                <h3 style="margin-bottom: 0.8rem; font-weight: 900;">Daftar Profil Minda:</h3>
-                <input type="text" id="player-name-input" class="input-neo" placeholder="Masukkan nama panggilan anda...">
-                <button class="btn btn-green" onclick="registerProfile()">Mula Pengembaraan Minda 🚀</button>
-            </div>
+        <div class="options-grid" id="options-container">
+            <!-- Pilihan jawapan akan dimasukkan oleh JS -->
         </div>
-
-        <div id="screen-menu" class="hidden">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <div>
-                    <span style="font-size: 0.8rem; font-weight: 800; color: #64748b;">PENGGUNA:</span>
-                    <h4 id="display-player-name" style="font-weight: 900; font-size: 1.2rem; text-transform: uppercase;">PLAYER</h4>
-                </div>
-                <div style="text-align: right;">
-                    <span style="font-size: 0.8rem; font-weight: 800; color: #64748b;">TOTAL MATA:</span>
-                    <h4 id="display-total-score" style="font-weight: 900; font-size: 1.2rem; color: #4F46E5;">0 PTS</h4>
-                </div>
-            </div>
-
-            <div class="nav-tabs">
-                <button class="btn btn-yellow" style="padding: 0.6rem; font-size: 0.85rem;" onclick="switchTab('sessions')">📦 Sesi Batches</button>
-                <button class="btn btn-cyan" style="padding: 0.6rem; font-size: 0.85rem;" onclick="switchTab('rewards')">🏆 Kedai Ganjaran</button>
-            </div>
-
-            <div id="tab-sessions">
-                <div class="card">
-                    <h3 style="font-weight: 900; font-size: 1.1rem; margin-bottom: 0.2rem;">Pilih Sesi Ujian:</h3>
-                    <p style="font-size: 0.75rem; font-weight: 700; color: #64748b; margin-bottom: 1rem;">Setiap batch mengandungi 25 simulasi 100% kalis ulang.</p>
-                    <div class="batch-grid" id="batch-buttons-container"></div>
-                </div>
-
-                <div class="card" id="selected-batch-card" style="background: #F8FAFC;">
-                    <h3 id="selected-batch-title" style="font-weight: 900;">Sila Pilih Mana-mana Batch</h3>
-                    <div style="display: flex; gap: 0.5rem; margin: 0.6rem 0 1.2rem 0;">
-                        <span id="selected-batch-level" class="badge-neo" style="background: #FFD93D;">LEVEL</span>
-                        <span id="selected-batch-status" class="badge-neo" style="background: #FFFFFF;">STATUS</span>
-                    </div>
-                    <button class="btn btn-magenta" id="btn-start-session" onclick="startSessionCampaign()" disabled>⚡ Kunci & Buka Sesi ⚡</button>
-                </div>
-            </div>
-
-            <div id="tab-rewards" class="hidden">
-                <div class="card">
-                    <h3 style="font-weight: 900; margin-bottom: 1rem;">🏆 Ganjaran Pencapaian Minda</h3>
-                    <div id="rewards-list-container"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="screen-gameplay" class="hidden">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span id="game-batch-label" style="font-weight: 900; text-transform: uppercase; font-size: 0.85rem;">BATCH</span>
-                <span id="game-progress-label" style="font-weight: 900; font-size: 0.85rem; color: #4F46E5;">SOALAN 1/25</span>
-            </div>
-            <div class="progress-container"><div class="progress-bar" id="game-progress-bar"></div></div>
-
-            <div class="card">
-                <div style="display: flex; gap: 0.4rem; margin-bottom: 1rem;">
-                    <span id="game-level-badge" class="badge-neo" style="background: #6BCB77;">MUDAH</span>
-                    <span id="game-tema-badge" class="badge-neo" style="background: #E2E8F0;">TEMA</span>
-                </div>
-                <div class="question-text" id="game-question-text">Memuatkan simulasi kes...</div>
-                <div class="opt-stack" id="game-options-container"></div>
-            </div>
-        </div>
-
-        <div id="screen-feedback" class="hidden">
-            <div id="feedback-alert-box" class="alert-box">STATUS JAWAPAN</div>
-            <div class="card" style="background: #F8FAFC; border-color: #4F46E5;">
-                <h4 style="font-weight: 900; color: #4F46E5; margin-bottom: 0.4rem;">🧠 REFLEKSI LOGIK MATANG:</h4>
-                <p id="feedback-explanation-text" style="font-size: 1rem; font-weight: 700; line-height: 1.5; color: #1E293B;"></p>
-            </div>
-            <button class="btn btn-green" onclick="nextCampaignStep()">Teruskan Langkah Simulasi ➡️</button>
-        </div>
-
-        <div id="screen-summary" class="hidden" style="text-align: center;">
-            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉</div>
-            <h2 style="font-weight: 900; text-transform: uppercase; margin-bottom: 0.2rem;" id="summary-title">Sesi Selesai!</h2>
-            <p style="font-weight: 900; font-size: 1.4rem; color: #4F46E5; margin-bottom: 1.5rem;" id="summary-score-text">Skor: 0 Mata</p>
-            
-            <div class="card" style="text-align: left;">
-                <h4 style="font-weight: 900; margin-bottom: 0.4rem;">ULASAN PEMIKIRAN:</h4>
-                <p id="summary-evaluation" style="font-weight: 700; font-size: 0.95rem; color: #475569; line-height: 1.5;">Ulasan...</p>
-            </div>
-            <button class="btn btn-magenta" onclick="exitToMainMenu()">Kembali Ke Papan Dashboard</button>
-        </div>
-
     </div>
 
-    <script>
-        // DATA KLUSTER PENJAMIN KESAHIHAN LOGIK & ANTI-BERULANG (500 UNIQUE COMBINATIONS METRIC)
-        const klusterLokasi = [
-            "di kawasan flat kos rendah waktu malam", "di kaunter premis perniagaan yang sesak", "di kawasan hentian R&R lebuhraya",
-            "di medan selera pusat membeli-belah", "di kawasan parkir restoran nasi kandar", "di dalam tren pengangkutan awam waktu puncak",
-            "di sebuah restoran mamak 24 jam", "di kaunter pejabat urusan dokumentasi kerajaan", "di dalam ruang pantri pejabat waktu rehat",
-            "di pekarangan kawasan perumahan berpagar", "di kaunter kedai serbaneka rangkaian tempatan", "di ruang menunggu pusat cuci kereta",
-            "di kawasan trek rekreasi taman awam", "di tapak jualan pasar borong waktu awal pagi", "di kaunter pesanan restoran makanan segera",
-            "di dalam ruang panggung wayang", "di lobi lif utama bangunan kondominium", "di pam stesen minyak lebuhraya",
-            "di kaunter khidmat pelanggan pusat servis", "di dalam ruang kafe hipster tempatan", "di hadapan mesin pengeluaran wang ATM",
-            "di kaunter tiket stesen pengangkutan bersepadu", "di persimpangan lampu isyarat utama", "di kawasan pasar malam hujung minggu",
-            "di ruang legar pusat perpustakaan awam"
-        ];
+    <!-- Skrin Keputusan -->
+    <div id="score-screen" class="score-screen">
+        <h1>Mantap Guys! 🎉</h1>
+        <p style="font-size: 18px; margin-bottom: 20px;">Sesi BrainGym Set ini selesai.</p>
+        <h2 id="final-score" style="font-size: 30px; color: var(--electric-blue);">Skor Anda: 0/20</h2>
+        <p id="rank-text" style="font-weight: bold; font-size: 20px; margin-bottom: 25px;"></p>
+        <button class="btn-next" onclick="restartQuiz()">Main Set Seterusnya</button>
+    </div>
+</div>
 
-        const klusterIsu = [
-            "sebuah kenderaan sengaja melakukan double-park tanpa menarik brek tangan dan menghalang laluan utama pemanduan.",
-            "seorang individu tidak dikenali berpura-pura menggunakan telefon bimbit untuk memotong barisan giliran anda secara terang-terangan.",
-            "seorang warga emas kelihatan tersangat bingung dan buntu untuk mengendalikan skrin mesin transaksi layan diri digital.",
-            "sekumpulan pelanggan di meja sebelah dengan sengaja bersembang kuat mengenai isu sensitif serta provokasi melampau.",
-            "petugas kaunter tersilap memulangkan baki bayaran tunai yang berlebihan RM50 kepada anda akibat keadaan keliru.",
-            "seorang kanak-kanak kecil kelihatan menangis bersendirian tanpa pengawasan penjaga sambil memanggil ibu bapanya.",
-            "seorang penunggang motosikal tersenggol cermin sisi kenderaan anda sehingga berpusing lalu dia terus melarikan diri.",
-            "anda menerima mesej ringkas mencurigakan daripada kenalan lama yang cuba meminjam wang kecemasan dalam kadar segera.",
-            "jiran kediaman selamba menyidai ampaian kain sehingga memasuki petak ruang halaman rumah milik anda.",
-            "seorang individu di hadapan anda tercicir beg dompetnya yang tebal di atas lantai tanpa dia sedari.",
-            "seorang pelanggan bertindak biadab dengan memaki hamun petugas keselamatan barisan hadapan atas isu teknikal kecil.",
-            "pemandu kenderaan di belakang anda bertindak mengekor rapat sambil menyalakan lampu limpah (high-beam) secara agresif.",
-            "anda mengesan tindakan seorang individu yang sedang merakam gambar penumpang lain secara sembunyi dan mencurigakan.",
-            "pihak kurier tersalah menghantar bungkusan barangan bernilai tinggi terus ke hadapan pintu rumah kediaman anda.",
-            "pekerja premis secara terbuka memperlekehkan pelanggan lain menggunakan bahasa asing yang kebetulan anda fahami.",
-            "pemandu sebuah kenderaan mewah bertindak membuang sisa sampah domestik keluar dari tingkap kereta ke atas jalan.",
-            "seorang warga emas wanita hilang keseimbangan lalu terjatuh akibat membawa barang muatan yang terlalu sarat.",
-            "kaunter utama dibiarkan kosong tanpa petugas dalam tempoh yang lama menyebabkan barisan menunggu menjadi terlalu panjang.",
-            "anda menemui sekeping kad pengenalan warganegara yang ditinggalkan secara tidak sengaja di atas slot mesin ATM.",
-            "beberapa ekor haiwan liar bertindak agresif menyekat laluan jalan kaki utama komuniti untuk pulang ke rumah.",
-            "seorang remaja kelihatan sedang ditekan, dibuli, serta dipaksa menyerahkan wang saku oleh sekumpulan remaja lain.",
-            "anda terhidu dengan jelas impak kebocoran gas yang amat kuat datang dari arah zon rantaian dapur premis makanan.",
-            "seorang warga tua sedang dikelilingi oleh sekumpulan ejen jualan yang cuba menawarkan skim gores dan menang meragukan.",
-            "anda menyedari diri anda sedang diekori secara rapat oleh individu mencurigakan sejurus keluar dari fasiliti awam.",
-            "sistem penghawa dingin premis mengalami kebocoran kritikal lalu menitiskan air kotor tepat ke atas hidangan makanan anda."
-        ];
+<script>
+    // DATA SOALAN (Contoh 1 Set Lengkap - Guna Prompt Generator di bawah untuk tambah sampai 3000 soalan)
+    const databaseSoalan = [
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Jika anda ingin melihat matahari terbit paling awal di Malaysia pada 1 Januari, di manakah lokasi geografi yang paling tepat untuk anda pacak khemah?",
+    "pilihan": ["Puncak Gunung Kinabalu, Sabah", "Tanjung Datu, Sarawak", "Darvel Bay, Lahad Datu, Sabah", "Puncak Gunung Tahan, Pahang"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda sedang beratur beli pisang goreng panas. Tiba-tiba hujan lebat turun dan makcik kedai tiada plastik lebih, hanya ada surat khabar lama. Bagaimana cara terbaik bawa balik pisang goreng supaya kekal rangup dan tidak basah?",
+    "pilihan": ["Bungkus ketat-ketat dengan surat khabar", "Guna surat khabar sebagai payung terjun di atas mangkuk mangkok plastik sendiri", "Buat bentuk kon terbuka menggunakan surat khabar bertingkat untuk ruang udara dan lari ke kereta", "Makan semua di situ juga bawah payung makcik"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Dalam budaya kedai mamak, apakah maksud sebenar apabila abang mamak jerit 'Siap bos!' tetapi air anda masih belum sampai selepas 20 minit?",
+    "pilihan": ["Air sedang dihantar menggunakan dron", "Dia baru sahaja mahu jerang air di dapur", "Pesanan anda telah lenyap dari memori sistemnya", "Dia sebenarnya panggil orang lain yang nama 'Bos'"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Zaman sekolah rendah dulu, jika pemadam bendera anda terjatuh dalam longkang hitam di tepi padang, apakah tindakan 'standard' yang melambangkan keberanian seorang budak?",
+    "pilihan": ["Beli pemadam baru di kedai buku sekolah", "Guna pembaris panjang 30cm untuk kais dan basuh guna air paip surau", "Biarkan sahaja dan menangis dalam kelas", "Guna ranting kayu, lap kat baju, sambung main flip"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah bumbung rumah tradisional Melayu Melaka dibina dengan kecerunan yang sangat tinggi jika dilihat dari sudut sains struktur tempatan?",
+    "pilihan": ["Supaya pencuri tidak boleh duduk di atas bumbung", "Untuk mempercepatkan aliran air hujan lebat bagi mengelakkan kebocoran dan kayu reput", "Sengaja untuk nampak gah dari rumah jiran", "Sebab saiz pokok nipah zaman dulu panjang-panjang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda membawa RM50 ke Pasar Malam. Anda perlu beli lauk makan malam untuk 4 orang (bajet RM30) dan baki RM20 mahu digunakan untuk snek. Manakah kombinasi pembelian paling bijak?",
+    "pilihan": ["Nasi ayam 4 bungkus (RM28) + 2 plastik air balang besar (RM10) + Keropok lekor (RM10)", "Nasi lemak biasa 4 bungkus (RM12) + Durian sebiji (RM35) + Air mineral (RM3)", "Ayam gunting 4 lidi (RM40) + Air tebu (RM10)", "Murtabak kambing 2 biji (RM20) + Apam balik 5 biji (RM15) + Air kelapa (RM15)"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Logat negeri manakah yang perkataan 'gocoh' bermaksud bertumbuk atau bergaduh, bukannya bermaksud tergopoh-gapah?",
+    "pilihan": ["Negeri Sembilan", "Kedah", "Kelantan", "Johor"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah 'pantang larang' tidak rasmi paling besar sewaktu bermain permainan Pemadam Bendera di atas meja sekolah?",
+    "pilihan": ["Tidak boleh guna pemadam yang ada stapler di tengah", "Tidak boleh main waktu cikgu tiada", "Wajib tiup sebelum flip", "Hanya boleh guna bendera Malaysia sahaja"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Jika anda memandu dari Johor Bahru ke Kota Bharu mengikut laluan pantai timur (Laluan Persekutuan 3), sungai utama manakah yang memerlukan anda menyeberangi jambatan paling panjang?",
+    "pilihan": ["Sungai Muar", "Sungai Pahang", "Sungai Kelantan", "Sungai Terengganu"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Kereta anda tiba-tiba mati di tengah jalan akibat bateri kong. Anda memandu kereta transmisi manual dan ada 3 orang rakan di dalam kereta. Apakah langkah penyelesaian fizik paling efektif?",
+    "pilihan": ["Minta semua rakan tolak kereta dari belakang, masukkan gear 2, tekan klac, dan lepas klac apabila kereta bergerak lambat", "Duduk dalam kereta sambil bunyikan hon minta bantuan lori tunda", "Buka bonet depan dan kipas bateri dengan surat khabar", "Tolak kereta ke stesen minyak terdekat yang jaraknya 2km"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah maksud peribahasa moden kognitif ini: 'Mendengar guruh di langit, kain di jemuran tak sempat diangkat, skrin telefon pula yang diselamatkan'?",
+    "pilihan": ["Orang yang sangat pentingkan harta benda", "Sindrom ketagihan gajet masyarakat digital Malaysia semasa hujan", "Sifat malas membantu ibu di rumah", "Takut kilat menyambar antena telefon"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Siapakah watak kartun lagenda karya Datuk Lat yang sentiasa memakai kain pelikat dan berkacamata bulat, melambangkan bapa tipikal Malaysia?",
+    "pilihan": ["Mamat", "Opah", "Mat Som", "Bapa Kampung Boy"],
+    "jawapan": 3
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah pokok bakau di kawasan paya bakau Kuala Sepetang mempunyai akar jangkang yang tumbuh keluar dari batang bawah? (Dari sudut biologi adaptasi)",
+    "pilihan": ["Untuk menapis garam daripada air laut secara terus", "Untuk menyokong pokok daripada tumbang di atas tanah berlumpur yang lembut dan membantu pernafasan oksigen", "Sengaja untuk perangkap ketam nipah", "Supaya air pasang tidak menenggelamkan daun pokok"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu menaiki LRT dari stesen KL Sentral ke KLCC pada waktu puncak (5:30 petang). Strategi manakah yang paling menjimatkan masa menanti di platform?",
+    "pilihan": ["Tunggu tren pertama, jika penuh, paksa diri masuk juga di celah-celah penumpang", "Tunggu tren kedua atau ketiga yang biasanya mempunyai ruang kosong di gerabak hujung (hadapan/belakang)", "Berjalan kaki menyusuri jalan raya bawah landasan LRT", "Tukar pelan dan naik bas awam melalui Jalan Ampang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah jawapan paling 'cliché' dan penuh misteri bagi seorang rakyat Malaysia apabila ditanya, 'Pukul berapa nak sampai?' sedangkan dia baru sahaja bangun tidur?",
+    "pilihan": ["Aku dah dalam kereta ni", "Kejap lagi, tengah cari parking", "On the way, dah lepas tol", "Aku otw (Otak Masih Di Wayar tilam)"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Ingat lagi permainan 'Batu Seremban'? Apakah gelaran bagi situasi di mana anda terpaksa menyambut semula batu yang dilambung menggunakan belakang tapak tangan?",
+    "pilihan": ["Menimbang batu", "Mencedok emas", "Membelah bumi", "Menangkap lalat"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Jika sebatang songket ditenun menggunakan benang emas asli, mengapakah ia tidak boleh dibasuh menggunakan mesin basuh moden mengikut logik struktur fabrik?",
+    "pilihan": ["Benang emas akan cair terkena sabun pencuci", "Putaran mesin basuh akan merosakkan silangan benang satin dan memutuskan anyaman seni benang logam", "Songket akan menjadi terlalu berat apabila menyerap air basuhan", "Warna kain songket akan bertukar menjadi hitam"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda menganjurkan kenduri kahwin di taman perumahan. Tiba-tiba lauk ayam masak merah habis awal pada jam 2 petang sedangkan tetamu masih ramai. Apakah pelan kontingensi terpantas?",
+    "pilihan": ["Masak nasi goreng besar menggunakan baki nasi kenduri dan hidang sebagai menu baru", "Minta katering goreng telur dadar berlada dalam kuantiti besar sebagai lauk tambahan segera", "Tutup khemah makan dan minta maaf kepada tetamu", "Beli ayam goreng segera di restoran makanan segera terdekat"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Di sebuah kedai runcit kampung, jika makcik kedai kata 'Duit syiling tak ada la cu, ambik ni buat baki', apakah benda yang sering dijadikan pengganti mata wang rasmi tersebut?",
+    "pilihan": ["Gula-gula (hacks atau mentos)", "Getah sekerap", "Keropok ricih", "Setem pos lama"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah bunyi ikonik yang paling dinanti-nantikan oleh budak-budak taman perumahan pada waktu jam 5 petang untuk berlari keluar rumah membawa syiling 50 sen?",
+    "pilihan": ["Hon lori sampah", "Bunyi loceng besi pakcik motor roti/eskrim motor", "Bunyi ekzos motor posmen", "Bunyi siren balai polis"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah bangunan Menara Berkembar Petronas (KLCC) menggunakan struktur keluli tahan karat dan konkrit bertulang tinggi berbanding keluli sepenuhnya seperti bangunan pencakar langit di AS?",
+    "pilihan": ["Kerana Malaysia kekurangan bekalan besi import", "Untuk mengurangkan gegaran akibat angin monsun serta kos bahan tempatan yang mengoptimumkan konkrit berat", "Supaya nampak lebih berkilat apabila dipancar lampu limpah waktu malam", "Sebab arkiteknya tersalah reka bentuk bentuk asal"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda sedang mendaki Bukit Broga dan tiba-tiba terserempak dengan segerombolan lebah hutan yang agresif berdekatan trek. Apakah tindakan paling selamat?",
+    "pilihan": ["Menjerit sekuat hati untuk menakutkan lebah", "Baring meniarap di tanah, tutup kepala dengan baju dan jangan bergerak agresif", "Berlari turun bukit sepantas kilat sambil melambaikan tangan", "Memukul lebah guna ranting pokok"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Sebut betul-betul! Kuih tradisional ini diperbuat daripada tepung beras, berbentuk bulat berkedut, manis gula melaka, dan namanya mempunyai unsur kejam. Kuih apakah ini?",
+    "pilihan": ["Kuih Koci", "Kuih Peneram / Telinga Keling", "Kuih Karipap", "Kuih Cucur Badak"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Zaman kegemilangan kad permainan (Card Games) di sekolah, kad apakah yang paling popular digunakan untuk berlawan 'kuasa serangan' (ATK) selain kad Yu-Gi-Oh?",
+    "pilihan": ["Kad Pokemon", "Kad Digimon", "Kad Animal Kaiser", "Kad Poker"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Fenomena alam 'Banjir Termenung' sering berlaku di kawasan dataran rendah Kedah atau Johor. Apakah takrifan sains geografi bagi banjir jenis ini?",
+    "pilihan": ["Banjir yang berlaku akibat penduduk termenung melihat hujan", "Air banjir yang bertakung sangat lama dan tidak boleh mengalir keluar akibat faktor air pasang laut atau sistem saliran tersekat", "Banjir kilat yang surut dalam masa 5 minit", "Banjir air masin yang jernih"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Siling bilik air rumah anda bocor kecil dan air menitik berterusan, manakala tukang paip hanya boleh datang esok pagi. Bagaimana nak elakkan bunyi 'ting tong' air menitik mengganggu tidur malam anda?",
+    "pilihan": ["Letak tuala tebal di dalam baldi kosong di bawah tempat titisan air untuk menyerap bunyi", "Biarkan lantai bilik air banjir sepenuhnya", "Tampal siling dengan selotep kertas", "Tidur di ruang tamu sambil pasang televisyen kuat-kuat"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah menu 'rahsia' yang tiada dalam buku menu kedai mamak tetapi semua rakyat Malaysia tahu ia wujud dan selalu dipesan bila diet?",
+    "pilihan": ["Mee Goreng Basah", "Roti Kosong Garing", "Teh O Ais Limau Kurang Manis", "Maggi Goreng Double Ayam"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Ketika bermain sembunyi-sembunyi (Sorok-sorok), apakah frasa keramat yang wajib dilaungkan oleh si pencari selepas berjaya menyentuh 'pangkalan' tanpa dikesan?",
+    "pilihan": ["Goal!", "Chup!", "Settle!", "Done!"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah buah durian biasanya luruh pada waktu lewat malam atau awal pagi dari segi faktor biologi dan persekitaran?",
+    "pilihan": ["Sebab angin malam bertiup lebih kencang", "Penurunan suhu persekitaran menyebabkan pengecutan sel pada tangkai buah yang matang lalu memutuskannya", "Sebab tupai aktif melonggarkan tangkai buah pada waktu malam", "Durian takut pada sinaran matahari siang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu merebus telur separuh masak yang sempurna (ala kopitiam) menggunakan bekas plastik khas bertapis lubang di bawah. Apakah formula fizik masa yang paling tepat?",
+    "pilihan": ["Tuang air mendidih penuh bekas, letak telur, letak penutup dan biarkan air menitis keluar sepenuhnya", "Rebus telur bersama air dalam periuk selama 15 minit", "Rendam telur dalam air sejuk selama setengah jam", "Guna air suam sahaja dan tunggu 2 minit"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Jika seorang peniaga di Kelantan menggelar barang jualan mereka sebagai 'Sangat Comel', apakah maksud sebenar perkataan tersebut dalam konteks dialek mereka?",
+    "pilihan": ["Barang itu bersaiz sangat kecil", "Barang itu sangat cantik, menarik atau berkualiti tinggi", "Barang itu khusus untuk kanak-kanak", "Barang itu diimport dari luar negara"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah fungsi utama garisan garpu di atas permukaan atas kuih makmur sebelum ia dibakar dalam ketuhar zaman emak-emak dulu?",
+    "pilihan": ["Untuk memastikan inti kacang di dalam masak sekata", "Sebagai corak estetik tradisional dan menahan gula akaun bertakung di celahnya", "Supaya kuih tidak kembang menjadi terlalu besar", "Untuk membezakan kuih makmur dengan kuih tart"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Gua Niah di Sarawak mempunyai deposit guano (najis kelawar) yang sangat tebal. Mengapakah guano ini dianggap komoditi ekonomi yang sangat bernilai tinggi sejak zaman dahulu?",
+    "pilihan": ["Ia digunakan sebagai bahan mentah membuat barangan seramik", "Ia mengandungi kandungan nitrogen dan fosforus yang tinggi, menjadikannya baja organik gred terbaik", "Ia mengandungi emas tersembunyi", "Ia digunakan untuk mengawet makanan tradisional"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Kasut sekolah putih anda basah lencun akibat hujan pada hari Ahad petang, sedangkan hari Isnin pagi ada perhimpunan rasmi. Apakah kaedah pengeringan kecemasan paling efisien?",
+    "pilihan": ["Sumbat bahagian dalam kasut dengan surat khabar kering diganti setiap sejam, lalu letakkan di belakang peti sejuk atau bawah kipas siling maksimum", "Sapu kasut dengan kapur tebal-tebal semasa basah dan biarkan semalaman", "Guna ketuhar gelombang mikro (microwave) selama 5 minit", "Jemur di luar rumah pada waktu malam bawah lampu jalan"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah jawapan yang paling selamat diberikan sekiranya isteri atau emak anda bertanya: 'Baju melayu warna hijau mint saya beli ni nampak saya gemuk tak?'",
+    "pilihan": ["Haah la, nampak macam pokok bergerak", "Tak la, warna tu yang buat reka bentuk baju tu nampak eksklusif dan terletak elok pada badan", "Sama je macam baju tahun lepas", "Boleh lah daripada tak ada baju baru"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Zaman sekolah dulu, reka bentuk bekas pensel (pencil box) yang manakah dianggap paling 'gempak' dan membuatkan pemiliknya disukai ramai rakan sekelas?",
+    "pilihan": ["Bekas pensel kain berzip jenama terkenal", "Bekas pensel magnet bertingkat-tingkat yang ada butang mekanikal untuk keluarkan pengasah dan laci rahsia", "Tin biskut kosong yang dijadikan kotak pensel", "Kotak pensel plastik lutsinar yang paling murah"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah jambatan Pulau Pinang dibina menggunakan reka bentuk jambatan kabel pancang (cable-stayed bridge) pada bahagian laluan kapal tengah?",
+    "pilihan": ["Supaya nampak lebih cantik di dalam televisyen", "Untuk memberikan ruang ketinggian pelepasan maksimum yang selamat bagi kapal kargo besar melintasi selat di bawahnya", "Sebab tiang konkrit biasa tidak boleh dipacak di kawasan laut dalam", "Untuk mengurangkan kelajuan kereta yang lalu"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Sotong yang anda beli di pasar basah menjadi liat seperti tayar kereta selepas dimasak. Di manakah kesilapan cara berfikir pengurusan masa masakan anda?",
+    "pilihan": ["Anda memotong sotong terlalu nipis", "Sotong dimasak terlalu lama; sepatutnya sotong dimasak dengan api besar dalam tempoh sangat singkat (2-3 minit saja)", "Anda tidak merendam sotong dalam air garam terlebih dahulu", "Anda memasak sotong bersama kulitnya"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Di sebuah majlis kenduri kahwin, bagaimanakah cara paling halus makcik rewang memberi isyarat bahawa masa untuk anda bersembang di meja makan sudah tamat?",
+    "pilihan": ["Dia datang dan jerit suruh anda balik", "Dia mula mengemas mangkuk lauk di depan anda sambil mengelap meja dengan kain lembap berbau busuk", "Dia memadamkan lampu dewan makan", "Dia menukar muzik DJ menjadi lagu sedih"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Ingat kartun animasi 'Keluang Man'? Siapakah nama sebenar watak superhero tempatan ini sebelum dia bertukar menjadi pembela keadilan di kota Tampoi?",
+    "pilihan": ["Borhan", "Samad", "Tiong", "Man"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah bahagian tengah Semenanjung Malaysia (Banjaran Titiwangsa) dikategorikan sebagai kawasan tadahan air yang sangat kritikal bagi ekosistem negara?",
+    "pilihan": ["Sebab kawasan itu paling dekat dengan awan hujan", "Hutan hujan tropika tanah tinggi di situ bertindak sebagai span semula jadi yang menapis dan mengalirkan air bersih ke sungai-sungai utama", "Sebab tiada penempatan manusia di sana", "Kerana batu-batan di situ mengandungi mineral penapis air alkali"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu menggantung bingkai gambar keluarga yang agak berat di dinding rumah sewa, tetapi tuan rumah melarang keras penggunaan paku atau tebuk lubang drill. Apakah alternatif mekanikal terbaik?",
+    "pilihan": ["Guna pita pelekat dua sisi gred industri (Command Strips) yang boleh ditanggalkan tanpa merosakkan cat dinding", "Guna gam gajah cair terus pada bingkai gambar", "Sander belakang bingkai gambar dan sandarkan pada dinding menggunakan kerusi", "Guna ubat gigi sebagai pelekat dinding"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah takrifan komedi bagi istilah 'Makan Suap' jika ditanya kepada seorang anak kecil warga Malaysia yang suci?",
+    "pilihan": ["Gejala rasuah politik di pejabat", "Aktiviti menyuap nasi ke dalam mulut menggunakan tangan ibu tercinta", "Makan makanan yang dibeli secara pandu lalu", "Makan ubat hospital yang pahit"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Semasa zaman persekolahan, apakah fungsi rahsia pembaris plastik panjang 30cm lutsinar selain daripada mengukur garisan buku latihan?",
+    "pilihan": ["Dijadikan kipas tangan gergasi waktu perhimpunan panas atau alat muzik ketuk meja", "Digunakan untuk memotong kertas tebal", "Sebagai cermin pantulan cahaya", "Alat penapis cahaya matahari"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah teknik penanaman padi di Dataran Kedah memerlukan sistem pengairan berkala (banjir dan kering) berbanding membiarkan sawah sentiasa dipenuhi air dalam?",
+    "pilihan": ["Supaya anak ikan sawah tidak membesar terlalu cepat", "Untuk merangsang pertumbuhan akar pokok padi secara optimum dan menghalang pembiakan bakteria anaerobik perosak tanah", "Sebab air empangan tidak cukup untuk dialirkan setiap hari", "Supaya jentera penuai padi tidak tenggelam semasa musim menuai"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Sambutan Hari Raya esok pagi, tetapi baju kurung sutera kegemaran anda berkedut seribu manakah kala seterika (iron) elektrik di rumah tiba-tiba rosak terakar. Bagaimana mengatasinya?",
+    "pilihan": ["Gantung baju di dalam bilik air semasa anda mandi menggunakan air panas (steam) pancuran untuk mengurangkan kedutan secara semulajadi", "Guna kuali memasak leper yang dipanaskan sedikit di atas dapur gas (alas kain bersih di atas baju)", "Pakai sahaja baju berkedut dan dakwa ia trend rekaan terbaru", "Jemur baju di bawah terik matahari selama 10 minit"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Di utara Malaysia, jika seseorang berkata daging mat rie itu 'Cenge', apakah sifat sebenar karakter individu yang dimaksudkan?",
+    "pilihan": ["Seorang yang sangat pemurah dan suka belanja makan", "Seorang yang garang, tegas, dan mudah melenting", "Seorang yang kelakar dan kuat berjenaka", "Seorang yang pemalu dan pendiam"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah nama jajan (snack) legenda yang berbentuk cincin gelung kecil berwarna oren, berasa sotong, dan sering dimasukkan ke dalam sepuluh jari tangan sebelum dimakan?",
+    "pilihan": ["Super Ring", "Mamee Monster", "Double Decker", "Twisties"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Pokok periuk kera (Nepenthes) banyak tumbuh di kawasan tanah yang kurang subur di kaki Gunung Kinabalu. Bagaimanakah tumbuhan ini menyelesaikan masalah kekurangan nutrien nitrogen dalam tanah?",
+    "pilihan": ["Akar pokok menyerap air dari udara kabus tanah tinggi", "Memerangkap dan mencerna serangga kecil di dalam kantung berasid mereka untuk dijadikan sumber nutrien tambahan", "Bergantung kepada baja yang ditabur oleh pendaki", "Menjalankan proses fotosintesis berganda pada waktu malam"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda sedang memandu di lebuhraya PLUS dan tayar kereta tiba-tiba pancit. Anda mendapati tiada talian internet untuk menggunakan aplikasi navigasi. Apakah langkah kecemasan paling logik?",
+    "pilihan": ["Berjalan kaki mencari pondok tol terdekat", "Melihat papan tanda lebuhraya untuk mencari nombor talian kecemasan PLUS Ronda (1800-88-0000) pada tiang kilometer", "Duduk di dalam kereta menunggu bantuan orang lalu", "Mencuba membaiki tayar menggunakan pembaris"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah menu minuman yang wajib dipesan di warung sekiranya anda mahu teh susu yang tidak terlalu manis, tetapi jika tersalah sebut anda mungkin mendapat teh kosong tanpa susu?",
+    "pilihan": ["Teh C", "Teh Tarik Kurang Manis", "Teh Si", "Teh Kurang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Zaman kanak-kanak dulu, jika anda berjaya mengumpul penutup botol kaca minuman berkarbonat (seperti F&N atau Coca-Cola), apakah permainan kreativiti fizikal yang boleh dibuat daripada penutup tersebut?",
+    "pilihan": ["Diketuk leper dan dijadikan acuan gasing atau roda kereta mainan DIY", "Dijadikan batu seremban ganti", "Disusun menjadi menara tinggi", "Digunakan sebagai duit syiling mainan monopoli"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah kawasan Selat Melaka menjadi laluan perdagangan maritim yang paling sibuk di dunia sejak zaman Kesultanan Melayu Melaka dari segi geografi?",
+    "pilihan": ["Kerana selat ini mempunyai air yang paling dalam di dunia", "Kedudukan geografinya yang terlindung daripada tiupan angin monsun kuat oleh Pulau Sumatera dan menjadi laluan semula jadi terdekat menghubungkan India dan China", "Sebab tiada lanun di kawasan tersebut zaman dulu", "Kerana sepanjang selat itu dipenuhi lampu isyarat laut purba"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Balik kampung musim perayaan, peti sejuk di rumah nenek penuh padat sehingga pintu tidak boleh ditutup rapat. Manakah barang makanan yang sepatutnya dikeluarkan dahulu demi penjimatan ruang berasaskan sains makanan?",
+    "pilihan": ["Susu kotak segar dan daging mentah", "Kicap, sos cili, bawang besar, kentang, dan telur gred baru (boleh disimpan pada suhu bilik)", "Ikan segar dan sayur sawi", "Ais krim dan makanan sejuk beku"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah maksud tersembunyi frasa 'Leklu' (Rilek dulu) apabila diucapkan oleh rakan anda yang sedang bermain permainan video (gaming) berkumpulan?",
+    "pilihan": ["Dia mahu berhenti bermain selamanya", "Jangan risau, kita pasti akan menang sekejap lagi", "Bertenang, beri saya masa fokus uruskan situasi cemas ini jangan bising", "Dia mahu tidur sekejap"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah nama majalah kartun/komik lagenda tanah air yang sangat popular dengan siri watak seperti 'Tiga Segi', 'Blues Untuk Aku', dan menjadi kegilaan remaja akhir 90-an?",
+    "pilihan": ["Majalah Ujang / Gila-Gila", "Komik Lawak Kampus", "Kreko", "Gempak"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Seni bina Rumah Tradisional Negeri Sembilan terkenal dengan struktur 'Tanpa Paku Pasak'. Bagaimanakah struktur rumah ini dikekalkan kukuh mengikut sistem kejuruteraan kayu tradisional?",
+    "pilihan": ["Menggunakan gam pokok getah yang sangat kuat", "Menggunakan sistem tanggam dan pasak kayu tegar yang saling mengunci antara tiang dan rasuk apabila menerima beban", "Rumah tersebut diikat menggunakan tali rotan gergasi", "Dinding rumah disandarkan pada pokok besar"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu merebus pisang muda untuk dibuat pengat, tetapi getah pisang melekat kuat pada pisau dapur kesayangan anda. Bagaimanakah cara menanggalkan getah tersebut dengan pantas tanpa merosakkan besi pisau?",
+    "pilihan": ["Gosok mata pisau menggunakan kain yang dibasahi sedikit minyak masak atau mentega sebelum dibasuh dengan sabun", "Rendam pisau dalam peluntur baju selama 3 jam", "Asah pisau pada batu jalan raya", "Bakar pisau di atas api dapur gas sehingga merah"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Dalam logat bahasa orang Pantai Timur (Terengganu/Kelantan), apakah makanan yang dimaksudkan sekiranya mereka menyebut perkataan 'Kepok Gete'?",
+    "pilihan": ["Keropok lekor goreng garing", "Keropok keping yang diperbuat daripada ubi kayu", "Keropok lekor rebus yang kenyal", "Sejenis kuih tradisional berasaskan pulut"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Ingat permainan lawak zaman sekolah rendah: 'Satu, dua, jaga... biskut____'. Apakah nama biskut yang melengkapkan jampi permainan melompat getah atau kejar-kejar ini?",
+    "pilihan": ["Biskut Marie", "Biskut Tiger", "Biskut Timbang", "Biskut Mayat"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah dataran tinggi Tanah Tinggi Cameron sangat sesuai untuk penanaman pokok teh gred komersial berbanding dataran rendah tanah pamah Malaysia?",
+    "pilihan": ["Kerana tanah di sana berwarna hitam legam", "Suhu yang sentiasa sejuk (18°C-25°C) gabungan hujan sekata dan sistem saliran tanah cerun menghalang air bertakung yang boleh mereputkan akar teh", "Sebab tanaman teh memerlukan cahaya matahari malam", "Kerana kabus di sana mengandungi baja semulajadi"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Balik dari bercuti, rumah anda dipenuhi bau hapak akibat tingkap ditutup rapat selama seminggu. Anda tidak mempunyai semburan pewangi komersial. Apakah bahan dapur alternatif untuk menyerap bau busuk tersebut?",
+    "pilihan": ["Letakkan beberapa mangkuk kecil berisi serbuk kopi terpakai atau arang bakar di sudut ruang tamu", "Sembur cuka makan penuh lantai rumah", "Bakar seikat daun kari di tengah rumah", "Tabur tepung gandum di atas permaidani"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah gelaran universal bagi seorang pemandu kenderaan di Malaysia yang menukar lorong jalan raya sesuka hati tanpa memberi lampu isyarat (signal)?",
+    "pilihan": ["Raja Lebuhraya", "Pemandu Berhemah", "Raja Jalanan / Pemandu Myvi Angkasa (secara gurauan)", "Kapten Jalan Raya"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah barangan runcit harian yang sering dijadikan gasing buatan sendiri (DIY) oleh budak-budak lelaki zaman dulu menggunakan tali kasut sekolah?",
+    "pilihan": ["Penutup ubat gigi besar", "Tin susu pekat manis kosong", "Penutup tin susu tepung besi atau penutup botol kicap plastik", "Batu sungai rata"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah kawasan hutan paya bakau dilabelkan sebagai benteng pertahanan tsunami semula jadi terbaik bagi zon pesisir pantai barat Semenanjung Malaysia?",
+    "pilihan": ["Sebab pokok bakau mengeluarkan bau yang menolak ombak besar", "Sistem akar jangkang dan pneumatofor yang rapat serta padat bertindak memecah, menyerap, dan mengurangkan tenaga kinetik ombak besar sebelum sampai ke daratan", "Sebab pokok bakau mengurangkan kedalaman air laut", "Kerana tanah paya bakau menyedut air tsunami masuk ke dalam bumi"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda sedang memanggang sate di laman rumah menggunakan arang, tetapi api arang tersebut terlalu perlahan dan hanya mengeluarkan asap tebal. Apakah langkah pemulihan pembakaran termodinamik?",
+    "pilihan": ["Tuang air sejuk ke atas arang", "Kipas dengan laju secara konsisten menggunakan kadbod sambil menabur sedikit minyak masak atau mengalih kedudukan arang supaya ada ruang pengudaraan oksigen di bawahnya", "Tutup seluruh tempat panggang dengan plastik", "Biarkan sahaja api merebak sendiri tanpa gangguan"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Di sebuah restoran, sekiranya pelayan tersalah hantar makanan meja lain kepada anda, dan anda sudah terlanjur menyuap satu suapan, apakah respon paling 'Malaysia'?",
+    "pilihan": ["Muntahkan semula makanan tersebut", "Jerit panggil pengurus restoran", "Rezeki jangan ditolak, teruskan makan sambil buat muka selamba (lalu bayar beza harga kemudian)", "Lari keluar dari restoran tanpa bayar"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Zaman sekolah rendah, siri buku cerita seram kompak setebal poket manakah yang paling popular dibaca secara sembunyi bawah meja sewaktu perhimpunan atau subjek bosan?",
+    "pilihan": ["Siri Novel Kanak-Kanak", "Siri Buku Misteri / Mastika", "Siri Novel Seram Goosebumps (Terjemahan/Asal) atau Siri Buku Jingga", "Buku Teks Sejarah"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah haiwan ikonik Malaysia, Tapir (Tenuk), mempunyai corak warna badan hitam di bahagian depan/belakang dan putih di bahagian tengah?",
+    "pilihan": ["Sebab tapir suka mandi air lumpur putih", "Sebagai penyamaran (camouflage) di dalam hutan hujan; pada waktu malam, corak kontras ini memecah bentuk fizikal tapir melindunginya daripada pemangsa", "Sebab genetik tapir bercampur dengan haiwan panda", "Sengaja untuk nampak unik di dalam zoo"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu membuat sambal belacan menggunakan lesung batu, tetapi cili sering terkeluar melompat dari lesung setiap kali ditumbuk. Apakah trik mekanikal fizikal dapur untuk mengatasinya?",
+    "pilihan": ["Potong cili kecil-kecil dahulu dan taburkan sedikit garam kasar di dalam lesung sebagai agen geseran sebelum mula menumbuk", "Tumbuk cili menggunakan belakang cawan plastik", "Guna tukul besi ganti anak lesung", "Letakkan air penuh di dalam lesung batu semasa menumbuk"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah gelaran bagi satu keadaan sosiologi di mana sekumpulan rakan berkumpul di kedai mamak untuk bersembang, tetapi masing-masing hanya melihat skrin telefon pintar sendiri tanpa bersuara?",
+    "pilihan": ["Mesyuarat Agung Tahunan", "Mesyuarat Tingkap Digital / Geng Pak Turut", "Perhimpunan Agung Senyap", "Geng Tunduk Hormat"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Ingat lagi permainan kad jenama lama yang menampilkan gambar-gambar kereta lumba, jet pejuang, atau kapal tangki lengkap dengan statistik kelajuan? Apakah nama jenis kad tersebut?",
+    "pilihan": ["Kad Uno", "Kad Snap", "Kad Happy Families", "Kad Trump / Kad Kuda Lumba Super Cars"],
+    "jawapan": 3
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah pembinaan bangunan Merdeka 118 direka dengan bentuk permukaan kristal kaca bersegi-segi dari sudut simbolik budaya jati diri?",
+    "pilihan": ["Sebab kilang kaca memberikan diskaun harga bahan reka bentuk", "Reka bentuknya diispirasikan daripada corak geometri seni Islam tradisional tanah air melambangkan kepelbagaian budaya Malaysia yang bersatu", "Sebab puncak menara terlalu tinggi untuk diletakkan simen biasa", "Supaya menara boleh memantulkan cahaya laser ke angkasa luar"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu menanam pokok cili di balkoni kondo, tetapi kawasan tersebut menerima tiupan angin kencang yang sering mematahkan anak pokok. Apakah penyelesaian mekanikal struktur tumbuhan anda?",
+    "pilihan": ["Ikat batang anak pokok cili pada sebatang kayu pancang (bambu) yang dicacak kukuh ke dalam tanah pasu sebagai sokongan tulang belakang", "Pindahkan pasu ke dalam bilik tidur bawah aircond", "Bungkus seluruh pokok cili dengan kotak kadbod tebal", "Siram pokok cili dengan air baja simen"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah peribahasa moden yang paling sesuai menggambarkan situasi seseorang yang membeli telefon pintar harga RM6,000 secara ansuran bulanan 36 bulan tetapi hanya makan mi segera setiap akhir bulan?",
+    "pilihan": ["Biar mati anak, jangan mati adat", "Ukur baju di badan sendiri", "Biar papa asal bergaya / Sumpahan Poket Nipis", "Sediakan payung sebelum hujan"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah denda 'paling kejam' tetapi melucukan bagi kumpulan yang kalah dalam permainan tradisi 'Galah Panjang' zaman kanak-kanak kampung dulu?",
+    "pilihan": ["Kena bayar RM5 kepada ketua lawan", "Kena denda dukung ahli kumpulan lawan yang menang (Kuda Kepang/Tunggang belakang) atau kena jentik telinga", "Kena cuci kaki kawan sebelum balik rumah", "Dilarang bermain selama sebulan di padang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah hidangan Nasi Lemak tradisional dibungkus menggunakan daun pisang yang dilayur api dari sudut sains kulinari tempatan?",
+    "pilihan": ["Sebab plastik pembungkus belum dicipta pada zaman dulu", "Haba daripada nasi panas mengaktifkan minyak pati (essential oils) pada daun pisang yang dilayur, membebaskan aroma wangi semula jadi yang meningkatkan rasa nasi", "Supaya nasi lemak tidak cepat basi akibat serangan semut", "Sebab daun pisang bertindak sebagai ejen penyerap minyak sambal sepenuhnya"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Zip beg sandang sekolah atau beg pakaian anda tiba-tiba tersekat di tengah jalan akibat tersangkut benang atau gigi zip kering. Apakah ejen pelincir kecemasan rumah yang selamat?",
+    "pilihan": ["Gosok lilin biasa atau permukaan sabun buku kering pada laluan gigi zip untuk mengurangkan geseran mekanikal", "Sapu gam gajah pada gigi zip yang rosak", "Guna tukul besi ketuk kepala zip bagi longgar", "Rendam beg dalam minyak tanah semalaman"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Dalam budaya permotoran Malaysia, apakah gelaran fizikal bagi penunggang motosikal yang melakukan aksi meniarap di atas tempat duduk motor persis watak superhero komik luar negara?",
+    "pilihan": ["Aksi Superman", "Aksi Batman", "Aksi Spiderman", "Aksi Iron Man"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah nama snek ringkas biskut jejari coklat lagenda yang mempunyai bekas plastik kecil mengandungi krim coklat pekat di sebelah, dan biskut kering di sebelah untuk dicicah?",
+    "pilihan": ["Yan Yan", "Choki Choki", "Nyam Nyam", "Apollo"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah kawasan perairan laut di sekitar Pulau Sipadan, Sabah, diwartakan sebagai salah satu tapak selam skuba terbaik dunia dari segi hidrologi kelautan?",
+    "pilihan": ["Kerana air laut di sana mempunyai rasa paling manis", "Kedudukannya di atas tiang konkrit batu kapur gunung berapi dasar laut setinggi 600 meter menarik arus lautan kaya nutrien yang menyokong ekosistem marin mega", "Sebab tiada ombak besar berlaku di sana sepanjang tahun", "Sebab laut di situ tidak mempunyai hidupan jerung berbahaya"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda sedang memanggang kuih tradisional dan mendapati permukaan atas kuih hangus sedikit manakala bahagian tengah masih elok. Bagaimanakah cara menyelamatkan penampilan rupa kuih sebelum dihidang?",
+    "pilihan": ["Kikis bahagian yang hangus menggunakan parutan keju atau pisau kecil secara perlahan, kemudian taburkan lapisan gula akaun halus atau kelapa parut di atasnya", "Buang seluruh kuih ke dalam tong sampah dan beli baru", "Sapukan pewarna makanan hijau di atas bahagian hangus", "Hidangkan secara terbalik dengan bahagian bawah di atas"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah maksud ungkapan 'Koyak' yang sering digunakan oleh anak muda Malaysia semasa bersembang atau berdebat di media sosial?",
+    "pilihan": ["Pakaian mereka mengalami kerosakan fizikal", "Keadaan emosi seseorang yang terkesan, mengalah, atau hilang sabar akibat disakat atau kalah dalam hujah", "Aktiviti menggunting kertas tugasan universiti", "Dompet duit koyak akibat tiada wang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah fungsi sepasang mata plastik kecil bertali getah yang sering dipasang pada bahagian atas kasut sekolah hitam/putih jenama 'Bata' zaman dulu?",
+    "pilihan": ["Sebagai alat pengesan lokasi murid", "Hiasan estetik 'Kasut Berlampu/Bermata' yang menjadi trend kanak-kanak berasa kasut mereka hidup", "Alat pengetat tali kasut mekanikal", "Sengaja diletakkan sebagai cop jaminan tulen kilang"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Jika anda melihat seni bina bumbung Stadium Negara di Kuala Lumpur, ia menggunakan struktur bumbung gantung berbentuk parabola. Mengapakah reka bentuk kejuruteraan ini dipilih pada tahun 1962?",
+    "pilihan": ["Supaya bumbung boleh dibuka sekiranya cuaca panas", "Untuk menghasilkan ruang dalaman dewan yang luas tanpa memerlukan tiang sokongan di tengah stadium yang boleh menghalang pandangan penonton", "Sebab bahan simen konkrit tidak mencukupi waktu itu", "Sengaja dibina mengikut bentuk kuali memasak gergasi"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Balik kampung, bekalan elektrik tiba-tiba terputus (blackout) pada waktu malam manakala rumah nenek kehabisan lilin. Anda mempunyai minyak masak terpakai, seulas bawang putih, dan kapas muka. Bagaimana membuat lampu kecemasan?",
+    "pilihan": ["Letakkan minyak masak dalam piring, pintal kapas muka menjadi sumbu, rendam sebahagian dalam minyak, letak bawang putih sebagai penyokong, dan nyalakan hujung kapas", "Sapu minyak masak pada dinding rumah untuk memantulkan cahaya bulan", "Bakar kapas muka di atas lantai kayu secara terbuka", "Rendam kapas muka dalam air suam sahaja dan gantung"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah gelaran unik bagi sejenis kain lap dapur berpetak-petak merah-putih atau biru-putih yang sangat serba guna di tangan makcik kantin sekolah?",
+    "pilihan": ["Kain Skraf Eksklusif", "Kain Lap Kayu", "Kain Buruk / Kain Lap Kedai Kopi Makcik Lejen", "Kain Sutera Dapur"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah nama kartun animasi pendek tempatan era 90-an yang menampilkan kisah seekor anak ayam cerdik bernama 'Chintel' bersama rakan-rakan haiwan lain, sering ditayangkan di TV1/TV2?",
+    "pilihan": ["Anak Ayam Cerdik", "Kisah Sang Kancil", "Siri Animasi Hikayat Awang Berani", "Siri Kartun Sang Wira / Alif & Sofia lama"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah burung Enggang (Hornbill) menjadi simbol negeri Sarawak (Bumi Kenyalang) dan dipelihara ketat dalam ekosistem hutan hujan Borneo?",
+    "pilihan": ["Sebab engang merupakan haiwan peliharaan kegemaran raja zaman dulu", "Enggang bertindak sebagai agen penyebar biji benih pokok hutan gergasi yang sangat efektif untuk mengekalkan kelestarian kanopi hutan hujan", "Sebab burung engang suka makan buah tempatan Sarawak sahaja", "Kerana suaranya boleh meramal cuaca hujan monsun"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mahu memotong bawang besar dalam kuantiti yang banyak untuk masakan kenduri, tetapi mata anda berair teruk akibat gas kimia bawang. Manakah trik pengurusan biokimia terbaik?",
+    "pilihan": ["Pakai cermin mata hitam yang paling gelap semasa memotong", "Sejukkan bawang di dalam peti sejuk selama 15 minit sebelum dipotong atau gunakan pisau yang sangat tajam untuk mengurangkan kerosakan sel bawang membebaskan gas", "Potong bawang di dalam baldi berisi air panas", "Sapu minyak angin cap kapak di bawah kelopak mata sebelum memotong"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Dalam budaya pasaran kerja moden Malaysia, jika sesebuah syarikat mengiklankan jawatan kosong dengan faedah 'Suasana Kerja Sentiasa Ceria Bagai Keluarga', apakah terjemahan realistik bagi pekerja berpengalaman?",
+    "pilihan": ["Bos akan belanja makan setiap hari jumaat", "Tugasan kerja luar skop (multi-tasking) yang tinggi dengan jangkaan kerja lebih masa (OT) tanpa bayaran atas dasar kekeluargaan", "Waktu bekerja yang sangat fleksibel boleh balik awal", "Syarikat menyediakan pengasuh anak percuma"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah jenama aiskrim kon lejen 90-an yang mempunyai coklat pekat di bahagian atasnya lengkap dengan taburan kacang, harganya 50 sen, dan konnya sangat rapuh garing?",
+    "pilihan": ["Cornetto", "Aiskrim Mat Kool / Pop Semangkuk", "Aiskrim Kon Kedai Runcit Jenama Walls / King's kon lama", "Magnum"],
+    "jawapan": 2
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah reka bentuk stesen janakuasa hidroelektrik Bakun di Sarawak memerlukan empangan jenis konkrit berwajah batuan (CFRD) yang sangat besar?",
+    "pilihan": ["Supaya kawasan itu boleh dijadikan pusat pelancongan memancing ikan air tawar gergasi", "Struktur batuan CFRD mampu menahan tekanan hidrostatik air sungai berskala mega dan fleksibel terhadap sebarang anjakan geologi bumi struktur tanah Borneo", "Sebab simen tidak tahan karat air sungai", "Untuk menghalang air sungai mengalir terus ke kawasan laut China Selatan"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda mendapati nasi yang anda masak di dalam 'rice cooker' menjadi mentah sedikit di bahagian tengah (jelantah) akibat terkurang air. Apakah kaedah pemulihan termal terbaik?",
+    "pilihan": ["Buang nasi tersebut dan masak beras baru", "Rembat sedikit air garam hangat di permukaan nasi, buat beberapa lubang menggunakan garpu, lalu tutup semula periuk dan tekan butang 'Cook' atau 'Warm' semula selama 10 minit", "Tuang air sejuk penuh periuk dan biarkan nasi kembang sendiri", "Kacau nasi dengan minyak masak panas"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah maksud tersembunyi frasa 'Membawang' sekiranya dilakukan oleh sekumpulan makcik yang berkumpul di bawah pokok mangga taman perumahan?",
+    "pilihan": ["Aktiviti membersihkan sisa kulit bawang bersama-sama untuk persediaan memasak lauk malam", "Sesi perkongsian maklumat, gosip hangat persekitaran jiran tetangga, dan analisis isu semasa secara tidak rasmi", "Pertandingan menanam pokok bawang hiasan", "Sesi menangis beramai-ramai akibat bau gas cili"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah nama program rancangan televisyen kanak-kanak tempatan terbitan TV3 sekitar awal 2000an yang memaparkan siri pengembaraan berlakon interaktif bersama watak maskot harimau oren?",
+    "pilihan": ["Zon Kanak-Kanak", "Rancangan Tom Tom Bak", "Siri Di Mana Joe Jambul?", "Rancangan Along / Kelab Along"],
+    "jawapan": 3
+  },
+  {
+    "kategori": "KBAT LOKAL",
+    "soalan": "Mengapakah reka bentuk Menara Kuala Lumpur (KL Tower) dibina di atas kemuncak Bukit Nanas dari sudut fizik pemancaran isyarat komunikasi?",
+    "pilihan": ["Supaya menara terselamat daripada banjir kilat bandar", "Mengambil kesempatan atas ketinggian geografi sedia ada bukit untuk memaksimumkan jarak liputan gelombang penyiaran radio dan televisyen ke seluruh Lembah Klang", "Sebab tanah di kaki bukit terlalu mahal untuk dibeli", "Sengaja untuk merapatkan jarak bangunan dengan laluan awan"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "PENYELESAIAN CARA FIKIR",
+    "soalan": "Anda membeli madu asli di tepi jalan, tetapi mahu menguji sama ada madu tersebut bercampur air gula sediaan sirap atau tulen menggunakan sehelai kertas tisu. Bagaimana cara membaca keputusannya?",
+    "pilihan": ["Titiskan madu atas tisu; jika madu meresap menembusi tisu dengan cepat mewujudkan bulatan basah, ia bermakna madu bercampur air gula (madu tulen kekal menggumpal)", "Madu asli akan membakar kertas tisu secara automatik", "Madu asli akan menukarkan warna kertas tisu menjadi hijau", "Tisu akan hancur lebur terkena madu palsu"],
+    "jawapan": 0
+  },
+  {
+    "kategori": "HUMOR MASYARAKAT",
+    "soalan": "Apakah gelaran universal bagi individu yang sering menawarkan diri untuk menjadi penonton tegar (backseat driver) di dalam kereta, sibuk memberi arahan laluan jalan walaupun pemandu sudah tahu jalan?",
+    "pilihan": ["Kapten Navigasi", "Copilot Terpaling Tahu / GPS Bernyawa Yang Bising", "Pegawai Trafik Kehormat", "Pengurus Jalan Raya"],
+    "jawapan": 1
+  },
+  {
+    "kategori": "INNER CHILD NOSTALGIA",
+    "soalan": "Apakah nama mainan tiupan plastik lejen berbentuk tiub ubat gigi kecil, dibekalkan dengan sebatang straw kecil untuk ditiup menjadi sebiji belon lutsinar yang melekit-lekit?",
+    "pilihan": ["Belon Tiup Gajah / Belon Tiup Plastik (Bubble Balloon)", "Slime Mainan", "Belon Air", "Super Bubble"],
+    "jawapan": 0
+  }
+] kategori: "KBAT LOKAL",
+            soalan: "Anda sangkut dalam 'jam' dekat Lebuhraya Persekutuan pukul 6 petang. Minyak kereta tinggal 1 bar, perut lapar, telefon tinggal 3% bateri. Apakah tindakan paling bijak & jimat tenaga?",
+            pilihan: ["Buka tingkap, tutup aircond, layan radio klasik.", "Tolak kereta ke tepi, cari abang motor mintak tumpang beli pisang goreng.", "Keluar ke susur terdekat, parking dekat stesen minyak, cas telefon & makan dulu.", "Menangis tepi stereng sambil call mak."],
+            jawapan: 2
+        },
+        {
+            kategori: "HUMOR MASYARAKAT",
+            soalan: "Dalam banyak-banyak kuih tradisional Malaysia, kuih apa yang paling kuat merajuk dan tak suka kawan dengan orang?",
+            pilihan: ["Karipap Pusing (sebab merajuk bawa diri)", "Kuih Makmur (sebab nak makmur sorang-sorang)", "Dodol (sebab lambat sangat nak siap)", "Seri Muka (sebab muka ketat)"],
+            jawapan: 1
+        },
+        {
+            kategori: "INNER CHILD NOSTALGIA",
+            soalan: "Zaman sekolah rendah dulu, apakah teknik flip pemadam bendera paling 'lejen' untuk kalahkan pemadam kawan tanpa jatuh meja?",
+            pilihan: ["Teknik 'Lompat Katak' guna ibu jari sisi", "Teknik 'Hempasan Padu' guna tapak tangan", "Teknik tiup sekuat hati", "Teknik gesel pemadam bagi nipis dulu"],
+            jawapan: 0
+        },
+        {
+            kategori: "PENYELESAIAN CARA FIKIR",
+            soalan: "Mak Timah jual 3 biji karipap RM2. Kak Eton jual 4 biji RM2.50. Anda ada bajet RM10 untuk bagi 12 orang makan minum di pejabat. Macam mana nak maksimumkan pembelian?",
+            pilihan: ["Beli 12 biji dekat Kak Eton (RM7.50), baki beli air mineral.", "Beli 15 biji dekat Mak Timah (RM10), semua dapat makan lebih.", "Beli separuh-separuh dekat kedua-dua kedai.", "Minta diskaun sampai dapat RM5."],
+            jawapan: 0
+        },
+        // Tambah objek soalan baru di sini melalui penjana ChatGPT/AI
+    ];
 
-        const klusterPilihan = [
-            { o: ["Mengajak jiran terdekat untuk menolak kenderaan tersebut dialihkan ke tepi secara selamat.", "Membunyikan hon tanpa henti sehingga pemilik keluar.", "Menggariskan pintu kereta tersebut menggunakan kunci sebagai pengajaran.", "Merakam gambar dan menularkannya di platform media sosial komuniti."], h: "Mengutamakan solusi praktikal yang pantas berbanding tindakan emosi yang memanjangkan konflik." },
-            { o: ["Menegur individu tersebut secara bersemuka dengan nada tegas namun mengekalkan adab profesional.", "Menjerit ke arahnya bagi memastikan dia mendapat malu di khalayak ramai.", "Mendiamkan diri sahaja kerana enggan mencetuskan sebarang pergaduhan.", "Bertindak menolak tubuhnya keluar daripada barisan secara fizikal."], h: "Ketegasan diri yang matang mampu menetapkan sempadan sosial tanpa perlu bertindak agresif." },
-            { o: ["Menghampiri beliau dengan senyuman lalu menawarkan bantuan navigasi sistem secara mesra.", "Memandang sinis dari jauh sambil merungut kerana beliau melambatkan urusan.", "Meminta pengawal keselamatan untuk menguruskan situasi warga emas tersebut.", "Merakam gelagat beliau untuk dijadikan kandungan video jenaka di media sosial."], h: "Nilai street smart yang tinggi sentiasa diiringi oleh rasa empati sosial terhadap golongan yang memerlukan." },
-            { o: ["Mengabaikan provokasi tersebut dan memilih untuk fokus kepada perbualan atau urusan sendiri.", "Mencelah perbualan mereka lalu memulakan pertengkaran hujah yang agresif.", "Bertindak agresif merosakkan harta benda premis bagi menunjukkan protes.", "Mendesak pemilik premis menghalau keluar kumpulan tersebut serta-merta."], h: "Kematangan emosi dewasa diukur daripada keupayaan mengawal diri daripada terjebak dalam perangkap toksik." },
-            { o: ["Memulangkan semula wang lebihan tersebut kepada juruwang demi menjaga integriti dan nasib pekerja.", "Menyimpan wang tersebut ke dalam dompet sebagai bonus rezeki terpijak.", "Segera beredar meninggalkan lokasi kejadian agar tidak dikesan semula.", "Menggunakan wang tersebut untuk tujuan sumbangan tanpa persetujuan pemilik asal."], h: "Integriti asas kehidupan tidak boleh digadaikan oleh peluang keuntungan jangka pendek." },
-            { o: ["Membawa kanak-kanak tersebut ke pusat kawalan keselamatan atau kaunter informasi rasmi terdekat.", "Membiarkannya sahaja dengan tanggapan ibu bapa mereka akan menemuinya kelak.", "Mengambil keputusan membawa budak itu pulang ke rumah anda untuk dijaga.", "Menjerit dengan kuat bertanya hak milik anak siapakah yang sedang menangis itu."], h: "Mengendalikan situasi berisiko memerlukan pematuhan terhadap protokol keselamatan awam bagi mengelak salah faham." },
-            { o: ["Meneruskan pemanduan secara tenang, menyemak impak melalui dashcam, lalu membuat laporan jika perlu.", "Mengejar penunggang tersebut secara berbahaya demi menuntut ganti rugi segera.", "Membuat laporan polis on-the-spot tanpa mempunyai bukti nombor plat yang jelas.", "Meluahkan kemarahan dengan memaki hamun di dalam ruang kenderaan anda sendiri."], h: "Keselamatan nyawa di jalan raya jauh lebih bernilai berbanding kerosakan fizikal kos rendah." },
-            { o: ["Menghubungi talian kenalan itu terus untuk pengesahan identiti dan suara bagi mengelak taktik scammer.", "Terus melakukan pemindahan wang atas dasar simpati tanpa berfikir panjang.", "Menyekat (block) nombor tersebut serta-merta tanpa mahu menyiasat kebenaran.", "Menularkan nombor akaun bank yang diberikan ke dalam group perbualan awam."], h: "Sikap berhati-hati dan rasional adalah benteng utama daripada menjadi mangsa penipuan digital moden." },
-            { o: ["Mengajak jiran berbincang secara matang face-to-face untuk mencari solusi ruang perkongsian.", "Bertindak mencampak ampaian kain jiran ke atas permukaan jalan raya.", "Membuat aduan rasmi kepada majlis perbandaran agar tindakan saman dikenakan.", "Sengaja menyimbah air kotor ke arah pakaian jiran yang sedang dijemur itu."], h: "Keharmonian kejiranan jangka panjang memerlukan komunikasi interaktif yang berhemah tinggi." },
-            { o: ["Memanggil individu tersebut dengan kuat sambil menyerahkan semula dompet yang tercicir.", "Mengambil dompet itu lalu menyembunyikannya untuk kepentingan kegunaan peribadi.", "Membiarkan sahaja dompet itu di lantai dengan andaian orang lain akan mengambilnya.", "Menendang dompet itu ke bawah struktur kerusi berdekatan agar tidak kelihatan."], h: "Memulangkan hak milik orang lain mencerminkan kualiti moral paling tulen seseorang dewasa." },
-            { o: ["Intervensi situasi secara tenang dengan meminta pelanggan tersebut menghormati ruang tugas pekerja.", "Menyokong tindakan pelanggan tersebut untuk memeriahkan suasana pertengkaran.", "Merakam video kejadian untuk ditularkan tanpa melakukan sebarang bantuan fizikal.", "Segera melangkah pergi daripada kawasan tersebut bagi mengelak penglibatan."], h: "Mempertahankan maruah pekerja barisan hadapan secara profesional adalah tanda komuniti yang sihat." },
-            { o: ["Mengekalkan kelajuan selamat, mengasingkan silauan cermin, atau memberi ruang untuk dia memotong.", "Bertindak menekan brek secara mengejut (brake-check) untuk memberi amaran keras.", "Memasang lampu limpah tambahan bahagian belakang kenderaan untuk membalas dendam.", "Menghentikan kenderaan di tengah jalan raya lalu turun mencabar pemandu tersebut."], h: "Pemandu defensif mengutamakan pengurusan risiko kemalangan berbanding kemenangan ego." },
-            { o: ["Memaklumkan perkara tersebut secara bijak kepada mangsa atau melaporkannya kepada pihak pengurusan.", "Mengabaikan situasi tersebut kerana beranggapan ia bukan urusan peribadi anda.", "Turut serta mengambil gambar pelaku berkenaan untuk disimpan sebagai koleksi.", "Menjerit menuduh pelaku sebagai penjenayah secara meluru tanpa usul periksa."], h: "Kepekaan terhadap keselamatan persekitaran mampu membanteras gejala gangguan seksual awam." },
-            { o: ["Menghubungi pihak kurier atau menghantar semula bungkusan ke alamat jiran yang sepatutnya.", "Membuka bungkusan tersebut dan menggunakan barangan di dalamnya secara percuma.", "Menjual semula barangan bernilai tinggi itu di platform e-dagang untuk untung mudah.", "Menyimpan bungkusan itu di dalam stor rumah dan berpura-pura tidak tahu."], h: "Amanah menguruskan harta benda tersalah hantar adalah sebahagian daripada tanggungjawab sivil." },
-            { o: ["Menegur salah laku profesional staf tersebut secara terus dengan tegas dan beradab.", "Mendiamkan diri kerana berasa bersyukur bukan diri anda yang menjadi mangsa kutukan.", "Menulis ulasan (review) berbaur emosi ekstrem di platform carian digital kedai.", "Mengajak rakan-rakan lain memboikot perniagaan tersebut tanpa menyatakan sebab."], h: "Menegur secara profesional di tempat kejadian memberi peluang penambahbaikan kualiti khidmat." },
-            { o: ["Merakam bukti visual plat kenderaan tersebut lalu membuat laporan rasmi sivil.", "Mengutip semula sampah tersebut lalu mencampakkannya semula ke dalam kereta mewah itu.", "Meluahkan makian berbaur kemarahan ekstrem ke arah pemandu kereta tersebut.", "Membiarkan sahaja kerana menganggap ia adalah bidang tugas rasmi pekerja pembersihan."], h: "Tindakan sivil yang berlandaskan undang-undang mendidik masyarakat dengan lebih berkesan." },
-            { o: ["Membantu memapah warga emas tersebut serta mengutip kembali barangan yang bertaburan.", "Melangkah melepasi beliau begitu sahaja kerana anda sedang mengejar masa.", "Menjerit meminta orang asing lain untuk datang memberikan bantuan.", "Mentertawakan kejadian tersebut dari jauh secara senyap dalam hati."], h: "Sifat ihsan dan tolong-menolong adalah asas utama kekuatan moral sesebuah bangsa." },
-            { o: ["Mencari staf lain yang berdekatan untuk bertanyakan status pengurusan kaunter secara rasional.", "Menghempas barangan di atas meja kaunter bagi menunjukkan protes kemarahan anda.", "Mengambil keputusan untuk membatalkan urusan lalu pulang ke rumah dengan marah.", "Membuat hantaran luahan emosi negatif di media sosial sambil menandakan akaun menteri."], h: "Menyelesaikan masalah birokrasi secara matang memerlukan tindakan melalui saluran rasmi." },
-            { o: ["Menyerahkan kad pengenalan tersebut kepada pihak pengurusan bank atau balai polis terdekat.", "Menyimpan kad tersebut sebagai koleksi simpanan peribadi yang unik.", "Membuang kad pengenalan itu ke dalam tong sampah terdekat supaya tidak disalahguna.", "Memuat naik gambar penuh dokumen tersebut di media sosial tanpa menapis data privasi."], h: "Melindungi kerahsiaan data peribadi pihak ketiga adalah satu keperluan undang-undang moden." },
-            { o: ["Mencari laluan alternatif yang lebih selamat atau bergerak secara tenang tanpa mencetuskan panik.", "Bertindak membaling batu batu kerikil ke arah haiwan tersebut agar ia lari.", "Menjerit dengan kuat ke arah haiwan berkenaan untuk menguji tahap agresif.", "Sengaja melakukan provokasi fizikal untuk melihat reaksi tindak balas haiwan itu."], h: "Mengelak daripada potensi ancaman fizikal secara bijak adalah sebahagian daripada kemahiran street smart." },
-            { o: ["Melakukan intervensi lisan secara tegas untuk menghentikan perbuatan tersebut atau memanggil otoriti.", "Menyertai kumpulan tersebut untuk bersama-sama menindas mangsa buli.", "Berpura-pura tidak melihat kejadian dan meneruskan langkah kaki keluar.", "Mengeluarkan telefon pintar untuk merakam video demi tujuan tontonan peribadi."], h: "Menentang kezaliman buli dalam komuniti menunjukkan keberanian sivil yang tinggi." },
-            { o: ["Segera mengarahkan orang sekeliling menjauhi kawasan dan memaklumkan pengurusan premis.", "Meneruskan aktiviti makan minum kerana hidangan yang dipesan baru sahaja tiba.", "Mencuba menyalakan pemetik api untuk menguji tahap kepekatan gas tersebut.", "Menjerit mencetuskan keadaan panik berskala besar sehingga orang ramai bertindak merempuh."], h: "Tindakan pantas, berstruktur dan bertenang semasa situasi kecemasan mampu menyelamatkan banyak nyawa." },
-            { o: ["Menarik warga tua tersebut keluar secara sopan daripada zon interaksi ejen meragukan itu.", "Membiarkan sahaja senario itu berlaku kerana menganggap ia bukan ahli keluarga sendiri.", "Turut serta mendaftar nama untuk membeli pakej gores dan menang yang ditawarkan.", "Mentertawakan warga tua tersebut kerana dianggap terlalu lurus bendul."], h: "Melindungi golongan rentan daripada eksploitasi sindiket adalah tanggungjawab sosial bersama." },
-            { o: ["Melangkah masuk ke dalam premis komersial yang ramai orang dan menghubungi talian kecemasan.", "Berhenti mengejut di kawasan lorong gelap lalu mengajak individu tersebut bertumbuk.", "Mempercepatkan langkah kaki menuju ke arah kawasan semak yang lebih sunyi.", "Duduk menangis di tepi jalan raya sambil berserah kepada takdir persekitaran."], h: "Kesedaran keselamatan diri yang tinggi mengutamakan zon tumpuan ramai sebagai perlindungan." },
-            { o: ["Meminta pertukaran meja makan yang baharu daripada pengurusan restoran secara baik.", "Membiarkan sahaja sisa air kotor tersebut menitik ke atas pakaian dan tubuh anda.", "Menjerit memarahi pelayan restoran peringkat bawahan dengan perkataan kesat.", "Bertindak menterbalikkan meja makan tersebut sebagai tanda protes kemarahan."], h: "Menyelesaikan isu fasiliti secara tenang memastikan emosi dan selera makan anda tidak terjejas." }
-        ];
+    let poolSoalan = [...databaseSoalan];
+    let setSoalanSemasa = [];
+    let indeksSoalanSemasa = 0;
+    let skor = 0;
+    const TOTAL_SOALAN_PER_SET = Math.min(20, databaseSoalan.length); // Laras automatik mengikut jumlah data yang ada
 
-        const ganjaranStore = [
-            { id: "r1", nama: "Sijil Street-Smart", kos: 1200, icon: "📜", desc: "Membuktikan anda faham selok-belok vibe jalanan." },
-            { id: "r2", nama: "Lencana Master Logik", kos: 2500, icon: "🧠", desc: "Pengiktirafan otak kelas pertama anti-emosi." },
-            { id: "r3", nama: "Trofi Neon Minda", kos: 5000, icon: "🏆", desc: "Anugerah agung komuniti BrainGym dewasa." },
-            { id: "r4", nama: "Pingat Kebal Manipulasi", kos: 8000, icon: "🥇", desc: "Tahap maksima minda kalis taktik scammer sivil." }
-        ];
-
-        // ENGINE GENERATOR DATABASE 500 SOALAN MUTLAK (DYNAMIC LOGIC PATTERN)
-        function dapatkanSoalanSpesifik(noId) {
-            let indexLokasi = (noId - 1) % 25;
-            // Formula anjakan berstruktur memastikan pasangan situasi sentiasa unik & tiada ulangan ayat dalam 500 kombinasi
-            let indexIsu = ((noId - 1) * 7 + Math.floor((noId - 1) / 25)) % 25;
-            
-            let dataPilihan = klusterPilihan[indexIsu];
-            let tahap = "mudah";
-            if (noId > 150 && noId <= 350) tahap = "sederhana";
-            if (noId > 350) tahap = "sukar";
-
-            let temaIdx = (noId * 3) % dTema.length;
-
-            return {
-                id: noId,
-                batch: Math.ceil(noId / 25),
-                level: tahap,
-                tema: dTema[temaIdx],
-                q: `Semasa anda berada ${klusterLokasi[indexLokasi]}, tiba-tiba ${klusterIsu[indexIsu]}`,
-                o: [...dataPilihan.o],
-                h: dataPilihan.h,
-                ans: 0, // Pilihan pertama senantiasa merupakan jawapan terbaik berlandaskan logik matang
-                points: 40
-            };
-        }
-
-        // STATE APLIKASI
-        let appState = {
-            playerName: "",
-            totalScore: 0,
-            batchCompleted: {},
-            ownedRewards: []
-        };
-
-        let activeBatch = null;
-        let currentQuestionInBatch = 0; // 0 hingga 24
-        let currentActiveQuestionData = null;
-        let activeBatchScore = 0;
-        let randomOptionsOrder = [];
-
-        // LOAD & SAVE DATA
-        function initApp() {
-            let localData = localStorage.getItem("BrainGym500_MindaMatang_v3");
-            if (localData) {
-                appState = JSON.parse(localData);
-                document.getElementById('screen-login').classList.add('hidden');
-                document.getElementById('screen-menu').classList.remove('hidden');
-                setupDashboard();
-            } else {
-                for (let i = 1; i <= 20; i++) appState.batchCompleted[i] = -1;
+    function mulakanSetBaharu() {
+        setSoalanSemasa = [];
+        // Mengambil soalan secara rawak tanpa ulangan daripada baki poolSoalan
+        for(let i = 0; i < TOTAL_SOALAN_PER_SET; i++) {
+            if(poolSoalan.length === 0) {
+                poolSoalan = [...databaseSoalan]; // Reset pool kalau 3,000 soalan dah habis digunakan
             }
+            const indeksRawak = Math.floor(Math.random() * poolSoalan.length);
+            setSoalanSemasa.push(poolSoalan[indeksRawak]);
+            poolSoalan.splice(indeksRawak, 1); // Buang soalan ini supaya 100% anti-ulang
+        }
+        indeksSoalanSemasa = 0;
+        skor = 0;
+        paparkanSoalan();
+    }
+
+    function paparkanSoalan() {
+        if(indeksSoalanSemasa >= TOTAL_SOALAN_PER_SET) {
+            tamatKuiz();
+            return;
         }
 
-        function saveState() {
-            localStorage.setItem("BrainGym500_MindaMatang_v3", JSON.stringify(appState));
+        document.getElementById("quiz-screen").style.display = "block";
+        document.getElementById("score-screen").style.display = "none";
+
+        const dataSemasa = setSoalanSemasa[indeksSoalanSemasa];
+        document.getElementById("question-number").innerText = `Soalan ${indeksSoalanSemasa + 1}/${TOTAL_SOALAN_PER_SET}`;
+        document.getElementById("score-badge").innerText = `Skor: ${skor}`;
+        document.getElementById("category").innerText = dataSemasa.kategori;
+        document.getElementById("question-text").innerText = dataSemasa.soalan;
+
+        // Progress Bar
+        const peratusProgress = ((indeksSoalanSemasa) / TOTAL_SOALAN_PER_SET) * 100;
+        document.getElementById("progress").style.width = peratusProgress + "%";
+
+        // Pilihan Jawapan
+        const containerPilihan = document.getElementById("options-container");
+        containerPilihan.innerHTML = "";
+        dataSemasa.pilihan.forEach((teks, indeks) => {
+            const butang = document.createElement("button");
+            butang.className = "btn-option";
+            butang.innerText = `${String.fromCharCode(65 + indeks)}. ${teks}`;
+            butang.onclick = () => semakJawapan(indeks);
+            containerPilihan.appendChild(butang);
+        });
+    }
+
+    function semakJawapan(indeksDipilih) {
+        const jawapanBetul = setSoalanSemasa[indeksSoalanSemasa].jawapan;
+        if(indeksDipilih === jawapanBetul) {
+            skor++;
+            alert("Betul! Otak korang memang cerdas cenggini 👍");
+        } else {
+            alert(`Aduhai, salah! Jawapan betul ialah: ${setSoalanSemasa[indeksSoalanSemasa].pilihan[jawapanBetul]}`);
         }
+        indeksSoalanSemasa++;
+        paparkanSoalan();
+    }
 
-        function registerProfile() {
-            let inputName = document.getElementById('player-name-input').value.trim();
-            if (inputName === "") {
-                alert("Sila masukkan nama panggilan anda untuk profil!");
-                return;
-            }
-            appState.playerName = inputName;
-            saveState();
-            document.getElementById('screen-login').classList.add('hidden');
-            document.getElementById('screen-menu').classList.remove('hidden');
-            setupDashboard();
-        }
+    function tamatKuiz() {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("score-screen").style.display = "block";
+        document.getElementById("final-score").innerText = `Skor Anda: ${skor}/${TOTAL_SOALAN_PER_SET}`;
+        
+        // Penarafan Jati Diri Juru Bina Otak Malaysia
+        let pangkat = "";
+        if(skor === TOTAL_SOALAN_PER_SET) pangkat = "Pangkat: Sang Kancil Terpaling Genius 🏆";
+        else if(skor > TOTAL_SOALAN_PER_SET * 0.7) pangkat = "Pangkat: Abang Long Kawasan Bertenaga ⚡";
+        else if(skor > TOTAL_SOALAN_PER_SET * 0.4) pangkat = "Pangkat: Geng Kedai Kopi Santai ☕";
+        else pangkat = "Pangkat: Budak Kampung Baru Belajar 👶";
+        
+        document.getElementById("rank-text").innerText = pangkat;
+    }
 
-        function setupDashboard() {
-            document.getElementById('display-player-name').innerText = appState.playerName;
-            document.getElementById('display-total-score').innerText = `${appState.totalScore} PTS`;
-            renderBatchGrid();
-            renderRewardsStore();
-        }
+    function restartQuiz() {
+        mulakanSetBaharu();
+    }
 
-        function renderBatchGrid() {
-            const container = document.getElementById('batch-buttons-container');
-            container.innerHTML = "";
-            for (let b = 1; b <= 20; b++) {
-                let statusClass = appState.batchCompleted[b] !== -1 ? "completed" : "";
-                container.innerHTML += `<button class="batch-btn ${statusClass}" onclick="selectBatch(${b})">${b}</button>`;
-            }
-        }
+    // Auto-mula bila buka apps
+    mulakanSetBaharu();
+</script>
 
-        function selectBatch(batchNum) {
-            activeBatch = batchNum;
-            let levelLabel = "MUDAH";
-            if (batchNum > 6 && batchNum <= 14) levelLabel = "SEDERHANA";
-            if (batchNum > 14) levelLabel = "SUKAR";
-
-            document.getElementById('selected-batch-title').innerText = `BATCH SESI ${batchNum}`;
-            document.getElementById('selected-batch-level').innerText = levelLabel;
-            
-            let rekodSkor = appState.batchCompleted[batchNum];
-            document.getElementById('selected-batch-status').innerText = rekodSkor !== -1 ? `SKOR: ${rekodSkor}/1000` : "BELUM MULA";
-            document.getElementById('btn-start-session').disabled = false;
-        }
-
-        function switchTab(tabName) {
-            if (tabName === 'sessions') {
-                document.getElementById('tab-sessions').classList.remove('hidden');
-                document.getElementById('tab-rewards').classList.add('hidden');
+</body>
+</html>
